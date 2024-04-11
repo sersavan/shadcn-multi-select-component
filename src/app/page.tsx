@@ -4,10 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import MultiSelectFormField from "@/components/multi-select";
+import MultiSelectFormField from "@/components/ui/multi-select";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
+import { Icons } from "@/components/icons";
 import { toast } from "sonner";
 import {
   Form,
@@ -18,33 +18,32 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Toast } from "@/components/ui/toast";
 
 const frameworksList = [
   {
     value: "next.js",
     label: "Next.js",
-    icon: Dog,
+    icon: Icons.dog,
   },
   {
     value: "sveltekit",
     label: "SvelteKit",
-    icon: Cat,
+    icon: Icons.cat,
   },
   {
     value: "nuxt.js",
     label: "Nuxt.js",
-    icon: Turtle,
+    icon: Icons.turtle,
   },
   {
     value: "remix",
     label: "Remix",
-    icon: Rabbit,
+    icon: Icons.rabbit,
   },
   {
     value: "astro",
     label: "Astro",
-    icon: Fish,
+    icon: Icons.fish,
   },
 ];
 
@@ -70,7 +69,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Card className="w-full max-w-3xl p-5">
+      <Card className="w-full max-w-2xl p-5">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -82,6 +81,7 @@ export default function Home() {
                   <FormControl>
                     <MultiSelectFormField
                       options={frameworksList}
+                      defaultValue={field.value}
                       onValueChange={field.onChange}
                       placeholder="Select options"
                     />
