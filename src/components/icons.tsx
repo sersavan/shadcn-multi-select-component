@@ -1,7 +1,6 @@
 import {
-  X,
   MoonIcon,
-  SunIcon,
+  SunMedium,
   LucideProps,
   Cat,
   Dog,
@@ -11,9 +10,8 @@ import {
 } from "lucide-react";
 
 export const Icons = {
-  close: X,
   moonIcon: MoonIcon,
-  sunIcon: SunIcon,
+  sunIcon: SunMedium,
   cat: Cat,
   dog: Dog,
   fish: Fish,

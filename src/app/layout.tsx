@@ -27,16 +27,17 @@ export default function RootLayout({
           inter.className
         )}
       >
-        <div className="flex min-h-screen flex-col">
-          <ThemeProvider
-            attribute="class"
-            enableSystem
-            disableTransitionOnChange
-          >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="relative flex min-h-screen flex-col bg-background">
             <SiteHeader />
             {children}
-          </ThemeProvider>
-        </div>
+          </div>
+        </ThemeProvider>
         <Toaster position="bottom-center" />
       </body>
     </html>
