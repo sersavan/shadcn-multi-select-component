@@ -94,7 +94,9 @@ export default function Home() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button variant="outline" type="submit">
+              Submit
+            </Button>
           </form>
         </Form>
       </Card>
