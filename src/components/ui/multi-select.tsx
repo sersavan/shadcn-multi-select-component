@@ -98,6 +98,7 @@ const MultiSelectFormField = ({
                   className="h-4 mx-2 cursor-pointer text-muted-foreground"
                   onClick={(event) => {
                     setSelectedValues(new Set([]));
+                    onValueChange(Array.from(new Set([])));
                     event.stopPropagation();
                   }}
                 />
@@ -156,7 +157,10 @@ const MultiSelectFormField = ({
                 <CommandSeparator />
                 <CommandGroup>
                   <CommandItem
-                    onSelect={() => setSelectedValues(new Set([]))}
+                    onSelect={() => {
+                      setSelectedValues(new Set([]));
+                      onValueChange(Array.from(new Set([])));
+                    }}
                     className="justify-center text-center"
                   >
                     Clear filters

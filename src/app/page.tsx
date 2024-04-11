@@ -49,7 +49,8 @@ const frameworksList = [
 
 const FormSchema = z.object({
   frameworks: z
-    .array(z.string())
+    .array(z.string().min(1))
+    .min(1)
     .nonempty("Please select at least one framework."),
 });
 
