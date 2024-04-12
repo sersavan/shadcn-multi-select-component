@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import MultiSelectFormField from "@/components/ui/multi-select";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
 import { toast } from "sonner";
@@ -18,6 +18,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import {
+  PageActions,
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderHeading,
+} from "@/components/page-header";
 
 const frameworksList = [
   {
@@ -69,7 +78,22 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-3 md:p-24">
+    <main className="flex min-h-screen flex-col items-center justify-start space-y-3 p-3">
+      <PageHeader>
+        <PageHeaderHeading>Multi select component</PageHeaderHeading>
+        <PageHeaderDescription>assembled with shadcn/ui</PageHeaderDescription>
+        <PageActions>
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/sersavan/shadcn-multi-select-component"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            <Icons.gitHub className="mr-2 h-4 w-4" />
+            GitHub
+          </Link>
+        </PageActions>
+      </PageHeader>
       <Card className="w-full max-w-2xl p-5">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

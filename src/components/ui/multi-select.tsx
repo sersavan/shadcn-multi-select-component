@@ -67,50 +67,48 @@ const MultiSelectFormField = ({
       <PopoverTrigger asChild>
         <div className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inside">
           {Array.from(selectedValues).length > 0 ? (
-            <>
-              <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center">
-                  {Array.from(selectedValues).map((value) => {
-                    const option = options.find((o) => o.value === value);
-                    const IconComponent = option?.icon;
-                    return (
-                      <Badge
-                        key={value}
-                        variant="outline"
-                        className="m-1 bg-card"
-                      >
-                        {IconComponent && (
-                          <IconComponent className="h-4 w-4 mr-2" />
-                        )}
-                        {option?.label}
-                        <XCircle
-                          className="ml-2 h-4 w-4 cursor-pointer"
-                          onClick={(event) => {
-                            toggleOption(value);
-                            event.stopPropagation();
-                          }}
-                        />
-                      </Badge>
-                    );
-                  })}
-                </div>
-                <div className="flex items-center justify-between">
-                  <XIcon
-                    className="h-4 mx-2 cursor-pointer text-muted-foreground"
-                    onClick={(event) => {
-                      setSelectedValues(new Set([]));
-                      onValueChange(Array.from(new Set([])));
-                      event.stopPropagation();
-                    }}
-                  />
-                  <Separator
-                    orientation="vertical"
-                    className="flex min-h-6 h-full"
-                  />
-                  <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground" />
-                </div>
+            <div className="flex justify-between items-center w-full">
+              <div className="flex flex-wrap items-center">
+                {Array.from(selectedValues).map((value) => {
+                  const option = options.find((o) => o.value === value);
+                  const IconComponent = option?.icon;
+                  return (
+                    <Badge
+                      key={value}
+                      variant="outline"
+                      className="m-1 bg-card"
+                    >
+                      {IconComponent && (
+                        <IconComponent className="h-4 w-4 mr-2" />
+                      )}
+                      {option?.label}
+                      <XCircle
+                        className="ml-2 h-4 w-4 cursor-pointer"
+                        onClick={(event) => {
+                          toggleOption(value);
+                          event.stopPropagation();
+                        }}
+                      />
+                    </Badge>
+                  );
+                })}
               </div>
-            </>
+              <div className="flex items-center justify-between">
+                <XIcon
+                  className="h-4 mx-2 cursor-pointer text-muted-foreground"
+                  onClick={(event) => {
+                    setSelectedValues(new Set([]));
+                    onValueChange(Array.from(new Set([])));
+                    event.stopPropagation();
+                  }}
+                />
+                <Separator
+                  orientation="vertical"
+                  className="flex min-h-6 h-full"
+                />
+                <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground" />
+              </div>
+            </div>
           ) : (
             <div className="flex items-center justify-between w-full mx-auto">
               <span className="text-sm text-muted-foreground mx-3">
