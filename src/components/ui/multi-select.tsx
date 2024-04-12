@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { CheckIcon, XCircle, ChevronDown, XIcon } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import {
   Popover,
@@ -41,31 +40,59 @@ const MultiSelectFormField = ({
   const [selectedValues, setSelectedValues] = useState(
     new Set(defaultValue || [])
   );
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   useEffect(() => {
     setSelectedValues(new Set(defaultValue));
   }, [defaultValue]);
 
-  const toggleOption = (value: string) => {
-    const newSelectedValues = new Set(selectedValues);
-    if (newSelectedValues.has(value)) {
-      newSelectedValues.delete(value);
-    } else {
-      newSelectedValues.add(value);
-    }
-    setSelectedValues(newSelectedValues);
-    onValueChange(Array.from(newSelectedValues));
-  };
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      switch (event.key) {
+        case "Enter":
+          setIsPopoverOpen(true);
+          break;
+        case "Escape":
+          setIsPopoverOpen(false);
+          break;
+        case "Backspace":
+          const values = Array.from(selectedValues);
+          values.pop();
+          setSelectedValues(new Set(values));
+          onValueChange(values);
+          break;
+        default:
+          break;
+      }
+    };
 
-  const displayValue = Array.from(selectedValues)
-    .map((value) => options.find((option) => option.value === value)?.label)
-    .filter(Boolean)
-    .join(", ");
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedValues, onValueChange]);
+
+  const toggleOption = useCallback(
+    (value: string) => {
+      const newSelectedValues = new Set(selectedValues);
+      if (newSelectedValues.has(value)) {
+        newSelectedValues.delete(value);
+      } else {
+        newSelectedValues.add(value);
+      }
+      setSelectedValues(newSelectedValues);
+      onValueChange(Array.from(newSelectedValues));
+    },
+    [selectedValues, onValueChange]
+  );
 
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
-        <div className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inside">
+        <div
+          onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+          className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inside"
+        >
           {Array.from(selectedValues).length > 0 ? (
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-wrap items-center">
@@ -119,7 +146,15 @@ const MultiSelectFormField = ({
           )}
         </div>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent
+        className="w-[200px] p-0"
+        align="start"
+        onInteractOutside={(event) => {
+          if (!event.defaultPrevented) {
+            setIsPopoverOpen(false);
+          }
+        }}
+      >
         <Command>
           <CommandInput placeholder={placeholder} />
           <CommandList>
