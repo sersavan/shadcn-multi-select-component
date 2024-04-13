@@ -102,12 +102,7 @@ const MultiSelectFormField = React.forwardRef<
             className="drop-shadow-xl flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           >
             {Array.from(selectedValues).length > 0 ? (
-              <div
-                className={cn(
-                  "flex justify-between items-center w-full",
-                  isAnimating ? "invert" : ""
-                )}
-              >
+              <div className="flex justify-between items-center w-full">
                 <div className="flex flex-wrap items-center">
                   {Array.from(selectedValues).map((value) => {
                     const option = options.find((o) => o.value === value);
@@ -117,8 +112,8 @@ const MultiSelectFormField = React.forwardRef<
                         key={value}
                         variant="outline"
                         className={cn(
-                          "drop-shadow m-1 bg-card transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
-                          isAnimating ? "animate-bounce" : ""
+                          "drop-shadow-md m-1 bg-card transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
+                          isAnimating ? "animate-bounce invert" : ""
                         )}
                         style={{
                           animationDuration: `${animationSpeed}s`,
@@ -166,7 +161,7 @@ const MultiSelectFormField = React.forwardRef<
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[200px] p-0"
+          className="w-[200px] p-0 drop-shadow-xl"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
           onInteractOutside={(event) => {
@@ -239,7 +234,10 @@ const MultiSelectFormField = React.forwardRef<
         </PopoverContent>
         {Array.from(selectedValues).length > 0 && (
           <WandSparkles
-            className="cursor-pointer my-2 text-foreground bg-background w-4 h-4"
+            className={cn(
+              "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
+              isAnimating ? "" : "text-muted-foreground"
+            )}
             onClick={() => setIsAnimating(!isAnimating)}
           />
         )}
