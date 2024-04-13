@@ -170,6 +170,10 @@ const MultiSelectFormField = React.forwardRef<
                       onSelect={() => {
                         toggleOption(option.value);
                       }}
+                      style={{
+                        pointerEvents: "auto",
+                        opacity: 1,
+                      }}
                     >
                       <div
                         className={cn(
@@ -197,6 +201,10 @@ const MultiSelectFormField = React.forwardRef<
                       onSelect={() => {
                         setSelectedValues(new Set([]));
                         onValueChange(Array.from(new Set([])));
+                      }}
+                      style={{
+                        pointerEvents: "auto",
+                        opacity: 1,
                       }}
                       className="justify-center text-center"
                     >
