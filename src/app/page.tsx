@@ -67,7 +67,7 @@ export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      frameworks: [],
+      frameworks: ["next.js", "nuxt.js", "astro"],
     },
   });
 
