@@ -6,6 +6,10 @@ import {
   XIcon,
   WandSparkles,
 } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Popover,
@@ -21,9 +25,6 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "./button";
 
 interface MultiSelectFormFieldProps {
   options: {
@@ -98,10 +99,15 @@ const MultiSelectFormField = React.forwardRef<
             ref={ref}
             {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
+            className="drop-shadow-xl flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           >
             {Array.from(selectedValues).length > 0 ? (
-              <div className="flex justify-between items-center w-full">
+              <div
+                className={cn(
+                  "flex justify-between items-center w-full",
+                  isAnimating ? "invert" : ""
+                )}
+              >
                 <div className="flex flex-wrap items-center">
                   {Array.from(selectedValues).map((value) => {
                     const option = options.find((o) => o.value === value);
@@ -111,7 +117,7 @@ const MultiSelectFormField = React.forwardRef<
                         key={value}
                         variant="outline"
                         className={cn(
-                          "m-1 bg-card transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
+                          "drop-shadow m-1 bg-card transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
                           isAnimating ? "animate-bounce" : ""
                         )}
                         style={{
