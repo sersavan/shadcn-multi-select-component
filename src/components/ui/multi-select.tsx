@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { CheckIcon, XCircle, ChevronDown, XIcon } from "lucide-react";
+import {
+  CheckIcon,
+  XCircle,
+  ChevronDown,
+  XIcon,
+  WandSparkles,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Popover,
@@ -30,6 +36,7 @@ interface MultiSelectFormFieldProps {
   disabled?: boolean;
   placeholder: string;
   className?: string;
+  animationSpeed?: number;
 }
 
 const MultiSelectFormField = React.forwardRef<
@@ -44,6 +51,7 @@ const MultiSelectFormField = React.forwardRef<
       disabled,
       placeholder,
       className,
+      animationSpeed = 2,
       ...props
     },
     ref
@@ -52,6 +60,7 @@ const MultiSelectFormField = React.forwardRef<
       new Set(defaultValue || [])
     );
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(true);
 
     useEffect(() => {
       setSelectedValues(new Set(defaultValue));
@@ -101,7 +110,13 @@ const MultiSelectFormField = React.forwardRef<
                       <Badge
                         key={value}
                         variant="outline"
-                        className="m-1 bg-card"
+                        className={cn(
+                          "m-1 bg-card transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
+                          isAnimating ? "animate-bounce" : ""
+                        )}
+                        style={{
+                          animationDuration: `${animationSpeed}s`,
+                        }}
                       >
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
@@ -216,6 +231,12 @@ const MultiSelectFormField = React.forwardRef<
             </CommandList>
           </Command>
         </PopoverContent>
+        {Array.from(selectedValues).length > 0 && (
+          <WandSparkles
+            className="cursor-pointer my-2 text-foreground bg-background w-4 h-4"
+            onClick={() => setIsAnimating(!isAnimating)}
+          />
+        )}
       </Popover>
     );
   }
