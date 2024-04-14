@@ -83,42 +83,41 @@ const MultiSelectFormField = React.forwardRef<
     },
     ref
   ) => {
-    const [selectedValues, setSelectedValues] = React.useState(
-      new Set(defaultValue || [])
+    const [selectedValues, setSelectedValues] = React.useState<string[]>(
+      defaultValue || []
     );
+    const selectedValuesSet = React.useRef(new Set(selectedValues));
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    const [isAnimating, setIsAnimating] = React.useState(
-      animation > 0 ? true : false
-    );
+    const [isAnimating, setIsAnimating] = React.useState(animation > 0);
 
     React.useEffect(() => {
-      setSelectedValues(new Set(defaultValue));
+      setSelectedValues(defaultValue || []);
+      selectedValuesSet.current = new Set(defaultValue);
     }, [defaultValue]);
 
     const handleInputKeyDown = (event: any) => {
       if (event.key === "Enter") {
         setIsPopoverOpen(true);
       } else if (event.key === "Backspace" && !event.target.value) {
-        const values = Array.from(selectedValues);
-        values.pop();
-        setSelectedValues(new Set(values));
-        onValueChange(values);
+        selectedValues.pop();
+        setSelectedValues([...selectedValues]);
+        selectedValuesSet.current.delete(
+          selectedValues[selectedValues.length - 1]
+        );
+        onValueChange([...selectedValues]);
       }
     };
 
-    const toggleOption = React.useCallback(
-      (value: string) => {
-        const newSelectedValues = new Set(selectedValues);
-        if (newSelectedValues.has(value)) {
-          newSelectedValues.delete(value);
-        } else {
-          newSelectedValues.add(value);
-        }
-        setSelectedValues(newSelectedValues);
-        onValueChange(Array.from(newSelectedValues));
-      },
-      [selectedValues, onValueChange]
-    );
+    const toggleOption = (value: string) => {
+      if (selectedValuesSet.current.has(value)) {
+        selectedValuesSet.current.delete(value);
+        setSelectedValues(selectedValues.filter((v) => v !== value));
+      } else {
+        selectedValuesSet.current.add(value);
+        setSelectedValues([...selectedValues, value]);
+      }
+      onValueChange([...selectedValuesSet.current]);
+    };
 
     return (
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
@@ -128,10 +127,10 @@ const MultiSelectFormField = React.forwardRef<
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
             className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           >
-            {Array.from(selectedValues).length > 0 ? (
+            {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-wrap items-center">
-                  {Array.from(selectedValues).map((value) => {
+                  {selectedValues.map((value) => {
                     const option = options.find((o) => o.value === value);
                     const IconComponent = option?.icon;
                     return (
@@ -153,8 +152,8 @@ const MultiSelectFormField = React.forwardRef<
                         <XCircle
                           className="ml-2 h-4 w-4 cursor-pointer"
                           onClick={(event) => {
-                            toggleOption(value);
                             event.stopPropagation();
+                            toggleOption(value);
                           }}
                         />
                       </Badge>
@@ -165,8 +164,9 @@ const MultiSelectFormField = React.forwardRef<
                   <XIcon
                     className="h-4 mx-2 cursor-pointer text-muted-foreground"
                     onClick={(event) => {
-                      setSelectedValues(new Set([]));
-                      onValueChange(Array.from(new Set([])));
+                      setSelectedValues([]);
+                      selectedValuesSet.current.clear();
+                      onValueChange([]);
                       event.stopPropagation();
                     }}
                   />
@@ -206,13 +206,13 @@ const MultiSelectFormField = React.forwardRef<
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
-                  const isSelected = selectedValues.has(option.value);
+                  const isSelected = selectedValuesSet.current.has(
+                    option.value
+                  );
                   return (
                     <CommandItem
                       key={option.value}
-                      onSelect={() => {
-                        toggleOption(option.value);
-                      }}
+                      onSelect={() => toggleOption(option.value)}
                       style={{
                         pointerEvents: "auto",
                         opacity: 1,
@@ -240,12 +240,13 @@ const MultiSelectFormField = React.forwardRef<
               <CommandSeparator />
               <CommandGroup>
                 <div className="flex items-center justify-between">
-                  {selectedValues.size > 0 && (
+                  {selectedValues.length > 0 && (
                     <>
                       <CommandItem
                         onSelect={() => {
-                          setSelectedValues(new Set([]));
-                          onValueChange(Array.from(new Set([])));
+                          setSelectedValues([]);
+                          selectedValuesSet.current.clear();
+                          onValueChange([]);
                         }}
                         style={{
                           pointerEvents: "auto",
@@ -277,7 +278,7 @@ const MultiSelectFormField = React.forwardRef<
             </CommandList>
           </Command>
         </PopoverContent>
-        {animation > 0 && Array.from(selectedValues).length > 0 && (
+        {animation > 0 && selectedValues.length > 0 && (
           <WandSparkles
             className={cn(
               "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
