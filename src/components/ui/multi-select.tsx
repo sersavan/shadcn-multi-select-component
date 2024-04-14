@@ -99,7 +99,7 @@ const MultiSelectFormField = React.forwardRef<
             ref={ref}
             {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="drop-shadow-xl flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
+            className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           >
             {Array.from(selectedValues).length > 0 ? (
               <div className="flex justify-between items-center w-full">
@@ -161,7 +161,7 @@ const MultiSelectFormField = React.forwardRef<
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[200px] p-0 drop-shadow-xl"
+          className="w-[200px] p-0 drop-shadow-sm"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
           onInteractOutside={(event) => {
@@ -172,7 +172,7 @@ const MultiSelectFormField = React.forwardRef<
         >
           <Command>
             <CommandInput
-              placeholder={placeholder}
+              placeholder="Search..."
               onKeyDown={handleInputKeyDown}
             />
             <CommandList>
@@ -209,10 +209,10 @@ const MultiSelectFormField = React.forwardRef<
                   );
                 })}
               </CommandGroup>
-              {selectedValues.size > 0 && (
-                <>
-                  <CommandSeparator />
-                  <CommandGroup>
+              <CommandSeparator />
+              <CommandGroup>
+                <div className="flex items-center justify-between">
+                  {selectedValues.size > 0 && (
                     <CommandItem
                       onSelect={() => {
                         setSelectedValues(new Set([]));
@@ -222,13 +222,24 @@ const MultiSelectFormField = React.forwardRef<
                         pointerEvents: "auto",
                         opacity: 1,
                       }}
-                      className="justify-center text-center"
+                      className="flex-1 justify-center"
                     >
-                      Clear filters
+                      Clear
                     </CommandItem>
-                  </CommandGroup>
-                </>
-              )}
+                  )}
+                  <CommandSeparator />
+                  <CommandItem
+                    onSelect={() => setIsPopoverOpen(false)}
+                    style={{
+                      pointerEvents: "auto",
+                      opacity: 1,
+                    }}
+                    className="flex-1 justify-center"
+                  >
+                    Close
+                  </CommandItem>
+                </div>
+              </CommandGroup>
             </CommandList>
           </Command>
         </PopoverContent>
