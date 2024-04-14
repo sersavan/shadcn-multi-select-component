@@ -67,7 +67,7 @@ export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      frameworks: ["next.js", "nuxt.js", "astro"],
+      frameworks: ["next.js", "nuxt.js"],
     },
   });
 
@@ -109,6 +109,8 @@ export default function Home() {
                       defaultValue={field.value}
                       onValueChange={field.onChange}
                       placeholder="Select options"
+                      variant="inverted"
+                      animation={2}
                     />
                   </FormControl>
                   <FormDescription>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import {
   CheckIcon,
   XCircle,
@@ -26,18 +27,41 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 
-interface MultiSelectFormFieldProps {
+const multiSelectVariants = cva(
+  "m-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
+  {
+    variants: {
+      variant: {
+        default:
+          "border-foreground/10 drop-shadow-md text-foreground bg-card hover:bg-card/80",
+        secondary:
+          "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        inverted: "inverted",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+interface MultiSelectFormFieldProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof multiSelectVariants> {
+  asChild?: boolean;
   options: {
     label: string;
     value: string;
     icon?: React.ComponentType<{ className?: string }>;
   }[];
   defaultValue?: string[];
-  onValueChange: (value: string[]) => void;
   disabled?: boolean;
   placeholder: string;
   className?: string;
-  animationSpeed?: number;
+  animation?: number;
+  onValueChange: (value: string[]) => void;
 }
 
 const MultiSelectFormField = React.forwardRef<
@@ -46,24 +70,28 @@ const MultiSelectFormField = React.forwardRef<
 >(
   (
     {
+      className,
+      variant,
+      asChild = false,
       options,
       defaultValue,
       onValueChange,
       disabled,
       placeholder,
-      className,
-      animationSpeed = 2,
+      animation = 0,
       ...props
     },
     ref
   ) => {
-    const [selectedValues, setSelectedValues] = useState(
+    const [selectedValues, setSelectedValues] = React.useState(
       new Set(defaultValue || [])
     );
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(true);
+    const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+    const [isAnimating, setIsAnimating] = React.useState(
+      animation > 0 ? true : false
+    );
 
-    useEffect(() => {
+    React.useEffect(() => {
       setSelectedValues(new Set(defaultValue));
     }, [defaultValue]);
 
@@ -78,7 +106,7 @@ const MultiSelectFormField = React.forwardRef<
       }
     };
 
-    const toggleOption = useCallback(
+    const toggleOption = React.useCallback(
       (value: string) => {
         const newSelectedValues = new Set(selectedValues);
         if (newSelectedValues.has(value)) {
@@ -97,7 +125,6 @@ const MultiSelectFormField = React.forwardRef<
         <PopoverTrigger asChild>
           <Button
             ref={ref}
-            {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
             className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           >
@@ -110,13 +137,13 @@ const MultiSelectFormField = React.forwardRef<
                     return (
                       <Badge
                         key={value}
-                        variant="outline"
+                        {...props}
                         className={cn(
-                          "drop-shadow-md m-1 bg-card transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
-                          isAnimating ? "animate-bounce invert" : ""
+                          isAnimating ? "animate-bounce" : "",
+                          multiSelectVariants({ variant, className })
                         )}
                         style={{
-                          animationDuration: `${animationSpeed}s`,
+                          animationDuration: `${animation}s`,
                         }}
                       >
                         {IconComponent && (
@@ -243,7 +270,7 @@ const MultiSelectFormField = React.forwardRef<
             </CommandList>
           </Command>
         </PopoverContent>
-        {Array.from(selectedValues).length > 0 && (
+        {animation > 0 && Array.from(selectedValues).length > 0 && (
           <WandSparkles
             className={cn(
               "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
