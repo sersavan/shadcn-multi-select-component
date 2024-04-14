@@ -217,6 +217,7 @@ const MultiSelectFormField = React.forwardRef<
                         pointerEvents: "auto",
                         opacity: 1,
                       }}
+                      className="cursor-pointer"
                     >
                       <div
                         className={cn(
@@ -226,7 +227,7 @@ const MultiSelectFormField = React.forwardRef<
                             : "opacity-50 [&_svg]:invisible"
                         )}
                       >
-                        <CheckIcon className={cn("h-4 w-4")} />
+                        <CheckIcon className="h-4 w-4" />
                       </div>
                       {option.icon && (
                         <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
@@ -240,19 +241,25 @@ const MultiSelectFormField = React.forwardRef<
               <CommandGroup>
                 <div className="flex items-center justify-between">
                   {selectedValues.size > 0 && (
-                    <CommandItem
-                      onSelect={() => {
-                        setSelectedValues(new Set([]));
-                        onValueChange(Array.from(new Set([])));
-                      }}
-                      style={{
-                        pointerEvents: "auto",
-                        opacity: 1,
-                      }}
-                      className="flex-1 justify-center"
-                    >
-                      Clear
-                    </CommandItem>
+                    <>
+                      <CommandItem
+                        onSelect={() => {
+                          setSelectedValues(new Set([]));
+                          onValueChange(Array.from(new Set([])));
+                        }}
+                        style={{
+                          pointerEvents: "auto",
+                          opacity: 1,
+                        }}
+                        className="flex-1 justify-center cursor-pointer"
+                      >
+                        Clear
+                      </CommandItem>
+                      <Separator
+                        orientation="vertical"
+                        className="flex min-h-6 h-full"
+                      />
+                    </>
                   )}
                   <CommandSeparator />
                   <CommandItem
@@ -261,7 +268,7 @@ const MultiSelectFormField = React.forwardRef<
                       pointerEvents: "auto",
                       opacity: 1,
                     }}
-                    className="flex-1 justify-center"
+                    className="flex-1 justify-center cursor-pointer"
                   >
                     Close
                   </CommandItem>
