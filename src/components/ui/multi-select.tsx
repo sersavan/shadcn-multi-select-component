@@ -48,7 +48,7 @@ const multiSelectVariants = cva(
 );
 
 interface MultiSelectFormFieldProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof multiSelectVariants> {
   asChild?: boolean;
   options: {
@@ -124,6 +124,7 @@ const MultiSelectFormField = React.forwardRef<
         <PopoverTrigger asChild>
           <Button
             ref={ref}
+            {...props}
             onClick={() => setIsPopoverOpen(!isPopoverOpen)}
             className="flex w-full rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
           >
@@ -136,7 +137,6 @@ const MultiSelectFormField = React.forwardRef<
                     return (
                       <Badge
                         key={value}
-                        {...props}
                         className={cn(
                           isAnimating ? "animate-bounce" : "",
                           multiSelectVariants({ variant, className })
