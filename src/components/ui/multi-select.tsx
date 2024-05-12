@@ -116,7 +116,7 @@ const MultiSelectFormField = React.forwardRef<
         selectedValuesSet.current.add(value);
         setSelectedValues([...selectedValues, value]);
       }
-      onValueChange([...selectedValuesSet.current]);
+      onValueChange(Array.from(selectedValuesSet.current));
     };
 
     return (
@@ -191,11 +191,6 @@ const MultiSelectFormField = React.forwardRef<
           className="w-[200px] p-0 drop-shadow-sm"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
-          onInteractOutside={(event) => {
-            if (!event.defaultPrevented) {
-              setIsPopoverOpen(false);
-            }
-          }}
         >
           <Command>
             <CommandInput
