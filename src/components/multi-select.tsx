@@ -47,7 +47,7 @@ const multiSelectVariants = cva(
   }
 );
 
-interface MultiSelectFormFieldProps
+interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof multiSelectVariants> {
   asChild?: boolean;
@@ -64,21 +64,21 @@ interface MultiSelectFormFieldProps
   onValueChange: (value: string[]) => void;
 }
 
-const MultiSelectFormField = React.forwardRef<
+export const MultiSelect = React.forwardRef<
   HTMLButtonElement,
-  MultiSelectFormFieldProps
+  MultiSelectProps
 >(
   (
     {
-      className,
       variant,
       asChild = false,
       options,
       defaultValue,
-      onValueChange,
       disabled,
       placeholder,
+      className,
       animation = 0,
+      onValueChange,
       ...props
     },
     ref
@@ -287,6 +287,4 @@ const MultiSelectFormField = React.forwardRef<
   }
 );
 
-MultiSelectFormField.displayName = "MultiSelectFormField";
-
-export default MultiSelectFormField;
+MultiSelect.displayName = "MultiSelect";

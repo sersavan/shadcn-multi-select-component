@@ -3,12 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
+import Link from "next/link";
 
-import MultiSelectFormField from "@/components/ui/multi-select";
+import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
-import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -18,15 +19,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 import {
   PageActions,
   PageHeader,
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
+import { MultiSelect } from "@/components/multi-select";
 
 const frameworksList = [
   {
@@ -104,7 +103,7 @@ export default function Home() {
                 <FormItem>
                   <FormLabel>Frameworks</FormLabel>
                   <FormControl>
-                    <MultiSelectFormField
+                    <MultiSelect
                       options={frameworksList}
                       defaultValue={field.value}
                       onValueChange={field.onChange}
