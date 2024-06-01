@@ -5,29 +5,30 @@
 Ensure you have a Next.js project set up. If not, create one using the following command:
 
 ```bash
-npx create-next-app@latest my-nextjs-app
-cd my-nextjs-app
+npx create-next-app@latest my-app --typescript --tailwind --eslint
+cd my-app
 ```
 
-#### Step 1: Install Dependencies
-
-Install the required dependencies including shadcn components, react-hook-form for form handling, and zod for validation.
-
-```bash
-npm install @shadcn/ui lucide-react @hookform/resolvers react-hook-form zod class-variance-authority
-```
-
-#### Step 2: Install shadcn Components
+#### Step 1: Install shadcn Components
 
 To use shadcn components, you need to install them. You can install the specific components required for the multi-select component as follows:
 
 ```bash
-npm install @shadcn/ui/popover @shadcn/ui/button @shadcn/ui/separator @shadcn/ui/badge @shadcn/ui/command
+npx shadcn-ui@latest init
+npx shadcn-ui@latest add command popover button separator badge
+```
+
+#### Step 2: Install Dependencies (optional)
+
+Install the optional dependencies including react-hook-form for form handling and zod for validation.
+
+```bash
+npm install @hookform/resolvers react-hook-form zod sonner
 ```
 
 #### Step 3: Create the Multi-Select Component
 
-Create a new file named `MultiSelectFormField.tsx` in your components directory and add the following code:
+Create a new file named `components/multi-select.tsx` in your components directory and add the following code:
 
 ```tsx
 import * as React from "react";
@@ -79,7 +80,7 @@ const multiSelectVariants = cva(
   }
 );
 
-interface MultiSelectFormFieldProps
+interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof multiSelectVariants> {
   asChild?: boolean;
@@ -96,9 +97,9 @@ interface MultiSelectFormFieldProps
   onValueChange: (value: string[]) => void;
 }
 
-const MultiSelectFormField = React.forwardRef<
+const MultiSelect = React.forwardRef<
   HTMLButtonElement,
-  MultiSelectFormFieldProps
+  MultiSelectProps
 >(
   (
     {
@@ -307,9 +308,7 @@ const MultiSelectFormField = React.forwardRef<
         </PopoverContent>
         {animation > 0 && selectedValues.length > 0 && (
           <WandSparkles
-            className
-
-={cn(
+            className={cn(
               "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
               isAnimating ? "" : "text-muted-foreground"
             )}
@@ -321,14 +320,12 @@ const MultiSelectFormField = React.forwardRef<
   }
 );
 
-MultiSelectFormField.displayName = "MultiSelectFormField";
-
-export default MultiSelectFormField;
+MultiSelect.displayName = "MultiSelect";
 ```
 
 #### Step 4: Integrate the Multi-Select Component in a Form
 
-Create or update a page/component where you want to use the multi-select component with form validation using Zod.
+Create or update a page or component where you want to use the multi-select component with optional form validation using Zod.
 
 ```tsx
 "use client";
@@ -336,12 +333,12 @@ Create or update a page/component where you want to use the multi-select compone
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Link from "next/link";
+import { toast } from "sonner";
 
-import MultiSelectFormField from "@/components/ui/multi-select";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
-import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -351,8 +348,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   PageActions,
@@ -360,6 +355,7 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
+import MultiSelect from "@/components/multi-select";
 
 const frameworksList = [
   {
@@ -437,7 +433,7 @@ export default function Home() {
                 <FormItem>
                   <FormLabel>Frameworks</FormLabel>
                   <FormControl>
-                    <MultiSelectFormField
+                    <MultiSelect
                       options={frameworksList}
                       defaultValue={field.value}
                       onValueChange={field.onChange}
@@ -466,12 +462,12 @@ export default function Home() {
 
 #### Step 5: Using Variants and Animations
 
-You can control the appearance of the component by using different variants and enabling/disabling animations. Modify the `variant` and `animation` props in the `MultiSelectFormField` component to see the changes.
+You can control the appearance of the component by using different variants and enabling/disabling animations. Modify the `variant` and `animation` props in the `MultiSelect` component to see the changes.
 
 Example with secondary variant and no animation:
 
 ```tsx
-<MultiSelectFormField
+<MultiSelect
   options={frameworksList}
   defaultValue={field.value}
   onValueChange={field.onChange}
