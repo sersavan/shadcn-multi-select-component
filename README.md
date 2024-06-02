@@ -368,11 +368,11 @@ function Home() {
       <h1 className="text-2xl font-bold mb-4">Multi-Select Component</h1>
       <MultiSelect
         options={frameworksList}
-        defaultValue={selectedFrameworks}
         onValueChange={setSelectedFrameworks}
-        placeholder="Select frameworks"
-        animation={2}
-        variant="inverted"
+        defaultValue={selectedFrameworks} // optional
+        placeholder="Select frameworks" // optional
+        animation={2} // optional
+        variant="inverted" // optional
       />
       <div className="mt-4">
         <h2 className="text-xl font-semibold">Selected Frameworks:</h2>
