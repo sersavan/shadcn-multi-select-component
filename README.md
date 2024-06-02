@@ -326,7 +326,7 @@ Update a file named `page.tsx` in your `app` directory with the following code:
 "use client";
 
 import React, { useState } from "react";
-import MultiSelect from "@/components/multi-select";
+import { MultiSelect } from "@/components/multi-select";
 import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
 
 const frameworksList = [
