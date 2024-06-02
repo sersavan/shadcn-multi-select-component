@@ -20,9 +20,11 @@ npx shadcn-ui@latest add command popover button separator badge
 
 ### Step 2: Create the Multi-Select Component
 
-Create a new file named `src/components/multi-select.tsx` in your components directory and add the following code:
+Create a new file named `multi-select.tsx` in your `components` directory and add the following code:
 
 ```tsx
+// src/components/multi-select.tsx
+
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { CheckIcon, XCircle, ChevronDown, XIcon, WandSparkles } from "lucide-react";
@@ -297,9 +299,11 @@ export default MultiSelect;
 
 ### Step 3: Integrate the Multi-Select Component in a Next.js Page
 
-Update a file named `app/page.tsx` in your `src` directory with the following code:
+Update a file named `page.tsx` in your `app` directory with the following code:
 
 ```tsx
+// src/app/page.tsx
+
 "use client";
 
 import React, { useState } from "react";
