@@ -80,18 +80,17 @@ const multiSelectVariants = cva(
 interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof multiSelectVariants> {
-  asChild?: boolean;
   options: {
     label: string;
     value: string;
     icon?: React.ComponentType<{ className?: string }>;
   }[];
-  defaultValue?: string[];
-  disabled?: boolean;
-  placeholder: string;
-  className?: string;
-  animation?: number;
   onValueChange: (value: string[]) => void;
+  defaultValue?: string[];
+  placeholder?: string;
+  animation?: number;
+  asChild?: boolean;
+  className?: string;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -100,15 +99,14 @@ export const MultiSelect = React.forwardRef<
 >(
   (
     {
-      variant,
-      asChild = false,
       options,
-      defaultValue = [],
-      disabled,
-      placeholder,
-      className,
-      animation = 0,
       onValueChange,
+      variant,
+      defaultValue = [],
+      placeholder = "Select options",
+      animation = 0,
+      asChild = false,
+      className,
       ...props
     },
     ref
@@ -200,8 +198,8 @@ export const MultiSelect = React.forwardRef<
                   <XIcon
                     className="h-4 mx-2 cursor-pointer text-muted-foreground"
                     onClick={(event) => {
-                      handleClear();
                       event.stopPropagation();
+                      handleClear();
                     }}
                   />
                   <Separator
