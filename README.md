@@ -30,13 +30,23 @@ Create a new file named `multi-select.tsx` in your `components` directory and ad
 
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { CheckIcon, XCircle, ChevronDown, XIcon, WandSparkles } from "lucide-react";
+import {
+  CheckIcon,
+  XCircle,
+  ChevronDown,
+  XIcon,
+  WandSparkles,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Command,
   CommandEmpty,
@@ -52,9 +62,12 @@ const multiSelectVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-foreground/10 drop-shadow-md text-foreground bg-card hover:bg-card/80",
-        secondary: "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        default:
+          "border-foreground/10 drop-shadow-md text-foreground bg-card hover:bg-card/80",
+        secondary:
+          "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive:
+          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         inverted: "inverted",
       },
     },
@@ -81,52 +94,62 @@ interface MultiSelectProps
   onValueChange: (value: string[]) => void;
 }
 
-const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
+export const MultiSelect = React.forwardRef<
+  HTMLButtonElement,
+  MultiSelectProps
+>(
   (
     {
-      className,
       variant,
       asChild = false,
       options,
-      defaultValue,
-      onValueChange,
+      defaultValue = [],
       disabled,
       placeholder,
+      className,
       animation = 0,
+      onValueChange,
       ...props
     },
     ref
   ) => {
-    const [selectedValues, setSelectedValues] = React.useState<string[]>(defaultValue || []);
-    const selectedValuesSet = React.useRef(new Set(selectedValues));
+    const [selectedValues, setSelectedValues] =
+      React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(animation > 0);
 
     React.useEffect(() => {
-      setSelectedValues(defaultValue || []);
-      selectedValuesSet.current = new Set(defaultValue);
+      setSelectedValues(defaultValue);
     }, [defaultValue]);
 
-    const handleInputKeyDown = (event: any) => {
+    const handleInputKeyDown = (
+      event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
       if (event.key === "Enter") {
         setIsPopoverOpen(true);
-      } else if (event.key === "Backspace" && !event.target.value) {
-        selectedValues.pop();
-        setSelectedValues([...selectedValues]);
-        selectedValuesSet.current.delete(selectedValues[selectedValues.length - 1]);
-        onValueChange([...selectedValues]);
+      } else if (event.key === "Backspace" && !event.currentTarget.value) {
+        const newSelectedValues = [...selectedValues];
+        newSelectedValues.pop();
+        setSelectedValues(newSelectedValues);
+        onValueChange(newSelectedValues);
       }
     };
 
     const toggleOption = (value: string) => {
-      if (selectedValuesSet.current.has(value)) {
-        selectedValuesSet.current.delete(value);
-        setSelectedValues(selectedValues.filter((v) => v !== value));
-      } else {
-        selectedValuesSet.current.add(value);
-        setSelectedValues([...selectedValues, value]);
-      }
-      onValueChange(Array.from(selectedValuesSet.current));
+      const newSelectedValues = selectedValues.includes(value)
+        ? selectedValues.filter((v) => v !== value)
+        : [...selectedValues, value];
+      setSelectedValues(newSelectedValues);
+      onValueChange(newSelectedValues);
+    };
+
+    const handleClear = () => {
+      setSelectedValues([]);
+      onValueChange([]);
+    };
+
+    const handleTogglePopover = () => {
+      setIsPopoverOpen((prev) => !prev);
     };
 
     return (
@@ -135,8 +158,11 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
           <Button
             ref={ref}
             {...props}
-            onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
+            onClick={handleTogglePopover}
+            className={cn(
+              "flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card",
+              className
+            )}
           >
             {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
@@ -174,9 +200,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
                   <XIcon
                     className="h-4 mx-2 cursor-pointer text-muted-foreground"
                     onClick={(event) => {
-                      setSelectedValues([]);
-                      selectedValuesSet.current.clear();
-                      onValueChange([]);
+                      handleClear();
                       event.stopPropagation();
                     }}
                   />
@@ -211,7 +235,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
-                  const isSelected = selectedValuesSet.current.has(option.value);
+                  const isSelected = selectedValues.includes(option.value);
                   return (
                     <CommandItem
                       key={option.value}
@@ -246,11 +270,7 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
                   {selectedValues.length > 0 && (
                     <>
                       <CommandItem
-                        onSelect={() => {
-                          setSelectedValues([]);
-                          selectedValuesSet.current.clear();
-                          onValueChange([]);
-                        }}
+                        onSelect={handleClear}
                         style={{
                           pointerEvents: "auto",
                           opacity: 1,
@@ -296,8 +316,6 @@ const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
 );
 
 MultiSelect.displayName = "MultiSelect";
-
-export default MultiSelect;
 ```
 
 ### Step 3: Integrate the Multi-Select Component in a Next.js Page
