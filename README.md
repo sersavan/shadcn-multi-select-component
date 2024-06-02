@@ -435,12 +435,6 @@ The `MultiSelect` component comes with several props that allow you to customize
   placeholder="Select frameworks"
   ```
 
-- **`disabled`**: A boolean to disable the component.
-
-  ```tsx
-  disabled={true}
-  ```
-
 - **`variant`**: A string to apply predefined styles to the component. Possible values include `default`, `secondary`, `destructive`, and `inverted`.
 
   ```tsx
