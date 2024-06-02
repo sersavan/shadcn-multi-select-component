@@ -20,7 +20,7 @@ npx shadcn-ui@latest add command popover button separator badge
 
 ### Step 2: Create the Multi-Select Component
 
-Create a new file named `components/multi-select.tsx` in your components directory and add the following code:
+Create a new file named `src/components/multi-select.tsx` in your components directory and add the following code:
 
 ```tsx
 import * as React from "react";
