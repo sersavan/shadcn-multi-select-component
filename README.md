@@ -297,9 +297,7 @@ export default MultiSelect;
 
 #### Step 3: Integrate the Multi-Select Component in a Simple React App
 
-Create or update a file named `App.tsx` in your `src` directory and add the following code
-
-:
+Create or update a file named `App.tsx` in your `src` directory and add the following code:
 
 ```tsx
 import React, { useState } from "react";
