@@ -1,11 +1,11 @@
-### Installation and Integration of Multi-Select Component in Next.js with shadcn
+### Installation and Integration of Multi-Select Component in React Projects (simplest way)
 
 #### Prerequisites
 
-Ensure you have a Next.js project set up. If not, create one using the following command:
+Ensure you have a React project set up. If not, create one using the following command:
 
 ```bash
-npx create-next-app@latest my-app --typescript --tailwind --eslint
+npx create-react-app my-app --template typescript
 cd my-app
 ```
 
@@ -18,38 +18,20 @@ npx shadcn-ui@latest init
 npx shadcn-ui@latest add command popover button separator badge
 ```
 
-#### Step 2: Install Dependencies (optional)
-
-Install the optional dependencies including react-hook-form for form handling and zod for validation.
-
-```bash
-npm install @hookform/resolvers react-hook-form zod sonner
-```
-
-#### Step 3: Create the Multi-Select Component
+#### Step 2: Create the Multi-Select Component
 
 Create a new file named `components/multi-select.tsx` in your components directory and add the following code:
 
 ```tsx
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import {
-  CheckIcon,
-  XCircle,
-  ChevronDown,
-  XIcon,
-  WandSparkles,
-} from "lucide-react";
+import { CheckIcon, XCircle, ChevronDown, XIcon, WandSparkles } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Command,
   CommandEmpty,
@@ -65,12 +47,9 @@ const multiSelectVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-foreground/10 drop-shadow-md text-foreground bg-card hover:bg-card/80",
-        secondary:
-          "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+        default: "border-foreground/10 drop-shadow-md text-foreground bg-card hover:bg-card/80",
+        secondary: "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         inverted: "inverted",
       },
     },
@@ -97,10 +76,7 @@ interface MultiSelectProps
   onValueChange: (value: string[]) => void;
 }
 
-const MultiSelect = React.forwardRef<
-  HTMLButtonElement,
-  MultiSelectProps
->(
+const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>(
   (
     {
       className,
@@ -116,9 +92,7 @@ const MultiSelect = React.forwardRef<
     },
     ref
   ) => {
-    const [selectedValues, setSelectedValues] = React.useState<string[]>(
-      defaultValue || []
-    );
+    const [selectedValues, setSelectedValues] = React.useState<string[]>(defaultValue || []);
     const selectedValuesSet = React.useRef(new Set(selectedValues));
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(animation > 0);
@@ -134,9 +108,7 @@ const MultiSelect = React.forwardRef<
       } else if (event.key === "Backspace" && !event.target.value) {
         selectedValues.pop();
         setSelectedValues([...selectedValues]);
-        selectedValuesSet.current.delete(
-          selectedValues[selectedValues.length - 1]
-        );
+        selectedValuesSet.current.delete(selectedValues[selectedValues.length - 1]);
         onValueChange([...selectedValues]);
       }
     };
@@ -234,9 +206,7 @@ const MultiSelect = React.forwardRef<
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
-                  const isSelected = selectedValuesSet.current.has(
-                    option.value
-                  );
+                  const isSelected = selectedValuesSet.current.has(option.value);
                   return (
                     <CommandItem
                       key={option.value}
@@ -321,172 +291,80 @@ const MultiSelect = React.forwardRef<
 );
 
 MultiSelect.displayName = "MultiSelect";
+
+export default MultiSelect;
 ```
 
-#### Step 4: Integrate the Multi-Select Component in a Form
+#### Step 3: Integrate the Multi-Select Component in a Simple React App
 
-Create or update a page or component where you want to use the multi-select component with optional form validation using Zod.
+Create or update a file named `App.tsx` in your `src` directory and add the following code
+
+:
 
 ```tsx
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import Link from "next/link";
-import { toast } from "sonner";
-
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Icons } from "@/components/icons";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { cn } from "@/lib/utils";
-import {
-  PageActions,
-  PageHeader,
-  PageHeaderDescription,
-  PageHeaderHeading,
-} from "@/components/page-header";
-import MultiSelect from "@/components/multi-select";
+import React, { useState } from "react";
+import MultiSelect from "./components/multi-select";
 
 const frameworksList = [
   {
-    value: "next.js",
-    label: "Next.js",
-    icon: Icons.dog,
+    value: "react",
+    label: "React",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
-    icon: Icons.cat,
+    value: "angular",
+    label: "Angular",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-    icon: Icons.turtle,
+    value: "vue",
+    label: "Vue",
   },
   {
-    value: "remix",
-    label: "Remix",
-    icon: Icons.rabbit,
+    value: "svelte",
+    label: "Svelte",
   },
   {
-    value: "astro",
-    label: "Astro",
-    icon: Icons.fish,
+    value: "ember",
+    label: "Ember",
   },
 ];
 
-const FormSchema = z.object({
-  frameworks: z
-    .array(z.string().min(1))
-    .min(1)
-    .nonempty("Please select at least one framework."),
-});
-
-export default function Home() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      frameworks: ["next.js", "nuxt.js", "astro"],
-    },
-  });
-
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast(
-      `You have selected following frameworks: ${data.frameworks.join(", ")}.`
-    );
-  }
+function App() {
+  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start space-y-3 p-3">
-      <PageHeader>
-        <PageHeaderHeading>Multi select component</PageHeaderHeading>
-        <PageHeaderDescription>assembled with shadcn/ui</PageHeaderDescription>
-        <PageActions>
-          <Link
-            target="_blank"
-            rel="noreferrer"
-            href="https://github.com/sersavan/shadcn-multi-select-component"
-            className={cn(buttonVariants({ variant: "outline" }))}
-          >
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-            GitHub
-          </Link>
-        </PageActions>
-      </PageHeader>
-      <Card className="w-full max-w-2xl p-5">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="frameworks"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Frameworks</FormLabel>
-                  <FormControl>
-                    <MultiSelect
-                      options={frameworksList}
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                      placeholder="Select options"
-                      variant="inverted"
-                      animation={2}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Choose the frameworks you are interested in.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button variant="outline" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Form>
-      </Card>
-    </main>
+    <div className="App">
+      <h1>Multi-Select Component Demo</h1>
+      <MultiSelect
+        options={frameworksList}
+        defaultValue={selectedFrameworks}
+        onValueChange={setSelectedFrameworks}
+        placeholder="Select frameworks"
+      />
+      <div>
+        <h2>Selected Frameworks:</h2>
+        <ul>
+          {selectedFrameworks.map((framework) => (
+            <li key={framework}>{framework}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
+
+export default App;
 ```
 
-#### Step 5: Using Variants and Animations
+#### Step 4: Run Your React Project
 
-You can control the appearance of the component by using different variants and enabling/disabling animations. Modify the `variant` and `animation` props in the `MultiSelect` component to see the changes.
-
-Example with secondary variant and no animation:
-
-```tsx
-<MultiSelect
-  options={frameworksList}
-  defaultValue={field.value}
-  onValueChange={field.onChange}
-  placeholder="Select options"
-  variant="secondary"
-  animation={0}
-/>
-```
-
-#### Step 6: Deploying and Testing
-
-Run your Next.js project to see the multi-select component in action.
+Run your React project to see the multi-select component in action.
 
 ```bash
-npm run dev
+npm start
 ```
 
-Visit `http://localhost:3000` to see the form with the multi-select component integrated.
+Visit `http://localhost:3000` to see the multi-select component integrated in your React application.
 
 ### Conclusion
 
-You have successfully integrated a multi-select component in your Next.js project using shadcn, with form validation powered by Zod. Customize the component further as per your needs, and explore various shadcn components to enhance your project.
+You have successfully integrated a multi-select component in your React project using shadcn components. Customize the component further as per your needs, and explore various shadcn components to enhance your project.
