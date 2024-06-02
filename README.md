@@ -1,15 +1,15 @@
-### Installation and Integration of Multi-Select Component in React Projects (simplest way)
+## Installation and Integration of Multi-Select Component in Next.js Projects
 
-#### Prerequisites
+### Prerequisites
 
-Ensure you have a React project set up. If not, create one using the following command:
+Ensure you have a Next.js project set up. If not, create one using the following command:
 
 ```bash
-npx create-react-app my-app --template typescript
+npx create-next-app my-app --typescript
 cd my-app
 ```
 
-#### Step 1: Install shadcn Components
+### Step 1: Install shadcn Components
 
 To use shadcn components, you need to install them. You can install the specific components required for the multi-select component as follows:
 
@@ -18,7 +18,7 @@ npx shadcn-ui@latest init
 npx shadcn-ui@latest add command popover button separator badge
 ```
 
-#### Step 2: Create the Multi-Select Component
+### Step 2: Create the Multi-Select Component
 
 Create a new file named `components/multi-select.tsx` in your components directory and add the following code:
 
@@ -295,52 +295,65 @@ MultiSelect.displayName = "MultiSelect";
 export default MultiSelect;
 ```
 
-#### Step 3: Integrate the Multi-Select Component in a Simple React App
+### Step 3: Integrate the Multi-Select Component in a Next.js Page
 
-Create or update a file named `App.tsx` in your `src` directory and add the following code:
+Update a file named `app/page.tsx` in your `src` directory with the following code:
 
 ```tsx
+"use client";
+
 import React, { useState } from "react";
-import MultiSelect from "./components/multi-select";
+import MultiSelect from "@/components/multi-select";
+import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
 
 const frameworksList = [
   {
     value: "react",
     label: "React",
+    icon: Turtle,
   },
   {
     value: "angular",
     label: "Angular",
+    icon: Cat,
   },
   {
     value: "vue",
     label: "Vue",
+    icon: Dog,
   },
   {
     value: "svelte",
     label: "Svelte",
+    icon: Rabbit,
   },
   {
     value: "ember",
     label: "Ember",
+    icon: Fish,
   },
 ];
 
-function App() {
-  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
+function Home() {
+  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
+    "react",
+    "angular",
+  ]);
 
   return (
-    <div className="App">
-      <h1>Multi-Select Component Demo</h1>
+    <div className="p-4 max-w-xl">
+      <h1 className="text-2xl font-bold mb-4">Multi-Select Component</h1>
       <MultiSelect
         options={frameworksList}
         defaultValue={selectedFrameworks}
         onValueChange={setSelectedFrameworks}
         placeholder="Select frameworks"
+        animation={2}
+        variant="inverted"
       />
-      <div>
-        <h2>Selected Frameworks:</h2>
-        <ul>
+      <div className="mt-4">
+        <h2 className="text-xl font-semibold">Selected Frameworks:</h2>
+        <ul className="list-disc list-inside">
           {selectedFrameworks.map((framework) => (
             <li key={framework}>{framework}</li>
           ))}
@@ -350,19 +363,87 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
 ```
 
-#### Step 4: Run Your React Project
+### Step 4: Run Your Next.js Project
 
-Run your React project to see the multi-select component in action.
+Run your Next.js project to see the multi-select component in action.
 
 ```bash
-npm start
+npm run dev
 ```
 
-Visit `http://localhost:3000` to see the multi-select component integrated in your React application.
+Visit `http://localhost:3000` to see the multi-select component integrated into your Next.js application.
+
+### Managing Props in Multi-Select Component
+
+The `MultiSelect` component comes with several props that allow you to customize its behavior and appearance. Here's a detailed explanation of each prop:
+
+- **`options`**: An array of objects representing the selectable options. Each object should have `label` and `value` properties, and optionally an `icon` component.
+  
+  ```tsx
+  options={[
+    { label: "React", value: "react", icon: Turtle },
+    { label: "Angular", value: "angular", icon: Cat },
+    // more options...
+  ]}
+  ```
+
+- **`defaultValue`**: An array of strings representing the default selected values.
+
+  ```tsx
+  defaultValue={["react", "angular"]}
+  ```
+
+- **`onValueChange`**: A callback function that gets called whenever the selected values change. It receives the updated array of selected values as an argument.
+
+  ```tsx
+  onValueChange={(selectedValues) => {
+    console.log(selectedValues);
+  }}
+  ```
+
+- **`placeholder`**: A string to display when no options are selected.
+
+  ```tsx
+  placeholder="Select frameworks"
+  ```
+
+- **`disabled`**: A boolean to disable the component.
+
+  ```tsx
+  disabled={true}
+  ```
+
+- **`variant`**: A string to apply predefined styles to the component. Possible values include `default`, `secondary`, `destructive`, and `inverted`.
+
+  ```tsx
+  variant="inverted"
+  ```
+
+- **`className`**: A string of additional CSS classes to apply to the component.
+
+  ```tsx
+  className="my-custom-class"
+  ```
+
+- **`animation`**: A number representing the duration of the animation in seconds. If greater than 0, the selected badges will animate.
+
+  ```tsx
+  animation={0.5}
+  ```
+
+### Managing Icons in Multi-Select Component
+
+You can add custom icons to each option in the multi-select component. Here’s how you can manage icons:
+
+1. **Import or Define Icon Components**: Ensure you have the icon components available. You can import them from a library `lucide-react` or define your custom icons.
+
+2. **Add Icons to Options**: Include the `icon` property in each option object, pointing to the respective icon component.
+
+3. **Display Icons in Multi-Select**: The `MultiSelect` component already handles the display of icons. Ensure each option object passed to the `options` prop includes an `icon` property.
 
 ### Conclusion
 
-You have successfully integrated a multi-select component in your React project using shadcn components. Customize the component further as per your needs, and explore various shadcn components to enhance your project.
+You have successfully integrated a multi-select component in your Next.js project using shadcn components. You can manage the component's behavior and appearance using various props to customize it according to your needs. Additionally, you can add custom icons to each option to enhance the visual appeal and usability of the multi-select component.
