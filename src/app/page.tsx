@@ -105,8 +105,8 @@ export default function Home() {
                   <FormControl>
                     <MultiSelect
                       options={frameworksList}
-                      defaultValue={field.value}
                       onValueChange={field.onChange}
+                      defaultValue={field.value}
                       placeholder="Select options"
                       variant="inverted"
                       animation={2}

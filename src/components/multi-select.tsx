@@ -87,7 +87,9 @@ export const MultiSelect = React.forwardRef<
     const [isAnimating, setIsAnimating] = React.useState(animation > 0);
 
     React.useEffect(() => {
-      setSelectedValues(defaultValue);
+      if (defaultValue.length > 0) {
+        setSelectedValues(defaultValue);
+      }
     }, [defaultValue]);
 
     const handleInputKeyDown = (
