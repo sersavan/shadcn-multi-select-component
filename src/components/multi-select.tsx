@@ -73,7 +73,7 @@ export const MultiSelect = React.forwardRef<
       variant,
       asChild = false,
       options,
-      defaultValue,
+      defaultValue = [],
       disabled,
       placeholder,
       className,
@@ -83,40 +83,43 @@ export const MultiSelect = React.forwardRef<
     },
     ref
   ) => {
-    const [selectedValues, setSelectedValues] = React.useState<string[]>(
-      defaultValue || []
-    );
-    const selectedValuesSet = React.useRef(new Set(selectedValues));
+    const [selectedValues, setSelectedValues] =
+      React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(animation > 0);
 
     React.useEffect(() => {
-      setSelectedValues(defaultValue || []);
-      selectedValuesSet.current = new Set(defaultValue);
+      setSelectedValues(defaultValue);
     }, [defaultValue]);
 
-    const handleInputKeyDown = (event: any) => {
+    const handleInputKeyDown = (
+      event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
       if (event.key === "Enter") {
         setIsPopoverOpen(true);
-      } else if (event.key === "Backspace" && !event.target.value) {
-        selectedValues.pop();
-        setSelectedValues([...selectedValues]);
-        selectedValuesSet.current.delete(
-          selectedValues[selectedValues.length - 1]
-        );
-        onValueChange([...selectedValues]);
+      } else if (event.key === "Backspace" && !event.currentTarget.value) {
+        const newSelectedValues = [...selectedValues];
+        newSelectedValues.pop();
+        setSelectedValues(newSelectedValues);
+        onValueChange(newSelectedValues);
       }
     };
 
     const toggleOption = (value: string) => {
-      if (selectedValuesSet.current.has(value)) {
-        selectedValuesSet.current.delete(value);
-        setSelectedValues(selectedValues.filter((v) => v !== value));
-      } else {
-        selectedValuesSet.current.add(value);
-        setSelectedValues([...selectedValues, value]);
-      }
-      onValueChange(Array.from(selectedValuesSet.current));
+      const newSelectedValues = selectedValues.includes(value)
+        ? selectedValues.filter((v) => v !== value)
+        : [...selectedValues, value];
+      setSelectedValues(newSelectedValues);
+      onValueChange(newSelectedValues);
+    };
+
+    const handleClear = () => {
+      setSelectedValues([]);
+      onValueChange([]);
+    };
+
+    const handleTogglePopover = () => {
+      setIsPopoverOpen((prev) => !prev);
     };
 
     return (
@@ -125,8 +128,11 @@ export const MultiSelect = React.forwardRef<
           <Button
             ref={ref}
             {...props}
-            onClick={() => setIsPopoverOpen(!isPopoverOpen)}
-            className="flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card"
+            onClick={handleTogglePopover}
+            className={cn(
+              "flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-card",
+              className
+            )}
           >
             {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
@@ -164,9 +170,7 @@ export const MultiSelect = React.forwardRef<
                   <XIcon
                     className="h-4 mx-2 cursor-pointer text-muted-foreground"
                     onClick={(event) => {
-                      setSelectedValues([]);
-                      selectedValuesSet.current.clear();
-                      onValueChange([]);
+                      handleClear();
                       event.stopPropagation();
                     }}
                   />
@@ -201,9 +205,7 @@ export const MultiSelect = React.forwardRef<
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
-                  const isSelected = selectedValuesSet.current.has(
-                    option.value
-                  );
+                  const isSelected = selectedValues.includes(option.value);
                   return (
                     <CommandItem
                       key={option.value}
@@ -238,11 +240,7 @@ export const MultiSelect = React.forwardRef<
                   {selectedValues.length > 0 && (
                     <>
                       <CommandItem
-                        onSelect={() => {
-                          setSelectedValues([]);
-                          selectedValuesSet.current.clear();
-                          onValueChange([]);
-                        }}
+                        onSelect={handleClear}
                         style={{
                           pointerEvents: "auto",
                           opacity: 1,
