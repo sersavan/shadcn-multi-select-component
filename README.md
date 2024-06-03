@@ -325,7 +325,7 @@ Update your page or root component, for example, `page.tsx` in your `app` direct
 ```tsx
 // src/app/page.tsx
 
-"use client";
+"use client"; // mandatory
 
 import React, { useState } from "react";
 import { MultiSelect } from "@/components/multi-select";
