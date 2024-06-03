@@ -320,7 +320,7 @@ MultiSelect.displayName = "MultiSelect";
 
 ### Step 3: Integrate the Multi-Select Component in a Next.js Page
 
-Update a file named `page.tsx` in your `app` directory with the following code:
+Update your page or root component, for example, `page.tsx` in your `app` directory with the following code:
 
 ```tsx
 // src/app/page.tsx
@@ -361,8 +361,8 @@ const frameworksList = [
 
 function Home() {
   const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([
-    "react",
-    "angular",
+    "react", //optional
+    "angular", //optional
   ]);
 
   return (
