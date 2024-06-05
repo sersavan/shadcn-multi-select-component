@@ -84,7 +84,7 @@ export const MultiSelect = React.forwardRef<
     const [selectedValues, setSelectedValues] =
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    const [isAnimating, setIsAnimating] = React.useState(animation > 0);
+    const [isAnimating, setIsAnimating] = React.useState(false);
 
     React.useEffect(() => {
       if (defaultValue.length > 0) {
