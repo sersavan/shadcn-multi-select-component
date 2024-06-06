@@ -1,4 +1,4 @@
-#### ⭐ Please, give this repository a ⭐! Your support motivates me to create more & more! ⭐
+#### ⭐ Please, give this repository a ⭐! Your support motivates me to create more! ⭐
 
 
 ## Installation and Integration of Multi-Select Component in Next.js Projects
