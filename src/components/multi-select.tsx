@@ -59,6 +59,7 @@ interface MultiSelectProps
   defaultValue: string[];
   placeholder?: string;
   animation?: number;
+  maxCount?: number;
   asChild?: boolean;
   className?: string;
 }
@@ -75,6 +76,7 @@ export const MultiSelect = React.forwardRef<
       defaultValue = [],
       placeholder = "Select options",
       animation = 0,
+      maxCount = 3,
       asChild = false,
       className,
       ...props
@@ -122,6 +124,12 @@ export const MultiSelect = React.forwardRef<
       setIsPopoverOpen((prev) => !prev);
     };
 
+    const clearExtraOptions = () => {
+      const newSelectedValues = selectedValues.slice(0, maxCount);
+      setSelectedValues(newSelectedValues);
+      onValueChange(newSelectedValues);
+    };
+
     return (
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>
@@ -137,7 +145,7 @@ export const MultiSelect = React.forwardRef<
             {selectedValues.length > 0 ? (
               <div className="flex justify-between items-center w-full">
                 <div className="flex flex-wrap items-center">
-                  {selectedValues.map((value) => {
+                  {selectedValues.slice(0, maxCount).map((value) => {
                     const option = options.find((o) => o.value === value);
                     const IconComponent = option?.icon;
                     return (
@@ -147,9 +155,7 @@ export const MultiSelect = React.forwardRef<
                           isAnimating ? "animate-bounce" : "",
                           multiSelectVariants({ variant, className })
                         )}
-                        style={{
-                          animationDuration: `${animation}s`,
-                        }}
+                        style={{ animationDuration: `${animation}s` }}
                       >
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
@@ -165,6 +171,25 @@ export const MultiSelect = React.forwardRef<
                       </Badge>
                     );
                   })}
+                  {selectedValues.length > maxCount && (
+                    <Badge
+                      className={cn(
+                        " bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
+                        isAnimating ? "animate-bounce" : "",
+                        multiSelectVariants({ variant, className })
+                      )}
+                      style={{ animationDuration: `${animation}s` }}
+                    >
+                      {`+ ${selectedValues.length - maxCount} more`}
+                      <XCircle
+                        className="ml-2 h-4 w-4 cursor-pointer"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          clearExtraOptions();
+                        }}
+                      />
+                    </Badge>
+                  )}
                 </div>
                 <div className="flex items-center justify-between">
                   <XIcon
@@ -210,10 +235,7 @@ export const MultiSelect = React.forwardRef<
                     <CommandItem
                       key={option.value}
                       onSelect={() => toggleOption(option.value)}
-                      style={{
-                        pointerEvents: "auto",
-                        opacity: 1,
-                      }}
+                      style={{ pointerEvents: "auto", opacity: 1 }}
                       className="cursor-pointer"
                     >
                       <div
@@ -241,10 +263,7 @@ export const MultiSelect = React.forwardRef<
                     <>
                       <CommandItem
                         onSelect={handleClear}
-                        style={{
-                          pointerEvents: "auto",
-                          opacity: 1,
-                        }}
+                        style={{ pointerEvents: "auto", opacity: 1 }}
                         className="flex-1 justify-center cursor-pointer"
                       >
                         Clear
@@ -258,10 +277,7 @@ export const MultiSelect = React.forwardRef<
                   <CommandSeparator />
                   <CommandItem
                     onSelect={() => setIsPopoverOpen(false)}
-                    style={{
-                      pointerEvents: "auto",
-                      opacity: 1,
-                    }}
+                    style={{ pointerEvents: "auto", opacity: 1 }}
                     className="flex-1 justify-center cursor-pointer"
                   >
                     Close

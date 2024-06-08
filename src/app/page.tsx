@@ -110,6 +110,7 @@ export default function Home() {
                       placeholder="Select options"
                       variant="inverted"
                       animation={2}
+                      maxCount={3}
                     />
                   </FormControl>
                   <FormDescription>

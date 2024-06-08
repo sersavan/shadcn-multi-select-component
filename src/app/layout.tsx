@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "shadcn|radix Multi select component",
+  title: "shadcn Multi select component",
   description: "A multi select component designed with shadcn/ui",
 };
 
