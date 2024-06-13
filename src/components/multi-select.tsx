@@ -130,6 +130,16 @@ export const MultiSelect = React.forwardRef<
       onValueChange(newSelectedValues);
     };
 
+    const toggleAll = () => {
+      if (selectedValues.length === options.length) {
+        handleClear();
+      } else {
+        const allValues = options.map((option) => option.value);
+        setSelectedValues(allValues);
+        onValueChange(allValues);
+      }
+    };
+
     return (
       <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <PopoverTrigger asChild>
@@ -174,7 +184,7 @@ export const MultiSelect = React.forwardRef<
                   {selectedValues.length > maxCount && (
                     <Badge
                       className={cn(
-                        " bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
+                        "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
                         isAnimating ? "animate-bounce" : "",
                         multiSelectVariants({ variant, className })
                       )}
@@ -229,6 +239,24 @@ export const MultiSelect = React.forwardRef<
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>
+                <CommandItem
+                  key="all"
+                  onSelect={toggleAll}
+                  style={{ pointerEvents: "auto", opacity: 1 }}
+                  className="cursor-pointer"
+                >
+                  <div
+                    className={cn(
+                      "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                      selectedValues.length === options.length
+                        ? "bg-primary text-primary-foreground"
+                        : "opacity-50 [&_svg]:invisible"
+                    )}
+                  >
+                    <CheckIcon className="h-4 w-4" />
+                  </div>
+                  <span>(Select All)</span>
+                </CommandItem>
                 {options.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
                   return (
