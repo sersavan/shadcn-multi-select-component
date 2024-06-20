@@ -242,7 +242,6 @@ export const MultiSelect = React.forwardRef<
                 <CommandItem
                   key="all"
                   onSelect={toggleAll}
-                  style={{ pointerEvents: "auto", opacity: 1 }}
                   className="cursor-pointer"
                 >
                   <div
@@ -263,7 +262,6 @@ export const MultiSelect = React.forwardRef<
                     <CommandItem
                       key={option.value}
                       onSelect={() => toggleOption(option.value)}
-                      style={{ pointerEvents: "auto", opacity: 1 }}
                       className="cursor-pointer"
                     >
                       <div
@@ -291,7 +289,6 @@ export const MultiSelect = React.forwardRef<
                     <>
                       <CommandItem
                         onSelect={handleClear}
-                        style={{ pointerEvents: "auto", opacity: 1 }}
                         className="flex-1 justify-center cursor-pointer"
                       >
                         Clear
@@ -305,7 +302,6 @@ export const MultiSelect = React.forwardRef<
                   <CommandSeparator />
                   <CommandItem
                     onSelect={() => setIsPopoverOpen(false)}
-                    style={{ pointerEvents: "auto", opacity: 1 }}
                     className="flex-1 justify-center cursor-pointer"
                   >
                     Close
