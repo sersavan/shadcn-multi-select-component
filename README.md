@@ -1,5 +1,3 @@
-#### ⭐ Support this repository by giving it a ⭐
-
 ## Multi-Select Component Setup in Next.js
 
 ### Prerequisites
