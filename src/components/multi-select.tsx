@@ -60,6 +60,7 @@ interface MultiSelectProps
   placeholder?: string;
   animation?: number;
   maxCount?: number;
+  modalPopover?: boolean;
   asChild?: boolean;
   className?: string;
 }
@@ -77,6 +78,7 @@ export const MultiSelect = React.forwardRef<
       placeholder = "Select options",
       animation = 0,
       maxCount = 3,
+      modalPopover = false,
       asChild = false,
       className,
       ...props
@@ -141,7 +143,11 @@ export const MultiSelect = React.forwardRef<
     };
 
     return (
-      <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+      <Popover
+        open={isPopoverOpen}
+        onOpenChange={setIsPopoverOpen}
+        modal={modalPopover}
+      >
         <PopoverTrigger asChild>
           <Button
             ref={ref}
