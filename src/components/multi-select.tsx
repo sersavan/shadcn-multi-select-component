@@ -144,7 +144,7 @@ export const MultiSelect = React.forwardRef<
 
     React.useEffect(() => {
       if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
-        setSelectedValues(defaultValue);
+        setSelectedValues(selectedValues);
       }
     }, [defaultValue, selectedValues]);
 
@@ -221,7 +221,7 @@ export const MultiSelect = React.forwardRef<
                         key={value}
                         className={cn(
                           isAnimating ? "animate-bounce" : "",
-                          multiSelectVariants({ variant, className })
+                          multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
                       >
@@ -244,7 +244,7 @@ export const MultiSelect = React.forwardRef<
                       className={cn(
                         "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
                         isAnimating ? "animate-bounce" : "",
-                        multiSelectVariants({ variant, className })
+                        multiSelectVariants({ variant })
                       )}
                       style={{ animationDuration: `${animation}s` }}
                     >

@@ -84,8 +84,7 @@ const multiSelectVariants = cva(
 interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof multiSelectVariants> {
-
-  /** 
+  /**
    * An array of option objects to be displayed in the multi-select component.
    * Each option object has a label, value, and an optional icon.
    */
@@ -172,7 +171,7 @@ export const MultiSelect = React.forwardRef<
 
     React.useEffect(() => {
       if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
-        setSelectedValues(defaultValue);
+        setSelectedValues(selectedValues);
       }
     }, [defaultValue, selectedValues]);
 
@@ -249,7 +248,7 @@ export const MultiSelect = React.forwardRef<
                         key={value}
                         className={cn(
                           isAnimating ? "animate-bounce" : "",
-                          multiSelectVariants({ variant, className })
+                          multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
                       >
@@ -272,7 +271,7 @@ export const MultiSelect = React.forwardRef<
                       className={cn(
                         "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
                         isAnimating ? "animate-bounce" : "",
-                        multiSelectVariants({ variant, className })
+                        multiSelectVariants({ variant })
                       )}
                       style={{ animationDuration: `${animation}s` }}
                     >
