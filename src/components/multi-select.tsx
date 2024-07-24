@@ -360,7 +360,7 @@ export const MultiSelect = React.forwardRef<
                   <CommandSeparator />
                   <CommandItem
                     onSelect={() => setIsPopoverOpen(false)}
-                    className="flex-1 justify-center cursor-pointer"
+                    className="flex-1 justify-center cursor-pointer max-w-full"
                   >
                     Close
                   </CommandItem>
