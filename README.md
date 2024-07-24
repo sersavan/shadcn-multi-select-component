@@ -439,9 +439,7 @@ function Home() {
 
   return (
     <div className="p-4 max-w-xl">
-      <h1 class
-
-Name="text-2xl font-bold mb-4">Multi-Select Component</h1>
+      <h1 className="text-2xl font-bold mb-4">Multi-Select Component</h1>
       <MultiSelect
         options={frameworksList}
         onValueChange={setSelectedFrameworks}
