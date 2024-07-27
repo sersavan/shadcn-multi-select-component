@@ -93,7 +93,7 @@ export default function Home() {
           </Link>
         </PageActions>
       </PageHeader>
-      <Card className="w-full max-w-2xl p-5">
+      <Card className="w-full max-w-xl p-5">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -120,7 +120,7 @@ export default function Home() {
                 </FormItem>
               )}
             />
-            <Button variant="outline" type="submit">
+            <Button variant="default" type="submit" className="w-full">
               Submit
             </Button>
           </form>
