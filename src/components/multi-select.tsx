@@ -223,7 +223,9 @@ export const MultiSelect = React.forwardRef<
                         key={value}
                         className={cn(
                           isAnimating ? "animate-bounce" : "",
-                          multiSelectVariants({ variant })
+                          option?.disabled
+                            ? multiSelectVariants({ variant: "secondary" })
+                            : multiSelectVariants({ variant })
                         )}
                         style={{ animationDuration: `${animation}s` }}
                       >
@@ -231,13 +233,15 @@ export const MultiSelect = React.forwardRef<
                           <IconComponent className="h-4 w-4 mr-2" />
                         )}
                         {option?.label}
-                        <XCircle
-                          className="ml-2 h-4 w-4 cursor-pointer"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            toggleOption(value);
-                          }}
-                        />
+                        {!option?.disabled && (
+                          <XCircle
+                            className="ml-2 h-4 w-4 cursor-pointer"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              toggleOption(value);
+                            }}
+                          />
+                        )}
                       </Badge>
                     );
                   })}
@@ -321,6 +325,7 @@ export const MultiSelect = React.forwardRef<
                   return (
                     <CommandItem
                       key={option.value}
+                      disabled={option?.disabled}
                       onSelect={() => toggleOption(option.value)}
                       className="cursor-pointer"
                     >
