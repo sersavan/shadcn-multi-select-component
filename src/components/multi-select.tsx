@@ -143,6 +143,17 @@ export const MultiSelect = React.forwardRef<
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
+    const disabledOptions = options.filter((option) => option.disabled);
+    const disabledAndUncheckedOptions = disabledOptions.filter(
+      ({ value }) => !selectedValues.includes(value)
+    );
+    const disabledValues = disabledOptions.map(({ value }) => value);
+    const defaultAndDisabledValues = defaultValue.filter((value) =>
+      disabledValues.includes(value)
+    );
+    const isSelectedAll =
+      selectedValues.length ===
+      options.length - disabledAndUncheckedOptions.length;
 
     React.useEffect(() => {
       if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
@@ -172,8 +183,8 @@ export const MultiSelect = React.forwardRef<
     };
 
     const handleClear = () => {
-      setSelectedValues([]);
-      onValueChange([]);
+      setSelectedValues(defaultAndDisabledValues);
+      onValueChange(defaultAndDisabledValues);
     };
 
     const handleTogglePopover = () => {
@@ -187,12 +198,18 @@ export const MultiSelect = React.forwardRef<
     };
 
     const toggleAll = () => {
-      if (selectedValues.length === options.length) {
+      if (isSelectedAll) {
         handleClear();
       } else {
-        const allValues = options.map((option) => option.value);
-        setSelectedValues(allValues);
-        onValueChange(allValues);
+        const enabledValues = options
+          .filter(({ disabled }) => !disabled)
+          .map(({ value }) => value);
+        const newSelectedValues = [
+          ...defaultAndDisabledValues,
+          ...enabledValues,
+        ];
+        setSelectedValues(newSelectedValues);
+        onValueChange(newSelectedValues);
       }
     };
 
@@ -311,7 +328,7 @@ export const MultiSelect = React.forwardRef<
                   <div
                     className={cn(
                       "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                      selectedValues.length === options.length
+                      isSelectedAll
                         ? "bg-primary text-primary-foreground"
                         : "opacity-50 [&_svg]:invisible"
                     )}
