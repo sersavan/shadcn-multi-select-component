@@ -68,6 +68,8 @@ interface MultiSelectProps
     value: string;
     /** Optional icon component to display alongside the option. */
     icon?: React.ComponentType<{ className?: string }>;
+    /** Decides whether to disable the option or not. If true, user cannot interact with the option. */
+    disabled?: boolean;
   }[];
 
   /**
