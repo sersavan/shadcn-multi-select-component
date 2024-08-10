@@ -8,7 +8,8 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { CardStyled } from "./components/card-styled";
+import { CardTitle } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
 import {
   Form,
@@ -63,7 +64,7 @@ const FormSchema = z.object({
 });
 
 export default function Home() {
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const basicExampleForm = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       frameworks: ["next.js", "nuxt.js"],
@@ -93,11 +94,16 @@ export default function Home() {
           </Link>
         </PageActions>
       </PageHeader>
-      <Card className="w-full max-w-xl p-5">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+
+      <CardStyled>
+        <CardTitle className="mb-6">Basic Example</CardTitle>
+        <Form {...basicExampleForm}>
+          <form
+            onSubmit={basicExampleForm.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
             <FormField
-              control={form.control}
+              control={basicExampleForm.control}
               name="frameworks"
               render={({ field }) => (
                 <FormItem>
@@ -125,7 +131,7 @@ export default function Home() {
             </Button>
           </form>
         </Form>
-      </Card>
+      </CardStyled>
     </main>
   );
 }
