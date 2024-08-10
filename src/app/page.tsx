@@ -55,6 +55,34 @@ const frameworksList: MultiSelectProps["options"] = [
     icon: Icons.fish,
   },
 ];
+const frameworksListIncludingDisabled: MultiSelectProps["options"] = [
+  {
+    value: "next.js",
+    label: "Next.js",
+    icon: Icons.dog,
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+    icon: Icons.cat,
+    disabled: true,
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+    icon: Icons.turtle,
+  },
+  {
+    value: "remix",
+    label: "Remix",
+    icon: Icons.rabbit,
+  },
+  {
+    value: "astro",
+    label: "Astro",
+    icon: Icons.fish,
+  },
+];
 
 const FormSchema = z.object({
   frameworks: z
@@ -70,6 +98,12 @@ export default function Home() {
       frameworks: ["next.js", "nuxt.js"],
     },
   });
+  const disabledExampleForm = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      frameworks: ["sveltekit", "astro"],
+    },
+  });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast(
@@ -78,7 +112,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen:calc(100vh - 3rem) flex-col items-center justify-start space-y-3 p-3">
+    <main className="flex min-h-screen:calc(100vh - 3rem) flex-col items-center justify-start space-y-3 p-3 pb-20">
       <PageHeader>
         <PageHeaderHeading>Multi select component</PageHeaderHeading>
         <PageHeaderDescription>assembled with shadcn/ui</PageHeaderDescription>
@@ -121,6 +155,45 @@ export default function Home() {
                   </FormControl>
                   <FormDescription>
                     Choose the frameworks you are interested in.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button variant="default" type="submit" className="w-full">
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </CardStyled>
+
+      <CardStyled>
+        <CardTitle className="mb-6">Disabled Usecase Example</CardTitle>
+        <Form {...disabledExampleForm}>
+          <form
+            onSubmit={disabledExampleForm.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
+            <FormField
+              control={disabledExampleForm.control}
+              name="frameworks"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Frameworks</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={frameworksListIncludingDisabled}
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      placeholder="Select options"
+                      variant="inverted"
+                      animation={2}
+                      maxCount={3}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Choose the frameworks you are interested in. <br />
+                    There is a <strong>disabled</strong> values in the list.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
