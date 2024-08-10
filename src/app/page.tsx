@@ -25,9 +25,9 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { MultiSelect } from "@/components/multi-select";
+import { MultiSelect, type MultiSelectProps } from "@/components/multi-select";
 
-const frameworksList = [
+const frameworksList: MultiSelectProps["options"] = [
   {
     value: "next.js",
     label: "Next.js",
