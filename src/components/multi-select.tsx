@@ -6,6 +6,7 @@ import {
   ChevronDown,
   XIcon,
   WandSparkles,
+  Plus
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -115,6 +116,18 @@ interface MultiSelectProps
    * Optional, can be used to add custom styles.
    */
   className?: string;
+
+   /**
+   * If true, allows creating new options that are not in the original list.
+   * Optional, defaults to false.
+   */
+   creatable?: boolean;
+
+   /**
+    * Callback function triggered when a new option is created.
+    * Required if creatable is true.
+    */
+   onCreate?: (value: string) => void;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -133,6 +146,8 @@ export const MultiSelect = React.forwardRef<
       modalPopover = false,
       asChild = false,
       className,
+      creatable = false,
+      onCreate,
       ...props
     },
     ref
@@ -141,6 +156,7 @@ export const MultiSelect = React.forwardRef<
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
+    const [inputValue, setInputValue] = React.useState("");
 
     React.useEffect(() => {
       if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
@@ -191,6 +207,18 @@ export const MultiSelect = React.forwardRef<
         const allValues = options.map((option) => option.value);
         setSelectedValues(allValues);
         onValueChange(allValues);
+      }
+    };
+
+    const handleInputChange = (value: string) => {
+      setInputValue(value);
+    };
+
+    const handleCreateOption = () => {
+      if (creatable && onCreate && inputValue) {
+        onCreate(inputValue);
+        toggleOption(inputValue);
+        setInputValue("");
       }
     };
 
@@ -295,7 +323,16 @@ export const MultiSelect = React.forwardRef<
               onKeyDown={handleInputKeyDown}
             />
             <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>
+                {creatable ? (
+                  <CommandItem onSelect={handleCreateOption}>
+                    <Plus className="mr-2 h-4 w-4" />
+                    Create "{inputValue}"
+                  </CommandItem>
+                ) : (
+                  "No results found."
+                )}
+              </CommandEmpty>
               <CommandGroup>
                 <CommandItem
                   key="all"
