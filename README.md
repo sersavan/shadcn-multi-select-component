@@ -170,10 +170,8 @@ export const MultiSelect = React.forwardRef<
     const [isAnimating, setIsAnimating] = React.useState(false);
 
     React.useEffect(() => {
-      if (JSON.stringify(selectedValues) !== JSON.stringify(defaultValue)) {
-        setSelectedValues(selectedValues);
-      }
-    }, [defaultValue, selectedValues]);
+      setSelectedValues(defaultValue);
+    }, [defaultValue]);
 
     const handleInputKeyDown = (
       event: React.KeyboardEvent<HTMLInputElement>
