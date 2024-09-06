@@ -14,8 +14,8 @@ cd my-app
 Install required shadcn components:
 
 ```bash
-npx shadcn-ui@latest init
-npx shadcn-ui@latest add command popover button separator badge
+npx shadcn@latest init
+npx shadcn@latest add command popover button separator badge
 ```
 
 ### Step 2: Create the Multi-Select Component
