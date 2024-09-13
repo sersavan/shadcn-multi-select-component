@@ -8,7 +8,8 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { CardStyled } from "./components/card-styled";
+import { CardTitle } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
 import {
   Form,
@@ -25,9 +26,9 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { MultiSelect } from "@/components/multi-select";
+import { MultiSelect, type MultiSelectProps } from "@/components/multi-select";
 
-const frameworksList = [
+const frameworksList: MultiSelectProps["options"] = [
   {
     value: "next.js",
     label: "Next.js",
@@ -54,6 +55,34 @@ const frameworksList = [
     icon: Icons.fish,
   },
 ];
+const frameworksListIncludingDisabled: MultiSelectProps["options"] = [
+  {
+    value: "next.js",
+    label: "Next.js",
+    icon: Icons.dog,
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+    icon: Icons.cat,
+    disabled: true,
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+    icon: Icons.turtle,
+  },
+  {
+    value: "remix",
+    label: "Remix",
+    icon: Icons.rabbit,
+  },
+  {
+    value: "astro",
+    label: "Astro",
+    icon: Icons.fish,
+  },
+];
 
 const FormSchema = z.object({
   frameworks: z
@@ -63,10 +92,16 @@ const FormSchema = z.object({
 });
 
 export default function Home() {
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const basicExampleForm = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       frameworks: ["next.js", "nuxt.js"],
+    },
+  });
+  const disabledExampleForm = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      frameworks: ["sveltekit", "astro"],
     },
   });
 
@@ -77,7 +112,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen:calc(100vh - 3rem) flex-col items-center justify-start space-y-3 p-3">
+    <main className="flex min-h-screen:calc(100vh - 3rem) flex-col items-center justify-start space-y-3 p-3 pb-20">
       <PageHeader>
         <PageHeaderHeading>Multi select component</PageHeaderHeading>
         <PageHeaderDescription>assembled with shadcn/ui</PageHeaderDescription>
@@ -93,11 +128,16 @@ export default function Home() {
           </Link>
         </PageActions>
       </PageHeader>
-      <Card className="w-full max-w-xl p-5">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+
+      <CardStyled>
+        <CardTitle className="mb-6">Basic Example</CardTitle>
+        <Form {...basicExampleForm}>
+          <form
+            onSubmit={basicExampleForm.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
             <FormField
-              control={form.control}
+              control={basicExampleForm.control}
               name="frameworks"
               render={({ field }) => (
                 <FormItem>
@@ -125,7 +165,46 @@ export default function Home() {
             </Button>
           </form>
         </Form>
-      </Card>
+      </CardStyled>
+
+      <CardStyled>
+        <CardTitle className="mb-6">Disabled Usecase Example</CardTitle>
+        <Form {...disabledExampleForm}>
+          <form
+            onSubmit={disabledExampleForm.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
+            <FormField
+              control={disabledExampleForm.control}
+              name="frameworks"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Frameworks</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={frameworksListIncludingDisabled}
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      placeholder="Select options"
+                      variant="inverted"
+                      animation={2}
+                      maxCount={3}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Choose the frameworks you are interested in. <br />
+                    There is a <strong>disabled</strong> values in the list.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button variant="default" type="submit" className="w-full">
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </CardStyled>
     </main>
   );
 }
