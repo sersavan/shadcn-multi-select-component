@@ -1,5 +1,9 @@
 ## Multi-Select Component Setup in Next.js
 
+### Check out the live example
+
+[Link](https://shadcn-multi-select-component.vercel.app/)
+
 ### Prerequisites
 
 Ensure you have a Next.js project set up. If not, create one:
