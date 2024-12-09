@@ -3,9 +3,15 @@
 ### Prerequisites
 
 Ensure you have a Next.js project set up. If not, create one:
+> npm:
+  ```
+   npx create-next-app my-app --typescript
+   cd my-app
+  ```
 
-```bash
-npx create-next-app my-app --typescript
+> pnpm:
+```
+pnpm dlx create-next-app my-app --typescript
 cd my-app
 ```
 
@@ -13,9 +19,15 @@ cd my-app
 
 Install required shadcn components:
 
-```bash
+> npm
+```
 npx shadcn@latest init
 npx shadcn@latest add command popover button separator badge
+```
+> pnpm
+```
+pnpm dlx shadcn@latest init
+pnpm dlx shadcn@latest add command popover button separator badge
 ```
 
 ### Step 2: Create the Multi-Select Component
@@ -459,6 +471,11 @@ export default Home;
 
 ### Step 4: Run Your Project
 
-```bash
+> npm
+```
 npm run dev
+```
+> pnpm
+```
+pnpm dev
 ```
