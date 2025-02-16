@@ -282,6 +282,7 @@ export const MultiSelect = React.forwardRef<
           className="w-auto p-0"
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
+          style={{ width: "var(--radix-popper-anchor-width)" }}
         >
           <Command>
             <CommandInput
