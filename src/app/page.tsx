@@ -75,7 +75,14 @@ export default function Home() {
       `You have selected following frameworks: ${data.frameworks.join(", ")}.`
     );
   }
-
+  const handleCreateFramework = (newFramework: string) => {
+    const newFrameworkObject = {
+      value: newFramework.toLowerCase(),
+      label: newFramework,
+      icon: Fish, // Using Fish icon as default for new frameworks
+    };
+    frameworksList.push(newFrameworkObject);
+  };
   return (
     <main className="flex min-h-screen:calc(100vh - 3rem) flex-col items-center justify-start space-y-3 p-3">
       <PageHeader>
@@ -109,6 +116,8 @@ export default function Home() {
                       defaultValue={field.value}
                       placeholder="Select options"
                       variant="inverted"
+                      creatable={true}
+                      onCreate={handleCreateFramework}
                       animation={2}
                       maxCount={3}
                     />
