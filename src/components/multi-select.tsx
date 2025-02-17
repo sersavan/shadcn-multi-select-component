@@ -76,6 +76,12 @@ interface MultiSelectProps
    */
   onValueChange: (value: string[]) => void;
 
+  /**
+   * Optional callback function triggered when the popover open state changes.
+   * Receives a boolean representing the new state (true for open, false for closed).
+   */
+  onOpenChange?: (open: boolean) => void;
+
   /** The default selected values when the component mounts. */
   defaultValue?: string[];
 
@@ -125,6 +131,7 @@ export const MultiSelect = React.forwardRef<
     {
       options,
       onValueChange,
+      onOpenChange,
       variant,
       defaultValue = [],
       placeholder = "Select options",
@@ -171,6 +178,10 @@ export const MultiSelect = React.forwardRef<
     const handleTogglePopover = () => {
       setIsPopoverOpen((prev) => !prev);
     };
+
+    React.useEffect(() => {
+      onOpenChange?.(isPopoverOpen)
+    }, [isPopoverOpen, onOpenChange]);
 
     const clearExtraOptions = () => {
       const newSelectedValues = selectedValues.slice(0, maxCount);
