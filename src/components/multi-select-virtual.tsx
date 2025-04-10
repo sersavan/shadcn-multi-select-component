@@ -144,27 +144,6 @@ export const MultiSelectVirtual = React.forwardRef<
       React.useState<string[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     const [isAnimating, setIsAnimating] = React.useState(false);
-    const [filteredOptions, setFilteredOptions] =
-      React.useState<Option[]>(options);
-    const parentRef = React.useRef<HTMLDivElement | null>(null);
-
-    const virtualizer = useVirtualizer({
-      count: filteredOptions.length,
-      getScrollElement: () => parentRef.current,
-      estimateSize: () => 32,
-    });
-
-    const virtualOptions = virtualizer.getVirtualItems();
-
-    const handleSearch = (value: string) => {
-      setFilteredOptions(
-        options.filter((option) =>
-          option.label
-            .toLocaleLowerCase()
-            .includes(value.toLocaleLowerCase() ?? [])
-        )
-      );
-    };
 
     const handleInputKeyDown = (
       event: React.KeyboardEvent<HTMLInputElement>
