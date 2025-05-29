@@ -25,13 +25,25 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { MultiSelect } from "@/components/multi-select";
+import { MultiSelect, Option } from "@/components/multi-select";
 
-const frameworksList = [
+const frameworksList: Option[] = [
   {
     value: "next.js",
     label: "Next.js",
     icon: Icons.dog,
+    subCategories: [
+      {
+        value: "next.js-app-router",
+        label: "App Router",
+        icon: Icons.dog,
+      },
+      {
+        value: "next.js-pages-router",
+        label: "Pages Router",
+        icon: Icons.dog,
+      },
+    ],
   },
   {
     value: "sveltekit",
@@ -66,13 +78,13 @@ export default function Home() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      frameworks: ["next.js", "nuxt.js"],
+      frameworks: ["next.js-app-router", "next.js-pages-router", "nuxt.js"],
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast(
-      `You have selected following frameworks: ${data.frameworks.join(", ")}.`
+      `You have selected following frameworks: ${data.frameworks.join(", ")}.`,
     );
   }
 
@@ -105,8 +117,8 @@ export default function Home() {
                   <FormControl>
                     <MultiSelect
                       options={frameworksList}
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      selectedValues={form.getValues("frameworks")}
+                      setSelectedValues={field.onChange}
                       placeholder="Select options"
                       variant="inverted"
                       animation={2}
