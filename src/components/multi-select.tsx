@@ -214,6 +214,7 @@ export const MultiSelect = React.forwardRef<
                       <Badge
                         key={value}
                         className={cn(
+                          "[&>svg]:pointer-events-auto",
                           isAnimating ? "animate-bounce" : "",
                           multiSelectVariants({ variant })
                         )}
@@ -236,6 +237,7 @@ export const MultiSelect = React.forwardRef<
                   {selectedValues.length > maxCount && (
                     <Badge
                       className={cn(
+                        "[&>svg]:pointer-events-auto",
                         "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
                         isAnimating ? "animate-bounce" : "",
                         multiSelectVariants({ variant })
