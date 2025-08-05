@@ -2,467 +2,845 @@
 
 [![Star History Chart](https://api.star-history.com/svg?repos=sersavan/shadcn-multi-select-component&type=Date)](https://star-history.com/#sersavan/shadcn-multi-select-component&Date)
 
-## Multi-Select Component Setup in Next.js
+# Shadcn Multi Select Component
 
-### Prerequisites
+A powerful and flexible multi-select component built with **React**,
+**TypeScript**, **Tailwind CSS**, and **shadcn/ui** components.
 
-Ensure you have a Next.js project set up. If not, create one:
+![Multi Select Demo](https://img.shields.io/badge/React-19+-blue?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-blue?logo=tailwindcss)
+
+## 🚀 Features
+
+- ✨ **Multiple Variants**: Default, secondary, destructive, and inverted styles
+- 🌈 **Custom Styling**: Custom badge colors, icon colors, and gradient
+  backgrounds
+- 📁 **Grouped Options**: Organize options in groups with headings and
+  separators
+- 🚫 **Disabled Options**: Mark specific options as disabled and non-selectable
+- 🎨 **Advanced Animations**: Multiple animation types (bounce, pulse, wiggle,
+  fade, slide) for badges and popovers
+- 🔍 **Search & Filter**: Built-in search functionality with keyboard navigation
+- 📊 **Dashboard Integration**: Perfect for analytics dashboards and data
+  visualization
+- 📈 **Chart Filtering**: Real-time filtering for bar, pie, area, and line
+  charts
+- 🎯 **Multi-level Filtering**: Primary and secondary filter combinations
+- 📱 **Responsive Design**: Automatic adaptation to mobile, tablet, and desktop
+  screens
+- 📐 **Width Constraints**: Support for minimum and maximum width settings
+- 📲 **Mobile-Optimized**: Compact mode with touch-friendly interactions
+- 💻 **Desktop-Enhanced**: Full feature set with large displays
+- ♿ **Accessibility**: Full keyboard support and screen reader compatibility
+- 🔧 **Imperative Methods**: Programmatic control via ref (reset, clear, focus,
+  get/set values)
+- 🔄 **Duplicate Handling**: Automatic detection and removal of duplicate
+  options
+- 📝 **Form Integration**: Seamless integration with React Hook Form and
+  validation
+- 🎛️ **Customizable Behavior**: Auto-close on select, width constraints, empty
+  indicators
+- 🎯 **TypeScript Support**: Fully typed with comprehensive TypeScript support
+- 📦 **Zero Dependencies**: Only uses peer dependencies you already have
+
+## 📦 Installation
+
+1. Copy the `multi-select.tsx` component to your project:
 
 ```bash
-npx create-next-app my-app --typescript
-cd my-app
+cp src/components/multi-select.tsx your-project/components/
 ```
 
-### Step 1: Install shadcn Components
+## Installation
 
-Install required shadcn components:
+1. Make sure you have the required dependencies:
 
 ```bash
-npx shadcn@latest init
-npx shadcn@latest add command popover button separator badge
+npm install react react-dom
+npm install @radix-ui/react-checkbox @radix-ui/react-popover @radix-ui/react-separator
+npm install lucide-react class-variance-authority clsx tailwind-merge
 ```
 
-### Step 2: Create the Multi-Select Component
+1. Ensure you have the required shadcn/ui components:
 
-Create `multi-select.tsx` in your `components` directory:
+## 🎯 Quick Start
 
-```tsx
-// src/components/multi-select.tsx
-
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import {
-  CheckIcon,
-  XCircle,
-  ChevronDown,
-  XIcon,
-  WandSparkles,
-} from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
-
-/**
- * Variants for the multi-select component to handle different styles.
- * Uses class-variance-authority (cva) to define different styles based on "variant" prop.
- */
-const multiSelectVariants = cva(
-  "m-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-foreground/10 text-foreground bg-card hover:bg-card/80",
-        secondary:
-          "border-foreground/10 bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        inverted: "inverted",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
-
-/**
- * Props for MultiSelect component
- */
-interface MultiSelectProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof multiSelectVariants> {
-  /**
-   * An array of option objects to be displayed in the multi-select component.
-   * Each option object has a label, value, and an optional icon.
-   */
-  options: {
-    /** The text to display for the option. */
-    label: string;
-    /** The unique value associated with the option. */
-    value: string;
-    /** Optional icon component to display alongside the option. */
-    icon?: React.ComponentType<{ className?: string }>;
-  }[];
-
-  /**
-   * Callback function triggered when the selected values change.
-   * Receives an array of the new selected values.
-   */
-  onValueChange: (value: string[]) => void;
-
-  /** The default selected values when the component mounts. */
-  defaultValue?: string[];
-
-  /**
-   * Placeholder text to be displayed when no values are selected.
-   * Optional, defaults to "Select options".
-   */
-  placeholder?: string;
-
-  /**
-   * Animation duration in seconds for the visual effects (e.g., bouncing badges).
-   * Optional, defaults to 0 (no animation).
-   */
-  animation?: number;
-
-  /**
-   * Maximum number of items to display. Extra selected items will be summarized.
-   * Optional, defaults to 3.
-   */
-  maxCount?: number;
-
-  /**
-   * The modality of the popover. When set to true, interaction with outside elements
-   * will be disabled and only popover content will be visible to screen readers.
-   * Optional, defaults to false.
-   */
-  modalPopover?: boolean;
-
-  /**
-   * If true, renders the multi-select component as a child of another component.
-   * Optional, defaults to false.
-   */
-  asChild?: boolean;
-
-  /**
-   * Additional class names to apply custom styles to the multi-select component.
-   * Optional, can be used to add custom styles.
-   */
-  className?: string;
-}
-
-export const MultiSelect = React.forwardRef<
-  HTMLButtonElement,
-  MultiSelectProps
->(
-  (
-    {
-      options,
-      onValueChange,
-      variant,
-      defaultValue = [],
-      placeholder = "Select options",
-      animation = 0,
-      maxCount = 3,
-      modalPopover = false,
-      asChild = false,
-      className,
-      ...props
-    },
-    ref
-  ) => {
-    const [selectedValues, setSelectedValues] =
-      React.useState<string[]>(defaultValue);
-    const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    const [isAnimating, setIsAnimating] = React.useState(false);
-
-    const handleInputKeyDown = (
-      event: React.KeyboardEvent<HTMLInputElement>
-    ) => {
-      if (event.key === "Enter") {
-        setIsPopoverOpen(true);
-      } else if (event.key === "Backspace" && !event.currentTarget.value) {
-        const newSelectedValues = [...selectedValues];
-        newSelectedValues.pop();
-        setSelectedValues(newSelectedValues);
-        onValueChange(newSelectedValues);
-      }
-    };
-
-    const toggleOption = (option: string) => {
-      const newSelectedValues = selectedValues.includes(option)
-        ? selectedValues.filter((value) => value !== option)
-        : [...selectedValues, option];
-      setSelectedValues(newSelectedValues);
-      onValueChange(newSelectedValues);
-    };
-
-    const handleClear = () => {
-      setSelectedValues([]);
-      onValueChange([]);
-    };
-
-    const handleTogglePopover = () => {
-      setIsPopoverOpen((prev) => !prev);
-    };
-
-    const clearExtraOptions = () => {
-      const newSelectedValues = selectedValues.slice(0, maxCount);
-      setSelectedValues(newSelectedValues);
-      onValueChange(newSelectedValues);
-    };
-
-    const toggleAll = () => {
-      if (selectedValues.length === options.length) {
-        handleClear();
-      } else {
-        const allValues = options.map((option) => option.value);
-        setSelectedValues(allValues);
-        onValueChange(allValues);
-      }
-    };
-
-    return (
-      <Popover
-        open={isPopoverOpen}
-        onOpenChange={setIsPopoverOpen}
-        modal={modalPopover}
-      >
-        <PopoverTrigger asChild>
-          <Button
-            ref={ref}
-            {...props}
-            onClick={handleTogglePopover}
-            className={cn(
-              "flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto",
-              className
-            )}
-          >
-            {selectedValues.length > 0 ? (
-              <div className="flex justify-between items-center w-full">
-                <div className="flex flex-wrap items-center">
-                  {selectedValues.slice(0, maxCount).map((value) => {
-                    const option = options.find((o) => o.value === value);
-                    const IconComponent = option?.icon;
-                    return (
-                      <Badge
-                        key={value}
-                        className={cn(
-                          isAnimating ? "animate-bounce" : "",
-                          multiSelectVariants({ variant })
-                        )}
-                        style={{ animationDuration: `${animation}s` }}
-                      >
-                        {IconComponent && (
-                          <IconComponent className="h-4 w-4 mr-2" />
-                        )}
-                        {option?.label}
-                        <XCircle
-                          className="ml-2 h-4 w-4 cursor-pointer"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            toggleOption(value);
-                          }}
-                        />
-                      </Badge>
-                    );
-                  })}
-                  {selectedValues.length > maxCount && (
-                    <Badge
-                      className={cn(
-                        "bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
-                        isAnimating ? "animate-bounce" : "",
-                        multiSelectVariants({ variant })
-                      )}
-                      style={{ animationDuration: `${animation}s` }}
-                    >
-                      {`+ ${selectedValues.length - maxCount} more`}
-                      <XCircle
-                        className="ml-2 h-4 w-4 cursor-pointer"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          clearExtraOptions();
-                        }}
-                      />
-                    </Badge>
-                  )}
-                </div>
-                <div className="flex items-center justify-between">
-                  <XIcon
-                    className="h-4 mx-2 cursor-pointer text-muted-foreground"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleClear();
-                    }}
-                  />
-                  <Separator
-                    orientation="vertical"
-                    className="flex min-h-6 h-full"
-                  />
-                  <ChevronDown className="h-4 mx-2 cursor-pointer text-muted-foreground" />
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center justify-between w-full mx-auto">
-                <span className="text-sm text-muted-foreground mx-3">
-                  {placeholder}
-                </span>
-                <ChevronDown className="h-4 cursor-pointer text-muted-foreground mx-2" />
-              </div>
-            )}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent
-          className="w-auto p-0"
-          align="start"
-          onEscapeKeyDown={() => setIsPopoverOpen(false)}
-        >
-          <Command>
-            <CommandInput
-              placeholder="Search..."
-              onKeyDown={handleInputKeyDown}
-            />
-            <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup>
-                <CommandItem
-                  key="all"
-                  onSelect={toggleAll}
-                  className="cursor-pointer"
-                >
-                  <div
-                    className={cn(
-                      "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                      selectedValues.length === options.length
-                        ? "bg-primary text-primary-foreground"
-                        : "opacity-50 [&_svg]:invisible"
-                    )}
-                  >
-                    <CheckIcon className="h-4 w-4" />
-                  </div>
-                  <span>(Select All)</span>
-                </CommandItem>
-                {options.map((option) => {
-                  const isSelected = selectedValues.includes(option.value);
-                  return (
-                    <CommandItem
-                      key={option.value}
-                      onSelect={() => toggleOption(option.value)}
-                      className="cursor-pointer"
-                    >
-                      <div
-                        className={cn(
-                          "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
-                          isSelected
-                            ? "bg-primary text-primary-foreground"
-                            : "opacity-50 [&_svg]:invisible"
-                        )}
-                      >
-                        <CheckIcon className="h-4 w-4" />
-                      </div>
-                      {option.icon && (
-                        <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-                      )}
-                      <span>{option.label}</span>
-                    </CommandItem>
-                  );
-                })}
-              </CommandGroup>
-              <CommandSeparator />
-              <CommandGroup>
-                <div className="flex items-center justify-between">
-                  {selectedValues.length > 0 && (
-                    <>
-                      <CommandItem
-                        onSelect={handleClear}
-                        className="flex-1 justify-center cursor-pointer"
-                      >
-                        Clear
-                      </CommandItem>
-                      <Separator
-                        orientation="vertical"
-                        className="flex min-h-6 h-full"
-                      />
-                    </>
-                  )}
-                  <CommandItem
-                    onSelect={() => setIsPopoverOpen(false)}
-                    className="flex-1 justify-center cursor-pointer max-w-full"
-                  >
-                    Close
-                  </CommandItem>
-                </div>
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-        {animation > 0 && selectedValues.length > 0 && (
-          <WandSparkles
-            className={cn(
-              "cursor-pointer my-2 text-foreground bg-background w-3 h-3",
-              isAnimating ? "" : "text-muted-foreground"
-            )}
-            onClick={() => setIsAnimating(!isAnimating)}
-          />
-        )}
-      </Popover>
-    );
-  }
-);
-
-MultiSelect.displayName = "MultiSelect";
-```
-
-### Step 3: Integrate the Component
-
-Update `page.tsx`:
+### Basic Usage
 
 ```tsx
-// src/app/page.tsx
-
-"use client";
-
-import React, { useState } from "react";
 import { MultiSelect } from "@/components/multi-select";
-import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
+import { useState } from "react";
 
-const frameworksList = [
-  { value: "react", label: "React", icon: Turtle },
-  { value: "angular", label: "Angular", icon: Cat },
-  { value: "vue", label: "Vue", icon: Dog },
-  { value: "svelte", label: "Svelte", icon: Rabbit },
-  { value: "ember", label: "Ember", icon: Fish },
+const options = [
+	{ value: "react", label: "React" },
+	{ value: "vue", label: "Vue.js" },
+	{ value: "angular", label: "Angular" },
 ];
 
-function Home() {
-  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>(["react", "angular"]);
+function App() {
+	const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
-  return (
-    <div className="p-4 max-w-xl">
-      <h1 className="text-2xl font-bold mb-4">Multi-Select Component</h1>
-      <MultiSelect
-        options={frameworksList}
-        onValueChange={setSelectedFrameworks}
-        defaultValue={selectedFrameworks}
-        placeholder="Select frameworks"
-        variant="inverted"
-        animation={2}
-        maxCount={3}
-      />
-      <div className="mt-4">
-        <h2 className="text-xl font-semibold">Selected Frameworks:</h2>
-        <ul className="list-disc list-inside">
-          {selectedFrameworks.map((framework) => (
-            <li key={framework}>{framework}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+	return (
+		<MultiSelect
+			options={options}
+			onValueChange={setSelectedValues}
+			defaultValue={selectedValues}
+			placeholder="Select frameworks..."
+			variant="default"
+			animationConfig={{
+				badgeAnimation: "pulse",
+				duration: 0.2,
+			}}
+			maxCount={3}
+			searchable={true}
+		/>
+	);
+}
+```
+
+### Custom Styling
+
+```tsx
+const styledOptions = [
+	{
+		value: "react",
+		label: "React",
+		icon: ReactIcon,
+		style: {
+			badgeColor: "#61DAFB",
+			iconColor: "#282C34",
+		},
+	},
+	{
+		value: "vue",
+		label: "Vue.js",
+		icon: VueIcon,
+		style: {
+			gradient: "linear-gradient(135deg, #4FC08D 0%, #42B883 100%)",
+		},
+	},
+];
+
+<MultiSelect
+	options={styledOptions}
+	onValueChange={setSelected}
+	placeholder="Select with custom styles..."
+/>;
+```
+
+### Grouped Options
+
+```tsx
+const groupedOptions = [
+	{
+		heading: "Frontend Frameworks",
+		options: [
+			{ value: "react", label: "React" },
+			{ value: "vue", label: "Vue.js" },
+			{ value: "angular", label: "Angular", disabled: true },
+		],
+	},
+	{
+		heading: "Backend Technologies",
+		options: [
+			{ value: "node", label: "Node.js" },
+			{ value: "python", label: "Python" },
+		],
+	},
+];
+
+<MultiSelect
+	options={groupedOptions}
+	onValueChange={setSelected}
+	placeholder="Select from groups..."
+/>;
+```
+
+## � Responsive Design
+
+The Multi-Select component includes comprehensive responsive design capabilities
+that automatically adapt to different screen sizes.
+
+### Automatic Responsive Behavior
+
+Enable responsive design with default settings:
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	responsive={true} // Enable automatic responsive behavior
+	placeholder="Responsive component"
+/>
+```
+
+**Default responsive settings:**
+
+- **Mobile** (< 640px): 2 badges max, compact mode
+- **Tablet** (640px - 1024px): 4 badges max, normal mode
+- **Desktop** (> 1024px): 6 badges max, full features
+
+### Custom Responsive Configuration
+
+Configure specific behavior for each screen size:
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	responsive={{
+		mobile: {
+			maxCount: 1,
+			hideIcons: true,
+			compactMode: true,
+		},
+		tablet: {
+			maxCount: 3,
+			hideIcons: false,
+			compactMode: false,
+		},
+		desktop: {
+			maxCount: 5,
+			hideIcons: false,
+			compactMode: false,
+		},
+	}}
+	placeholder="Custom responsive settings"
+/>
+```
+
+### Width Constraints
+
+Control component width with responsive adaptation:
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	responsive={true}
+	minWidth="200px"
+	maxWidth="400px"
+	placeholder="Constrained width"
+/>
+```
+
+### Responsive Configuration Options
+
+| Property      | Type      | Description               |
+| ------------- | --------- | ------------------------- |
+| `maxCount`    | `number`  | Maximum badges to display |
+| `hideIcons`   | `boolean` | Hide option icons         |
+| `compactMode` | `boolean` | Enable compact spacing    |
+
+See [RESPONSIVE.md](./RESPONSIVE.md) for detailed responsive design
+documentation.
+
+## 📊 Dashboard Integration
+
+The Multi-Select component provides powerful integration with analytics
+dashboards and data visualization libraries.
+
+### Basic Dashboard Filtering
+
+```tsx
+import { MultiSelect } from "@/components/multi-select";
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
+
+const Dashboard = () => {
+	const [selectedCategories, setSelectedCategories] = useState(["2024"]);
+
+	const filteredData = data.filter((item) =>
+		selectedCategories.includes(item.category)
+	);
+
+	return (
+		<div className="space-y-4">
+			<MultiSelect
+				options={[
+					{ value: "2024", label: "2024", icon: CalendarIcon },
+					{ value: "2023", label: "2023", icon: CalendarIcon },
+				]}
+				onValueChange={setSelectedCategories}
+				defaultValue={selectedCategories}
+				placeholder="Select time period"
+				responsive={true}
+			/>
+
+			<ResponsiveContainer width="100%" height={300}>
+				<BarChart data={filteredData}>
+					<XAxis dataKey="name" />
+					<YAxis />
+					<Bar dataKey="value" fill="#8884d8" />
+				</BarChart>
+			</ResponsiveContainer>
+		</div>
+	);
+};
+```
+
+### Multi-level Filtering
+
+```tsx
+const AdvancedDashboard = () => {
+	const [primaryFilters, setPrimaryFilters] = useState(["Performance"]);
+	const [secondaryFilters, setSecondaryFilters] = useState(["Speed"]);
+
+	return (
+		<div className="space-y-4">
+			<div className="grid grid-cols-2 gap-4">
+				<MultiSelect
+					options={primaryCategories}
+					onValueChange={setPrimaryFilters}
+					placeholder="Primary category"
+					variant="default"
+				/>
+
+				<MultiSelect
+					options={secondaryCategories}
+					onValueChange={setSecondaryFilters}
+					placeholder="Secondary filters"
+					variant="secondary"
+				/>
+			</div>
+
+			<ComposedChart data={filteredData}>
+				{/* Multiple chart types combined */}
+			</ComposedChart>
+		</div>
+	);
+};
+```
+
+## 📚 API Reference
+
+### Props
+
+| Prop                        | Type                                                      | Default            | Description                                 |
+| --------------------------- | --------------------------------------------------------- | ------------------ | ------------------------------------------- |
+| `options`                   | `MultiSelectOption[] \| MultiSelectGroup[]`               | -                  | Array of selectable options or groups       |
+| `onValueChange`             | `(value: string[]) => void`                               | -                  | Callback when selection changes             |
+| `defaultValue`              | `string[]`                                                | `[]`               | Initially selected values                   |
+| `placeholder`               | `string`                                                  | `"Select options"` | Placeholder text                            |
+| `variant`                   | `"default" \| "secondary" \| "destructive" \| "inverted"` | `"default"`        | Visual variant                              |
+| `animation`                 | `number`                                                  | `0`                | Legacy animation duration in seconds        |
+| `animationConfig`           | `AnimationConfig`                                         | -                  | Advanced animation configuration            |
+| `maxCount`                  | `number`                                                  | `3`                | Maximum visible selected items              |
+| `modalPopover`              | `boolean`                                                 | `false`            | Modal behavior for popover                  |
+| `asChild`                   | `boolean`                                                 | `false`            | Render as child component                   |
+| `className`                 | `string`                                                  | -                  | Additional CSS classes                      |
+| `hideSelectAll`             | `boolean`                                                 | `false`            | Hide "Select All" option                    |
+| `searchable`                | `boolean`                                                 | `true`             | Enable search functionality                 |
+| `emptyIndicator`            | `ReactNode`                                               | -                  | Custom empty state component                |
+| `autoSize`                  | `boolean`                                                 | `true`             | Allow component to grow/shrink with content |
+| `singleLine`                | `boolean`                                                 | `false`            | Show badges in single line with scroll      |
+| `popoverClassName`          | `string`                                                  | -                  | Custom CSS class for popover content        |
+| `disabled`                  | `boolean`                                                 | `false`            | Disable the entire component                |
+| `responsive`                | `boolean \| ResponsiveConfig`                             | `false`            | Enable responsive behavior                  |
+| `minWidth`                  | `string`                                                  | -                  | Minimum component width                     |
+| `maxWidth`                  | `string`                                                  | -                  | Maximum component width                     |
+| `deduplicateOptions`        | `boolean`                                                 | `false`            | Automatically remove duplicate options      |
+| `resetOnDefaultValueChange` | `boolean`                                                 | `true`             | Reset state when defaultValue changes       |
+| `closeOnSelect`             | `boolean`                                                 | `false`            | Close popover after selecting an option     |
+
+### Types
+
+#### AnimationConfig
+
+```tsx
+interface AnimationConfig {
+	badgeAnimation?: "bounce" | "pulse" | "wiggle" | "fade" | "slide" | "none";
+	popoverAnimation?: "scale" | "slide" | "fade" | "flip" | "none";
+	optionHoverAnimation?: "highlight" | "scale" | "glow" | "none";
+	duration?: number; // Animation duration in seconds
+	delay?: number; // Animation delay in seconds
+}
+```
+
+#### MultiSelectRef
+
+```tsx
+interface MultiSelectRef {
+	reset: () => void; // Reset to default value
+	getSelectedValues: () => string[]; // Get current selection
+	setSelectedValues: (values: string[]) => void; // Set selection programmatically
+	clear: () => void; // Clear all selections
+	focus: () => void; // Focus the component
+}
+```
+
+#### MultiSelectOption
+
+```tsx
+interface MultiSelectOption {
+	label: string; // Display text
+	value: string; // Unique identifier
+	icon?: React.ComponentType<{
+		// Optional icon component
+		className?: string;
+	}>;
+	disabled?: boolean; // Whether option is disabled
+	style?: {
+		// Custom styling
+		badgeColor?: string; // Custom badge background color
+		iconColor?: string; // Custom icon color
+		gradient?: string; // Gradient background (CSS gradient)
+	};
+}
+```
+
+#### MultiSelectGroup
+
+```tsx
+interface MultiSelectGroup {
+	heading: string; // Group heading text
+	options: MultiSelectOption[]; // Options in this group
+}
+```
+
+## 🎨 Styling Examples
+
+### Custom Colors
+
+```tsx
+// Single color badge with custom icon color
+{
+  value: "react",
+  label: "React",
+  style: {
+    badgeColor: "#61DAFB",
+    iconColor: "#282C34"
+  }
 }
 
-export default Home;
+// Gradient badge (icon will be white by default)
+{
+  value: "vue",
+  label: "Vue.js",
+  style: {
+    gradient: "linear-gradient(135deg, #4FC08D 0%, #42B883 100%)"
+  }
+}
+
+// Multiple gradients
+{
+  value: "angular",
+  label: "Angular",
+  style: {
+    gradient: "linear-gradient(45deg, #DD0031 0%, #C3002F 50%, #FF6B6B 100%)"
+  }
+}
 ```
 
-### Step 4: Run Your Project
+### Brand Colors
+
+```tsx
+const brandColors = {
+	react: { badgeColor: "#61DAFB", iconColor: "#282C34" },
+	vue: { gradient: "linear-gradient(135deg, #4FC08D 0%, #42B883 100%)" },
+	angular: { badgeColor: "#DD0031", iconColor: "#ffffff" },
+	svelte: { gradient: "linear-gradient(135deg, #FF3E00 0%, #FF8A00 100%)" },
+	node: { badgeColor: "#339933", iconColor: "#ffffff" },
+};
+```
+
+### Animation Examples
+
+```tsx
+// Wiggle animation with custom timing
+<MultiSelect
+  options={options}
+  onValueChange={setSelected}
+  animationConfig={{
+    badgeAnimation: "wiggle",
+    duration: 0.5,
+  }}
+/>
+
+// Pulse animation with delay
+<MultiSelect
+  options={options}
+  onValueChange={setSelected}
+  animationConfig={{
+    badgeAnimation: "pulse",
+    popoverAnimation: "fade",
+    duration: 0.3,
+    delay: 0.1,
+  }}
+/>
+
+// Scale animation for popover
+<MultiSelect
+  options={options}
+  onValueChange={setSelected}
+  animationConfig={{
+    badgeAnimation: "slide",
+    popoverAnimation: "scale",
+    duration: 0.4,
+  }}
+/>
+```
+
+## 🎯 Advanced Examples
+
+### Advanced Animations
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	animationConfig={{
+		badgeAnimation: "wiggle",
+		popoverAnimation: "scale",
+		duration: 0.3,
+		delay: 0.1,
+	}}
+	placeholder="Animated component"
+/>
+```
+
+### Programmatic Control via Ref
+
+```tsx
+import { useRef } from "react";
+import type { MultiSelectRef } from "@/components/multi-select";
+
+function ControlledExample() {
+	const multiSelectRef = useRef<MultiSelectRef>(null);
+
+	const handleReset = () => {
+		multiSelectRef.current?.reset();
+	};
+
+	const handleClear = () => {
+		multiSelectRef.current?.clear();
+	};
+
+	const handleSelectAll = () => {
+		const allValues = options.map((option) => option.value);
+		multiSelectRef.current?.setSelectedValues(allValues);
+	};
+
+	const handleFocus = () => {
+		multiSelectRef.current?.focus();
+	};
+
+	return (
+		<div className="space-y-4">
+			<MultiSelect
+				ref={multiSelectRef}
+				options={options}
+				onValueChange={setSelected}
+				placeholder="Controlled component"
+			/>
+			<div className="flex gap-2">
+				<button onClick={handleReset}>Reset</button>
+				<button onClick={handleClear}>Clear</button>
+				<button onClick={handleSelectAll}>Select All</button>
+				<button onClick={handleFocus}>Focus</button>
+			</div>
+		</div>
+	);
+}
+```
+
+### Auto-close on Select
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	closeOnSelect={true}
+	placeholder="Closes after each selection"
+/>
+```
+
+### Duplicate Handling
+
+```tsx
+const optionsWithDuplicates = [
+	{ value: "react", label: "React" },
+	{ value: "react", label: "React Duplicate" }, // Will be handled
+	{ value: "vue", label: "Vue.js" },
+];
+
+<MultiSelect
+	options={optionsWithDuplicates}
+	onValueChange={setSelected}
+	deduplicateOptions={true} // Automatically removes duplicates
+	placeholder="Handles duplicates"
+/>;
+```
+
+### With Form Integration (React Hook Form)
+
+```tsx
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const formSchema = z.object({
+	technologies: z.array(z.string()).min(1, "Select at least one technology"),
+});
+
+function MyForm() {
+	const form = useForm({
+		resolver: zodResolver(formSchema),
+		defaultValues: { technologies: [] },
+	});
+
+	return (
+		<form onSubmit={form.handleSubmit(onSubmit)}>
+			<Controller
+				control={form.control}
+				name="technologies"
+				render={({ field }) => (
+					<MultiSelect
+						options={techOptions}
+						onValueChange={field.onChange}
+						defaultValue={field.value}
+						placeholder="Select technologies..."
+					/>
+				)}
+			/>
+		</form>
+	);
+}
+```
+
+### Programmatic Control
+
+```tsx
+function ControlledExample() {
+	const [selected, setSelected] = useState<string[]>([]);
+
+	const selectRandom = () => {
+		const randomItems = options
+			.filter((item) => !item.disabled)
+			.sort(() => 0.5 - Math.random())
+			.slice(0, 3)
+			.map((item) => item.value);
+		setSelected(randomItems);
+	};
+
+	return (
+		<div>
+			<MultiSelect
+				options={options}
+				onValueChange={setSelected}
+				defaultValue={selected}
+			/>
+			<button onClick={selectRandom}>Random Selection</button>
+			<button onClick={() => setSelected([])}>Clear All</button>
+		</div>
+	);
+}
+```
+
+### Custom Empty State
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	searchable={true}
+	emptyIndicator={
+		<div className="flex flex-col items-center p-4">
+			<SearchIcon className="h-8 w-8 text-muted-foreground mb-2" />
+			<p className="text-muted-foreground">No items found</p>
+			<p className="text-xs text-muted-foreground">
+				Try a different search term
+			</p>
+		</div>
+	}
+/>
+```
+
+### Complex Grouped Structure
+
+```tsx
+const complexStructure = [
+	{
+		heading: "Frontend Frameworks",
+		options: [
+			{
+				value: "react",
+				label: "React",
+				icon: ReactIcon,
+				style: { badgeColor: "#61DAFB", iconColor: "#282C34" },
+			},
+			{
+				value: "vue",
+				label: "Vue.js",
+				icon: VueIcon,
+				style: {
+					gradient: "linear-gradient(135deg, #4FC08D 0%, #42B883 100%)",
+				},
+			},
+			{
+				value: "angular",
+				label: "Angular",
+				icon: AngularIcon,
+				disabled: true,
+				style: { badgeColor: "#DD0031", iconColor: "#ffffff" },
+			},
+		],
+	},
+	{
+		heading: "State Management",
+		options: [
+			{ value: "redux", label: "Redux" },
+			{ value: "zustand", label: "Zustand" },
+			{ value: "recoil", label: "Recoil", disabled: true },
+		],
+	},
+];
+```
+
+## 🎯 Use Cases
+
+- **Technology Stack Selection**: Choose programming languages, frameworks,
+  libraries
+- **Skill Assessment**: Multi-skill selection for profiles or job applications
+- **Category Filtering**: Filter content by multiple categories
+- **Tag Management**: Select multiple tags for articles or products
+- **Permission Management**: Assign multiple roles or permissions
+- **Geographic Selection**: Choose multiple countries, regions, or locations
+- **Product Configuration**: Select features, variants, or add-ons
+- **Team Assignment**: Assign multiple team members to projects
+
+## 🛠️ Customization
+
+### Style Customization
+
+The component uses CSS classes that can be customized via Tailwind CSS. You can
+override styles by passing custom classes:
+
+```tsx
+<MultiSelect
+	className="my-custom-class"
+	options={options}
+	onValueChange={setSelected}
+/>
+```
+
+### Custom Variants
+
+Create your own variants by extending the `multiSelectVariants`:
+
+```tsx
+const customVariants = cva("base-classes", {
+	variants: {
+		variant: {
+			// ... existing variants
+			premium: "bg-gradient-to-r from-purple-500 to-pink-500 text-white",
+			minimal: "bg-transparent border-dashed",
+		},
+	},
+});
+```
+
+### Theme Integration
+
+The component automatically adapts to your theme (light/dark mode) when using
+the shadcn/ui theme provider.
+
+## 📝 TypeScript Support
+
+The component is fully typed and provides excellent TypeScript support:
+
+```tsx
+// All types are exported for use
+import type {
+	MultiSelectOption,
+	MultiSelectGroup,
+	MultiSelectProps,
+	MultiSelectRef,
+	AnimationConfig,
+} from "@/components/multi-select";
+
+// Type-safe option creation
+const createOption = (
+	value: string,
+	label: string,
+	options?: Partial<MultiSelectOption>
+): MultiSelectOption => ({
+	value,
+	label,
+	...options,
+});
+
+// Type-safe event handlers
+const handleChange = (values: string[]) => {
+	// values is automatically typed as string[]
+	console.log("Selected:", values);
+};
+```
+
+## 🚀 Getting Started
+
+### Clone and Run
 
 ```bash
+# Clone the repository
+git clone https://github.com/sersavan/shadcn-multi-select-component.git
+
+# Navigate to the project
+cd shadcn-multi-select-component
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
+
+# Open your browser to http://localhost:3000
 ```
+
+### Project Structure
+
+```text
+├── src/
+│   ├── app/
+│   │   ├── page.tsx           # Demo page with examples
+│   │   ├── layout.tsx         # Root layout
+│   │   └── globals.css        # Global styles
+│   ├── components/
+│   │   ├── multi-select.tsx   # Main component
+│   │   ├── icons.tsx          # Icon components
+│   │   └── ui/                # shadcn/ui components
+│   └── lib/
+│       └── utils.ts           # Utility functions
+├── components.json            # shadcn/ui config
+├── tailwind.config.ts         # Tailwind configuration
+└── package.json              # Dependencies and scripts
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
+
+## 🙏 Acknowledgments
+
+- Built with [shadcn/ui](https://ui.shadcn.com/)
+- Icons from [Lucide React](https://lucide.dev/)
+- Powered by [Radix UI](https://www.radix-ui.com/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+
+## 🚀 Live Demo
+
+Check out the live demo:
+[Multi-Select Component Demo](https://shadcn-multi-select-component.vercel.app)
+
+---
+
+Made with ❤️ by [sersavan](https://github.com/sersavan)

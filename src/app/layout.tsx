@@ -12,38 +12,53 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "shadcn Multi select component",
-  description: "A multi select component designed with shadcn/ui",
+	title: "Multi-Select Component | shadcn/ui React TypeScript",
+	description:
+		"A powerful and flexible multi-select component built with React, TypeScript, Tailwind CSS, and shadcn/ui. Features animations, search, multiple variants, and full accessibility support.",
+	keywords: [
+		"react",
+		"typescript",
+		"shadcn",
+		"tailwind",
+		"multi-select",
+		"component",
+		"ui",
+	],
+	authors: [{ name: "sersavan", url: "https://github.com/sersavan" }],
+	openGraph: {
+		title: "Multi-Select Component | shadcn/ui React TypeScript",
+		description:
+			"A powerful and flexible multi-select component with animations, search, and multiple variants",
+		type: "website",
+	},
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background antialiased",
-          inter.className
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="relative flex min-h-screen flex-col bg-background">
-            <SiteHeader />
-            {children}
-          </div>
-        </ThemeProvider>
-        <Toaster position="bottom-center" />
-        <SpeedInsights />
-        <Analytics />
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<body
+				className={cn(
+					"min-h-screen bg-background antialiased",
+					inter.className
+				)}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange>
+					<div className="relative flex min-h-screen flex-col bg-background">
+						<SiteHeader />
+						{children}
+					</div>
+				</ThemeProvider>
+				<Toaster position="bottom-center" />
+				<SpeedInsights />
+				<Analytics />
+			</body>
+		</html>
+	);
 }
