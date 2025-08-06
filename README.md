@@ -86,14 +86,6 @@ function App() {
 			options={options}
 			onValueChange={setSelectedValues}
 			defaultValue={selectedValues}
-			placeholder="Select frameworks..."
-			variant="default"
-			animationConfig={{
-				badgeAnimation: "pulse",
-				duration: 0.2,
-			}}
-			maxCount={3}
-			searchable={true}
 		/>
 	);
 }
@@ -253,7 +245,6 @@ const AdvancedDashboard = () => {
 					options={primaryCategories}
 					onValueChange={setPrimaryFilters}
 					placeholder="Primary category"
-					variant="default"
 				/>
 
 				<MultiSelect

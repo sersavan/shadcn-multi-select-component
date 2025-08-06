@@ -50,9 +50,7 @@ import {
 	PageHeaderHeading,
 } from "@/components/page-header";
 import { MultiSelect, MultiSelectRef } from "@/components/multi-select";
-import { fa } from "zod/v4/locales";
 
-// Sample data sets for different examples
 const frameworksList = [
 	{ value: "next.js", label: "Next.js", icon: Icons.code },
 	{ value: "react", label: "React", icon: Icons.zap },
@@ -168,7 +166,6 @@ const companyDepartments = [
 	{ value: "security", label: "Security", icon: Icons.shield },
 ];
 
-// Chart data for different visualizations
 const salesData = [
 	{
 		name: "Jan",
@@ -220,7 +217,6 @@ const salesData = [
 	},
 ];
 
-// Custom Tooltip Component with Portal-like behavior
 const CustomTooltip = ({ active, payload, label, type = "default" }: any) => {
 	if (active && payload && payload.length) {
 		return (
@@ -291,7 +287,6 @@ const CustomTooltip = ({ active, payload, label, type = "default" }: any) => {
 	return null;
 };
 
-// Custom Pie Chart Tooltip
 const PieTooltip = ({ active, payload }: any) => {
 	if (active && payload && payload.length) {
 		const data = payload[0];
@@ -443,7 +438,6 @@ const productMetrics = [
 	},
 ];
 
-// Color palette for charts
 const chartColors = {
 	engineering: "#3b82f6",
 	design: "#10b981",
@@ -457,7 +451,6 @@ const chartColors = {
 	security: "#6366f1",
 };
 
-// Gradient definitions for charts
 const GradientDefs = () => (
 	<defs>
 		<linearGradient id="colorEngineering" x1="0" y1="0" x2="0" y2="1">
@@ -516,11 +509,6 @@ const FormSchema = z.object({
 });
 
 export default function Home() {
-	// State for standalone examples
-	const [basicSelection, setBasicSelection] = useState<string[]>([
-		"react",
-		"next.js",
-	]);
 	const [variantSelection, setVariantSelection] = useState<string[]>([
 		"typescript",
 	]);
@@ -547,7 +535,6 @@ export default function Home() {
 		"javascript",
 	]);
 
-	// Chart selections
 	const [selectedDepartments, setSelectedDepartments] = useState<string[]>([
 		"engineering",
 		"design",
@@ -563,12 +550,9 @@ export default function Home() {
 		"quarterly",
 	]);
 
-	// Refs for imperative methods example
 	const multiSelectRef = useRef<MultiSelectRef>(null);
 
-	// Computed chart data based on selections
 	const filteredSalesData = useMemo(() => {
-		// Filter by time periods - if monthly is selected, show monthly data
 		if (!selectedTimePeriods.includes("monthly")) {
 			return [];
 		}
@@ -584,7 +568,6 @@ export default function Home() {
 	}, [selectedDepartments, selectedTimePeriods]);
 
 	const pieChartData = useMemo(() => {
-		// Only show pie chart if revenue metric is selected
 		if (!selectedMetrics.includes("revenue")) {
 			return [];
 		}
@@ -597,7 +580,6 @@ export default function Home() {
 	}, [selectedDepartments, selectedMetrics]);
 
 	const areaChartData = useMemo(() => {
-		// Filter by time periods - if quarterly is selected, show quarterly data
 		if (!selectedTimePeriods.includes("quarterly")) {
 			return [];
 		}
@@ -613,17 +595,14 @@ export default function Home() {
 	}, [selectedDepartments, selectedTimePeriods]);
 
 	const lineChartData = useMemo(() => {
-		// Filter metrics based on selected metrics
 		const metricsToShow = selectedMetrics.includes("performance")
 			? productMetrics
 			: [];
 		return metricsToShow;
 	}, [selectedMetrics]);
 
-	// Radar Chart Data
 	const radarChartData = useMemo(() => {
 		if (!selectedMetrics.includes("performance")) return [];
-
 		return [
 			{
 				subject: "Quality",
@@ -676,10 +655,8 @@ export default function Home() {
 		];
 	}, [selectedMetrics]);
 
-	// Treemap Data
 	const treemapData = useMemo(() => {
 		if (!selectedMetrics.includes("revenue")) return [];
-
 		return [
 			{ name: "Frontend", size: 1200, fill: "#8884d8" },
 			{ name: "Backend", size: 800, fill: "#82ca9d" },
@@ -740,7 +717,6 @@ export default function Home() {
 		return result;
 	}, [selectedMetrics, selectedTimePeriods]);
 
-	// Form for comprehensive example
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -763,7 +739,6 @@ export default function Home() {
 		);
 	}
 
-	// Imperative methods handlers
 	const handleReset = () => {
 		multiSelectRef.current?.reset();
 		toast("MultiSelect reset to default values");
@@ -2030,10 +2005,6 @@ export function MyComponent() {
       options={options}
       onValueChange={setSelectedValues}
       defaultValue={selectedValues}
-      placeholder="Select frameworks"
-      variant="default"
-      animation={0.2}
-      maxCount={3}
     />
   );
 }`);

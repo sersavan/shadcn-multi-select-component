@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom tooltip styles for maximum z-index */
 .chart-tooltip {
 	z-index: 999999 !important;
 	pointer-events: none !important;

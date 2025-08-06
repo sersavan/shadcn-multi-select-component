@@ -30,7 +30,7 @@ import {
 /**
  * Animation types and configurations
  */
-interface AnimationConfig {
+export interface AnimationConfig {
 	/** Badge animation type */
 	badgeAnimation?: "bounce" | "pulse" | "wiggle" | "fade" | "slide" | "none";
 	/** Popover animation type */
@@ -341,14 +341,11 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 		const [isAnimating, setIsAnimating] = React.useState(false);
 		const [searchValue, setSearchValue] = React.useState("");
 
-		// Ref for tracking previous defaultValue
 		const prevDefaultValueRef = React.useRef<string[]>(defaultValue);
 
-		// Function for safe array comparison
 		const arraysEqual = React.useCallback(
 			(a: string[], b: string[]): boolean => {
 				if (a.length !== b.length) return false;
-				// Sort array copies for correct comparison
 				const sortedA = [...a].sort();
 				const sortedB = [...b].sort();
 				return sortedA.every((val, index) => val === sortedB[index]);
@@ -356,7 +353,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			[]
 		);
 
-		// Function for programmatic component reset
 		const resetToDefault = React.useCallback(() => {
 			setSelectedValues(defaultValue);
 			setIsPopoverOpen(false);
@@ -364,10 +360,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			onValueChange(defaultValue);
 		}, [defaultValue, onValueChange]);
 
-		// Internal ref for Button element
 		const buttonRef = React.useRef<HTMLButtonElement>(null);
 
-		// Expose imperative methods through ref
 		React.useImperativeHandle(
 			ref,
 			() => ({
@@ -383,17 +377,11 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 				},
 				focus: () => {
 					if (buttonRef.current) {
-						// First set focus
 						buttonRef.current.focus();
-
-						// Add temporary highlight for visual effect
 						const originalOutline = buttonRef.current.style.outline;
 						const originalOutlineOffset = buttonRef.current.style.outlineOffset;
-
 						buttonRef.current.style.outline = "2px solid hsl(var(--ring))";
 						buttonRef.current.style.outlineOffset = "2px";
-
-						// Remove highlight after 1 second
 						setTimeout(() => {
 							if (buttonRef.current) {
 								buttonRef.current.style.outline = originalOutline;
@@ -406,16 +394,12 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			[resetToDefault, selectedValues, onValueChange]
 		);
 
-		// Hook for responsive behavior
 		const [screenSize, setScreenSize] = React.useState<
 			"mobile" | "tablet" | "desktop"
 		>("desktop");
 
-		// Detect screen size changes
 		React.useEffect(() => {
-			// Only run on client side
 			if (typeof window === "undefined") return;
-
 			const handleResize = () => {
 				const width = window.innerWidth;
 				if (width < 640) {
@@ -426,22 +410,15 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					setScreenSize("desktop");
 				}
 			};
-
-			// Set initial size
 			handleResize();
-
-			// Add event listener
 			window.addEventListener("resize", handleResize);
-
-			// Cleanup
 			return () => {
 				if (typeof window !== "undefined") {
 					window.removeEventListener("resize", handleResize);
 				}
 			};
-		}, []); // Empty dependency array to run only once
+		}, []);
 
-		// Get responsive settings based on current screen size
 		const getResponsiveSettings = () => {
 			if (!responsive) {
 				return {
@@ -450,8 +427,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					compactMode: false,
 				};
 			}
-
-			// If responsive is true, use default responsive settings
 			if (responsive === true) {
 				const defaultResponsive = {
 					mobile: { maxCount: 2, hideIcons: false, compactMode: true },
@@ -465,8 +440,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					compactMode: currentSettings?.compactMode ?? false,
 				};
 			}
-
-			// If responsive is an object, use custom settings
 			const currentSettings = responsive[screenSize];
 			return {
 				maxCount: currentSettings?.maxCount ?? maxCount,
@@ -477,7 +450,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 
 		const responsiveSettings = getResponsiveSettings();
 
-		// Get badge animation class based on config
 		const getBadgeAnimationClass = () => {
 			if (animationConfig?.badgeAnimation) {
 				switch (animationConfig.badgeAnimation) {
@@ -499,11 +471,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 						return "";
 				}
 			}
-			// Fallback to legacy animation system
 			return isAnimating ? "animate-bounce" : "";
 		};
 
-		// Get popover animation class based on config
 		const getPopoverAnimationClass = () => {
 			if (animationConfig?.popoverAnimation) {
 				switch (animationConfig.popoverAnimation) {
@@ -524,13 +494,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			return "";
 		};
 
-		// Function to get all options from groups or plain list
 		const getAllOptions = React.useCallback((): MultiSelectOption[] => {
 			if (options.length === 0) return [];
-
 			let allOptions: MultiSelectOption[];
-
-			// Check if the first element is a group
 			if ("heading" in options[0]) {
 				allOptions = (options as MultiSelectGroup[]).flatMap(
 					(group) => group.options
@@ -538,16 +504,12 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			} else {
 				allOptions = options as MultiSelectOption[];
 			}
-
-			// Check for duplicate values
 			const valueSet = new Set<string>();
 			const duplicates: string[] = [];
 			const uniqueOptions: MultiSelectOption[] = [];
-
 			allOptions.forEach((option) => {
 				if (valueSet.has(option.value)) {
 					duplicates.push(option.value);
-					// If deduplication is enabled, skip duplicate
 					if (!deduplicateOptions) {
 						uniqueOptions.push(option);
 					}
@@ -556,8 +518,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					uniqueOptions.push(option);
 				}
 			});
-
-			// Warning in dev mode
 			if (process.env.NODE_ENV === "development" && duplicates.length > 0) {
 				const action = deduplicateOptions
 					? "automatically removed"
@@ -573,11 +533,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 						}`
 				);
 			}
-
 			return deduplicateOptions ? uniqueOptions : allOptions;
 		}, [options, deduplicateOptions]);
 
-		// Function to get option by value
 		const getOptionByValue = React.useCallback(
 			(value: string): MultiSelectOption | undefined => {
 				const option = getAllOptions().find((option) => option.value === value);
@@ -591,13 +549,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			[getAllOptions]
 		);
 
-		// Filter options by search query
 		const filteredOptions = React.useMemo(() => {
 			if (!searchable || !searchValue) return options;
-
 			if (options.length === 0) return [];
-
-			// If these are groups
 			if ("heading" in options[0]) {
 				const groups = options as MultiSelectGroup[];
 				return groups
@@ -613,8 +567,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					}))
 					.filter((group) => group.options.length > 0);
 			}
-
-			// If these are plain options
 			const simpleOptions = options as MultiSelectOption[];
 			return simpleOptions.filter(
 				(option) =>
@@ -640,14 +592,11 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			if (disabled) return;
 			const option = getOptionByValue(optionValue);
 			if (option?.disabled) return;
-
 			const newSelectedValues = selectedValues.includes(optionValue)
 				? selectedValues.filter((value) => value !== optionValue)
 				: [...selectedValues, optionValue];
 			setSelectedValues(newSelectedValues);
 			onValueChange(newSelectedValues);
-
-			// Close popover if closeOnSelect is enabled
 			if (closeOnSelect) {
 				setIsPopoverOpen(false);
 			}
@@ -685,36 +634,26 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 				onValueChange(allValues);
 			}
 
-			// Close popover if closeOnSelect is enabled
 			if (closeOnSelect) {
 				setIsPopoverOpen(false);
 			}
 		};
 
-		// Synchronization with external defaultValue changes
 		React.useEffect(() => {
-			// Only if synchronization with defaultValue is enabled
 			if (!resetOnDefaultValueChange) return;
-
-			// Safe array comparison, avoiding infinite loops
 			const prevDefaultValue = prevDefaultValueRef.current;
-
-			// Check if defaultValue has actually changed
 			if (!arraysEqual(prevDefaultValue, defaultValue)) {
-				// Additional check: update only if new value differs from current state
 				if (!arraysEqual(selectedValues, defaultValue)) {
 					setSelectedValues(defaultValue);
 				}
-				prevDefaultValueRef.current = [...defaultValue]; // Create copy to avoid mutations
+				prevDefaultValueRef.current = [...defaultValue];
 			}
 		}, [defaultValue, selectedValues, arraysEqual, resetOnDefaultValueChange]);
 
-		// Calculate effective width constraints
 		const getWidthConstraints = () => {
 			const defaultMinWidth = screenSize === "mobile" ? "250px" : "300px";
 			const effectiveMinWidth = minWidth || defaultMinWidth;
 			const effectiveMaxWidth = maxWidth || "100%";
-
 			return {
 				minWidth: effectiveMinWidth,
 				maxWidth: effectiveMaxWidth,
@@ -724,7 +663,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 
 		const widthConstraints = getWidthConstraints();
 
-		// Reset search when popover closes
 		React.useEffect(() => {
 			if (!isPopoverOpen) {
 				setSearchValue("");
@@ -775,12 +713,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 											const option = getOptionByValue(value);
 											const IconComponent = option?.icon;
 											const customStyle = option?.style;
-
-											// If option not found, don't display badge
 											if (!option) {
 												return null;
 											}
-
 											const badgeStyle: React.CSSProperties = {
 												animationDuration: `${animation}s`,
 												...(customStyle?.badgeColor && {
@@ -791,7 +726,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 													color: "white",
 												}),
 											};
-
 											return (
 												<Badge
 													key={value}
@@ -918,7 +852,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 						animationDelay: `${animationConfig?.delay || 0}s`,
 						maxWidth: `min(${widthConstraints.maxWidth}, 90vw)`,
 						maxHeight: screenSize === "mobile" ? "70vh" : "60vh",
-						touchAction: "manipulation", // Enhanced touch support
+						touchAction: "manipulation",
 					}}
 					align="start"
 					onEscapeKeyDown={() => setIsPopoverOpen(false)}>
@@ -935,7 +869,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 							className={cn(
 								"max-h-[40vh] overflow-y-auto multiselect-scrollbar",
 								screenSize === "mobile" && "max-h-[50vh]",
-								// Enhanced performance for large lists
 								"overscroll-behavior-y-contain"
 							)}>
 							<CommandEmpty>
@@ -967,9 +900,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 									</CommandItem>
 								</CommandGroup>
 							)}
-							{/* Render options or groups */}
 							{filteredOptions.length > 0 && "heading" in filteredOptions[0] ? (
-								// Render groups
 								(filteredOptions as MultiSelectGroup[]).map((group) => (
 									<CommandGroup key={group.heading} heading={group.heading}>
 										{group.options.map((option) => {
@@ -1002,7 +933,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 									</CommandGroup>
 								))
 							) : (
-								// Render simple options
 								<CommandGroup>
 									{(filteredOptions as MultiSelectOption[]).map((option) => {
 										const isSelected = selectedValues.includes(option.value);
@@ -1074,96 +1004,4 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 );
 
 MultiSelect.displayName = "MultiSelect";
-
-// Export types for use in other projects
 export type { MultiSelectOption, MultiSelectGroup, MultiSelectProps };
-
-/**
- * Utility function to create unique options from potentially duplicate options
- * @param options - Array of options that may contain duplicates
- * @param strategy - Strategy for handling duplicates
- * @returns Array of unique options
- */
-export const createUniqueOptions = (
-	options: MultiSelectOption[],
-	strategy: "keepFirst" | "keepLast" | "merge" = "keepFirst"
-): MultiSelectOption[] => {
-	const uniqueMap = new Map<string, MultiSelectOption>();
-
-	options.forEach((option) => {
-		const existing = uniqueMap.get(option.value);
-
-		if (!existing) {
-			uniqueMap.set(option.value, option);
-		} else {
-			switch (strategy) {
-				case "keepFirst":
-					// Keep the first occurrence (do nothing)
-					break;
-				case "keepLast":
-					// Replace with the last occurrence
-					uniqueMap.set(option.value, option);
-					break;
-				case "merge":
-					// Merge properties, preferring non-undefined values
-					uniqueMap.set(option.value, {
-						...existing,
-						...option,
-						// Merge styles if both exist
-						style:
-							existing.style || option.style
-								? { ...existing.style, ...option.style }
-								: undefined,
-					});
-					break;
-			}
-		}
-	});
-
-	return Array.from(uniqueMap.values());
-};
-
-/**
- * Utility function to validate options for duplicates
- * @param options - Array of options or groups to validate
- * @returns Object with validation results
- */
-export const validateOptions = (
-	options: MultiSelectOption[] | MultiSelectGroup[]
-): {
-	isValid: boolean;
-	duplicates: string[];
-	duplicateLabels: string[];
-} => {
-	const allOptions =
-		options.length > 0 && "heading" in options[0]
-			? (options as MultiSelectGroup[]).flatMap((group) => group.options)
-			: (options as MultiSelectOption[]);
-
-	const valueSet = new Set<string>();
-	const labelSet = new Set<string>();
-	const duplicateValues: string[] = [];
-	const duplicateLabels: string[] = [];
-
-	allOptions.forEach((option) => {
-		// Check for duplicate values
-		if (valueSet.has(option.value)) {
-			duplicateValues.push(option.value);
-		} else {
-			valueSet.add(option.value);
-		}
-
-		// Check for duplicate labels (might be intentional)
-		if (labelSet.has(option.label)) {
-			duplicateLabels.push(option.label);
-		} else {
-			labelSet.add(option.label);
-		}
-	});
-
-	return {
-		isValid: duplicateValues.length === 0,
-		duplicates: Array.from(new Set(duplicateValues)),
-		duplicateLabels: Array.from(new Set(duplicateLabels)),
-	};
-};
