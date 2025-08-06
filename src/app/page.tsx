@@ -50,6 +50,7 @@ import {
 	PageHeaderHeading,
 } from "@/components/page-header";
 import { MultiSelect, MultiSelectRef } from "@/components/multi-select";
+import { fa } from "zod/v4/locales";
 
 // Sample data sets for different examples
 const frameworksList = [
@@ -823,7 +824,7 @@ export default function Home() {
 							<form
 								onSubmit={form.handleSubmit(onSubmit)}
 								className="space-y-6">
-								<div className="grid gap-6 sm:grid-cols-2">
+								<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
 									<FormField
 										control={form.control}
 										name="frameworks"
@@ -836,8 +837,7 @@ export default function Home() {
 														onValueChange={field.onChange}
 														defaultValue={field.value}
 														placeholder="Select frameworks"
-														variant="default"
-														maxCount={3}
+														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -861,6 +861,7 @@ export default function Home() {
 														placeholder="Select technologies"
 														variant="secondary"
 														maxCount={4}
+														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -885,6 +886,7 @@ export default function Home() {
 														variant="inverted"
 														maxCount={5}
 														animationConfig={{ badgeAnimation: "pulse" }}
+														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -906,9 +908,7 @@ export default function Home() {
 														onValueChange={field.onChange}
 														defaultValue={field.value || []}
 														placeholder="Select departments"
-														variant="default"
-														responsive={true}
-														searchable={true}
+														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -942,9 +942,9 @@ export default function Home() {
 									options={techStackOptions.slice(0, 4)}
 									onValueChange={() => {}}
 									defaultValue={["typescript"]}
-									variant="default"
 									placeholder="Default variant"
 									maxCount={2}
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -956,6 +956,7 @@ export default function Home() {
 									variant="secondary"
 									placeholder="Secondary variant"
 									maxCount={2}
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -967,6 +968,7 @@ export default function Home() {
 									variant="destructive"
 									placeholder="Destructive variant"
 									maxCount={2}
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -978,6 +980,7 @@ export default function Home() {
 									variant="inverted"
 									placeholder="Inverted variant"
 									maxCount={2}
+									autoSize={false}
 								/>
 							</div>
 						</div>
@@ -991,7 +994,7 @@ export default function Home() {
 						<p className="text-muted-foreground mb-4">
 							Different animation effects for badges and interactions
 						</p>
-						<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						<div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 							<div className="space-y-2">
 								<label className="text-sm font-medium">Pulse Animation</label>
 								<MultiSelect
@@ -1003,6 +1006,7 @@ export default function Home() {
 										duration: 0.4,
 									}}
 									placeholder="Smooth pulse effect"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1016,6 +1020,7 @@ export default function Home() {
 										duration: 0.3,
 									}}
 									placeholder="Fade effect"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1029,6 +1034,7 @@ export default function Home() {
 										duration: 0.4,
 									}}
 									placeholder="Wiggle effect"
+									autoSize={false}
 								/>
 							</div>
 						</div>
@@ -1091,7 +1097,7 @@ export default function Home() {
 						<p className="text-muted-foreground mb-4">
 							Search functionality, select all, and empty state customization
 						</p>
-						<div className="grid gap-4 sm:grid-cols-2">
+						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 							<div className="space-y-2">
 								<label className="text-sm font-medium">
 									With Search (Default)
@@ -1108,6 +1114,7 @@ export default function Home() {
 											No frameworks found matching your search
 										</div>
 									}
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1121,6 +1128,7 @@ export default function Home() {
 									searchable={false}
 									hideSelectAll={true}
 									placeholder="Select without search"
+									autoSize={false}
 								/>
 							</div>
 						</div>
@@ -1153,7 +1161,7 @@ export default function Home() {
 									className="w-full"
 								/>
 							</div>
-							<div className="grid gap-4 sm:grid-cols-2">
+							<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 								<div className="space-y-2">
 									<label className="text-sm font-medium">
 										Fixed Width (autoSize=false)
@@ -1198,7 +1206,7 @@ export default function Home() {
 								defaultValue={["web-app", "mobile-app"]}
 								placeholder="Select project types"
 								className="w-full max-w-lg"
-								maxCount={3}
+								maxCount={5}
 							/>
 							<p className="text-sm text-muted-foreground">
 								Each option has custom colors and gradients defined in the style
@@ -1213,7 +1221,7 @@ export default function Home() {
 						<p className="text-muted-foreground mb-4">
 							Component-level and option-level disabled states
 						</p>
-						<div className="grid gap-4 sm:grid-cols-2">
+						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 							<div className="space-y-2">
 								<label className="text-sm font-medium">
 									Individual Disabled Options
@@ -1223,6 +1231,7 @@ export default function Home() {
 									onValueChange={setDisabledSelection}
 									defaultValue={["html", "css"]}
 									placeholder="Some options disabled"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1235,6 +1244,7 @@ export default function Home() {
 									defaultValue={["typescript", "javascript"]}
 									disabled={true}
 									placeholder="Disabled component"
+									autoSize={false}
 								/>
 							</div>
 						</div>
@@ -1248,7 +1258,7 @@ export default function Home() {
 						<p className="text-muted-foreground mb-4">
 							Close on select, modal popover, and duplicate handling
 						</p>
-						<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 							<div className="space-y-2">
 								<label className="text-sm font-medium">Close on Select</label>
 								<MultiSelect
@@ -1257,6 +1267,7 @@ export default function Home() {
 									defaultValue={["react"]}
 									closeOnSelect={true}
 									placeholder="Closes after selection"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1267,6 +1278,7 @@ export default function Home() {
 									defaultValue={["typescript"]}
 									modalPopover={true}
 									placeholder="Modal behavior"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1293,6 +1305,7 @@ export default function Home() {
 									defaultValue={["ts1"]}
 									deduplicateOptions={false}
 									placeholder="Similar labels allowed"
+									autoSize={false}
 								/>
 							</div>
 						</div>
@@ -1348,7 +1361,7 @@ export default function Home() {
 						</p>
 
 						{/* Chart Controls */}
-						<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-8">
+						<div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-8">
 							<div className="space-y-2">
 								<label className="text-sm font-medium">
 									Select Departments
@@ -1361,6 +1374,7 @@ export default function Home() {
 									variant="default"
 									maxCount={4}
 									className="w-full"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1373,6 +1387,7 @@ export default function Home() {
 									variant="secondary"
 									maxCount={3}
 									className="w-full"
+									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1385,6 +1400,7 @@ export default function Home() {
 									variant="inverted"
 									maxCount={2}
 									className="w-full"
+									autoSize={false}
 								/>
 							</div>
 						</div>

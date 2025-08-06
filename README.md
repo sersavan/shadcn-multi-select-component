@@ -181,35 +181,6 @@ Enable responsive design with default settings:
 - **Tablet** (640px - 1024px): 4 badges max, normal mode
 - **Desktop** (> 1024px): 6 badges max, full features
 
-### Custom Responsive Configuration
-
-Configure specific behavior for each screen size:
-
-```tsx
-<MultiSelect
-	options={options}
-	onValueChange={setSelected}
-	responsive={{
-		mobile: {
-			maxCount: 1,
-			hideIcons: true,
-			compactMode: true,
-		},
-		tablet: {
-			maxCount: 3,
-			hideIcons: false,
-			compactMode: false,
-		},
-		desktop: {
-			maxCount: 5,
-			hideIcons: false,
-			compactMode: false,
-		},
-	}}
-	placeholder="Custom responsive settings"
-/>
-```
-
 ### Width Constraints
 
 Control component width with responsive adaptation:
@@ -224,17 +195,6 @@ Control component width with responsive adaptation:
 	placeholder="Constrained width"
 />
 ```
-
-### Responsive Configuration Options
-
-| Property      | Type      | Description               |
-| ------------- | --------- | ------------------------- |
-| `maxCount`    | `number`  | Maximum badges to display |
-| `hideIcons`   | `boolean` | Hide option icons         |
-| `compactMode` | `boolean` | Enable compact spacing    |
-
-See [RESPONSIVE.md](./RESPONSIVE.md) for detailed responsive design
-documentation.
 
 ## 📊 Dashboard Integration
 
