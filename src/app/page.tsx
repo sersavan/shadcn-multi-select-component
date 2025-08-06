@@ -509,31 +509,26 @@ const FormSchema = z.object({
 });
 
 export default function Home() {
-	const [variantSelection, setVariantSelection] = useState<string[]>([
-		"typescript",
-	]);
-	const [animatedSelection, setAnimatedSelection] = useState<string[]>([
-		"web-app",
-	]);
-	const [responsiveSelection, setResponsiveSelection] = useState<string[]>([
-		"engineering",
-		"design",
-	]);
 	const [groupedSelection, setGroupedSelection] = useState<string[]>([
 		"react",
 		"nodejs",
 	]);
-	const [styledSelection, setStyledSelection] = useState<string[]>([
-		"web-app",
-		"mobile-app",
-	]);
-	const [disabledSelection, setDisabledSelection] = useState<string[]>([
-		"html",
-		"css",
-	]);
 	const [imperativeSelection, setImperativeSelection] = useState<string[]>([
 		"javascript",
 	]);
+
+	// Локальные состояния для демонстрационных примеров
+	const [variantDemo, setVariantDemo] = useState<string[]>(["typescript"]);
+	const [animatedDemo, setAnimatedDemo] = useState<string[]>(["web-app"]);
+	const [responsiveDemo, setResponsiveDemo] = useState<string[]>([
+		"engineering",
+		"design",
+	]);
+	const [styledDemo, setStyledDemo] = useState<string[]>([
+		"web-app",
+		"mobile-app",
+	]);
+	const [disabledDemo, setDisabledDemo] = useState<string[]>(["html", "css"]);
 
 	const [selectedDepartments, setSelectedDepartments] = useState<string[]>([
 		"engineering",
@@ -672,50 +667,6 @@ export default function Home() {
 			{ name: "Social", size: 200, fill: "#ffa07a" },
 		];
 	}, [selectedMetrics]);
-
-	const generateMetricData = useMemo(() => {
-		const baseData = [
-			{ period: "Week 1", value: 100 },
-			{ period: "Week 2", value: 120 },
-			{ period: "Week 3", value: 110 },
-			{ period: "Week 4", value: 140 },
-		];
-
-		const monthlyData = [
-			{ period: "Jan", value: 450 },
-			{ period: "Feb", value: 520 },
-			{ period: "Mar", value: 480 },
-			{ period: "Apr", value: 600 },
-		];
-
-		const result: any = {};
-
-		if (selectedMetrics.includes("users")) {
-			result.users = selectedTimePeriods.includes("weekly")
-				? baseData.map((d) => ({ ...d, users: d.value * 100 }))
-				: monthlyData.map((d) => ({ ...d, users: d.value * 80 }));
-		}
-
-		if (selectedMetrics.includes("growth")) {
-			result.growth = selectedTimePeriods.includes("weekly")
-				? baseData.map((d) => ({ ...d, growth: d.value * 0.1 }))
-				: monthlyData.map((d) => ({ ...d, growth: d.value * 0.15 }));
-		}
-
-		if (selectedMetrics.includes("satisfaction")) {
-			result.satisfaction = selectedTimePeriods.includes("weekly")
-				? baseData.map((d) => ({
-						...d,
-						satisfaction: Math.min(95, d.value * 0.7 + 20),
-				  }))
-				: monthlyData.map((d) => ({
-						...d,
-						satisfaction: Math.min(98, d.value * 0.12 + 60),
-				  }));
-		}
-
-		return result;
-	}, [selectedMetrics, selectedTimePeriods]);
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -950,7 +901,7 @@ export default function Home() {
 								<label className="text-sm font-medium">Inverted</label>
 								<MultiSelect
 									options={techStackOptions.slice(0, 4)}
-									onValueChange={setVariantSelection}
+									onValueChange={setVariantDemo}
 									defaultValue={["typescript"]}
 									variant="inverted"
 									placeholder="Inverted variant"
@@ -1002,7 +953,7 @@ export default function Home() {
 								<label className="text-sm font-medium">Wiggle Animation</label>
 								<MultiSelect
 									options={projectTypesWithStyle.slice(0, 3)}
-									onValueChange={setAnimatedSelection}
+									onValueChange={setAnimatedDemo}
 									defaultValue={["web-app"]}
 									animationConfig={{
 										badgeAnimation: "wiggle",
@@ -1021,12 +972,13 @@ export default function Home() {
 							4. Responsive Behavior
 						</h3>
 						<p className="text-muted-foreground mb-4">
-							Adaptive maxCount and layout based on screen size
+							Adaptive maxCount and layout based on screen size - try resizing
+							your browser window
 						</p>
 						<div className="space-y-4">
 							<MultiSelect
 								options={companyDepartments}
-								onValueChange={setResponsiveSelection}
+								onValueChange={setResponsiveDemo}
 								defaultValue={["engineering", "design"]}
 								placeholder="Select departments"
 								responsive={{
@@ -1039,6 +991,9 @@ export default function Home() {
 							<p className="text-sm text-muted-foreground">
 								Resize your window to see different maxCount values: Mobile (1),
 								Tablet (2), Desktop (4)
+							</p>
+							<p className="text-xs text-muted-foreground">
+								Selected: {responsiveDemo.join(", ") || "None"}
 							</p>
 						</div>
 					</Card>
@@ -1058,7 +1013,7 @@ export default function Home() {
 								className="w-full max-w-lg"
 								maxCount={5}
 							/>
-							<p className="text-sm text-muted-foreground">
+							<p className="text-xs text-muted-foreground">
 								Selected: {groupedSelection.join(", ") || "None"}
 							</p>
 						</div>
@@ -1177,7 +1132,7 @@ export default function Home() {
 						<div className="space-y-4">
 							<MultiSelect
 								options={projectTypesWithStyle}
-								onValueChange={setStyledSelection}
+								onValueChange={setStyledDemo}
 								defaultValue={["web-app", "mobile-app"]}
 								placeholder="Select project types"
 								className="w-full max-w-lg"
@@ -1186,6 +1141,9 @@ export default function Home() {
 							<p className="text-sm text-muted-foreground">
 								Each option has custom colors and gradients defined in the style
 								property
+							</p>
+							<p className="text-xs text-muted-foreground">
+								Selected: {styledDemo.join(", ") || "None"}
 							</p>
 						</div>
 					</Card>
@@ -1203,11 +1161,14 @@ export default function Home() {
 								</label>
 								<MultiSelect
 									options={skillsWithDisabled}
-									onValueChange={setDisabledSelection}
+									onValueChange={setDisabledDemo}
 									defaultValue={["html", "css"]}
 									placeholder="Some options disabled"
 									autoSize={false}
 								/>
+								<p className="text-xs text-muted-foreground">
+									Selected: {disabledDemo.join(", ") || "None"}
+								</p>
 							</div>
 							<div className="space-y-2">
 								<label className="text-sm font-medium">
@@ -1305,22 +1266,27 @@ export default function Home() {
 							/>
 							<div className="flex flex-wrap gap-2">
 								<Button size="sm" variant="outline" onClick={handleReset}>
+									<Icons.activity className="mr-1 h-3 w-3" />
 									Reset
 								</Button>
 								<Button size="sm" variant="outline" onClick={handleClear}>
+									<Icons.zap className="mr-1 h-3 w-3" />
 									Clear
 								</Button>
 								<Button size="sm" variant="outline" onClick={handleFocus}>
+									<Icons.target className="mr-1 h-3 w-3" />
 									Focus
 								</Button>
 								<Button size="sm" variant="outline" onClick={handleGetValues}>
+									<Icons.search className="mr-1 h-3 w-3" />
 									Get Values
 								</Button>
 								<Button size="sm" variant="outline" onClick={handleSetValues}>
+									<Icons.wand className="mr-1 h-3 w-3" />
 									Set Values
 								</Button>
 							</div>
-							<p className="text-sm text-muted-foreground">
+							<p className="text-xs text-muted-foreground">
 								Current selection: {imperativeSelection.join(", ") || "None"}
 							</p>
 						</div>
@@ -1973,10 +1939,6 @@ export function MyComponent() {
       options={options}
       onValueChange={setSelectedValues}
       defaultValue={selectedValues}
-      placeholder="Select frameworks"
-      variant="default"
-      animation={0.2}
-      maxCount={3}
     />
   );
 }`}</code>
@@ -2008,7 +1970,9 @@ export function MyComponent() {
     />
   );
 }`);
-										toast.success("Code copied to clipboard!");
+										toast.success("Code copied to clipboard!", {
+											description: "You can now paste it into your project",
+										});
 									}}>
 									<Copy className="h-4 w-4" />
 									Copy
