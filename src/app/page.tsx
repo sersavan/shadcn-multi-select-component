@@ -50,6 +50,7 @@ import {
 	PageHeaderHeading,
 } from "@/components/page-header";
 import { MultiSelect, MultiSelectRef } from "@/components/multi-select";
+import { AIChat } from "@/components/ai-chat";
 
 const frameworksList = [
 	{ value: "next.js", label: "Next.js", icon: Icons.code },
@@ -164,6 +165,215 @@ const companyDepartments = [
 	{ value: "operations", label: "Operations", icon: Icons.activity },
 	{ value: "support", label: "Customer Support", icon: Icons.mail },
 	{ value: "security", label: "Security", icon: Icons.shield },
+];
+
+const llmModelsOptions = [
+	{ value: "gpt-4o", label: "GPT-4o", icon: Icons.zap },
+	{ value: "gpt-4-turbo", label: "GPT-4 Turbo", icon: Icons.zap },
+	{ value: "claude-3-opus", label: "Claude 3 Opus", icon: Icons.cpu },
+	{ value: "claude-3-sonnet", label: "Claude 3 Sonnet", icon: Icons.cpu },
+	{ value: "gemini-pro", label: "Gemini Pro", icon: Icons.star },
+	{ value: "llama-3-70b", label: "Llama 3 70B", icon: Icons.cpu },
+	{ value: "mistral-large", label: "Mistral Large", icon: Icons.activity },
+	{ value: "cohere-command", label: "Cohere Command", icon: Icons.globe },
+];
+
+const aiToolsCategories = [
+	{
+		heading: "Language Models",
+		options: [
+			{ value: "openai-gpt", label: "OpenAI GPT", icon: Icons.zap },
+			{ value: "anthropic-claude", label: "Anthropic Claude", icon: Icons.cpu },
+			{ value: "google-gemini", label: "Google Gemini", icon: Icons.star },
+			{ value: "meta-llama", label: "Meta Llama", icon: Icons.cpu },
+		],
+	},
+	{
+		heading: "AI Agents",
+		options: [
+			{ value: "code-assistant", label: "Code Assistant", icon: Icons.code },
+			{ value: "research-agent", label: "Research Agent", icon: Icons.search },
+			{
+				value: "writing-assistant",
+				label: "Writing Assistant",
+				icon: Icons.wand,
+			},
+			{ value: "data-analyst", label: "Data Analyst", icon: Icons.pieChart },
+		],
+	},
+	{
+		heading: "Vector Databases",
+		options: [
+			{ value: "pinecone", label: "Pinecone", icon: Icons.database },
+			{ value: "weaviate", label: "Weaviate", icon: Icons.database },
+			{ value: "chroma", label: "Chroma", icon: Icons.database },
+			{ value: "qdrant", label: "Qdrant", icon: Icons.database },
+		],
+	},
+];
+
+const promptTemplateTypes = [
+	{
+		value: "system-prompt",
+		label: "System Prompt",
+		icon: Icons.shield,
+		style: { badgeColor: "#8b5cf6", gradient: "from-purple-500 to-indigo-600" },
+	},
+	{
+		value: "few-shot",
+		label: "Few-shot Learning",
+		icon: Icons.target,
+		style: { badgeColor: "#06b6d4", gradient: "from-cyan-500 to-blue-600" },
+	},
+	{
+		value: "chain-of-thought",
+		label: "Chain of Thought",
+		icon: Icons.activity,
+		style: { badgeColor: "#10b981", gradient: "from-emerald-500 to-teal-600" },
+	},
+	{
+		value: "role-playing",
+		label: "Role Playing",
+		icon: Icons.users,
+		style: { badgeColor: "#f59e0b", gradient: "from-amber-500 to-orange-600" },
+	},
+	{
+		value: "code-generation",
+		label: "Code Generation",
+		icon: Icons.code,
+		style: { badgeColor: "#ef4444", gradient: "from-red-500 to-pink-600" },
+	},
+	{
+		value: "data-analysis",
+		label: "Data Analysis",
+		icon: Icons.pieChart,
+		style: { badgeColor: "#3b82f6", gradient: "from-blue-500 to-purple-600" },
+	},
+];
+
+const ragDataSources = [
+	{ value: "pdf-documents", label: "PDF Documents", icon: Icons.harddrive },
+	{ value: "web-pages", label: "Web Pages", icon: Icons.globe },
+	{ value: "knowledge-base", label: "Knowledge Base", icon: Icons.database },
+	{ value: "api-endpoints", label: "API Endpoints", icon: Icons.activity },
+	{ value: "code-repositories", label: "Code Repositories", icon: Icons.code },
+	{ value: "chat-history", label: "Chat History", icon: Icons.mail },
+	{ value: "documentation", label: "Documentation", icon: Icons.monitor },
+	{ value: "spreadsheets", label: "Spreadsheets", icon: Icons.database },
+];
+
+const aiModelParameters = [
+	{
+		heading: "Generation Settings",
+		options: [
+			{ value: "temperature", label: "Temperature", icon: Icons.activity },
+			{ value: "top-p", label: "Top-p (Nucleus)", icon: Icons.target },
+			{ value: "max-tokens", label: "Max Tokens", icon: Icons.cpu },
+			{
+				value: "frequency-penalty",
+				label: "Frequency Penalty",
+				icon: Icons.trendingUp,
+			},
+		],
+	},
+	{
+		heading: "Response Control",
+		options: [
+			{ value: "stop-sequences", label: "Stop Sequences", icon: Icons.shield },
+			{
+				value: "presence-penalty",
+				label: "Presence Penalty",
+				icon: Icons.dollarSign,
+			},
+			{ value: "response-format", label: "Response Format", icon: Icons.code },
+			{ value: "seed", label: "Seed", icon: Icons.star },
+		],
+	},
+];
+
+const aiAgentCapabilities = [
+	{
+		heading: "Content Creation",
+		options: [
+			{ value: "text-generation", label: "Text Generation", icon: Icons.wand },
+			{ value: "code-writing", label: "Code Writing", icon: Icons.code },
+			{
+				value: "image-generation",
+				label: "Image Generation",
+				icon: Icons.star,
+			},
+			{
+				value: "document-editing",
+				label: "Document Editing",
+				icon: Icons.harddrive,
+			},
+		],
+	},
+	{
+		heading: "Analysis & Research",
+		options: [
+			{ value: "data-analysis", label: "Data Analysis", icon: Icons.pieChart },
+			{ value: "web-research", label: "Web Research", icon: Icons.search },
+			{ value: "code-review", label: "Code Review", icon: Icons.shield },
+			{
+				value: "sentiment-analysis",
+				label: "Sentiment Analysis",
+				icon: Icons.heart,
+			},
+		],
+	},
+	{
+		heading: "Communication",
+		options: [
+			{ value: "translation", label: "Translation", icon: Icons.globe },
+			{ value: "summarization", label: "Summarization", icon: Icons.target },
+			{ value: "email-writing", label: "Email Writing", icon: Icons.mail },
+			{
+				value: "chatbot-responses",
+				label: "Chatbot Responses",
+				icon: Icons.users,
+			},
+		],
+	},
+];
+
+const multimodalOptions = [
+	{
+		value: "text-to-image",
+		label: "Text to Image",
+		icon: Icons.star,
+		style: { badgeColor: "#8b5cf6", gradient: "from-purple-500 to-pink-600" },
+	},
+	{
+		value: "image-to-text",
+		label: "Image to Text",
+		icon: Icons.monitor,
+		style: { badgeColor: "#06b6d4", gradient: "from-cyan-500 to-blue-600" },
+	},
+	{
+		value: "text-to-speech",
+		label: "Text to Speech",
+		icon: Icons.activity,
+		style: { badgeColor: "#10b981", gradient: "from-emerald-500 to-teal-600" },
+	},
+	{
+		value: "speech-to-text",
+		label: "Speech to Text",
+		icon: Icons.cpu,
+		style: { badgeColor: "#f59e0b", gradient: "from-amber-500 to-orange-600" },
+	},
+	{
+		value: "video-analysis",
+		label: "Video Analysis",
+		icon: Icons.calendar,
+		style: { badgeColor: "#ef4444", gradient: "from-red-500 to-pink-600" },
+	},
+	{
+		value: "audio-generation",
+		label: "Audio Generation",
+		icon: Icons.zap,
+		style: { badgeColor: "#3b82f6", gradient: "from-blue-500 to-purple-600" },
+	},
 ];
 
 const salesData = [
@@ -544,6 +754,18 @@ export default function Home() {
 		"monthly",
 		"quarterly",
 	]);
+
+	const [selectedLLMs, setSelectedLLMs] = useState<string[]>([]);
+	const [selectedAITools, setSelectedAITools] = useState<string[]>([]);
+	const [selectedPromptTypes, setSelectedPromptTypes] = useState<string[]>([]);
+	const [selectedRAGSources, setSelectedRAGSources] = useState<string[]>([]);
+	const [selectedAIParameters, setSelectedAIParameters] = useState<string[]>(
+		[]
+	);
+	const [selectedAgentCapabilities, setSelectedAgentCapabilities] = useState<
+		string[]
+	>([]);
+	const [selectedMultimodal, setSelectedMultimodal] = useState<string[]>([]);
 
 	const multiSelectRef = useRef<MultiSelectRef>(null);
 
@@ -1822,9 +2044,218 @@ export default function Home() {
 						</div>
 					</Card>
 
+					{/* AI/LLM Examples Section */}
+					<Card className="p-6">
+						<h3 className="text-xl font-semibold mb-4">
+							13. AI & LLM Integration Examples
+						</h3>
+						<p className="text-muted-foreground mb-6">
+							Perfect for AI applications, chatbots, prompt engineering, and
+							machine learning workflows.
+						</p>
+
+						<div className="grid gap-6">
+							{/* LLM Model Selection */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">
+									LLM Model Selection
+								</h4>
+								<MultiSelect
+									options={llmModelsOptions}
+									onValueChange={(value) => setSelectedLLMs(value)}
+									defaultValue={["gpt-4o", "claude-3-opus"]}
+									placeholder="Select AI models"
+									variant="default"
+									animationConfig={{ badgeAnimation: "pulse" }}
+									className="w-full"
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Choose multiple language models for comparison, A/B testing,
+									or ensemble predictions.
+								</p>
+							</Card>
+
+							{/* AI Tools Categories */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">
+									AI Tools & Services
+								</h4>
+								<MultiSelect
+									options={aiToolsCategories}
+									onValueChange={(value) => setSelectedAITools(value)}
+									defaultValue={["openai-gpt", "code-assistant", "pinecone"]}
+									placeholder="Select AI tools"
+									variant="secondary"
+									animationConfig={{ badgeAnimation: "wiggle" }}
+									className="w-full"
+									searchable={true}
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Organize AI services by category for better workflow
+									management and tool selection.
+								</p>
+							</Card>
+
+							{/* Prompt Template Types */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">
+									Prompt Engineering Templates
+								</h4>
+								<MultiSelect
+									options={promptTemplateTypes}
+									onValueChange={(value) => setSelectedPromptTypes(value)}
+									defaultValue={["system-prompt", "few-shot"]}
+									placeholder="Select prompt types"
+									variant="default"
+									animationConfig={{ badgeAnimation: "bounce" }}
+									className="w-full"
+									maxCount={4}
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Select prompt engineering patterns with custom styling for
+									different template types.
+								</p>
+							</Card>
+
+							{/* RAG Data Sources */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">RAG Data Sources</h4>
+								<MultiSelect
+									options={ragDataSources}
+									onValueChange={(value) => setSelectedRAGSources(value)}
+									defaultValue={[
+										"pdf-documents",
+										"knowledge-base",
+										"web-pages",
+									]}
+									placeholder="Select data sources"
+									variant="secondary"
+									animationConfig={{ badgeAnimation: "slide" }}
+									className="w-full"
+									hideSelectAll={false}
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Configure Retrieval-Augmented Generation with multiple data
+									sources for enhanced AI responses.
+								</p>
+							</Card>
+
+							{/* AI Model Parameters */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">
+									Model Parameters Configuration
+								</h4>
+								<MultiSelect
+									options={aiModelParameters}
+									onValueChange={(value) => setSelectedAIParameters(value)}
+									defaultValue={["temperature", "max-tokens", "top-p"]}
+									placeholder="Select parameters"
+									variant="default"
+									animationConfig={{ badgeAnimation: "fade" }}
+									className="w-full"
+									responsive={true}
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Fine-tune AI model behavior by selecting generation and
+									response control parameters.
+								</p>
+							</Card>
+
+							{/* AI Agent Capabilities */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">
+									AI Agent Capabilities
+								</h4>
+								<MultiSelect
+									options={aiAgentCapabilities}
+									onValueChange={(value) => setSelectedAgentCapabilities(value)}
+									defaultValue={[
+										"text-generation",
+										"data-analysis",
+										"translation",
+									]}
+									placeholder="Select capabilities"
+									variant="secondary"
+									animationConfig={{ badgeAnimation: "bounce" }}
+									className="w-full"
+									maxCount={5}
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Define what your AI agent can do by selecting from content
+									creation, analysis, and communication capabilities.
+								</p>
+							</Card>
+
+							{/* Multimodal AI Features */}
+							<Card className="p-4">
+								<h4 className="text-lg font-medium mb-4">
+									Multimodal AI Features
+								</h4>
+								<MultiSelect
+									options={multimodalOptions}
+									onValueChange={(value) => setSelectedMultimodal(value)}
+									defaultValue={["text-to-image", "speech-to-text"]}
+									placeholder="Select modalities"
+									variant="default"
+									animationConfig={{ badgeAnimation: "wiggle" }}
+									className="w-full"
+									singleLine={false}
+								/>
+								<p className="text-sm text-muted-foreground mt-2">
+									Enable cross-modal AI capabilities with custom-styled badges
+									for different input/output types.
+								</p>
+							</Card>
+						</div>
+
+						{/* AI Use Cases Info */}
+						<div className="mt-6 p-4 bg-muted rounded-lg">
+							<h5 className="font-medium mb-2">AI/LLM Use Cases:</h5>
+							<ul className="text-sm text-muted-foreground space-y-1">
+								<li>
+									• Configure multiple AI models for ensemble predictions and
+									A/B testing
+								</li>
+								<li>
+									• Select prompt templates for different conversation patterns
+									and workflows
+								</li>
+								<li>
+									• Choose data sources for RAG-enhanced responses and knowledge
+									integration
+								</li>
+								<li>
+									• Fine-tune model parameters for specific use cases and
+									performance optimization
+								</li>
+								<li>
+									• Organize AI tools by categories and specialized workflows
+								</li>
+								<li>
+									• Build AI agent configurations with multiple capabilities and
+									skills
+								</li>
+								<li>
+									• Enable multimodal AI features for cross-format content
+									processing
+								</li>
+								<li>
+									• Create custom AI pipelines with modular component selection
+								</li>
+							</ul>
+							<div className="mt-3 p-3 bg-purple-50 dark:bg-purple-950 rounded border-l-4 border-purple-400">
+								<p className="text-sm font-medium text-purple-800 dark:text-purple-200">
+									🤖 Perfect for AI dashboards, chatbot configuration, prompt
+									engineering tools, MLOps workflows, and multimodal AI
+									applications!
+								</p>
+							</div>
+						</div>
+					</Card>
+
 					{/* Props Reference */}
 					<Card className="p-6">
-						<h3 className="text-xl font-semibold mb-4">13. Props Reference</h3>
+						<h3 className="text-xl font-semibold mb-4">14. Props Reference</h3>
 						<div className="prose prose-sm max-w-none">
 							<div className="grid gap-4 text-sm">
 								<div className="space-y-2">
@@ -1982,6 +2413,9 @@ export function MyComponent() {
 					</Card>
 				</div>
 			</div>
+
+			{/* AI Chat Widget */}
+			<AIChat />
 		</main>
 	);
 }

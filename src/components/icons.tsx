@@ -28,6 +28,15 @@ import {
 	PieChart,
 	Activity,
 	Search,
+	MessageCircle,
+	Bot,
+	Maximize,
+	Minimize,
+	X,
+	EyeOff,
+	Eye,
+	Copy,
+	Check,
 } from "lucide-react";
 
 export const Icons = {
@@ -59,6 +68,15 @@ export const Icons = {
 	pieChart: PieChart,
 	activity: Activity,
 	search: Search,
+	messageCircle: MessageCircle,
+	bot: Bot,
+	maximize: Maximize,
+	minimize: Minimize,
+	x: X,
+	eyeOff: EyeOff,
+	eye: Eye,
+	copy: Copy,
+	check: Check,
 	gitHub: ({ ...props }: LucideProps) => (
 		<svg
 			aria-hidden="true"
