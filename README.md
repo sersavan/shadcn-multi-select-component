@@ -283,7 +283,7 @@ const AdvancedDashboard = () => {
 | `hideSelectAll`             | `boolean`                                                 | `false`            | Hide "Select All" option                    |
 | `searchable`                | `boolean`                                                 | `true`             | Enable search functionality                 |
 | `emptyIndicator`            | `ReactNode`                                               | -                  | Custom empty state component                |
-| `autoSize`                  | `boolean`                                                 | `true`             | Allow component to grow/shrink with content |
+| `autoSize`                  | `boolean`                                                 | `false`            | Allow component to grow/shrink with content |
 | `singleLine`                | `boolean`                                                 | `false`            | Show badges in single line with scroll      |
 | `popoverClassName`          | `string`                                                  | -                  | Custom CSS class for popover content        |
 | `disabled`                  | `boolean`                                                 | `false`            | Disable the entire component                |

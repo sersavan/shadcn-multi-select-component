@@ -32,7 +32,7 @@ multi-selection functionality with extensive customization options.
 
 - `variant`: "default" | "secondary" | "destructive" | "inverted"
 - `maxCount`: Maximum badges to show (default: 3)
-- `autoSize`: Auto width behavior (default: true)
+- `autoSize`: Auto width behavior (default: false)
 - `singleLine`: Single line layout (default: false)
 
 ### Behavior Props
