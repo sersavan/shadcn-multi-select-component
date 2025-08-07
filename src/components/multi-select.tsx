@@ -497,7 +497,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 		const getAllOptions = React.useCallback((): MultiSelectOption[] => {
 			if (options.length === 0) return [];
 			let allOptions: MultiSelectOption[];
-			if ("heading" in options[0]) {
+			if (options[0] && "heading" in options[0]) {
 				allOptions = (options as MultiSelectGroup[]).flatMap(
 					(group) => group.options
 				);
@@ -552,7 +552,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 		const filteredOptions = React.useMemo(() => {
 			if (!searchable || !searchValue) return options;
 			if (options.length === 0) return [];
-			if ("heading" in options[0]) {
+			if (options[0] && "heading" in options[0]) {
 				const groups = options as MultiSelectGroup[];
 				return groups
 					.map((group) => ({
@@ -900,7 +900,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 									</CommandItem>
 								</CommandGroup>
 							)}
-							{filteredOptions.length > 0 && "heading" in filteredOptions[0] ? (
+							{filteredOptions[0] && "heading" in filteredOptions[0] ? (
 								(filteredOptions as MultiSelectGroup[]).map((group) => (
 									<CommandGroup key={group.heading} heading={group.heading}>
 										{group.options.map((option) => {
