@@ -203,7 +203,7 @@ export function AIChat({ className }: AIChatProps) {
 		setIsLoading(true);
 
 		setIsRateLimited(true);
-		setRateLimitSeconds(5);
+		setRateLimitSeconds(30);
 
 		setSuggestedQuestions([]);
 
