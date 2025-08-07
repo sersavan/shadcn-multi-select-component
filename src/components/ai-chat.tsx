@@ -104,6 +104,7 @@ When responding:
 10. **ALWAYS** end your response with exactly 5 relevant follow-up questions about MultiSelect
 11. Format follow-up questions as a JSON array at the end like: QUESTIONS: ["Question 1?", "Question 2?", "Question 3?", "Question 4?", "Question 5?"]
 12. Make sure questions are specific to MultiSelect component and build on the current conversation context
+13. **IMPORTANT**: The QUESTIONS section will be automatically hidden from users and used to update suggested questions
 
 Focus EXCLUSIVELY on practical, actionable advice that helps users implement the MultiSelect component successfully.`;
 
@@ -230,13 +231,27 @@ export function AIChat({ className }: AIChatProps) {
 			let aiContent = data.content;
 			let questions: string[] = [];
 
-			const questionsMatch = aiContent.match(/QUESTIONS:\s*(\[[\s\S]*?\])/);
+			let questionsMatch = aiContent.match(/QUESTIONS:\s*(\[[\s\S]*?\])/);
 			if (questionsMatch) {
 				try {
 					questions = JSON.parse(questionsMatch[1]);
 					aiContent = aiContent.replace(/QUESTIONS:\s*\[[\s\S]*?\]/, "").trim();
 				} catch (e) {
-					console.warn("Failed to parse suggested questions");
+					console.warn("Failed to parse JSON questions format");
+				}
+			}
+
+			if (questions.length === 0) {
+				const quotedQuestionsMatch = aiContent.match(
+					/QUESTIONS:\s*([\s\S]*?)$/
+				);
+				if (quotedQuestionsMatch) {
+					const questionsText = quotedQuestionsMatch[1];
+					const quotedQuestions = questionsText.match(/"([^"]+)"/g);
+					if (quotedQuestions) {
+						questions = quotedQuestions.map((q: string) => q.replace(/"/g, ""));
+						aiContent = aiContent.replace(/QUESTIONS:[\s\S]*$/, "").trim();
+					}
 				}
 			}
 
