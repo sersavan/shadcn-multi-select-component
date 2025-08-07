@@ -92,6 +92,7 @@
 	}
 }
 
+/* Thin scrollbar for Single Line Mode in MultiSelect */
 .multiselect-singleline-scroll {
 	scrollbar-width: thin;
 	scrollbar-color: hsl(var(--border) / 0.4) transparent;
@@ -117,11 +118,13 @@
 	opacity: 1;
 }
 
+/* Scrollbar becomes more visible when actively scrolling */
 .multiselect-singleline-scroll:active::-webkit-scrollbar-thumb {
 	background-color: hsl(var(--border) / 0.7);
 	opacity: 1;
 }
 
+/* Dark theme adjustments - make scrollbar slightly more visible */
 .dark .multiselect-singleline-scroll {
 	scrollbar-color: hsl(var(--border) / 0.5) transparent;
 }

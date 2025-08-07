@@ -142,6 +142,7 @@ const projectTypesWithStyle = [
 const skillsWithDisabled = [
 	{ value: "html", label: "HTML", icon: Icons.code },
 	{ value: "css", label: "CSS", icon: Icons.wand },
+	{ value: "javascript", label: "JavaScript", icon: Icons.zap },
 	{
 		value: "typescript",
 		label: "TypeScript",
@@ -1401,7 +1402,7 @@ export default function Home() {
 									<MultiSelect
 										options={skillsWithDisabled.slice(0, 4)}
 										onValueChange={() => {}}
-										defaultValue={["javascript"]}
+										defaultValue={["html"]}
 										autoSize={true}
 										placeholder="Auto width"
 									/>
