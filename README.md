@@ -7,6 +7,9 @@
 A powerful and flexible multi-select component built with **React**,
 **TypeScript**, **Tailwind CSS**, and **shadcn/ui** components.
 
+**Compatible with:** Next.js, Vite, Create React App, and any React environment
+that supports path aliases and shadcn/ui components.
+
 ![Multi Select Demo](https://img.shields.io/badge/React-19+-blue?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-blue?logo=tailwindcss)
@@ -46,23 +49,87 @@ A powerful and flexible multi-select component built with **React**,
 
 ## 📦 Installation
 
-1. Copy the `multi-select.tsx` component to your project:
+### Prerequisites
+
+This component is compatible with any React project but requires proper setup:
+
+- **React environment**: Next.js, Vite, Create React App, or any React setup
+- **Path aliases**: Configure `@/` imports in your bundler
+- **shadcn/ui**: Install and configure shadcn/ui components
+- **Tailwind CSS**: Setup and configure Tailwind CSS
+
+### 1. Copy the Component
 
 ```bash
 cp src/components/multi-select.tsx your-project/components/
 ```
 
-## Installation
-
-1. Make sure you have the required dependencies:
+### 2. Install Dependencies
 
 ```bash
 npm install react react-dom
-npm install @radix-ui/react-checkbox @radix-ui/react-popover @radix-ui/react-separator
-npm install lucide-react class-variance-authority clsx tailwind-merge
+npm install @radix-ui/react-popover @radix-ui/react-separator
+npm install lucide-react class-variance-authority clsx tailwind-merge cmdk
 ```
 
-1. Ensure you have the required shadcn/ui components:
+### 3. Setup shadcn/ui Components
+
+Install the required shadcn/ui components:
+
+```bash
+npx shadcn@latest add button badge popover command separator
+```
+
+### 4. Configure Path Aliases
+
+#### For Next.js
+
+Add to your `tsconfig.json` or `jsconfig.json`:
+
+```json
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		}
+	}
+}
+```
+
+#### For Vite
+
+Add to your `vite.config.ts`:
+
+```typescript
+import { defineConfig } from "vite";
+import path from "path";
+
+export default defineConfig({
+	resolve: {
+		alias: {
+			"@": path.resolve(__dirname, "./src"),
+		},
+	},
+});
+```
+
+#### For Webpack/Create React App
+
+You may need to eject or use CRACO to configure path aliases.
+
+### 5. Setup Utility Function
+
+Ensure you have the `cn` utility function in `src/lib/utils.ts`:
+
+```typescript
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}
+```
 
 ## 🎯 Quick Start
 
@@ -119,6 +186,40 @@ const styledOptions = [
 	onValueChange={setSelected}
 	placeholder="Select with custom styles..."
 />;
+```
+
+### Next.js Usage
+
+For Next.js projects, you can use the component in client components with the
+"use client" directive:
+
+```tsx
+"use client";
+
+import { MultiSelect } from "@/components/multi-select";
+import { useState } from "react";
+
+const options = [
+	{ value: "next", label: "Next.js" },
+	{ value: "react", label: "React" },
+	{ value: "typescript", label: "TypeScript" },
+];
+
+export default function MyPage() {
+	const [selected, setSelected] = useState<string[]>([]);
+
+	return (
+		<div className="container mx-auto p-4">
+			<h1 className="text-2xl font-bold mb-4">Select Technologies</h1>
+			<MultiSelect
+				options={options}
+				onValueChange={setSelected}
+				placeholder="Select technologies..."
+				variant="secondary"
+			/>
+		</div>
+	);
+}
 ```
 
 ### Grouped Options
