@@ -28,7 +28,7 @@ import {
 	PolarRadiusAxis,
 	Treemap,
 } from "recharts";
-import { Copy } from "lucide-react";
+import { Copy, ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -719,6 +719,8 @@ const FormSchema = z.object({
 });
 
 export default function Home() {
+	const [isInfoExpanded, setIsInfoExpanded] = useState(false);
+
 	const [groupedSelection, setGroupedSelection] = useState<string[]>([
 		"react",
 		"nodejs",
@@ -940,7 +942,7 @@ export default function Home() {
 	return (
 		<main className="min-h-screen bg-background">
 			{/* Header */}
-			<div className="container mx-auto px-4 py-8">
+			<div className="container mx-auto px-4 py-4">
 				<PageHeader className="text-center">
 					<PageHeaderHeading>Multi Select Component</PageHeaderHeading>
 					<PageHeaderDescription>
@@ -957,6 +959,81 @@ export default function Home() {
 						</Link>
 					</PageActions>
 				</PageHeader>
+
+				{/* Interactive Examples Introduction */}
+				<div className="mt-4 mb-4">
+					<Card className="p-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 overflow-hidden">
+						{/* Header - Always Visible */}
+						<div
+							className="p-6 cursor-pointer hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-colors"
+							onClick={() => setIsInfoExpanded(!isInfoExpanded)}>
+							<div className="flex items-center justify-between">
+								<div className="flex items-center gap-4">
+									<div className="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+										<Icons.zap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+									</div>
+									<div>
+										<h3 className="text-xl font-semibold text-blue-900 dark:text-blue-100">
+											Interactive Examples & Live Demos
+										</h3>
+										<p className="text-blue-700 dark:text-blue-300 text-sm mt-1">
+											{isInfoExpanded
+												? "Click to collapse detailed information"
+												: "Click to learn more about examples and AI assistant"}
+										</p>
+									</div>
+								</div>
+								<ChevronDown
+									className={cn(
+										"w-5 h-5 text-blue-600 dark:text-blue-400 transition-transform duration-200",
+										isInfoExpanded && "rotate-180"
+									)}
+								/>
+							</div>
+						</div>
+
+						{/* Expandable Content */}
+						<div
+							className={cn(
+								"overflow-hidden transition-all duration-300 ease-in-out",
+								isInfoExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+							)}>
+							<div className="px-6 pb-6">
+								<p className="text-blue-700 dark:text-blue-300 mb-4 leading-relaxed">
+									Explore comprehensive examples showcasing all MultiSelect
+									features including form integration, animations, responsive
+									design, AI/LLM configurations, and data visualization. Each
+									example is fully interactive and demonstrates real-world use
+									cases.
+								</p>
+								<div className="flex flex-col sm:flex-row gap-3 mb-4">
+									<div className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400">
+										<Icons.messageCircle className="w-4 h-4" />
+										<span className="font-medium">Need help?</span>
+										<span>Ask our AI assistant in the chat widget</span>
+									</div>
+									<div className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400">
+										<Icons.bot className="w-4 h-4" />
+										<span className="font-medium">AI Expert:</span>
+										<span>Get instant answers about MultiSelect usage</span>
+									</div>
+								</div>
+								<div className="p-3 bg-blue-100 dark:bg-blue-900/50 rounded-lg border border-blue-200 dark:border-blue-700">
+									<div className="flex items-center gap-2 text-sm text-blue-800 dark:text-blue-200">
+										<Icons.activity className="w-4 h-4" />
+										<span className="font-medium">💡 Pro Tip:</span>
+									</div>
+									<p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
+										Click the chat button in the bottom-right corner to ask
+										questions about props, styling, integration patterns, or
+										troubleshooting. The AI assistant specializes in MultiSelect
+										usage!
+									</p>
+								</div>
+							</div>
+						</div>
+					</Card>
+				</div>
 
 				{/* Examples Grid */}
 				<div className="grid gap-6 mt-12">
