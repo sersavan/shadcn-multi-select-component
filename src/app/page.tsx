@@ -1058,7 +1058,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<p className="text-base md:text-lg">
 										Choosing the right technology stack is crucial for any
-										successful project. Whether you're building a
+										successful project. Whether you&apos;re building a
 										<span className="font-semibold text-foreground">
 											{" "}
 											web application
@@ -1188,7 +1188,7 @@ export default function Home() {
 											Team Skills Assessment
 										</h3>
 										<p className="text-base md:text-lg mb-4">
-											Before finalizing your tech stack, assess your team's
+											Before finalizing your tech stack, assess your team&apos;s
 											current skills and expertise. This will help determine
 											whether you need additional training or if you should
 											consider alternative technologies.
@@ -1246,9 +1246,9 @@ export default function Home() {
 									<p className="text-base md:text-lg">
 										Remember, the best technology stack is the one that your
 										team can effectively use to deliver value to your users.
-										Don't choose technologies just because they're trendy –
-										choose them because they solve real problems and fit your
-										specific use case.
+										Don&apos;t choose technologies just because they&apos;re
+										trendy – choose them because they solve real problems and
+										fit your specific use case.
 									</p>
 								</div>
 							</div>
@@ -1371,14 +1371,15 @@ export default function Home() {
 										</h3>
 										<p className="text-base md:text-lg mb-6">
 											The tech industry evolves rapidly. Tell us which
-											technologies you're planning to learn next year. This
-											could include frameworks you've heard about but haven't
-											had the chance to try yet.
+											technologies you&apos;re planning to learn next year. This
+											could include frameworks you&apos;ve heard about but
+											haven&apos;t had the chance to try yet.
 										</p>
 
 										<blockquote className="border-l-4 border-teal-500 pl-6 italic text-muted-foreground mb-6 bg-teal-50/50 dark:bg-teal-950/20 py-4 rounded-r-lg">
-											"The only way to make sense out of change is to plunge
-											into it, move with it, and join the dance." - Alan Watts
+											&ldquo;The only way to make sense out of change is to
+											plunge into it, move with it, and join the dance.&rdquo; -
+											Alan Watts
 										</blockquote>
 
 										<div className="bg-gradient-to-br from-teal-50/50 to-cyan-50/50 dark:from-teal-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-teal-200/50 dark:border-teal-700/50">
@@ -1412,7 +1413,7 @@ export default function Home() {
 										<p className="text-base md:text-lg mb-6">
 											Understanding the types of projects developers work on
 											helps us identify common patterns and challenges. Whether
-											you're building{" "}
+											you&apos;re building{" "}
 											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
 												enterprise applications
 											</code>
