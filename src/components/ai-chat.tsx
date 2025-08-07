@@ -322,9 +322,9 @@ export function AIChat({ className }: AIChatProps) {
 					<Button
 						onClick={() => setIsOpen(true)}
 						size="lg"
-						className="relative rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-all duration-200 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 hover:scale-110 group text-white font-bold flex items-center justify-center">
-						<span className="text-xl font-black transition-transform group-hover:scale-110">
-							AI
+						className="relative rounded-full h-14 w-14 shadow-lg hover:shadow-xl transition-all duration-200 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 hover:scale-110 group flex items-center justify-center text-white font-bold">
+						<span className="text-2xl transition-transform group-hover:scale-110">
+							💬
 						</span>
 						<span className="sr-only">Open AI Chat</span>
 					</Button>
