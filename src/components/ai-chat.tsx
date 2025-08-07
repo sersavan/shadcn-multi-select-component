@@ -366,7 +366,7 @@ export function AIChat({ className }: AIChatProps) {
 						<div className="text-center text-muted-foreground py-8">
 							<Icons.zap className="h-12 w-12 mx-auto mb-4 opacity-50" />
 							<p className="text-sm font-medium mb-2">
-								Hi! I'm your MultiSelect AI Assistant
+								Hi! I&apos;m your MultiSelect AI Assistant
 							</p>
 							<p className="text-xs">
 								I specialize in helping with the MultiSelect component only. Ask
@@ -458,7 +458,7 @@ export function AIChat({ className }: AIChatProps) {
 																	{children}
 																</code>
 															</pre>
-															<CopyButton children={children} />
+															<CopyButton>{children}</CopyButton>
 														</div>
 													);
 												},
