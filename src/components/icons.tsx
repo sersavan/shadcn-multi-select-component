@@ -37,6 +37,7 @@ import {
 	Eye,
 	Copy,
 	Check,
+	Clock,
 } from "lucide-react";
 
 export const Icons = {
@@ -77,6 +78,7 @@ export const Icons = {
 	eye: Eye,
 	copy: Copy,
 	check: Check,
+	clock: Clock,
 	gitHub: ({ ...props }: LucideProps) => (
 		<svg
 			aria-hidden="true"

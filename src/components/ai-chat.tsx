@@ -125,8 +125,11 @@ export function AIChat({ className }: AIChatProps) {
 	const [suggestedQuestions, setSuggestedQuestions] =
 		useState<string[]>(INITIAL_QUESTIONS);
 	const [questionsKey, setQuestionsKey] = useState(0);
+	const [rateLimitSeconds, setRateLimitSeconds] = useState(0);
+	const [isRateLimited, setIsRateLimited] = useState(false);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
+	const rateLimitTimerRef = useRef<NodeJS.Timeout | null>(null);
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -157,8 +160,36 @@ export function AIChat({ className }: AIChatProps) {
 		return () => document.removeEventListener("keydown", handleEscape);
 	}, [isOpen, isFullscreen]);
 
+	useEffect(() => {
+		if (rateLimitSeconds > 0) {
+			rateLimitTimerRef.current = setTimeout(() => {
+				setRateLimitSeconds((prev) => {
+					if (prev <= 1) {
+						setIsRateLimited(false);
+						return 0;
+					}
+					return prev - 1;
+				});
+			}, 1000);
+		}
+
+		return () => {
+			if (rateLimitTimerRef.current) {
+				clearTimeout(rateLimitTimerRef.current);
+			}
+		};
+	}, [rateLimitSeconds]);
+
+	useEffect(() => {
+		return () => {
+			if (rateLimitTimerRef.current) {
+				clearTimeout(rateLimitTimerRef.current);
+			}
+		};
+	}, []);
+
 	const sendMessage = async (content: string) => {
-		if (!content.trim() || isLoading) return;
+		if (!content.trim() || isLoading || isRateLimited) return;
 
 		const userMessage: Message = {
 			id: Date.now().toString(),
@@ -170,6 +201,9 @@ export function AIChat({ className }: AIChatProps) {
 		setMessages((prev) => [...prev, userMessage]);
 		setInputValue("");
 		setIsLoading(true);
+
+		setIsRateLimited(true);
+		setRateLimitSeconds(5);
 
 		setSuggestedQuestions([]);
 
@@ -592,14 +626,20 @@ export function AIChat({ className }: AIChatProps) {
 				{/* Suggested Questions */}
 				{!isLoading && suggestedQuestions.length > 0 && (
 					<div
-						key={questionsKey} // Key for animation
+						key={questionsKey}
 						className={cn(
 							"px-4 py-2 border-t bg-muted/30 animate-in fade-in slide-in-from-bottom-2 duration-500",
-							isFullscreen && "max-w-4xl mx-auto w-full"
+							isFullscreen && "max-w-4xl mx-auto w-full",
+							isRateLimited && "opacity-60"
 						)}>
 						<div className="mb-2">
 							<p className="text-xs font-medium text-muted-foreground">
 								💡 Suggested questions:
+								{isRateLimited && (
+									<span className="ml-2 text-orange-500">
+										(Rate limited - {rateLimitSeconds}s)
+									</span>
+								)}
 							</p>
 						</div>
 						<div className="flex flex-wrap gap-1">
@@ -607,12 +647,19 @@ export function AIChat({ className }: AIChatProps) {
 								<Badge
 									key={`${questionsKey}-${question}-${index}`}
 									variant="secondary"
-									className="text-xs cursor-pointer hover:bg-secondary/80 transition-all duration-200 hover:scale-105 animate-in fade-in"
+									className={cn(
+										"text-xs transition-all duration-200 animate-in fade-in",
+										isRateLimited
+											? "cursor-not-allowed opacity-50"
+											: "cursor-pointer hover:bg-secondary/80 hover:scale-105"
+									)}
 									style={{
 										animationDelay: `${index * 100}ms`,
 										animationDuration: "300ms",
 									}}
-									onClick={() => handleSuggestedQuestion(question)}>
+									onClick={() =>
+										!isRateLimited && handleSuggestedQuestion(question)
+									}>
 									{question.length > 40
 										? question.substring(0, 40) + "..."
 										: question}
@@ -634,17 +681,40 @@ export function AIChat({ className }: AIChatProps) {
 							type="text"
 							value={inputValue}
 							onChange={(e) => setInputValue(e.target.value)}
-							placeholder="Ask about MultiSelect props, styling, integration..."
+							placeholder={
+								isRateLimited
+									? `Rate limited - wait ${rateLimitSeconds}s...`
+									: "Ask about MultiSelect props, styling, integration..."
+							}
 							className="flex-1 px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
-							disabled={isLoading}
+							disabled={isLoading || isRateLimited}
 						/>
 						<Button
 							type="submit"
 							size="sm"
-							disabled={!inputValue.trim() || isLoading}>
-							<Icons.zap className="h-4 w-4" />
+							disabled={!inputValue.trim() || isLoading || isRateLimited}
+							className={cn(
+								isRateLimited && "relative overflow-hidden",
+								"transition-all duration-200"
+							)}>
+							{isRateLimited ? (
+								<div className="flex items-center gap-1">
+									<Icons.clock className="h-4 w-4" />
+									<span className="text-xs font-mono">{rateLimitSeconds}</span>
+								</div>
+							) : (
+								<Icons.zap className="h-4 w-4" />
+							)}
 						</Button>
 					</form>
+					{isRateLimited && (
+						<div className="mt-2 text-xs text-muted-foreground text-center animate-in fade-in slide-in-from-bottom-1 duration-300">
+							⏱️ Rate limit active - you can send another message in{" "}
+							<span className="font-mono font-semibold text-orange-500">
+								{rateLimitSeconds}s
+							</span>
+						</div>
+					)}
 				</div>
 			</Card>
 		</div>
