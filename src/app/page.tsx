@@ -142,7 +142,6 @@ const projectTypesWithStyle = [
 const skillsWithDisabled = [
 	{ value: "html", label: "HTML", icon: Icons.code },
 	{ value: "css", label: "CSS", icon: Icons.wand },
-	{ value: "javascript", label: "JavaScript", icon: Icons.zap },
 	{
 		value: "typescript",
 		label: "TypeScript",
@@ -729,7 +728,6 @@ export default function Home() {
 		"javascript",
 	]);
 
-	// Локальные состояния для демонстрационных примеров
 	const [variantDemo, setVariantDemo] = useState<string[]>(["typescript"]);
 	const [animatedDemo, setAnimatedDemo] = useState<string[]>(["web-app"]);
 	const [responsiveDemo, setResponsiveDemo] = useState<string[]>([
@@ -790,7 +788,7 @@ export default function Home() {
 		if (!selectedMetrics.includes("revenue")) {
 			return [];
 		}
-		const q4Data = revenueData[3]; // Q4 data
+		const q4Data = revenueData[3];
 		return selectedDepartments.map((dept) => ({
 			name: companyDepartments.find((d) => d.value === dept)?.label || dept,
 			value: q4Data[dept as keyof typeof q4Data] || 0,
@@ -940,9 +938,9 @@ export default function Home() {
 	};
 
 	return (
-		<main className="min-h-screen bg-background">
+		<main className="min-h-screen bg-background overflow-x-hidden">
 			{/* Header */}
-			<div className="container mx-auto px-4 py-4">
+			<div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 w-full min-w-0">
 				<PageHeader className="text-center">
 					<PageHeaderHeading>Multi Select Component</PageHeaderHeading>
 					<PageHeaderDescription>
@@ -1036,9 +1034,9 @@ export default function Home() {
 				</div>
 
 				{/* Examples Grid */}
-				<div className="grid gap-6 mt-12">
+				<div className="grid gap-3 sm:gap-6 mt-12 w-full min-w-0">
 					{/* Form Integration */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							1. Form Integration with Validation
 						</h3>
@@ -1049,7 +1047,7 @@ export default function Home() {
 							<form
 								onSubmit={form.handleSubmit(onSubmit)}
 								className="space-y-6">
-								<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+								<div className="grid gap-3 sm:gap-6 grid-cols-1 md:grid-cols-2 w-full min-w-0">
 									<FormField
 										control={form.control}
 										name="frameworks"
@@ -1062,7 +1060,6 @@ export default function Home() {
 														onValueChange={field.onChange}
 														defaultValue={field.value}
 														placeholder="Select frameworks"
-														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -1085,8 +1082,6 @@ export default function Home() {
 														defaultValue={field.value || []}
 														placeholder="Select technologies"
 														variant="secondary"
-														maxCount={4}
-														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -1109,9 +1104,7 @@ export default function Home() {
 														defaultValue={field.value || []}
 														placeholder="Select your skills"
 														variant="inverted"
-														maxCount={5}
 														animationConfig={{ badgeAnimation: "pulse" }}
-														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -1133,7 +1126,6 @@ export default function Home() {
 														onValueChange={field.onChange}
 														defaultValue={field.value || []}
 														placeholder="Select departments"
-														autoSize={false}
 													/>
 												</FormControl>
 												<FormDescription>
@@ -1152,7 +1144,7 @@ export default function Home() {
 					</Card>
 
 					{/* Variants Example */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							2. Component Variants
 						</h3>
@@ -1160,8 +1152,8 @@ export default function Home() {
 							Different visual styles: default, secondary, destructive, and
 							inverted
 						</p>
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-							<div className="space-y-2">
+						<div className="grid gap-2 sm:gap-4 grid-cols-1 md:grid-cols-2 w-full min-w-0">
+							<div className="space-y-2 min-w-0">
 								<label className="text-sm font-medium">Default</label>
 								<MultiSelect
 									options={techStackOptions.slice(0, 4)}
@@ -1169,10 +1161,9 @@ export default function Home() {
 									defaultValue={["typescript"]}
 									placeholder="Default variant"
 									maxCount={2}
-									autoSize={false}
 								/>
 							</div>
-							<div className="space-y-2">
+							<div className="space-y-2 min-w-0">
 								<label className="text-sm font-medium">Secondary</label>
 								<MultiSelect
 									options={techStackOptions.slice(0, 4)}
@@ -1181,7 +1172,6 @@ export default function Home() {
 									variant="secondary"
 									placeholder="Secondary variant"
 									maxCount={2}
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1193,7 +1183,6 @@ export default function Home() {
 									variant="destructive"
 									placeholder="Destructive variant"
 									maxCount={2}
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1205,21 +1194,20 @@ export default function Home() {
 									variant="inverted"
 									placeholder="Inverted variant"
 									maxCount={2}
-									autoSize={false}
 								/>
 							</div>
 						</div>
 					</Card>
 
 					{/* Animation Example */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							3. Animation Configurations
 						</h3>
 						<p className="text-muted-foreground mb-4">
 							Different animation effects for badges and interactions
 						</p>
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 							<div className="space-y-2">
 								<label className="text-sm font-medium">Pulse Animation</label>
 								<MultiSelect
@@ -1231,7 +1219,6 @@ export default function Home() {
 										duration: 0.4,
 									}}
 									placeholder="Smooth pulse effect"
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1245,7 +1232,6 @@ export default function Home() {
 										duration: 0.3,
 									}}
 									placeholder="Fade effect"
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1259,14 +1245,13 @@ export default function Home() {
 										duration: 0.4,
 									}}
 									placeholder="Wiggle effect"
-									autoSize={false}
 								/>
 							</div>
 						</div>
 					</Card>
 
 					{/* Responsive Example */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							4. Responsive Behavior
 						</h3>
@@ -1286,6 +1271,7 @@ export default function Home() {
 									desktop: { maxCount: 4, compactMode: false },
 								}}
 								className="w-full"
+								autoSize={true}
 							/>
 							<p className="text-sm text-muted-foreground">
 								Resize your window to see different maxCount values: Mobile (1),
@@ -1298,7 +1284,7 @@ export default function Home() {
 					</Card>
 
 					{/* Grouped Options */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">5. Grouped Options</h3>
 						<p className="text-muted-foreground mb-4">
 							Options organized into categories with separators
@@ -1309,8 +1295,9 @@ export default function Home() {
 								onValueChange={setGroupedSelection}
 								defaultValue={["react", "nodejs"]}
 								placeholder="Select technologies"
-								className="w-full max-w-lg"
+								className="w-full max-w-full sm:max-w-lg"
 								maxCount={5}
+								autoSize={true}
 							/>
 							<p className="text-xs text-muted-foreground">
 								Selected: {groupedSelection.join(", ") || "None"}
@@ -1319,7 +1306,7 @@ export default function Home() {
 					</Card>
 
 					{/* Search and Configuration */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							6. Search and UI Configuration
 						</h3>
@@ -1343,7 +1330,6 @@ export default function Home() {
 											No frameworks found matching your search
 										</div>
 									}
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1357,14 +1343,13 @@ export default function Home() {
 									searchable={false}
 									hideSelectAll={true}
 									placeholder="Select without search"
-									autoSize={false}
 								/>
 							</div>
 						</div>
 					</Card>
 
 					{/* Layout Options */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							7. Layout and Sizing Options
 						</h3>
@@ -1383,12 +1368,17 @@ export default function Home() {
 										"design",
 										"product",
 										"marketing",
+										"sales",
 									]}
 									singleLine={true}
 									maxCount={8}
-									placeholder="Single line layout"
+									placeholder="Single line layout with scrolling"
 									className="w-full"
+									autoSize={true}
 								/>
+								<p className="text-xs text-muted-foreground">
+									Выберите больше опций, чтобы увидеть тонкую полосу прокрутки
+								</p>
 							</div>
 							<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 								<div className="space-y-2">
@@ -1399,9 +1389,9 @@ export default function Home() {
 										options={skillsWithDisabled.slice(0, 4)}
 										onValueChange={() => {}}
 										defaultValue={["html", "css"]}
-										autoSize={false}
-										minWidth="300px"
+										className="w-full min-w-0"
 										placeholder="Fixed width"
+										autoSize={true}
 									/>
 								</div>
 								<div className="space-y-2">
@@ -1421,7 +1411,7 @@ export default function Home() {
 					</Card>
 
 					{/* Custom Styling */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							8. Custom Styling and Colors
 						</h3>
@@ -1434,8 +1424,9 @@ export default function Home() {
 								onValueChange={setStyledDemo}
 								defaultValue={["web-app", "mobile-app"]}
 								placeholder="Select project types"
-								className="w-full max-w-lg"
+								className="w-full max-w-full sm:max-w-lg"
 								maxCount={5}
+								autoSize={true}
 							/>
 							<p className="text-sm text-muted-foreground">
 								Each option has custom colors and gradients defined in the style
@@ -1448,7 +1439,7 @@ export default function Home() {
 					</Card>
 
 					{/* Disabled States */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">9. Disabled States</h3>
 						<p className="text-muted-foreground mb-4">
 							Component-level and option-level disabled states
@@ -1463,7 +1454,6 @@ export default function Home() {
 									onValueChange={setDisabledDemo}
 									defaultValue={["html", "css"]}
 									placeholder="Some options disabled"
-									autoSize={false}
 								/>
 								<p className="text-xs text-muted-foreground">
 									Selected: {disabledDemo.join(", ") || "None"}
@@ -1479,14 +1469,13 @@ export default function Home() {
 									defaultValue={["typescript", "javascript"]}
 									disabled={true}
 									placeholder="Disabled component"
-									autoSize={false}
 								/>
 							</div>
 						</div>
 					</Card>
 
 					{/* Advanced Features */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							10. Advanced Features
 						</h3>
@@ -1502,7 +1491,6 @@ export default function Home() {
 									defaultValue={["react"]}
 									closeOnSelect={true}
 									placeholder="Closes after selection"
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1513,7 +1501,6 @@ export default function Home() {
 									defaultValue={["typescript"]}
 									modalPopover={true}
 									placeholder="Modal behavior"
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1540,14 +1527,13 @@ export default function Home() {
 									defaultValue={["ts1"]}
 									deduplicateOptions={false}
 									placeholder="Similar labels allowed"
-									autoSize={false}
 								/>
 							</div>
 						</div>
 					</Card>
 
 					{/* Imperative Methods */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							11. Imperative Methods (useRef)
 						</h3>
@@ -1561,9 +1547,10 @@ export default function Home() {
 								onValueChange={setImperativeSelection}
 								defaultValue={["react", "next.js"]}
 								placeholder="Controlled via ref"
-								className="w-full max-w-md"
+								className="w-full max-w-full sm:max-w-md"
+								autoSize={true}
 							/>
-							<div className="flex flex-wrap gap-2">
+							<div className="flex flex-wrap gap-1 sm:gap-2">
 								<Button size="sm" variant="outline" onClick={handleReset}>
 									<Icons.activity className="mr-1 h-3 w-3" />
 									Reset
@@ -1592,7 +1579,7 @@ export default function Home() {
 					</Card>
 
 					{/* Charts and Data Visualization */}
-					<Card className="p-6">
+					<Card className="p-3 sm:p-6 w-full min-w-0">
 						<h3 className="text-xl font-semibold mb-4">
 							12. Charts and Data Visualization
 						</h3>
@@ -1614,7 +1601,6 @@ export default function Home() {
 									variant="default"
 									maxCount={4}
 									className="w-full"
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1627,7 +1613,6 @@ export default function Home() {
 									variant="secondary"
 									maxCount={3}
 									className="w-full"
-									autoSize={false}
 								/>
 							</div>
 							<div className="space-y-2">
@@ -1640,15 +1625,14 @@ export default function Home() {
 									variant="inverted"
 									maxCount={2}
 									className="w-full"
-									autoSize={false}
 								/>
 							</div>
 						</div>
 
 						{/* Charts Grid */}
-						<div className="grid gap-6 lg:grid-cols-2">
+						<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
 							{/* Bar Chart */}
-							<Card className="p-4">
+							<Card className="p-2 sm:p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Monthly Sales by Department
 									{!selectedTimePeriods.includes("monthly") && (
@@ -1719,7 +1703,7 @@ export default function Home() {
 							</Card>
 
 							{/* Pie Chart */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Q4 Revenue Distribution
 									{!selectedMetrics.includes("revenue") && (
@@ -1737,14 +1721,15 @@ export default function Home() {
 													data={pieChartData}
 													cx="50%"
 													cy="50%"
-													outerRadius={100}
+													innerRadius={50}
+													outerRadius={80}
 													fill="#8884d8"
 													dataKey="value"
 													label={({ name, percent }: any) =>
 														`${name} ${((percent || 0) * 100).toFixed(0)}%`
 													}
-													labelLine={false}
-													className="outline-none">
+													labelLine={true}
+													className="outline-none text-xs">
 													{pieChartData.map((entry, index) => (
 														<Cell
 															key={`cell-${index}`}
@@ -1784,7 +1769,7 @@ export default function Home() {
 							</Card>
 
 							{/* Area Chart */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Quarterly Revenue Trends
 									{!selectedTimePeriods.includes("quarterly") && (
@@ -1861,7 +1846,7 @@ export default function Home() {
 							</Card>
 
 							{/* Line Chart */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Performance Metrics Comparison
 									{!selectedMetrics.includes("performance") && (
@@ -1955,7 +1940,7 @@ export default function Home() {
 							</Card>
 
 							{/* Radar Chart */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Team Skills Radar
 									{!selectedMetrics.includes("performance") && (
@@ -2046,7 +2031,7 @@ export default function Home() {
 							</Card>
 
 							{/* Treemap Chart */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Revenue Distribution by Teams
 									{!selectedMetrics.includes("revenue") && (
@@ -2111,7 +2096,7 @@ export default function Home() {
 								</li>
 							</ul>
 							<div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 rounded border-l-4 border-blue-400">
-								<p className="text-sm font-medium text-blue-800 dark:text-blue-200">
+								<p className="text-sm font-medium text-blue-800 dark:text-blue-200 break-words">
 									💡 Try different combinations: Select &ldquo;Revenue&rdquo; +
 									&ldquo;Quarterly&rdquo; for revenue trends, or
 									&ldquo;Performance&rdquo; + specific departments for
@@ -2133,7 +2118,7 @@ export default function Home() {
 
 						<div className="grid gap-6">
 							{/* LLM Model Selection */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									LLM Model Selection
 								</h4>
@@ -2153,7 +2138,7 @@ export default function Home() {
 							</Card>
 
 							{/* AI Tools Categories */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									AI Tools & Services
 								</h4>
@@ -2174,7 +2159,7 @@ export default function Home() {
 							</Card>
 
 							{/* Prompt Template Types */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Prompt Engineering Templates
 								</h4>
@@ -2195,7 +2180,7 @@ export default function Home() {
 							</Card>
 
 							{/* RAG Data Sources */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">RAG Data Sources</h4>
 								<MultiSelect
 									options={ragDataSources}
@@ -2218,7 +2203,7 @@ export default function Home() {
 							</Card>
 
 							{/* AI Model Parameters */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Model Parameters Configuration
 								</h4>
@@ -2239,7 +2224,7 @@ export default function Home() {
 							</Card>
 
 							{/* AI Agent Capabilities */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									AI Agent Capabilities
 								</h4>
@@ -2264,7 +2249,7 @@ export default function Home() {
 							</Card>
 
 							{/* Multimodal AI Features */}
-							<Card className="p-4">
+							<Card className="p-4 w-full min-w-0">
 								<h4 className="text-lg font-medium mb-4">
 									Multimodal AI Features
 								</h4>
@@ -2321,7 +2306,7 @@ export default function Home() {
 								</li>
 							</ul>
 							<div className="mt-3 p-3 bg-purple-50 dark:bg-purple-950 rounded border-l-4 border-purple-400">
-								<p className="text-sm font-medium text-purple-800 dark:text-purple-200">
+								<p className="text-sm font-medium text-purple-800 dark:text-purple-200 break-words">
 									🤖 Perfect for AI dashboards, chatbot configuration, prompt
 									engineering tools, MLOps workflows, and multimodal AI
 									applications!
@@ -2427,9 +2412,9 @@ export default function Home() {
 									component
 								</p>
 							</div>
-							<div className="relative">
-								<pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
-									<code>{`import { MultiSelect } from "@/components/multi-select";
+							<div className="relative overflow-hidden">
+								<pre className="bg-muted p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm max-w-full">
+									<code className="block whitespace-pre-wrap break-words sm:whitespace-pre">{`import { MultiSelect } from "@/components/multi-select";
 import { useState } from "react";
 
 const options = [
@@ -2440,7 +2425,8 @@ const options = [
 ];
 
 export function MyComponent() {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = 
+    useState<string[]>([]);
 
   return (
     <MultiSelect
@@ -2454,7 +2440,7 @@ export function MyComponent() {
 								<Button
 									size="sm"
 									variant="outline"
-									className="absolute top-2 right-2"
+									className="absolute top-1 right-1 sm:top-2 sm:right-2 h-8 w-8 sm:h-auto sm:w-auto p-1 sm:p-2"
 									onClick={() => {
 										navigator.clipboard
 											.writeText(`import { MultiSelect } from "@/components/multi-select";
@@ -2482,8 +2468,8 @@ export function MyComponent() {
 											description: "You can now paste it into your project",
 										});
 									}}>
-									<Copy className="h-4 w-4" />
-									Copy
+									<Copy className="h-3 w-3 sm:h-4 sm:w-4" />
+									<span className="hidden sm:inline ml-1">Copy</span>
 								</Button>
 							</div>
 						</div>

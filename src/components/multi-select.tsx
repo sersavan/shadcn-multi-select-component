@@ -192,7 +192,7 @@ interface MultiSelectProps
 	/**
 	 * If true, allows the component to grow and shrink with its content.
 	 * If false, uses fixed width behavior.
-	 * Optional, defaults to true.
+	 * Optional, defaults to false.
 	 */
 	autoSize?: boolean;
 
@@ -321,7 +321,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			hideSelectAll = false,
 			searchable = true,
 			emptyIndicator,
-			autoSize = true,
+			autoSize = false,
 			singleLine = false,
 			popoverClassName,
 			disabled = false,
@@ -656,7 +656,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 		}, [defaultValue, selectedValues, arraysEqual, resetOnDefaultValueChange]);
 
 		const getWidthConstraints = () => {
-			const defaultMinWidth = screenSize === "mobile" ? "250px" : "300px";
+			const defaultMinWidth = screenSize === "mobile" ? "0px" : "200px";
 			const effectiveMinWidth = minWidth || defaultMinWidth;
 			const effectiveMaxWidth = maxWidth || "100%";
 			return {
@@ -703,13 +703,15 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 									className={cn(
 										"flex items-center gap-1",
 										singleLine
-											? "overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+											? "overflow-x-auto multiselect-singleline-scroll"
 											: "flex-wrap",
 										responsiveSettings.compactMode && "gap-0.5"
 									)}
 									style={
 										singleLine
-											? { msOverflowStyle: "none", scrollbarWidth: "none" }
+											? {
+													paddingBottom: "4px",
+											  }
 											: {}
 									}>
 									{selectedValues
@@ -847,7 +849,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					className={cn(
 						"w-auto p-0",
 						getPopoverAnimationClass(),
-						screenSize === "mobile" && "w-[90vw] max-w-sm",
+						screenSize === "mobile" && "w-[85vw] max-w-[280px]",
 						screenSize === "tablet" && "w-[70vw] max-w-md",
 						screenSize === "desktop" && "min-w-[300px]",
 						popoverClassName
@@ -855,7 +857,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					style={{
 						animationDuration: `${animationConfig?.duration || animation}s`,
 						animationDelay: `${animationConfig?.delay || 0}s`,
-						maxWidth: `min(${widthConstraints.maxWidth}, 90vw)`,
+						maxWidth: `min(${widthConstraints.maxWidth}, 85vw)`,
 						maxHeight: screenSize === "mobile" ? "70vh" : "60vh",
 						touchAction: "manipulation",
 					}}
