@@ -343,6 +343,15 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 
 		const prevDefaultValueRef = React.useRef<string[]>(defaultValue);
 
+		const isGroupedOptions = React.useCallback(
+			(
+				opts: MultiSelectOption[] | MultiSelectGroup[]
+			): opts is MultiSelectGroup[] => {
+				return opts.length > 0 && "heading" in opts[0];
+			},
+			[]
+		);
+
 		const arraysEqual = React.useCallback(
 			(a: string[], b: string[]): boolean => {
 				if (a.length !== b.length) return false;
@@ -497,12 +506,10 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 		const getAllOptions = React.useCallback((): MultiSelectOption[] => {
 			if (options.length === 0) return [];
 			let allOptions: MultiSelectOption[];
-			if ("heading" in options[0]) {
-				allOptions = (options as MultiSelectGroup[]).flatMap(
-					(group) => group.options
-				);
+			if (isGroupedOptions(options)) {
+				allOptions = options.flatMap((group) => group.options);
 			} else {
-				allOptions = options as MultiSelectOption[];
+				allOptions = options;
 			}
 			const valueSet = new Set<string>();
 			const duplicates: string[] = [];
@@ -534,7 +541,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 				);
 			}
 			return deduplicateOptions ? uniqueOptions : allOptions;
-		}, [options, deduplicateOptions]);
+		}, [options, deduplicateOptions, isGroupedOptions]);
 
 		const getOptionByValue = React.useCallback(
 			(value: string): MultiSelectOption | undefined => {
@@ -552,9 +559,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 		const filteredOptions = React.useMemo(() => {
 			if (!searchable || !searchValue) return options;
 			if (options.length === 0) return [];
-			if ("heading" in options[0]) {
-				const groups = options as MultiSelectGroup[];
-				return groups
+			if (isGroupedOptions(options)) {
+				return options
 					.map((group) => ({
 						...group,
 						options: group.options.filter(
@@ -567,13 +573,12 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					}))
 					.filter((group) => group.options.length > 0);
 			}
-			const simpleOptions = options as MultiSelectOption[];
-			return simpleOptions.filter(
+			return options.filter(
 				(option) =>
 					option.label.toLowerCase().includes(searchValue.toLowerCase()) ||
 					option.value.toLowerCase().includes(searchValue.toLowerCase())
 			);
-		}, [options, searchValue, searchable]);
+		}, [options, searchValue, searchable, isGroupedOptions]);
 
 		const handleInputKeyDown = (
 			event: React.KeyboardEvent<HTMLInputElement>
@@ -900,8 +905,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 									</CommandItem>
 								</CommandGroup>
 							)}
-							{filteredOptions.length > 0 && "heading" in filteredOptions[0] ? (
-								(filteredOptions as MultiSelectGroup[]).map((group) => (
+							{isGroupedOptions(filteredOptions) ? (
+								filteredOptions.map((group) => (
 									<CommandGroup key={group.heading} heading={group.heading}>
 										{group.options.map((option) => {
 											const isSelected = selectedValues.includes(option.value);
@@ -934,7 +939,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 								))
 							) : (
 								<CommandGroup>
-									{(filteredOptions as MultiSelectOption[]).map((option) => {
+									{filteredOptions.map((option) => {
 										const isSelected = selectedValues.includes(option.value);
 										return (
 											<CommandItem
