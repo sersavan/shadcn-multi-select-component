@@ -2233,7 +2233,7 @@ export default function Home() {
 													<MultiSelect
 														options={projectTypesWithStyle.slice(0, 3)}
 														onValueChange={setAnimatedDemo}
-														defaultValue={["web-app"]}
+														defaultValue={["desktop-app"]}
 														animationConfig={{
 															badgeAnimation: "wiggle",
 															duration: 0.4,
@@ -2253,7 +2253,7 @@ export default function Home() {
 													<MultiSelect
 														options={projectTypesWithStyle.slice(0, 3)}
 														onValueChange={() => {}}
-														defaultValue={["api-service"]}
+														defaultValue={["web-app"]}
 														animationConfig={{
 															badgeAnimation: "bounce",
 															duration: 0.5,
@@ -5480,7 +5480,7 @@ export default function Home() {
 														autoSize
 													</code>
 													<p className="text-red-600 dark:text-red-400 mt-1">
-														Auto width behavior (default: true)
+														Auto width behavior (default: false)
 													</p>
 												</div>
 												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
