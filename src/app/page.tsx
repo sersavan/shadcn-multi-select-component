@@ -1377,7 +1377,7 @@ export default function Home() {
 									autoSize={true}
 								/>
 								<p className="text-xs text-muted-foreground">
-									Выберите больше опций, чтобы увидеть тонкую полосу прокрутки
+									Select more options to see the thin scroll bar
 								</p>
 							</div>
 							<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
