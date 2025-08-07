@@ -1599,1451 +1599,3681 @@ export default function Home() {
 				</div>
 
 				{/* Examples Grid */}
-				<div className="grid gap-3 sm:gap-6 mt-12 w-full min-w-0">
-					{/* Form Integration */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							1. Form Integration with Validation
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							React Hook Form integration with Zod validation
-						</p>
-						<Form {...form}>
-							<form
-								onSubmit={form.handleSubmit(onSubmit)}
-								className="space-y-6">
-								<div className="grid gap-3 sm:gap-6 grid-cols-1 md:grid-cols-2 w-full min-w-0">
-									<FormField
-										control={form.control}
-										name="frameworks"
-										render={({ field }) => (
-											<FormItem>
-												<FormLabel>Required Frameworks *</FormLabel>
-												<FormControl>
+				<div className="grid gap-6 mt-12 w-full min-w-0">
+					{/* 1. Form Integration - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm font-medium mb-4">
+									<Icons.wand className="h-4 w-4" />
+									Professional Form Integration
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-300 dark:to-fuchsia-300 bg-clip-text text-transparent mb-4">
+									Advanced Form Validation
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Professional form handling with React Hook Form and Zod
+									validation
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Building robust forms is essential for professional
+										applications. Our MultiSelect component seamlessly
+										integrates with{" "}
+										<span className="font-semibold text-foreground">
+											React Hook Form
+										</span>
+										and{" "}
+										<span className="font-semibold text-foreground">
+											Zod validation
+										</span>{" "}
+										to provide type-safe, validated user inputs with excellent
+										developer experience.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-violet-50/50 to-purple-50/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.check className="h-5 w-5 text-violet-500" />
+											Complete Form Example
+										</h4>
+										<p className="text-sm text-muted-foreground mb-6">
+											This form demonstrates validation, error handling, and
+											successful submission workflows:
+										</p>
+
+										<Form {...form}>
+											<form
+												onSubmit={form.handleSubmit(onSubmit)}
+												className="space-y-6">
+												<div className="grid gap-4 grid-cols-1 md:grid-cols-2 w-full min-w-0">
+													<FormField
+														control={form.control}
+														name="frameworks"
+														render={({ field }) => (
+															<FormItem>
+																<FormLabel className="flex items-center gap-2">
+																	<Icons.code className="h-4 w-4 text-violet-500" />
+																	Required Frameworks *
+																</FormLabel>
+																<FormControl>
+																	<MultiSelect
+																		options={frameworksList}
+																		onValueChange={field.onChange}
+																		defaultValue={field.value}
+																		placeholder="Select frameworks"
+																		variant="default"
+																		animationConfig={{
+																			badgeAnimation: "bounce",
+																			popoverAnimation: "scale",
+																		}}
+																	/>
+																</FormControl>
+																<FormDescription>
+																	Choose your preferred frameworks (required
+																	field)
+																</FormDescription>
+																<FormMessage />
+															</FormItem>
+														)}
+													/>
+													<FormField
+														control={form.control}
+														name="techStack"
+														render={({ field }) => (
+															<FormItem>
+																<FormLabel className="flex items-center gap-2">
+																	<Icons.zap className="h-4 w-4 text-purple-500" />
+																	Tech Stack
+																</FormLabel>
+																<FormControl>
+																	<MultiSelect
+																		options={techStackOptions}
+																		onValueChange={field.onChange}
+																		defaultValue={field.value || []}
+																		placeholder="Select technologies"
+																		variant="secondary"
+																		animationConfig={{
+																			badgeAnimation: "pulse",
+																			popoverAnimation: "fade",
+																		}}
+																	/>
+																</FormControl>
+																<FormDescription>
+																	Additional technologies you use
+																</FormDescription>
+																<FormMessage />
+															</FormItem>
+														)}
+													/>
+													<FormField
+														control={form.control}
+														name="skills"
+														render={({ field }) => (
+															<FormItem>
+																<FormLabel className="flex items-center gap-2">
+																	<Icons.star className="h-4 w-4 text-fuchsia-500" />
+																	Skills
+																</FormLabel>
+																<FormControl>
+																	<MultiSelect
+																		options={skillsWithDisabled}
+																		onValueChange={field.onChange}
+																		defaultValue={field.value || []}
+																		placeholder="Select your skills"
+																		variant="inverted"
+																		animationConfig={{
+																			badgeAnimation: "wiggle",
+																			optionHoverAnimation: "glow",
+																		}}
+																	/>
+																</FormControl>
+																<FormDescription>
+																	Your technical skills (some may be disabled)
+																</FormDescription>
+																<FormMessage />
+															</FormItem>
+														)}
+													/>
+													<FormField
+														control={form.control}
+														name="departments"
+														render={({ field }) => (
+															<FormItem>
+																<FormLabel className="flex items-center gap-2">
+																	<Icons.users className="h-4 w-4 text-indigo-500" />
+																	Departments
+																</FormLabel>
+																<FormControl>
+																	<MultiSelect
+																		options={companyDepartments}
+																		onValueChange={field.onChange}
+																		defaultValue={field.value || []}
+																		placeholder="Select departments"
+																		variant="default"
+																		animationConfig={{
+																			badgeAnimation: "fade",
+																			popoverAnimation: "slide",
+																		}}
+																	/>
+																</FormControl>
+																<FormDescription>
+																	Departments you work with
+																</FormDescription>
+																<FormMessage />
+															</FormItem>
+														)}
+													/>
+												</div>
+												<div className="pt-4">
+													<Button
+														type="submit"
+														className="w-full bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700">
+														<Icons.check className="mr-2 h-4 w-4" />
+														Submit Form
+													</Button>
+												</div>
+											</form>
+										</Form>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-violet-100/50 to-purple-100/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.code className="h-5 w-5 text-violet-500" />
+											Integration Benefits
+										</h4>
+										<ul className="text-sm text-muted-foreground space-y-2">
+											<li className="flex items-start gap-2">
+												<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+												<span>
+													<strong>Type Safety:</strong> Full TypeScript support
+													with Zod schema validation
+												</span>
+											</li>
+											<li className="flex items-start gap-2">
+												<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+												<span>
+													<strong>Error Handling:</strong> Automatic validation
+													messages and error states
+												</span>
+											</li>
+											<li className="flex items-start gap-2">
+												<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+												<span>
+													<strong>Performance:</strong> Optimized re-renders
+													with React Hook Form
+												</span>
+											</li>
+											<li className="flex items-start gap-2">
+												<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+												<span>
+													<strong>Accessibility:</strong> Built-in ARIA labels
+													and keyboard navigation
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
+
+					{/* 2. Component Variants - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 border-rose-200 dark:border-rose-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded-full text-sm font-medium mb-4">
+									<Icons.wand className="h-4 w-4" />
+									Visual Design System
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-700 via-pink-600 to-red-600 dark:from-rose-400 dark:via-pink-300 dark:to-red-300 bg-clip-text text-transparent mb-4">
+									Component Variants
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Explore different visual styles to match your design system
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Our MultiSelect component comes with multiple{" "}
+										<span className="font-semibold text-foreground">
+											pre-built variants
+										</span>
+										that seamlessly integrate with your design system. Each
+										variant serves different use cases and visual hierarchies in
+										your application interface.
+									</p>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-rose-500" />
+												Primary Variants
+											</h4>
+											<div className="space-y-4">
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+														Default
+													</label>
+													<MultiSelect
+														options={techStackOptions.slice(0, 4)}
+														onValueChange={() => {}}
+														defaultValue={["typescript"]}
+														placeholder="Primary interaction style"
+														maxCount={2}
+														animationConfig={{
+															badgeAnimation: "bounce",
+															popoverAnimation: "scale",
+														}}
+													/>
+													<p className="text-xs text-muted-foreground">
+														Perfect for main actions and primary selections
+													</p>
+												</div>
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-3 h-3 bg-gray-500 rounded-full"></span>
+														Secondary
+													</label>
+													<MultiSelect
+														options={techStackOptions.slice(0, 4)}
+														onValueChange={() => {}}
+														defaultValue={["javascript"]}
+														variant="secondary"
+														placeholder="Supporting interaction style"
+														maxCount={2}
+														animationConfig={{
+															badgeAnimation: "pulse",
+															popoverAnimation: "fade",
+														}}
+													/>
+													<p className="text-xs text-muted-foreground">
+														Great for secondary actions and supplementary data
+													</p>
+												</div>
+											</div>
+										</div>
+
+										<div className="bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.shield className="h-5 w-5 text-pink-500" />
+												Special Variants
+											</h4>
+											<div className="space-y-4">
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-3 h-3 bg-red-500 rounded-full"></span>
+														Destructive
+													</label>
+													<MultiSelect
+														options={techStackOptions.slice(0, 4)}
+														onValueChange={() => {}}
+														defaultValue={["python"]}
+														variant="destructive"
+														placeholder="Warning and danger states"
+														maxCount={2}
+														animationConfig={{
+															badgeAnimation: "wiggle",
+															popoverAnimation: "slide",
+														}}
+													/>
+													<p className="text-xs text-muted-foreground">
+														Use for critical actions and error states
+													</p>
+												</div>
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-3 h-3 bg-slate-800 dark:bg-slate-200 rounded-full"></span>
+														Inverted
+													</label>
+													<MultiSelect
+														options={techStackOptions.slice(0, 4)}
+														onValueChange={setVariantDemo}
+														defaultValue={["typescript"]}
+														variant="inverted"
+														placeholder="High contrast style"
+														maxCount={2}
+														animationConfig={{
+															badgeAnimation: "fade",
+															popoverAnimation: "flip",
+														}}
+													/>
+													<p className="text-xs text-muted-foreground">
+														Perfect for dark backgrounds and emphasis
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-rose-100/50 to-pink-100/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl border border-rose-200/50 dark:border-rose-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.star className="h-5 w-5 text-rose-500" />
+											Design System Integration
+										</h4>
+										<div className="grid md:grid-cols-2 gap-4 text-sm">
+											<div>
+												<h5 className="font-medium text-foreground mb-2">
+													When to Use Each Variant:
+												</h5>
+												<ul className="space-y-1 text-muted-foreground">
+													<li>
+														<strong>Default:</strong> Primary forms, main
+														content areas
+													</li>
+													<li>
+														<strong>Secondary:</strong> Sidebars, optional
+														settings
+													</li>
+													<li>
+														<strong>Destructive:</strong> Delete actions, error
+														handling
+													</li>
+													<li>
+														<strong>Inverted:</strong> Hero sections, dark
+														themes
+													</li>
+												</ul>
+											</div>
+											<div>
+												<h5 className="font-medium text-foreground mb-2">
+													Customization Options:
+												</h5>
+												<ul className="space-y-1 text-muted-foreground">
+													<li>• CSS variables for color overrides</li>
+													<li>• Tailwind classes for spacing</li>
+													<li>• Animation configurations</li>
+													<li>• Custom badge styling</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
+
+					{/* 3. Animation Configurations - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
+									<Icons.zap className="h-4 w-4" />
+									Interactive Animations
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-700 via-yellow-600 to-orange-600 dark:from-amber-400 dark:via-yellow-300 dark:to-orange-300 bg-clip-text text-transparent mb-4">
+									Animation Configurations
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Bring your interface to life with smooth, performant
+									animations
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Animations enhance user experience by providing{" "}
+										<span className="font-semibold text-foreground">
+											visual feedback
+										</span>
+										and creating{" "}
+										<span className="font-semibold text-foreground">
+											delightful interactions
+										</span>
+										. Our MultiSelect component offers a comprehensive animation
+										system with customizable timing, easing, and effects.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+											<Icons.activity className="h-5 w-5 text-amber-500" />
+											Badge Animation Showcase
+										</h4>
+
+										<div className="grid gap-6 md:grid-cols-2">
+											<div className="space-y-4">
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+														Pulse Animation
+													</label>
+													<MultiSelect
+														options={projectTypesWithStyle.slice(0, 3)}
+														onValueChange={() => {}}
+														defaultValue={["web-app"]}
+														animationConfig={{
+															badgeAnimation: "pulse",
+															duration: 0.4,
+														}}
+														placeholder="Rhythmic breathing effect"
+													/>
+													<p className="text-xs text-muted-foreground">
+														Creates a gentle pulsing effect that draws attention
+													</p>
+												</div>
+
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+														Fade Animation
+													</label>
+													<MultiSelect
+														options={projectTypesWithStyle.slice(0, 3)}
+														onValueChange={() => {}}
+														defaultValue={["mobile-app"]}
+														animationConfig={{
+															badgeAnimation: "fade",
+															duration: 0.3,
+														}}
+														placeholder="Smooth opacity transitions"
+													/>
+													<p className="text-xs text-muted-foreground">
+														Elegant fade-in/fade-out for subtle interactions
+													</p>
+												</div>
+											</div>
+
+											<div className="space-y-4">
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+														Wiggle Animation
+													</label>
+													<MultiSelect
+														options={projectTypesWithStyle.slice(0, 3)}
+														onValueChange={setAnimatedDemo}
+														defaultValue={["web-app"]}
+														animationConfig={{
+															badgeAnimation: "wiggle",
+															duration: 0.4,
+														}}
+														placeholder="Playful wiggle effect"
+													/>
+													<p className="text-xs text-muted-foreground">
+														Fun shake animation for interactive feedback
+													</p>
+												</div>
+
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-2 h-2 bg-red-500 rounded-full"></span>
+														Bounce Animation
+													</label>
+													<MultiSelect
+														options={projectTypesWithStyle.slice(0, 3)}
+														onValueChange={() => {}}
+														defaultValue={["api-service"]}
+														animationConfig={{
+															badgeAnimation: "bounce",
+															duration: 0.5,
+														}}
+														placeholder="Energetic bounce effect"
+													/>
+													<p className="text-xs text-muted-foreground">
+														Spring-like animation for dynamic interactions
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<blockquote className="border-l-4 border-amber-500 pl-6 italic text-muted-foreground my-6 bg-amber-50/50 dark:bg-amber-950/20 py-4 rounded-r-lg">
+										&ldquo;Animation is not the art of drawings that move but
+										the art of movements that are drawn.&rdquo; - Norman McLaren
+									</blockquote>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-amber-500" />
+												Performance Features
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Hardware Accelerated:</strong> Uses CSS
+														transforms for smooth 60fps animations
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Reduced Motion:</strong> Respects
+														user&apos;s accessibility preferences
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Memory Efficient:</strong> Minimal impact on
+														application performance
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.star className="h-5 w-5 text-orange-500" />
+												Animation Types
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Badge Animations:
+													</strong>
+													<div className="ml-2 mt-1">
+														pulse, fade, wiggle, bounce, slide
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Popover Animations:
+													</strong>
+													<div className="ml-2 mt-1">
+														scale, slide, fade, flip
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Hover Effects:
+													</strong>
+													<div className="ml-2 mt-1">
+														highlight, scale, glow
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-amber-100/50 to-yellow-100/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-amber-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Best Practices
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Use animations purposefully to enhance user
+													experience, not distract from it. Consider your
+													application&apos;s context and user needs when
+													choosing animation styles.
+												</p>
+												<div className="grid md:grid-cols-2 gap-4 text-sm">
+													<div>
+														<strong className="text-foreground">Do:</strong>
+														<ul className="ml-2 mt-1 text-muted-foreground">
+															<li>• Use subtle animations for feedback</li>
+															<li>• Maintain consistent timing</li>
+															<li>• Test on slower devices</li>
+														</ul>
+													</div>
+													<div>
+														<strong className="text-foreground">Avoid:</strong>
+														<ul className="ml-2 mt-1 text-muted-foreground">
+															<li>• Excessive or distracting effects</li>
+															<li>• Long animation durations</li>
+															<li>• Ignoring accessibility settings</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
+
+					{/* 4. Responsive Behavior - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 border-green-200 dark:border-green-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium mb-4">
+									<Icons.smartphone className="h-4 w-4" />
+									Adaptive Design
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 dark:from-green-400 dark:via-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-4">
+									Responsive Behavior
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Seamlessly adapts to any screen size with intelligent layout
+									optimization
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										In today&apos;s multi-device world,{" "}
+										<span className="font-semibold text-foreground">
+											responsive design
+										</span>
+										is crucial. Our MultiSelect component automatically adapts
+										its behavior based on screen size, ensuring optimal user
+										experience across{" "}
+										<span className="font-semibold text-foreground">
+											mobile phones
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											tablets
+										</span>
+										, and{" "}
+										<span className="font-semibold text-foreground">
+											desktop screens
+										</span>
+										.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.monitor className="h-5 w-5 text-green-500" />
+											Live Responsive Demo
+										</h4>
+										<p className="text-sm text-muted-foreground mb-6">
+											Try resizing your browser window to see how the component
+											adapts its maxCount and layout behavior:
+										</p>
+
+										<div className="space-y-4">
+											<MultiSelect
+												options={companyDepartments}
+												onValueChange={setResponsiveDemo}
+												defaultValue={["engineering", "design"]}
+												placeholder="Select departments"
+												responsive={{
+													mobile: { maxCount: 1, compactMode: true },
+													tablet: { maxCount: 2, compactMode: false },
+													desktop: { maxCount: 4, compactMode: false },
+												}}
+												className="w-full"
+												autoSize={true}
+												animationConfig={{
+													badgeAnimation: "pulse",
+													popoverAnimation: "scale",
+												}}
+											/>
+
+											<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-green-200/50 dark:border-green-700/50">
+													<div className="flex items-center gap-2 mb-2">
+														<Icons.smartphone className="h-4 w-4 text-green-500" />
+														<span className="font-medium text-foreground">
+															Mobile
+														</span>
+														<span className="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-1 rounded">
+															≤ 768px
+														</span>
+													</div>
+													<p className="text-xs text-muted-foreground">
+														maxCount: 1, Compact mode enabled
+													</p>
+												</div>
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50">
+													<div className="flex items-center gap-2 mb-2">
+														<Icons.monitor className="h-4 w-4 text-emerald-500" />
+														<span className="font-medium text-foreground">
+															Tablet
+														</span>
+														<span className="text-xs bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 px-2 py-1 rounded">
+															769-1024px
+														</span>
+													</div>
+													<p className="text-xs text-muted-foreground">
+														maxCount: 2, Standard layout
+													</p>
+												</div>
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-teal-200/50 dark:border-teal-700/50">
+													<div className="flex items-center gap-2 mb-2">
+														<Icons.monitor className="h-4 w-4 text-teal-500" />
+														<span className="font-medium text-foreground">
+															Desktop
+														</span>
+														<span className="text-xs bg-teal-100 dark:bg-teal-900 text-teal-700 dark:text-teal-300 px-2 py-1 rounded">
+															≥ 1025px
+														</span>
+													</div>
+													<p className="text-xs text-muted-foreground">
+														maxCount: 4, Full layout
+													</p>
+												</div>
+											</div>
+
+											<div className="mt-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200/50 dark:border-green-700/50">
+												<p className="text-sm font-medium text-green-800 dark:text-green-200">
+													Current Selection:{" "}
+													{responsiveDemo.join(", ") || "None selected"}
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-green-500" />
+												Responsive Features
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Dynamic maxCount:</strong> Automatically
+														adjusts based on screen size
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Compact Mode:</strong> Optimized layout for
+														mobile devices
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Touch Friendly:</strong> Larger touch
+														targets on mobile
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>CSS Breakpoints:</strong> Standard
+														responsive breakpoints
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-green-50/50 to-teal-50/50 dark:from-green-950/20 dark:to-teal-950/20 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.star className="h-5 w-5 text-emerald-500" />
+												Configuration Options
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Breakpoint Controls:
+													</strong>
+													<div className="ml-2 mt-1">
+														mobile, tablet, desktop configurations
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Layout Modes:
+													</strong>
+													<div className="ml-2 mt-1">
+														compact, standard, expanded
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Auto Sizing:
+													</strong>
+													<div className="ml-2 mt-1">
+														Dynamic width based on content
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-green-100/50 to-emerald-100/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Mobile-First Approach
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Our responsive system follows mobile-first principles,
+													starting with optimized mobile experience and
+													progressively enhancing for larger screens. This
+													ensures excellent performance across all devices.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">
+														Key Benefits:
+													</strong>{" "}
+													Faster mobile loading, better touch interactions,
+													improved accessibility, and consistent behavior across
+													device types.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
+
+					{/* 5. Grouped Options - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
+									<Icons.star className="h-4 w-4" />
+									Organized Structure
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-300 bg-clip-text text-transparent mb-4">
+									Grouped Options
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Organize complex option sets into logical categories with
+									visual separators
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										When dealing with large option sets,{" "}
+										<span className="font-semibold text-foreground">
+											logical grouping
+										</span>
+										becomes essential for user experience. Our grouped options
+										feature organizes related items into
+										<span className="font-semibold text-foreground">
+											categories
+										</span>{" "}
+										with clear visual separators, making it easier for users to
+										find and select relevant options.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.code className="h-5 w-5 text-blue-500" />
+											Technology Stack Selector
+										</h4>
+										<p className="text-sm text-muted-foreground mb-6">
+											Choose from categorized technology options to build your
+											stack:
+										</p>
+
+										<div className="space-y-4">
+											<MultiSelect
+												options={categorizedOptions}
+												onValueChange={setGroupedSelection}
+												defaultValue={["react", "nodejs"]}
+												placeholder="Select technologies"
+												className="w-full max-w-full sm:max-w-lg"
+												maxCount={5}
+												autoSize={true}
+												animationConfig={{
+													badgeAnimation: "slide",
+													popoverAnimation: "fade",
+												}}
+											/>
+
+											<div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200/50 dark:border-blue-700/50">
+												<p className="text-sm font-medium text-blue-800 dark:text-blue-200">
+													Selected Stack:{" "}
+													{groupedSelection.join(", ") || "None selected"}
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-blue-500" />
+												Grouping Benefits
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Logical Organization:</strong> Related
+														options grouped together
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Visual Separators:</strong> Clear
+														distinction between categories
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Faster Navigation:</strong> Users find
+														options more quickly
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Scalable Structure:</strong> Handles large
+														option sets efficiently
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.star className="h-5 w-5 text-indigo-500" />
+												Category Structure
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">Frontend:</strong>
+													<div className="ml-2 mt-1 text-xs">
+														React, Vue, Angular, Svelte
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">Backend:</strong>
+													<div className="ml-2 mt-1 text-xs">
+														Node.js, Python, Java, Go
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">Database:</strong>
+													<div className="ml-2 mt-1 text-xs">
+														PostgreSQL, MongoDB, Redis
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">Cloud:</strong>
+													<div className="ml-2 mt-1 text-xs">
+														AWS, Azure, Google Cloud
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-blue-100/50 to-indigo-100/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-blue-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Implementation Strategy
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Groups are defined in the options data structure using
+													separators or category labels. The component
+													automatically renders visual dividers and maintains
+													group integrity during search operations.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">Pro Tip:</strong>{" "}
+													Use consistent naming conventions for your groups and
+													consider alphabetical ordering within each category
+													for optimal user experience.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
+
+					{/* 6. Search and UI Configuration - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 dark:from-cyan-950/30 dark:via-sky-950/30 dark:to-blue-950/30 border-cyan-200 dark:border-cyan-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-full text-sm font-medium mb-4">
+									<Icons.search className="h-4 w-4" />
+									Search & Discovery
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-700 via-sky-600 to-blue-600 dark:from-cyan-400 dark:via-sky-300 dark:to-blue-300 bg-clip-text text-transparent mb-4">
+									Search and UI Configuration
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Powerful search capabilities with customizable UI controls and
+									empty states
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Efficient{" "}
+										<span className="font-semibold text-foreground">
+											search functionality
+										</span>{" "}
+										is crucial for user experience when dealing with extensive
+										option lists. Our component provides
+										<span className="font-semibold text-foreground">
+											real-time filtering
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											select all controls
+										</span>
+										, and
+										<span className="font-semibold text-foreground">
+											customizable empty states
+										</span>
+										to create intuitive selection interfaces.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-cyan-50/50 to-sky-50/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.search className="h-5 w-5 text-cyan-500" />
+											Search Configuration Comparison
+										</h4>
+										<p className="text-sm text-muted-foreground mb-6">
+											Compare different search and UI configurations side by
+											side:
+										</p>
+
+										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+											<div className="space-y-4">
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
+													<div className="flex items-center gap-2 mb-3">
+														<Icons.search className="h-4 w-4 text-cyan-500" />
+														<span className="font-medium text-foreground text-sm">
+															Full Search Experience
+														</span>
+													</div>
 													<MultiSelect
 														options={frameworksList}
-														onValueChange={field.onChange}
-														defaultValue={field.value}
-														placeholder="Select frameworks"
+														onValueChange={() => {}}
+														defaultValue={["react"]}
+														searchable={true}
+														hideSelectAll={false}
+														placeholder="Search frameworks"
+														emptyIndicator={
+															<div className="text-center p-4 text-muted-foreground">
+																<Icons.search className="h-8 w-8 mx-auto mb-2 text-muted-foreground/50" />
+																<p className="text-sm">
+																	No frameworks found matching your search
+																</p>
+															</div>
+														}
+														animationConfig={{
+															badgeAnimation: "bounce",
+															popoverAnimation: "slide",
+														}}
 													/>
-												</FormControl>
-												<FormDescription>
-													Choose your preferred frameworks (required)
-												</FormDescription>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-									<FormField
-										control={form.control}
-										name="techStack"
-										render={({ field }) => (
-											<FormItem>
-												<FormLabel>Tech Stack</FormLabel>
-												<FormControl>
+													<div className="mt-2 text-xs text-muted-foreground">
+														✅ Search enabled • ✅ Select all • ✅ Custom empty
+														state
+													</div>
+												</div>
+											</div>
+
+											<div className="space-y-4">
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-sky-200/50 dark:border-sky-700/50">
+													<div className="flex items-center gap-2 mb-3">
+														<Icons.target className="h-4 w-4 text-sky-500" />
+														<span className="font-medium text-foreground text-sm">
+															Simplified Interface
+														</span>
+													</div>
 													<MultiSelect
-														options={techStackOptions}
-														onValueChange={field.onChange}
-														defaultValue={field.value || []}
-														placeholder="Select technologies"
-														variant="secondary"
+														options={techStackOptions.slice(0, 6)}
+														onValueChange={() => {}}
+														defaultValue={["typescript"]}
+														searchable={false}
+														hideSelectAll={true}
+														placeholder="Select without search"
+														animationConfig={{
+															badgeAnimation: "fade",
+															popoverAnimation: "scale",
+														}}
 													/>
-												</FormControl>
-												<FormDescription>
-													Additional technologies you use
-												</FormDescription>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-									<FormField
-										control={form.control}
-										name="skills"
-										render={({ field }) => (
-											<FormItem>
-												<FormLabel>Skills</FormLabel>
-												<FormControl>
-													<MultiSelect
-														options={skillsWithDisabled}
-														onValueChange={field.onChange}
-														defaultValue={field.value || []}
-														placeholder="Select your skills"
-														variant="inverted"
-														animationConfig={{ badgeAnimation: "pulse" }}
-													/>
-												</FormControl>
-												<FormDescription>
-													Your technical skills (some may be disabled)
-												</FormDescription>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-									<FormField
-										control={form.control}
-										name="departments"
-										render={({ field }) => (
-											<FormItem>
-												<FormLabel>Departments</FormLabel>
-												<FormControl>
-													<MultiSelect
-														options={companyDepartments}
-														onValueChange={field.onChange}
-														defaultValue={field.value || []}
-														placeholder="Select departments"
-													/>
-												</FormControl>
-												<FormDescription>
-													Departments you work with
-												</FormDescription>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-								</div>
-								<Button type="submit" className="w-full">
-									Submit Form
-								</Button>
-							</form>
-						</Form>
-					</Card>
-
-					{/* Variants Example */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							2. Component Variants
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Different visual styles: default, secondary, destructive, and
-							inverted
-						</p>
-						<div className="grid gap-2 sm:gap-4 grid-cols-1 md:grid-cols-2 w-full min-w-0">
-							<div className="space-y-2 min-w-0">
-								<label className="text-sm font-medium">Default</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 4)}
-									onValueChange={() => {}}
-									defaultValue={["typescript"]}
-									placeholder="Default variant"
-									maxCount={2}
-								/>
-							</div>
-							<div className="space-y-2 min-w-0">
-								<label className="text-sm font-medium">Secondary</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 4)}
-									onValueChange={() => {}}
-									defaultValue={["javascript"]}
-									variant="secondary"
-									placeholder="Secondary variant"
-									maxCount={2}
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Destructive</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 4)}
-									onValueChange={() => {}}
-									defaultValue={["python"]}
-									variant="destructive"
-									placeholder="Destructive variant"
-									maxCount={2}
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Inverted</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 4)}
-									onValueChange={setVariantDemo}
-									defaultValue={["typescript"]}
-									variant="inverted"
-									placeholder="Inverted variant"
-									maxCount={2}
-								/>
-							</div>
-						</div>
-					</Card>
-
-					{/* Animation Example */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							3. Animation Configurations
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Different animation effects for badges and interactions
-						</p>
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Pulse Animation</label>
-								<MultiSelect
-									options={projectTypesWithStyle.slice(0, 3)}
-									onValueChange={() => {}}
-									defaultValue={["web-app"]}
-									animationConfig={{
-										badgeAnimation: "pulse",
-										duration: 0.4,
-									}}
-									placeholder="Smooth pulse effect"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Fade Animation</label>
-								<MultiSelect
-									options={projectTypesWithStyle.slice(0, 3)}
-									onValueChange={() => {}}
-									defaultValue={["mobile-app"]}
-									animationConfig={{
-										badgeAnimation: "fade",
-										duration: 0.3,
-									}}
-									placeholder="Fade effect"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Wiggle Animation</label>
-								<MultiSelect
-									options={projectTypesWithStyle.slice(0, 3)}
-									onValueChange={setAnimatedDemo}
-									defaultValue={["web-app"]}
-									animationConfig={{
-										badgeAnimation: "wiggle",
-										duration: 0.4,
-									}}
-									placeholder="Wiggle effect"
-								/>
-							</div>
-						</div>
-					</Card>
-
-					{/* Responsive Example */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							4. Responsive Behavior
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Adaptive maxCount and layout based on screen size - try resizing
-							your browser window
-						</p>
-						<div className="space-y-4">
-							<MultiSelect
-								options={companyDepartments}
-								onValueChange={setResponsiveDemo}
-								defaultValue={["engineering", "design"]}
-								placeholder="Select departments"
-								responsive={{
-									mobile: { maxCount: 1, compactMode: true },
-									tablet: { maxCount: 2, compactMode: false },
-									desktop: { maxCount: 4, compactMode: false },
-								}}
-								className="w-full"
-								autoSize={true}
-							/>
-							<p className="text-sm text-muted-foreground">
-								Resize your window to see different maxCount values: Mobile (1),
-								Tablet (2), Desktop (4)
-							</p>
-							<p className="text-xs text-muted-foreground">
-								Selected: {responsiveDemo.join(", ") || "None"}
-							</p>
-						</div>
-					</Card>
-
-					{/* Grouped Options */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">5. Grouped Options</h3>
-						<p className="text-muted-foreground mb-4">
-							Options organized into categories with separators
-						</p>
-						<div className="space-y-4">
-							<MultiSelect
-								options={categorizedOptions}
-								onValueChange={setGroupedSelection}
-								defaultValue={["react", "nodejs"]}
-								placeholder="Select technologies"
-								className="w-full max-w-full sm:max-w-lg"
-								maxCount={5}
-								autoSize={true}
-							/>
-							<p className="text-xs text-muted-foreground">
-								Selected: {groupedSelection.join(", ") || "None"}
-							</p>
-						</div>
-					</Card>
-
-					{/* Search and Configuration */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							6. Search and UI Configuration
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Search functionality, select all, and empty state customization
-						</p>
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									With Search (Default)
-								</label>
-								<MultiSelect
-									options={frameworksList}
-									onValueChange={() => {}}
-									defaultValue={["react"]}
-									searchable={true}
-									hideSelectAll={false}
-									placeholder="Search frameworks"
-									emptyIndicator={
-										<div className="text-center p-4 text-muted-foreground">
-											No frameworks found matching your search
+													<div className="mt-2 text-xs text-muted-foreground">
+														❌ No search • ❌ No select all • Clean interface
+													</div>
+												</div>
+											</div>
 										</div>
-									}
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									No Search + No Select All
-								</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 6)}
-									onValueChange={() => {}}
-									defaultValue={["typescript"]}
-									searchable={false}
-									hideSelectAll={true}
-									placeholder="Select without search"
-								/>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-cyan-500" />
+												Search Features
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Real-time Filtering:</strong> Instant
+														results as you type
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Case Insensitive:</strong> Matches
+														regardless of case
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Substring Matching:</strong> Finds partial
+														matches
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Keyboard Navigation:</strong> Arrow keys and
+														Enter support
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.zap className="h-5 w-5 text-sky-500" />
+												UI Controls
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Search Toggle:
+													</strong>
+													<div className="ml-2 mt-1">
+														Enable/disable search functionality
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Select All Control:
+													</strong>
+													<div className="ml-2 mt-1">
+														Show/hide bulk selection options
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Empty States:
+													</strong>
+													<div className="ml-2 mt-1">
+														Custom no-results messaging
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Placeholder Text:
+													</strong>
+													<div className="ml-2 mt-1">
+														Contextual hints for users
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-cyan-100/50 to-sky-100/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-cyan-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Search Performance
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Our search implementation is optimized for performance
+													with debounced input handling, efficient filtering
+													algorithms, and smooth animations that don&apos;t
+													block user interactions.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">
+														Best Practices:
+													</strong>{" "}
+													Use descriptive placeholders, provide helpful empty
+													states, and consider disabling search for small option
+													sets (≤10 items) to simplify the interface.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</Card>
 
-					{/* Layout Options */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							7. Layout and Sizing Options
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Different layout modes: single line, auto-sizing, and width
-							constraints
-						</p>
-						<div className="space-y-6">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Single Line Mode</label>
-								<MultiSelect
-									options={companyDepartments.slice(0, 6)}
-									onValueChange={() => {}}
-									defaultValue={[
-										"engineering",
-										"design",
-										"product",
-										"marketing",
-										"sales",
-									]}
-									singleLine={true}
-									maxCount={8}
-									placeholder="Single line layout with scrolling"
-									className="w-full"
-									autoSize={true}
-								/>
-								<p className="text-xs text-muted-foreground">
-									Select more options to see the thin scroll bar
+					{/* 7. Layout and Sizing Options - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 border-orange-200 dark:border-orange-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium mb-4">
+									<Icons.monitor className="h-4 w-4" />
+									Flexible Layouts
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-300 dark:to-yellow-300 bg-clip-text text-transparent mb-4">
+									Layout and Sizing Options
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Adaptable layout modes for different space constraints and
+									design requirements
 								</p>
 							</div>
-							<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-								<div className="space-y-2">
-									<label className="text-sm font-medium">
-										Fixed Width (autoSize=false)
-									</label>
-									<MultiSelect
-										options={skillsWithDisabled.slice(0, 4)}
-										onValueChange={() => {}}
-										defaultValue={["html", "css"]}
-										className="w-full min-w-0"
-										placeholder="Fixed width"
-										autoSize={true}
-									/>
-								</div>
-								<div className="space-y-2">
-									<label className="text-sm font-medium">
-										Auto Width (autoSize=true)
-									</label>
-									<MultiSelect
-										options={skillsWithDisabled.slice(0, 4)}
-										onValueChange={() => {}}
-										defaultValue={["html"]}
-										autoSize={true}
-										placeholder="Auto width"
-									/>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Different interfaces require different{" "}
+										<span className="font-semibold text-foreground">
+											layout approaches
+										</span>
+										. Our component offers flexible sizing options including
+										<span className="font-semibold text-foreground">
+											single-line mode
+										</span>{" "}
+										for compact spaces,
+										<span className="font-semibold text-foreground">
+											auto-sizing
+										</span>{" "}
+										for dynamic content, and
+										<span className="font-semibold text-foreground">
+											width constraints
+										</span>{" "}
+										for consistent layouts.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.monitor className="h-5 w-5 text-orange-500" />
+											Layout Demonstrations
+										</h4>
+
+										<div className="space-y-6">
+											{/* Single Line Mode */}
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-orange-200/50 dark:border-orange-700/50">
+												<div className="flex items-center gap-2 mb-3">
+													<Icons.x className="h-4 w-4 text-orange-500" />
+													<span className="font-medium text-foreground text-sm">
+														Single Line Mode
+													</span>
+													<span className="text-xs bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 px-2 py-1 rounded">
+														singleLine=true
+													</span>
+												</div>
+												<MultiSelect
+													options={companyDepartments.slice(0, 6)}
+													onValueChange={() => {}}
+													defaultValue={[
+														"engineering",
+														"design",
+														"product",
+														"marketing",
+														"sales",
+													]}
+													singleLine={true}
+													maxCount={8}
+													placeholder="Single line layout with scrolling"
+													className="w-full"
+													autoSize={true}
+													animationConfig={{
+														badgeAnimation: "slide",
+														popoverAnimation: "fade",
+													}}
+												/>
+												<p className="text-xs text-muted-foreground mt-2">
+													Horizontal scrolling when content exceeds container
+													width
+												</p>
+											</div>
+
+											{/* Width Comparison */}
+											<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-amber-200/50 dark:border-amber-700/50">
+													<div className="flex items-center gap-2 mb-3">
+														<Icons.maximize className="h-4 w-4 text-amber-500" />
+														<span className="font-medium text-foreground text-sm">
+															Fixed Width
+														</span>
+														<span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 px-2 py-1 rounded">
+															autoSize=false
+														</span>
+													</div>
+													<MultiSelect
+														options={skillsWithDisabled.slice(0, 4)}
+														onValueChange={() => {}}
+														defaultValue={["html", "css"]}
+														className="w-full min-w-0"
+														placeholder="Fixed width"
+														autoSize={false}
+														animationConfig={{
+															badgeAnimation: "bounce",
+															popoverAnimation: "scale",
+														}}
+													/>
+													<p className="text-xs text-muted-foreground mt-2">
+														Uses full container width
+													</p>
+												</div>
+
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-yellow-200/50 dark:border-yellow-700/50">
+													<div className="flex items-center gap-2 mb-3">
+														<Icons.minimize className="h-4 w-4 text-yellow-600" />
+														<span className="font-medium text-foreground text-sm">
+															Auto Width
+														</span>
+														<span className="text-xs bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 px-2 py-1 rounded">
+															autoSize=true
+														</span>
+													</div>
+													<MultiSelect
+														options={skillsWithDisabled.slice(0, 4)}
+														onValueChange={() => {}}
+														defaultValue={["html"]}
+														autoSize={true}
+														placeholder="Auto width"
+														animationConfig={{
+															badgeAnimation: "pulse",
+															popoverAnimation: "slide",
+														}}
+													/>
+													<p className="text-xs text-muted-foreground mt-2">
+														Adapts to content size
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-orange-500" />
+												Layout Features
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Single Line Mode:</strong> Horizontal
+														scrolling for compact spaces
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Auto Sizing:</strong> Dynamic width based on
+														content
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Width Constraints:</strong> Minimum and
+														maximum width limits
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Responsive Behavior:</strong> Adapts to
+														container changes
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-950/20 dark:to-yellow-950/20 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.activity className="h-5 w-5 text-amber-500" />
+												Size Control Options
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														singleLine:
+													</strong>
+													<div className="ml-2 mt-1">
+														Forces horizontal layout with scroll
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">autoSize:</strong>
+													<div className="ml-2 mt-1">
+														Dynamic width based on content
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														className:
+													</strong>
+													<div className="ml-2 mt-1">
+														Custom CSS classes for styling
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">maxCount:</strong>
+													<div className="ml-2 mt-1">
+														Controls badge overflow behavior
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-orange-100/50 to-amber-100/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-orange-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Layout Best Practices
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Choose the right layout mode based on your design
+													constraints. Use single-line mode for toolbars and
+													compact interfaces, auto-sizing for flexible content
+													areas, and fixed width for consistent layouts.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">Pro Tip:</strong>{" "}
+													Combine layout options with responsive configurations
+													to create interfaces that work beautifully across all
+													screen sizes and use cases.
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</Card>
 
-					{/* Custom Styling */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							8. Custom Styling and Colors
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Options with custom badge colors and gradient backgrounds
-						</p>
-						<div className="space-y-4">
-							<MultiSelect
-								options={projectTypesWithStyle}
-								onValueChange={setStyledDemo}
-								defaultValue={["web-app", "mobile-app"]}
-								placeholder="Select project types"
-								className="w-full max-w-full sm:max-w-lg"
-								maxCount={5}
-								autoSize={true}
-							/>
-							<p className="text-sm text-muted-foreground">
-								Each option has custom colors and gradients defined in the style
-								property
-							</p>
-							<p className="text-xs text-muted-foreground">
-								Selected: {styledDemo.join(", ") || "None"}
-							</p>
-						</div>
-					</Card>
-
-					{/* Disabled States */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">9. Disabled States</h3>
-						<p className="text-muted-foreground mb-4">
-							Component-level and option-level disabled states
-						</p>
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									Individual Disabled Options
-								</label>
-								<MultiSelect
-									options={skillsWithDisabled}
-									onValueChange={setDisabledDemo}
-									defaultValue={["html", "css"]}
-									placeholder="Some options disabled"
-								/>
-								<p className="text-xs text-muted-foreground">
-									Selected: {disabledDemo.join(", ") || "None"}
+					{/* 8. Custom Styling and Colors - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 dark:from-purple-950/30 dark:via-fuchsia-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
+									<Icons.wand className="h-4 w-4" />
+									Creative Expression
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-700 via-fuchsia-600 to-pink-600 dark:from-purple-400 dark:via-fuchsia-300 dark:to-pink-300 bg-clip-text text-transparent mb-4">
+									Custom Styling and Colors
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Express your brand identity with custom badge colors and
+									gradient backgrounds
 								</p>
 							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									Entirely Disabled Component
-								</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 4)}
-									onValueChange={() => {}}
-									defaultValue={["typescript", "javascript"]}
-									disabled={true}
-									placeholder="Disabled component"
-								/>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Make your interface uniquely yours with{" "}
+										<span className="font-semibold text-foreground">
+											custom styling options
+										</span>
+										. Each option can have its own{" "}
+										<span className="font-semibold text-foreground">
+											badge colors
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											gradient backgrounds
+										</span>
+										, and
+										<span className="font-semibold text-foreground">
+											visual identity
+										</span>{" "}
+										that reflects your brand or categorizes content
+										meaningfully.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-purple-50/50 to-fuchsia-50/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.wand className="h-5 w-5 text-purple-500" />
+											Styled Project Types
+										</h4>
+										<p className="text-sm text-muted-foreground mb-6">
+											Each project type has its own unique color scheme and
+											styling:
+										</p>
+
+										<div className="space-y-4">
+											<MultiSelect
+												options={projectTypesWithStyle}
+												onValueChange={setStyledDemo}
+												defaultValue={["web-app", "mobile-app"]}
+												placeholder="Select project types"
+												className="w-full max-w-full sm:max-w-lg"
+												maxCount={5}
+												autoSize={true}
+												animationConfig={{
+													badgeAnimation: "bounce",
+													popoverAnimation: "scale",
+												}}
+											/>
+
+											<div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50">
+													<h5 className="font-medium text-foreground mb-3 flex items-center gap-2">
+														<Icons.target className="h-4 w-4 text-purple-500" />
+														Style Categories
+													</h5>
+													<div className="space-y-2 text-sm">
+														<div className="flex items-center gap-2">
+															<div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
+															<span className="text-muted-foreground">
+																Web Applications
+															</span>
+														</div>
+														<div className="flex items-center gap-2">
+															<div className="w-3 h-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full"></div>
+															<span className="text-muted-foreground">
+																Mobile Apps
+															</span>
+														</div>
+														<div className="flex items-center gap-2">
+															<div className="w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+															<span className="text-muted-foreground">
+																API Services
+															</span>
+														</div>
+														<div className="flex items-center gap-2">
+															<div className="w-3 h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
+															<span className="text-muted-foreground">
+																Desktop Apps
+															</span>
+														</div>
+													</div>
+												</div>
+
+												<div className="bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50">
+													<h5 className="font-medium text-foreground mb-3 flex items-center gap-2">
+														<Icons.star className="h-4 w-4 text-fuchsia-500" />
+														Current Selection
+													</h5>
+													<div className="text-sm text-muted-foreground">
+														{styledDemo.length > 0 ? (
+															<div className="space-y-1">
+																{styledDemo.map((item, index) => (
+																	<div
+																		key={index}
+																		className="flex items-center gap-2">
+																		<Icons.check className="h-3 w-3 text-green-500" />
+																		<span>
+																			{item
+																				.replace("-", " ")
+																				.replace(/\b\w/g, (l) =>
+																					l.toUpperCase()
+																				)}
+																		</span>
+																	</div>
+																))}
+															</div>
+														) : (
+															<p className="italic">No projects selected</p>
+														)}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-purple-500" />
+												Styling Features
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Custom Badge Colors:</strong> Individual
+														color schemes per option
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Gradient Backgrounds:</strong> Beautiful
+														gradient effects
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>CSS Variables:</strong> Dynamic theming
+														support
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Dark Mode:</strong> Automatic adaptation to
+														themes
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.wand className="h-5 w-5 text-fuchsia-500" />
+												Implementation
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Style Property:
+													</strong>
+													<div className="ml-2 mt-1">
+														Define colors in option objects
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														CSS Classes:
+													</strong>
+													<div className="ml-2 mt-1">
+														Use Tailwind or custom CSS
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">Theming:</strong>
+													<div className="ml-2 mt-1">
+														Support for light/dark modes
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Brand Colors:
+													</strong>
+													<div className="ml-2 mt-1">
+														Match your design system
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-purple-100/50 to-fuchsia-100/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-purple-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Design System Integration
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Custom styling seamlessly integrates with your
+													existing design system. Define colors that match your
+													brand, use consistent spacing, and maintain visual
+													hierarchy across your application.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">Pro Tip:</strong>{" "}
+													Use semantic color names and CSS custom properties to
+													create a scalable theming system that adapts to
+													different contexts and user preferences.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</Card>
 
-					{/* Advanced Features */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							10. Advanced Features
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Close on select, modal popover, and duplicate handling
-						</p>
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Close on Select</label>
-								<MultiSelect
-									options={frameworksList.slice(0, 5)}
-									onValueChange={() => {}}
-									defaultValue={["react"]}
-									closeOnSelect={true}
-									placeholder="Closes after selection"
-								/>
+					{/* 9. Disabled States - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-900/30 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium mb-4">
+									<Icons.shield className="h-4 w-4" />
+									Access Control
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-700 via-gray-600 to-zinc-600 dark:from-slate-400 dark:via-gray-300 dark:to-zinc-300 bg-clip-text text-transparent mb-4">
+									Disabled States
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Control user access with component-level and option-level
+									disabled states
+								</p>
 							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Modal Popover</label>
-								<MultiSelect
-									options={techStackOptions.slice(0, 5)}
-									onValueChange={() => {}}
-									defaultValue={["typescript"]}
-									modalPopover={true}
-									placeholder="Modal behavior"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									Duplicate Labels Example
-								</label>
-								<MultiSelect
-									options={[
-										{ value: "ts1", label: "TypeScript", icon: Icons.code },
-										{ value: "js1", label: "JavaScript", icon: Icons.zap },
-										{ value: "py1", label: "Python", icon: Icons.cpu },
-										{
-											value: "ts2",
-											label: "TypeScript (Backend)",
-											icon: Icons.code,
-										},
-										{
-											value: "js2",
-											label: "JavaScript (Node)",
-											icon: Icons.zap,
-										},
-									]}
-									onValueChange={() => {}}
-									defaultValue={["ts1"]}
-									deduplicateOptions={false}
-									placeholder="Similar labels allowed"
-								/>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Disabled states provide{" "}
+										<span className="font-semibold text-foreground">
+											access control
+										</span>{" "}
+										and
+										<span className="font-semibold text-foreground">
+											contextual restrictions
+										</span>
+										. You can disable
+										<span className="font-semibold text-foreground">
+											individual options
+										</span>{" "}
+										based on user permissions or
+										<span className="font-semibold text-foreground">
+											entire components
+										</span>{" "}
+										during loading states or form validation.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-slate-50/50 to-gray-50/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.shield className="h-5 w-5 text-slate-500" />
+											Disabled State Demonstrations
+										</h4>
+
+										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50">
+												<div className="flex items-center gap-2 mb-3">
+													<Icons.eyeOff className="h-4 w-4 text-slate-500" />
+													<span className="font-medium text-foreground text-sm">
+														Selective Disabled Options
+													</span>
+												</div>
+												<p className="text-xs text-muted-foreground mb-3">
+													Some skills are disabled based on availability or
+													access level
+												</p>
+												<MultiSelect
+													options={skillsWithDisabled}
+													onValueChange={setDisabledDemo}
+													defaultValue={["html", "css"]}
+													placeholder="Some options disabled"
+													animationConfig={{
+														badgeAnimation: "fade",
+														popoverAnimation: "scale",
+													}}
+												/>
+												<div className="mt-3 p-2 bg-slate-50 dark:bg-slate-950/50 rounded text-xs">
+													<span className="font-medium text-slate-700 dark:text-slate-300">
+														Selected: {disabledDemo.join(", ") || "None"}
+													</span>
+												</div>
+											</div>
+
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50">
+												<div className="flex items-center gap-2 mb-3">
+													<Icons.x className="h-4 w-4 text-slate-500" />
+													<span className="font-medium text-foreground text-sm">
+														Entirely Disabled Component
+													</span>
+												</div>
+												<p className="text-xs text-muted-foreground mb-3">
+													Complete component disabled for maintenance or
+													restricted access
+												</p>
+												<MultiSelect
+													options={techStackOptions.slice(0, 4)}
+													onValueChange={() => {}}
+													defaultValue={["typescript", "javascript"]}
+													disabled={true}
+													placeholder="Disabled component"
+													animationConfig={{
+														badgeAnimation: "fade",
+														popoverAnimation: "scale",
+													}}
+												/>
+												<div className="mt-3 p-2 bg-slate-50 dark:bg-slate-950/50 rounded text-xs">
+													<span className="font-medium text-slate-700 dark:text-slate-300">
+														Status: Component disabled
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-slate-500" />
+												Disabled Features
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Option-Level:</strong> Disable specific
+														choices individually
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Component-Level:</strong> Disable entire
+														selection interface
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Visual Feedback:</strong> Clear disabled
+														state indicators
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Accessibility:</strong> Screen reader
+														compatible states
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-slate-50/50 to-zinc-50/50 dark:from-slate-950/20 dark:to-zinc-950/20 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.shield className="h-5 w-5 text-gray-500" />
+												Use Cases
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Permission Control:
+													</strong>
+													<div className="ml-2 mt-1">
+														Restrict based on user roles
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Loading States:
+													</strong>
+													<div className="ml-2 mt-1">
+														Disable during data fetching
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Form Validation:
+													</strong>
+													<div className="ml-2 mt-1">
+														Conditional availability
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Maintenance Mode:
+													</strong>
+													<div className="ml-2 mt-1">
+														Temporary service restrictions
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-slate-100/50 to-gray-100/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-slate-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Accessibility & UX
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Disabled states maintain excellent accessibility with
+													proper ARIA attributes, keyboard navigation support,
+													and clear visual indicators that help users understand
+													why certain options are unavailable.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">
+														Best Practice:
+													</strong>{" "}
+													Always provide contextual information about why
+													options are disabled, and consider offering
+													alternative paths when possible.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</Card>
 
-					{/* Imperative Methods */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							11. Imperative Methods (useRef)
-						</h3>
-						<p className="text-muted-foreground mb-4">
-							Programmatic control using ref methods
-						</p>
-						<div className="space-y-4">
-							<MultiSelect
-								ref={multiSelectRef}
-								options={frameworksList}
-								onValueChange={setImperativeSelection}
-								defaultValue={["react", "next.js"]}
-								placeholder="Controlled via ref"
-								className="w-full max-w-full sm:max-w-md"
-								autoSize={true}
-							/>
-							<div className="flex flex-wrap gap-1 sm:gap-2">
-								<Button size="sm" variant="outline" onClick={handleReset}>
-									<Icons.activity className="mr-1 h-3 w-3" />
-									Reset
-								</Button>
-								<Button size="sm" variant="outline" onClick={handleClear}>
-									<Icons.zap className="mr-1 h-3 w-3" />
-									Clear
-								</Button>
-								<Button size="sm" variant="outline" onClick={handleFocus}>
-									<Icons.target className="mr-1 h-3 w-3" />
-									Focus
-								</Button>
-								<Button size="sm" variant="outline" onClick={handleGetValues}>
-									<Icons.search className="mr-1 h-3 w-3" />
-									Get Values
-								</Button>
-								<Button size="sm" variant="outline" onClick={handleSetValues}>
-									<Icons.wand className="mr-1 h-3 w-3" />
-									Set Values
-								</Button>
+					{/* 10. Advanced Features - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/30 dark:via-blue-950/30 dark:to-cyan-950/30 border-indigo-200 dark:border-indigo-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
+									<Icons.zap className="h-4 w-4" />
+									Power User Features
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-700 via-blue-600 to-cyan-600 dark:from-indigo-400 dark:via-blue-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4">
+									Advanced Features
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Sophisticated behaviors for complex interaction patterns and
+									edge cases
+								</p>
 							</div>
-							<p className="text-xs text-muted-foreground">
-								Current selection: {imperativeSelection.join(", ") || "None"}
-							</p>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										For sophisticated applications, advanced features provide{" "}
+										<span className="font-semibold text-foreground">
+											fine-grained control
+										</span>
+										over interaction behaviors. These include{" "}
+										<span className="font-semibold text-foreground">
+											modal popovers
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											close-on-select
+										</span>{" "}
+										patterns, and
+										<span className="font-semibold text-foreground">
+											duplicate handling
+										</span>{" "}
+										for complex data scenarios.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-indigo-50/50 to-blue-50/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.zap className="h-5 w-5 text-indigo-500" />
+											Advanced Behavior Showcase
+										</h4>
+
+										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-indigo-200/50 dark:border-indigo-700/50">
+												<div className="flex items-center gap-2 mb-3">
+													<Icons.x className="h-4 w-4 text-indigo-500" />
+													<span className="font-medium text-foreground text-sm">
+														Close on Select
+													</span>
+												</div>
+												<p className="text-xs text-muted-foreground mb-3">
+													Automatically closes popover after each selection
+												</p>
+												<MultiSelect
+													options={frameworksList.slice(0, 5)}
+													onValueChange={() => {}}
+													defaultValue={["react"]}
+													closeOnSelect={true}
+													placeholder="Closes after selection"
+													animationConfig={{
+														badgeAnimation: "slide",
+														popoverAnimation: "fade",
+													}}
+												/>
+												<div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
+													🎯 Perfect for single-focused selection flows
+												</div>
+											</div>
+
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-blue-200/50 dark:border-blue-700/50">
+												<div className="flex items-center gap-2 mb-3">
+													<Icons.maximize className="h-4 w-4 text-blue-500" />
+													<span className="font-medium text-foreground text-sm">
+														Modal Popover
+													</span>
+												</div>
+												<p className="text-xs text-muted-foreground mb-3">
+													Renders popover as modal overlay for focus control
+												</p>
+												<MultiSelect
+													options={techStackOptions.slice(0, 5)}
+													onValueChange={() => {}}
+													defaultValue={["typescript"]}
+													modalPopover={true}
+													placeholder="Modal behavior"
+													animationConfig={{
+														badgeAnimation: "bounce",
+														popoverAnimation: "scale",
+													}}
+												/>
+												<div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
+													📱 Great for mobile and accessibility
+												</div>
+											</div>
+
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50 md:col-span-2 lg:col-span-1">
+												<div className="flex items-center gap-2 mb-3">
+													<Icons.copy className="h-4 w-4 text-cyan-500" />
+													<span className="font-medium text-foreground text-sm">
+														Duplicate Handling
+													</span>
+												</div>
+												<p className="text-xs text-muted-foreground mb-3">
+													Allows similar labels with different values
+												</p>
+												<MultiSelect
+													options={[
+														{
+															value: "ts1",
+															label: "TypeScript",
+															icon: Icons.code,
+														},
+														{
+															value: "js1",
+															label: "JavaScript",
+															icon: Icons.zap,
+														},
+														{ value: "py1", label: "Python", icon: Icons.cpu },
+														{
+															value: "ts2",
+															label: "TypeScript (Backend)",
+															icon: Icons.code,
+														},
+														{
+															value: "js2",
+															label: "JavaScript (Node)",
+															icon: Icons.zap,
+														},
+													]}
+													onValueChange={() => {}}
+													defaultValue={["ts1"]}
+													deduplicateOptions={false}
+													placeholder="Similar labels allowed"
+													animationConfig={{
+														badgeAnimation: "pulse",
+														popoverAnimation: "slide",
+													}}
+												/>
+												<div className="mt-2 text-xs text-slate-600 dark:text-slate-400">
+													🔄 Handle complex data relationships
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-indigo-500" />
+												Advanced Controls
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>closeOnSelect:</strong> Auto-close after
+														each selection
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>modalPopover:</strong> Modal overlay
+														behavior
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>deduplicateOptions:</strong> Handle similar
+														labels
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>Custom Positioning:</strong> Advanced
+														popover placement
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-indigo-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.star className="h-5 w-5 text-blue-500" />
+												Implementation Notes
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Performance:
+													</strong>
+													<div className="ml-2 mt-1">
+														Optimized for complex data sets
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Accessibility:
+													</strong>
+													<div className="ml-2 mt-1">
+														ARIA compliance for all modes
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Mobile Support:
+													</strong>
+													<div className="ml-2 mt-1">
+														Touch-optimized interactions
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Customization:
+													</strong>
+													<div className="ml-2 mt-1">
+														Extensive theming options
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-indigo-100/50 to-blue-100/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-indigo-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Enterprise-Ready Features
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													These advanced features are designed for enterprise
+													applications where user experience consistency,
+													accessibility compliance, and edge case handling are
+													critical requirements.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">
+														Use Cases:
+													</strong>{" "}
+													Complex forms, data dashboards, content management
+													systems, and applications with sophisticated user
+													interaction patterns.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
+
+					{/* 11. Imperative Methods (useRef) - Markdown Style */}
+					<Card className="p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden">
+						<div className="p-8 md:p-12">
+							{/* Header */}
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
+									<Icons.code className="h-4 w-4" />
+									Programmatic Control
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-green-600 dark:from-emerald-400 dark:via-teal-300 dark:to-green-300 bg-clip-text text-transparent mb-4">
+									Imperative Methods (useRef)
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Programmatic control with ref methods for complex interaction
+									patterns
+								</p>
+							</div>
+
+							{/* Markdown Content */}
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										For advanced use cases,{" "}
+										<span className="font-semibold text-foreground">
+											imperative methods
+										</span>{" "}
+										provide direct programmatic control over the component.
+										Using React&apos;s{" "}
+										<span className="font-semibold text-foreground">
+											useRef
+										</span>{" "}
+										hook, you can trigger actions, manage state, and integrate
+										with complex application workflows.
+									</p>
+
+									<div className="my-8 p-6 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50">
+										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.code className="h-5 w-5 text-emerald-500" />
+											Interactive Control Panel
+										</h4>
+										<p className="text-sm text-muted-foreground mb-6">
+											Try the buttons below to programmatically control the
+											MultiSelect component:
+										</p>
+
+										<div className="space-y-6">
+											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50">
+												<MultiSelect
+													ref={multiSelectRef}
+													options={frameworksList}
+													onValueChange={setImperativeSelection}
+													defaultValue={["react", "next.js"]}
+													placeholder="Controlled via ref"
+													className="w-full max-w-full sm:max-w-md"
+													autoSize={true}
+													animationConfig={{
+														badgeAnimation: "bounce",
+														popoverAnimation: "scale",
+													}}
+												/>
+											</div>
+
+											<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={handleReset}
+													className="flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:hover:bg-emerald-950">
+													<Icons.activity className="h-3 w-3" />
+													Reset
+												</Button>
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={handleClear}
+													className="flex items-center gap-1 bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/50 dark:hover:bg-teal-950">
+													<Icons.x className="h-3 w-3" />
+													Clear
+												</Button>
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={handleFocus}
+													className="flex items-center gap-1 bg-green-50 hover:bg-green-100 dark:bg-green-950/50 dark:hover:bg-green-950">
+													<Icons.target className="h-3 w-3" />
+													Focus
+												</Button>
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={handleGetValues}
+													className="flex items-center gap-1 bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-950/50 dark:hover:bg-cyan-950">
+													<Icons.search className="h-3 w-3" />
+													Get Values
+												</Button>
+												<Button
+													size="sm"
+													variant="outline"
+													onClick={handleSetValues}
+													className="flex items-center gap-1 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/50 dark:hover:bg-blue-950">
+													<Icons.wand className="h-3 w-3" />
+													Set Values
+												</Button>
+											</div>
+
+											<div className="bg-emerald-50 dark:bg-emerald-950/20 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50">
+												<div className="flex items-center gap-2 mb-2">
+													<Icons.check className="h-4 w-4 text-emerald-500" />
+													<span className="font-medium text-emerald-800 dark:text-emerald-200">
+														Current Selection
+													</span>
+												</div>
+												<p className="text-sm text-emerald-700 dark:text-emerald-300">
+													{imperativeSelection.length > 0
+														? imperativeSelection.join(", ")
+														: "No frameworks selected"}
+												</p>
+											</div>
+										</div>
+									</div>
+
+									<div className="grid md:grid-cols-2 gap-6 my-8">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-emerald-500" />
+												Available Methods
+											</h4>
+											<ul className="text-sm text-muted-foreground space-y-2">
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>reset():</strong> Reset to default values
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>clear():</strong> Remove all selections
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>focus():</strong> Focus the input element
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>getValues():</strong> Get current selections
+													</span>
+												</li>
+												<li className="flex items-start gap-2">
+													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+													<span>
+														<strong>setValues():</strong> Set selections
+														programmatically
+													</span>
+												</li>
+											</ul>
+										</div>
+
+										<div className="bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/20 dark:to-green-950/20 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50">
+											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+												<Icons.code className="h-5 w-5 text-teal-500" />
+												Use Cases
+											</h4>
+											<div className="text-sm text-muted-foreground space-y-3">
+												<div>
+													<strong className="text-foreground">
+														Form Integration:
+													</strong>
+													<div className="ml-2 mt-1">
+														Reset forms after submission
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Wizard Steps:
+													</strong>
+													<div className="ml-2 mt-1">
+														Auto-advance between steps
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Data Loading:
+													</strong>
+													<div className="ml-2 mt-1">
+														Set values from API responses
+													</div>
+												</div>
+												<div>
+													<strong className="text-foreground">
+														Shortcuts:
+													</strong>
+													<div className="ml-2 mt-1">
+														Keyboard shortcuts for actions
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div className="mt-8 p-6 bg-gradient-to-r from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50">
+										<div className="flex items-start gap-4">
+											<Icons.star className="h-6 w-6 text-emerald-500 mt-1 flex-shrink-0" />
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Implementation Pattern
+												</h4>
+												<p className="text-base text-muted-foreground mb-4">
+													Imperative methods bridge the gap between declarative
+													React patterns and imperative interactions.
+													They&apos;re particularly useful for complex user
+													flows, integrations with third-party libraries, and
+													advanced accessibility features.
+												</p>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">
+														Best Practice:
+													</strong>{" "}
+													Use imperative methods sparingly and prefer controlled
+													components with props when possible for better React
+													patterns.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</Card>
 
 					{/* Charts and Data Visualization */}
-					<Card className="p-3 sm:p-6 w-full min-w-0">
-						<h3 className="text-xl font-semibold mb-4">
-							12. Charts and Data Visualization
-						</h3>
-						<p className="text-muted-foreground mb-6">
-							Interactive charts that update based on MultiSelect selections
-						</p>
-
-						{/* Chart Controls */}
-						<div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-8">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									Select Departments
-								</label>
-								<MultiSelect
-									options={companyDepartments}
-									onValueChange={setSelectedDepartments}
-									defaultValue={["engineering", "design", "product"]}
-									placeholder="Choose departments"
-									variant="default"
-									maxCount={4}
-									className="w-full"
-								/>
+					<div className="w-full min-w-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden">
+						{/* Header */}
+						<div className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 p-6 text-white">
+							<div className="flex items-center gap-3 mb-3">
+								<div className="p-2 bg-white/20 rounded-lg">
+									<Icons.pieChart className="h-6 w-6" />
+								</div>
+								<h2 className="text-2xl font-bold">
+									Charts & Data Visualization
+								</h2>
 							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Select Metrics</label>
-								<MultiSelect
-									options={metricsOptions}
-									onValueChange={setSelectedMetrics}
-									defaultValue={["revenue", "users", "performance"]}
-									placeholder="Choose metrics"
-									variant="secondary"
-									maxCount={3}
-									className="w-full"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Time Periods</label>
-								<MultiSelect
-									options={timePeriodsOptions}
-									onValueChange={setSelectedTimePeriods}
-									defaultValue={["monthly", "quarterly"]}
-									placeholder="Select periods"
-									variant="inverted"
-									maxCount={2}
-									className="w-full"
-								/>
-							</div>
+							<p className="text-orange-100 text-lg leading-relaxed">
+								Create interactive, data-driven dashboards where MultiSelect
+								components control chart filters, time periods, and
+								visualization parameters. Perfect for business intelligence and
+								analytics platforms.
+							</p>
 						</div>
 
-						{/* Charts Grid */}
-						<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
-							{/* Bar Chart */}
-							<Card className="p-2 sm:p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Monthly Sales by Department
-									{!selectedTimePeriods.includes("monthly") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Monthly&rdquo; to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedTimePeriods.includes("monthly") &&
-									filteredSalesData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<BarChart data={filteredSalesData}>
-												<XAxis
-													dataKey="name"
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-												/>
-												<YAxis
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-													tickFormatter={(value) =>
-														new Intl.NumberFormat("en-US", {
-															notation: "compact",
-															compactDisplay: "short",
-														}).format(value)
-													}
-												/>
-												<Tooltip content={<CustomTooltip type="currency" />} />
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="rect"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments.map((dept, index) => (
-													<Bar
-														key={dept}
-														dataKey={dept}
-														fill={chartColors[dept as keyof typeof chartColors]}
-														name={dept}
-														radius={[2, 2, 0, 0]}
-														className="transition-all duration-200 hover:opacity-80"
-														isAnimationActive={false}
+						{/* Content */}
+						<div className="p-6 space-y-8">
+							{/* Introduction */}
+							<div className="prose prose-orange max-w-none">
+								<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+									Transform static charts into{" "}
+									<strong>interactive experiences</strong> where users can
+									dynamically filter departments, select metrics, and adjust
+									time periods. MultiSelect components serve as powerful control
+									panels for complex data visualizations.
+								</p>
+							</div>
+
+							{/* Interactive Demo Section */}
+							<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-orange-200 dark:border-orange-800">
+								<h3 className="text-xl font-semibold mb-4 text-orange-800 dark:text-orange-200">
+									📊 Interactive Dashboard Demo
+								</h3>
+								<p className="text-muted-foreground mb-6">
+									Interactive charts that update based on MultiSelect selections
+								</p>
+
+								{/* Chart Controls */}
+								<div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-8">
+									<div className="space-y-2">
+										<label className="text-sm font-medium">
+											Select Departments
+										</label>
+										<MultiSelect
+											options={companyDepartments}
+											onValueChange={setSelectedDepartments}
+											defaultValue={["engineering", "design", "product"]}
+											placeholder="Choose departments"
+											variant="default"
+											maxCount={4}
+											className="w-full"
+										/>
+									</div>
+									<div className="space-y-2">
+										<label className="text-sm font-medium">
+											Select Metrics
+										</label>
+										<MultiSelect
+											options={metricsOptions}
+											onValueChange={setSelectedMetrics}
+											defaultValue={["revenue", "users", "performance"]}
+											placeholder="Choose metrics"
+											variant="secondary"
+											maxCount={3}
+											className="w-full"
+										/>
+									</div>
+									<div className="space-y-2">
+										<label className="text-sm font-medium">Time Periods</label>
+										<MultiSelect
+											options={timePeriodsOptions}
+											onValueChange={setSelectedTimePeriods}
+											defaultValue={["monthly", "quarterly"]}
+											placeholder="Select periods"
+											variant="inverted"
+											maxCount={2}
+											className="w-full"
+										/>
+									</div>
+								</div>
+
+								{/* Charts Grid */}
+								<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
+									{/* Bar Chart */}
+									<Card className="p-2 sm:p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Monthly Sales by Department
+											{!selectedTimePeriods.includes("monthly") && (
+												<span className="text-sm text-muted-foreground ml-2">
+													(Select &ldquo;Monthly&rdquo; to view)
+												</span>
+											)}
+										</h4>
+										<div className="h-80">
+											{selectedTimePeriods.includes("monthly") &&
+											filteredSalesData.length > 0 ? (
+												<ResponsiveContainer width="100%" height="100%">
+													<BarChart data={filteredSalesData}>
+														<XAxis
+															dataKey="name"
+															className="text-sm"
+															tick={{ fontSize: 12 }}
+															axisLine={{ stroke: "hsl(var(--border))" }}
+															tickLine={{ stroke: "hsl(var(--border))" }}
+														/>
+														<YAxis
+															className="text-sm"
+															tick={{ fontSize: 12 }}
+															axisLine={{ stroke: "hsl(var(--border))" }}
+															tickLine={{ stroke: "hsl(var(--border))" }}
+															tickFormatter={(value) =>
+																new Intl.NumberFormat("en-US", {
+																	notation: "compact",
+																	compactDisplay: "short",
+																}).format(value)
+															}
+														/>
+														<Tooltip
+															content={<CustomTooltip type="currency" />}
+														/>
+														<Legend
+															wrapperStyle={{ fontSize: "14px" }}
+															iconType="rect"
+															formatter={(value: string) => (
+																<span className="text-sm font-medium">
+																	{companyDepartments.find(
+																		(d) => d.value === value
+																	)?.label || value}
+																</span>
+															)}
+														/>
+														{selectedDepartments.map((dept, index) => (
+															<Bar
+																key={dept}
+																dataKey={dept}
+																fill={
+																	chartColors[dept as keyof typeof chartColors]
+																}
+																name={dept}
+																radius={[2, 2, 0, 0]}
+																className="transition-all duration-200 hover:opacity-80"
+																isAnimationActive={false}
+															/>
+														))}
+													</BarChart>
+												</ResponsiveContainer>
+											) : (
+												<div className="flex items-center justify-center h-full text-muted-foreground">
+													<div className="text-center">
+														<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+														<p>
+															Select &ldquo;Monthly&rdquo; period to view sales
+															data
+														</p>
+													</div>
+												</div>
+											)}
+										</div>
+									</Card>
+
+									{/* Pie Chart */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Q4 Revenue Distribution
+											{!selectedMetrics.includes("revenue") && (
+												<span className="text-sm text-muted-foreground ml-2">
+													(Select &ldquo;Revenue&rdquo; metric to view)
+												</span>
+											)}
+										</h4>
+										<div className="h-80">
+											{selectedMetrics.includes("revenue") &&
+											pieChartData.length > 0 ? (
+												<ResponsiveContainer width="100%" height="100%">
+													<PieChart>
+														<Pie
+															data={pieChartData}
+															cx="50%"
+															cy="50%"
+															innerRadius={50}
+															outerRadius={80}
+															fill="#8884d8"
+															dataKey="value"
+															label={({ name, percent }: any) =>
+																`${name} ${((percent || 0) * 100).toFixed(0)}%`
+															}
+															labelLine={true}
+															className="outline-none text-xs">
+															{pieChartData.map((entry, index) => (
+																<Cell
+																	key={`cell-${index}`}
+																	fill={entry.color}
+																	stroke="rgba(255,255,255,0.1)"
+																	strokeWidth={2}
+																	className="transition-all duration-200 hover:opacity-80"
+																/>
+															))}
+														</Pie>
+														<Tooltip content={<PieTooltip />} />
+														<Legend
+															wrapperStyle={{ fontSize: "14px" }}
+															iconType="circle"
+															formatter={(value: string, entry: any) => (
+																<span
+																	className="text-sm font-medium"
+																	style={{ color: entry.color }}>
+																	{value}
+																</span>
+															)}
+														/>
+													</PieChart>
+												</ResponsiveContainer>
+											) : (
+												<div className="flex items-center justify-center h-full text-muted-foreground">
+													<div className="text-center">
+														<Icons.dollarSign className="h-12 w-12 mx-auto mb-2 opacity-50" />
+														<p>
+															Select &ldquo;Revenue&rdquo; metric to view
+															distribution
+														</p>
+													</div>
+												</div>
+											)}
+										</div>
+									</Card>
+
+									{/* Area Chart */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Quarterly Revenue Trends
+											{!selectedTimePeriods.includes("quarterly") && (
+												<span className="text-sm text-muted-foreground ml-2">
+													(Select &ldquo;Quarterly&rdquo; to view)
+												</span>
+											)}
+										</h4>
+										<div
+											className="h-80 relative overflow-visible"
+											style={{ zIndex: 1 }}>
+											{selectedTimePeriods.includes("quarterly") &&
+											areaChartData.length > 0 ? (
+												<ResponsiveContainer width="100%" height="100%">
+													<AreaChart data={areaChartData}>
+														<GradientDefs />
+														<XAxis
+															dataKey="quarter"
+															className="text-sm"
+															tick={{ fontSize: 12 }}
+															axisLine={{ stroke: "hsl(var(--border))" }}
+															tickLine={{ stroke: "hsl(var(--border))" }}
+														/>
+														<YAxis
+															className="text-sm"
+															tick={{ fontSize: 12 }}
+															axisLine={{ stroke: "hsl(var(--border))" }}
+															tickLine={{ stroke: "hsl(var(--border))" }}
+															tickFormatter={(value) =>
+																new Intl.NumberFormat("en-US", {
+																	notation: "compact",
+																	compactDisplay: "short",
+																}).format(value)
+															}
+														/>
+														<Tooltip
+															content={<CustomTooltip type="currency" />}
+														/>
+														<Legend
+															wrapperStyle={{ fontSize: "14px", zIndex: 1 }}
+															iconType="rect"
+															formatter={(value: string) => (
+																<span className="text-sm font-medium">
+																	{companyDepartments.find(
+																		(d) => d.value === value
+																	)?.label || value}
+																</span>
+															)}
+														/>
+														{selectedDepartments.map((dept, index) => (
+															<Area
+																key={dept}
+																type="monotone"
+																dataKey={dept}
+																stackId="1"
+																stroke={
+																	chartColors[dept as keyof typeof chartColors]
+																}
+																fill={`url(#${getGradientId(dept)})`}
+																strokeWidth={2}
+																className="transition-all duration-200"
+															/>
+														))}
+													</AreaChart>
+												</ResponsiveContainer>
+											) : (
+												<div className="flex items-center justify-center h-full text-muted-foreground">
+													<div className="text-center">
+														<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+														<p>
+															Select &ldquo;Quarterly&rdquo; period to view
+															trends
+														</p>
+													</div>
+												</div>
+											)}
+										</div>
+									</Card>
+
+									{/* Line Chart */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Performance Metrics Comparison
+											{!selectedMetrics.includes("performance") && (
+												<span className="text-sm text-muted-foreground ml-2">
+													(Select &ldquo;Performance&rdquo; metric to view)
+												</span>
+											)}
+										</h4>
+										<div className="h-80">
+											{selectedMetrics.includes("performance") &&
+											lineChartData.length > 0 ? (
+												<ResponsiveContainer width="100%" height="100%">
+													<LineChart data={lineChartData}>
+														<YAxis
+															className="text-sm"
+															tick={{ fontSize: 12 }}
+															axisLine={{ stroke: "hsl(var(--border))" }}
+															tickLine={{ stroke: "hsl(var(--border))" }}
+															tickFormatter={(value) => `${value}%`}
+														/>
+														<Tooltip
+															content={<CustomTooltip type="percentage" />}
+														/>
+														<Legend
+															wrapperStyle={{ fontSize: "14px" }}
+															iconType="line"
+															formatter={(value: string) => (
+																<span className="text-sm font-medium">
+																	{companyDepartments.find(
+																		(d) => d.value === value
+																	)?.label || value}
+																</span>
+															)}
+														/>
+														{selectedDepartments
+															.filter((dept) =>
+																[
+																	"engineering",
+																	"design",
+																	"product",
+																	"marketing",
+																].includes(dept)
+															)
+															.map((dept, index) => (
+																<Line
+																	key={dept}
+																	type="monotone"
+																	dataKey={dept}
+																	stroke={
+																		chartColors[
+																			dept as keyof typeof chartColors
+																		]
+																	}
+																	strokeWidth={3}
+																	dot={{
+																		fill: chartColors[
+																			dept as keyof typeof chartColors
+																		],
+																		strokeWidth: 2,
+																		r: 5,
+																		className:
+																			"transition-all duration-200 hover:r-7",
+																	}}
+																	activeDot={{
+																		r: 8,
+																		stroke:
+																			chartColors[
+																				dept as keyof typeof chartColors
+																			],
+																		strokeWidth: 2,
+																		fill: chartColors[
+																			dept as keyof typeof chartColors
+																		],
+																	}}
+																	name={
+																		companyDepartments.find(
+																			(d) => d.value === dept
+																		)?.label || dept
+																	}
+																	className="transition-all duration-200"
+																/>
+															))}
+													</LineChart>
+												</ResponsiveContainer>
+											) : (
+												<div className="flex items-center justify-center h-full text-muted-foreground">
+													<div className="text-center">
+														<Icons.activity className="h-12 w-12 mx-auto mb-2 opacity-50" />
+														<p>
+															Select &ldquo;Performance&rdquo; metric to view
+															comparison
+														</p>
+													</div>
+												</div>
+											)}
+										</div>
+									</Card>
+
+									{/* Radar Chart */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Team Skills Radar
+											{!selectedMetrics.includes("performance") && (
+												<span className="text-sm text-muted-foreground ml-2">
+													(Select &ldquo;Performance&rdquo; metric to view)
+												</span>
+											)}
+										</h4>
+										<div className="h-80">
+											{selectedMetrics.includes("performance") &&
+											radarChartData.length > 0 ? (
+												<ResponsiveContainer width="100%" height="100%">
+													<RadarChart data={radarChartData}>
+														<PolarGrid
+															gridType="polygon"
+															className="opacity-30"
+														/>
+														<PolarAngleAxis
+															dataKey="subject"
+															className="text-sm"
+															tick={{ fontSize: 12 }}
+														/>
+														<PolarRadiusAxis
+															angle={90}
+															domain={[0, 100]}
+															className="text-sm"
+															tick={{ fontSize: 10 }}
+															tickCount={6}
+														/>
+														<Tooltip
+															content={<CustomTooltip type="percentage" />}
+														/>
+														<Legend
+															wrapperStyle={{ fontSize: "14px" }}
+															iconType="line"
+															formatter={(value: string) => (
+																<span className="text-sm font-medium">
+																	{companyDepartments.find(
+																		(d) => d.value === value
+																	)?.label || value}
+																</span>
+															)}
+														/>
+														{selectedDepartments
+															.filter((dept) =>
+																[
+																	"engineering",
+																	"design",
+																	"product",
+																	"marketing",
+																].includes(dept)
+															)
+															.map((dept, index) => (
+																<Radar
+																	key={dept}
+																	name={
+																		companyDepartments.find(
+																			(d) => d.value === dept
+																		)?.label || dept
+																	}
+																	dataKey={dept}
+																	stroke={
+																		chartColors[
+																			dept as keyof typeof chartColors
+																		]
+																	}
+																	fill={
+																		chartColors[
+																			dept as keyof typeof chartColors
+																		]
+																	}
+																	fillOpacity={0.1}
+																	strokeWidth={2}
+																	dot={{
+																		fill: chartColors[
+																			dept as keyof typeof chartColors
+																		],
+																		strokeWidth: 2,
+																		r: 4,
+																	}}
+																/>
+															))}
+													</RadarChart>
+												</ResponsiveContainer>
+											) : (
+												<div className="flex items-center justify-center h-full text-muted-foreground">
+													<div className="text-center">
+														<Icons.target className="h-12 w-12 mx-auto mb-2 opacity-50" />
+														<p>
+															Select &ldquo;Performance&rdquo; metric to view
+															skills radar
+														</p>
+													</div>
+												</div>
+											)}
+										</div>
+									</Card>
+
+									{/* Treemap Chart */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Revenue Distribution by Teams
+											{!selectedMetrics.includes("revenue") && (
+												<span className="text-sm text-muted-foreground ml-2">
+													(Select &ldquo;Revenue&rdquo; metric to view)
+												</span>
+											)}
+										</h4>
+										<div className="h-80">
+											{selectedMetrics.includes("revenue") &&
+											treemapData.length > 0 ? (
+												<ResponsiveContainer width="100%" height="100%">
+													<Treemap
+														data={treemapData}
+														dataKey="size"
+														stroke="#fff"
+														fill="#8884d8"
 													/>
-												))}
-											</BarChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Monthly&rdquo; period to view sales data
-												</p>
-											</div>
+												</ResponsiveContainer>
+											) : (
+												<div className="flex items-center justify-center h-full text-muted-foreground">
+													<div className="text-center">
+														<Icons.pieChart className="h-12 w-12 mx-auto mb-2 opacity-50" />
+														<p>
+															Select &ldquo;Revenue&rdquo; metric to view team
+															distribution
+														</p>
+													</div>
+												</div>
+											)}
 										</div>
-									)}
+									</Card>
 								</div>
 							</Card>
 
-							{/* Pie Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Q4 Revenue Distribution
-									{!selectedMetrics.includes("revenue") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Revenue&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("revenue") &&
-									pieChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<PieChart>
-												<Pie
-													data={pieChartData}
-													cx="50%"
-													cy="50%"
-													innerRadius={50}
-													outerRadius={80}
-													fill="#8884d8"
-													dataKey="value"
-													label={({ name, percent }: any) =>
-														`${name} ${((percent || 0) * 100).toFixed(0)}%`
-													}
-													labelLine={true}
-													className="outline-none text-xs">
-													{pieChartData.map((entry, index) => (
-														<Cell
-															key={`cell-${index}`}
-															fill={entry.color}
-															stroke="rgba(255,255,255,0.1)"
-															strokeWidth={2}
-															className="transition-all duration-200 hover:opacity-80"
-														/>
-													))}
-												</Pie>
-												<Tooltip content={<PieTooltip />} />
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="circle"
-													formatter={(value: string, entry: any) => (
-														<span
-															className="text-sm font-medium"
-															style={{ color: entry.color }}>
-															{value}
-														</span>
-													)}
-												/>
-											</PieChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.dollarSign className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Revenue&rdquo; metric to view
-													distribution
-												</p>
-											</div>
-										</div>
-									)}
+							{/* Chart Info */}
+							<div className="mt-6 p-4 bg-muted rounded-lg">
+								<h5 className="font-medium mb-2">Interactive Features:</h5>
+								<ul className="text-sm text-muted-foreground space-y-1">
+									<li>
+										• Select different departments to filter chart data across
+										all visualizations
+									</li>
+									<li>
+										• Choose specific metrics (Revenue, Users, Performance,
+										etc.) to control which charts are displayed
+									</li>
+									<li>
+										• Select time periods (Monthly, Quarterly, Weekly) to change
+										chart timeframes
+									</li>
+									<li>
+										• Charts automatically update and show/hide based on your
+										selections
+									</li>
+									<li>
+										• Hover over chart elements for detailed tooltips with
+										formatted values
+									</li>
+									<li>
+										• Each department has a unique color for easy identification
+										across charts
+									</li>
+								</ul>
+								<div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 rounded border-l-4 border-blue-400">
+									<p className="text-sm font-medium text-blue-800 dark:text-blue-200 break-words">
+										💡 Try different combinations: Select &ldquo;Revenue&rdquo;
+										+ &ldquo;Quarterly&rdquo; for revenue trends, or
+										&ldquo;Performance&rdquo; + specific departments for
+										performance comparison!
+									</p>
 								</div>
-							</Card>
-
-							{/* Area Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Quarterly Revenue Trends
-									{!selectedTimePeriods.includes("quarterly") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Quarterly&rdquo; to view)
-										</span>
-									)}
-								</h4>
-								<div
-									className="h-80 relative overflow-visible"
-									style={{ zIndex: 1 }}>
-									{selectedTimePeriods.includes("quarterly") &&
-									areaChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<AreaChart data={areaChartData}>
-												<GradientDefs />
-												<XAxis
-													dataKey="quarter"
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-												/>
-												<YAxis
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-													tickFormatter={(value) =>
-														new Intl.NumberFormat("en-US", {
-															notation: "compact",
-															compactDisplay: "short",
-														}).format(value)
-													}
-												/>
-												<Tooltip content={<CustomTooltip type="currency" />} />
-												<Legend
-													wrapperStyle={{ fontSize: "14px", zIndex: 1 }}
-													iconType="rect"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments.map((dept, index) => (
-													<Area
-														key={dept}
-														type="monotone"
-														dataKey={dept}
-														stackId="1"
-														stroke={
-															chartColors[dept as keyof typeof chartColors]
-														}
-														fill={`url(#${getGradientId(dept)})`}
-														strokeWidth={2}
-														className="transition-all duration-200"
-													/>
-												))}
-											</AreaChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Quarterly&rdquo; period to view trends
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Line Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Performance Metrics Comparison
-									{!selectedMetrics.includes("performance") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Performance&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("performance") &&
-									lineChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<LineChart data={lineChartData}>
-												<YAxis
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-													tickFormatter={(value) => `${value}%`}
-												/>
-												<Tooltip
-													content={<CustomTooltip type="percentage" />}
-												/>
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="line"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments
-													.filter((dept) =>
-														[
-															"engineering",
-															"design",
-															"product",
-															"marketing",
-														].includes(dept)
-													)
-													.map((dept, index) => (
-														<Line
-															key={dept}
-															type="monotone"
-															dataKey={dept}
-															stroke={
-																chartColors[dept as keyof typeof chartColors]
-															}
-															strokeWidth={3}
-															dot={{
-																fill: chartColors[
-																	dept as keyof typeof chartColors
-																],
-																strokeWidth: 2,
-																r: 5,
-																className:
-																	"transition-all duration-200 hover:r-7",
-															}}
-															activeDot={{
-																r: 8,
-																stroke:
-																	chartColors[dept as keyof typeof chartColors],
-																strokeWidth: 2,
-																fill: chartColors[
-																	dept as keyof typeof chartColors
-																],
-															}}
-															name={
-																companyDepartments.find((d) => d.value === dept)
-																	?.label || dept
-															}
-															className="transition-all duration-200"
-														/>
-													))}
-											</LineChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.activity className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Performance&rdquo; metric to view
-													comparison
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Radar Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Team Skills Radar
-									{!selectedMetrics.includes("performance") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Performance&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("performance") &&
-									radarChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<RadarChart data={radarChartData}>
-												<PolarGrid gridType="polygon" className="opacity-30" />
-												<PolarAngleAxis
-													dataKey="subject"
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-												/>
-												<PolarRadiusAxis
-													angle={90}
-													domain={[0, 100]}
-													className="text-sm"
-													tick={{ fontSize: 10 }}
-													tickCount={6}
-												/>
-												<Tooltip
-													content={<CustomTooltip type="percentage" />}
-												/>
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="line"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments
-													.filter((dept) =>
-														[
-															"engineering",
-															"design",
-															"product",
-															"marketing",
-														].includes(dept)
-													)
-													.map((dept, index) => (
-														<Radar
-															key={dept}
-															name={
-																companyDepartments.find((d) => d.value === dept)
-																	?.label || dept
-															}
-															dataKey={dept}
-															stroke={
-																chartColors[dept as keyof typeof chartColors]
-															}
-															fill={
-																chartColors[dept as keyof typeof chartColors]
-															}
-															fillOpacity={0.1}
-															strokeWidth={2}
-															dot={{
-																fill: chartColors[
-																	dept as keyof typeof chartColors
-																],
-																strokeWidth: 2,
-																r: 4,
-															}}
-														/>
-													))}
-											</RadarChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.target className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Performance&rdquo; metric to view skills
-													radar
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Treemap Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Revenue Distribution by Teams
-									{!selectedMetrics.includes("revenue") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Revenue&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("revenue") &&
-									treemapData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<Treemap
-												data={treemapData}
-												dataKey="size"
-												stroke="#fff"
-												fill="#8884d8"
-											/>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.pieChart className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Revenue&rdquo; metric to view team
-													distribution
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-						</div>
-
-						{/* Chart Info */}
-						<div className="mt-6 p-4 bg-muted rounded-lg">
-							<h5 className="font-medium mb-2">Interactive Features:</h5>
-							<ul className="text-sm text-muted-foreground space-y-1">
-								<li>
-									• Select different departments to filter chart data across all
-									visualizations
-								</li>
-								<li>
-									• Choose specific metrics (Revenue, Users, Performance, etc.)
-									to control which charts are displayed
-								</li>
-								<li>
-									• Select time periods (Monthly, Quarterly, Weekly) to change
-									chart timeframes
-								</li>
-								<li>
-									• Charts automatically update and show/hide based on your
-									selections
-								</li>
-								<li>
-									• Hover over chart elements for detailed tooltips with
-									formatted values
-								</li>
-								<li>
-									• Each department has a unique color for easy identification
-									across charts
-								</li>
-							</ul>
-							<div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 rounded border-l-4 border-blue-400">
-								<p className="text-sm font-medium text-blue-800 dark:text-blue-200 break-words">
-									💡 Try different combinations: Select &ldquo;Revenue&rdquo; +
-									&ldquo;Quarterly&rdquo; for revenue trends, or
-									&ldquo;Performance&rdquo; + specific departments for
-									performance comparison!
-								</p>
 							</div>
-						</div>
-					</Card>
 
-					{/* AI/LLM Examples Section */}
-					<Card className="p-6">
-						<h3 className="text-xl font-semibold mb-4">
-							13. AI & LLM Integration Examples
-						</h3>
-						<p className="text-muted-foreground mb-6">
-							Perfect for AI applications, chatbots, prompt engineering, and
-							machine learning workflows.
-						</p>
-
-						<div className="grid gap-6">
-							{/* LLM Model Selection */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									LLM Model Selection
-								</h4>
-								<MultiSelect
-									options={llmModelsOptions}
-									onValueChange={(value) => setSelectedLLMs(value)}
-									defaultValue={["gpt-4o", "claude-3-opus"]}
-									placeholder="Select AI models"
-									variant="default"
-									animationConfig={{ badgeAnimation: "pulse" }}
-									className="w-full"
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Choose multiple language models for comparison, A/B testing,
-									or ensemble predictions.
-								</p>
-							</Card>
-
-							{/* AI Tools Categories */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									AI Tools & Services
-								</h4>
-								<MultiSelect
-									options={aiToolsCategories}
-									onValueChange={(value) => setSelectedAITools(value)}
-									defaultValue={["openai-gpt", "code-assistant", "pinecone"]}
-									placeholder="Select AI tools"
-									variant="secondary"
-									animationConfig={{ badgeAnimation: "wiggle" }}
-									className="w-full"
-									searchable={true}
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Organize AI services by category for better workflow
-									management and tool selection.
-								</p>
-							</Card>
-
-							{/* Prompt Template Types */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Prompt Engineering Templates
-								</h4>
-								<MultiSelect
-									options={promptTemplateTypes}
-									onValueChange={(value) => setSelectedPromptTypes(value)}
-									defaultValue={["system-prompt", "few-shot"]}
-									placeholder="Select prompt types"
-									variant="default"
-									animationConfig={{ badgeAnimation: "bounce" }}
-									className="w-full"
-									maxCount={4}
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Select prompt engineering patterns with custom styling for
-									different template types.
-								</p>
-							</Card>
-
-							{/* RAG Data Sources */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">RAG Data Sources</h4>
-								<MultiSelect
-									options={ragDataSources}
-									onValueChange={(value) => setSelectedRAGSources(value)}
-									defaultValue={[
-										"pdf-documents",
-										"knowledge-base",
-										"web-pages",
-									]}
-									placeholder="Select data sources"
-									variant="secondary"
-									animationConfig={{ badgeAnimation: "slide" }}
-									className="w-full"
-									hideSelectAll={false}
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Configure Retrieval-Augmented Generation with multiple data
-									sources for enhanced AI responses.
-								</p>
-							</Card>
-
-							{/* AI Model Parameters */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Model Parameters Configuration
-								</h4>
-								<MultiSelect
-									options={aiModelParameters}
-									onValueChange={(value) => setSelectedAIParameters(value)}
-									defaultValue={["temperature", "max-tokens", "top-p"]}
-									placeholder="Select parameters"
-									variant="default"
-									animationConfig={{ badgeAnimation: "fade" }}
-									className="w-full"
-									responsive={true}
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Fine-tune AI model behavior by selecting generation and
-									response control parameters.
-								</p>
-							</Card>
-
-							{/* AI Agent Capabilities */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									AI Agent Capabilities
-								</h4>
-								<MultiSelect
-									options={aiAgentCapabilities}
-									onValueChange={(value) => setSelectedAgentCapabilities(value)}
-									defaultValue={[
-										"text-generation",
-										"data-analysis",
-										"translation",
-									]}
-									placeholder="Select capabilities"
-									variant="secondary"
-									animationConfig={{ badgeAnimation: "bounce" }}
-									className="w-full"
-									maxCount={5}
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Define what your AI agent can do by selecting from content
-									creation, analysis, and communication capabilities.
-								</p>
-							</Card>
-
-							{/* Multimodal AI Features */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Multimodal AI Features
-								</h4>
-								<MultiSelect
-									options={multimodalOptions}
-									onValueChange={(value) => setSelectedMultimodal(value)}
-									defaultValue={["text-to-image", "speech-to-text"]}
-									placeholder="Select modalities"
-									variant="default"
-									animationConfig={{ badgeAnimation: "wiggle" }}
-									className="w-full"
-									singleLine={false}
-								/>
-								<p className="text-sm text-muted-foreground mt-2">
-									Enable cross-modal AI capabilities with custom-styled badges
-									for different input/output types.
-								</p>
-							</Card>
-						</div>
-
-						{/* AI Use Cases Info */}
-						<div className="mt-6 p-4 bg-muted rounded-lg">
-							<h5 className="font-medium mb-2">AI/LLM Use Cases:</h5>
-							<ul className="text-sm text-muted-foreground space-y-1">
-								<li>
-									• Configure multiple AI models for ensemble predictions and
-									A/B testing
-								</li>
-								<li>
-									• Select prompt templates for different conversation patterns
-									and workflows
-								</li>
-								<li>
-									• Choose data sources for RAG-enhanced responses and knowledge
-									integration
-								</li>
-								<li>
-									• Fine-tune model parameters for specific use cases and
-									performance optimization
-								</li>
-								<li>
-									• Organize AI tools by categories and specialized workflows
-								</li>
-								<li>
-									• Build AI agent configurations with multiple capabilities and
-									skills
-								</li>
-								<li>
-									• Enable multimodal AI features for cross-format content
-									processing
-								</li>
-								<li>
-									• Create custom AI pipelines with modular component selection
-								</li>
-							</ul>
-							<div className="mt-3 p-3 bg-purple-50 dark:bg-purple-950 rounded border-l-4 border-purple-400">
-								<p className="text-sm font-medium text-purple-800 dark:text-purple-200 break-words">
-									🤖 Perfect for AI dashboards, chatbot configuration, prompt
-									engineering tools, MLOps workflows, and multimodal AI
-									applications!
-								</p>
+							{/* Features Grid */}
+							<div className="p-6 pt-0">
+								<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+									<div className="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-200 dark:border-orange-800">
+										<div className="flex items-center gap-2 mb-2">
+											<Icons.activity className="h-5 w-5 text-orange-600 dark:text-orange-400" />
+											<h4 className="font-semibold text-orange-900 dark:text-orange-100">
+												Real-time Updates
+											</h4>
+										</div>
+										<p className="text-sm text-orange-700 dark:text-orange-300">
+											Charts instantly update when selections change
+										</p>
+									</div>
+									<div className="p-4 bg-amber-100 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800">
+										<div className="flex items-center gap-2 mb-2">
+											<Icons.search className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+											<h4 className="font-semibold text-amber-900 dark:text-amber-100">
+												Smart Filtering
+											</h4>
+										</div>
+										<p className="text-sm text-amber-700 dark:text-amber-300">
+											Multiple filter dimensions working together
+										</p>
+									</div>
+									<div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-800">
+										<div className="flex items-center gap-2 mb-2">
+											<Icons.target className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
+											<h4 className="font-semibold text-yellow-900 dark:text-yellow-100">
+												Custom Visualizations
+											</h4>
+										</div>
+										<p className="text-sm text-yellow-700 dark:text-yellow-300">
+											Bar, pie, area, line, radar, and treemap charts
+										</p>
+									</div>
+								</div>
 							</div>
-						</div>
-					</Card>
 
-					{/* Props Reference */}
-					<Card className="p-6">
-						<h3 className="text-xl font-semibold mb-4">14. Props Reference</h3>
-						<div className="prose prose-sm max-w-none">
-							<div className="grid gap-4 text-sm">
-								<div className="space-y-2">
-									<h4 className="font-medium">Core Props</h4>
-									<ul className="space-y-1 text-muted-foreground">
-										<li>
-											<code>options</code>: Array of options or grouped options
-										</li>
-										<li>
-											<code>onValueChange</code>: Callback for value changes
-										</li>
-										<li>
-											<code>defaultValue</code>: Initial selected values
-											(default: [])
-										</li>
-										<li>
-											<code>placeholder</code>: Placeholder text (default:
-											&ldquo;Select options&rdquo;)
-										</li>
-									</ul>
+							{/* Implementation Notes */}
+							<div className="p-6 pt-0">
+								<div className="bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800">
+									<h4 className="text-lg font-semibold mb-4 text-orange-900 dark:text-orange-100 flex items-center gap-2">
+										<Icons.code className="h-5 w-5" />
+										Implementation Highlights
+									</h4>
+									<div className="grid gap-4 md:grid-cols-2">
+										<div>
+											<h5 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
+												Data Binding Strategy
+											</h5>
+											<ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
+												<li>• Reactive chart data based on selections</li>
+												<li>• Conditional chart rendering</li>
+												<li>• Optimized re-render performance</li>
+												<li>• Smooth transition animations</li>
+											</ul>
+										</div>
+										<div>
+											<h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">
+												Best Practices
+											</h5>
+											<ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+												<li>• Consistent color schemes across charts</li>
+												<li>• Responsive chart containers</li>
+												<li>• Accessible tooltips and legends</li>
+												<li>• Empty state handling</li>
+											</ul>
+										</div>
+									</div>
 								</div>
-								<div className="space-y-2">
-									<h4 className="font-medium">Appearance</h4>
-									<ul className="space-y-1 text-muted-foreground">
-										<li>
-											<code>variant</code>: &ldquo;default&rdquo; |
-											&ldquo;secondary&rdquo; | &ldquo;destructive&rdquo; |
-											&ldquo;inverted&rdquo;
-										</li>
-										<li>
-											<code>maxCount</code>: Max badges to show (default: 3)
-										</li>
-										<li>
-											<code>autoSize</code>: Auto width behavior (default: true)
-										</li>
-										<li>
-											<code>singleLine</code>: Single line layout (default:
-											false)
-										</li>
-									</ul>
-								</div>
-								<div className="space-y-2">
-									<h4 className="font-medium">Behavior</h4>
-									<ul className="space-y-1 text-muted-foreground">
-										<li>
-											<code>searchable</code>: Enable search (default: true)
-										</li>
-										<li>
-											<code>hideSelectAll</code>: Hide select all button
-											(default: false)
-										</li>
-										<li>
-											<code>closeOnSelect</code>: Close after selection
-											(default: false)
-										</li>
-										<li>
-											<code>disabled</code>: Disable component (default: false)
-										</li>
-									</ul>
-								</div>
-								<div className="space-y-2">
-									<h4 className="font-medium">Advanced</h4>
-									<ul className="space-y-1 text-muted-foreground">
-										<li>
-											<code>responsive</code>: Responsive configuration
-										</li>
-										<li>
-											<code>animationConfig</code>: Animation settings
-										</li>
-										<li>
-											<code>modalPopover</code>: Modal behavior (default: false)
-										</li>
-										<li>
-											<code>deduplicateOptions</code>: Remove duplicates
-											(default: false)
-										</li>
-									</ul>
+							</div>
+
+							{/* Pro Tips */}
+							<div className="p-6 pt-0">
+								<div className="bg-gradient-to-br from-yellow-400/10 via-orange-400/10 to-amber-400/10 border-l-4 border-orange-400 rounded-r-lg p-4">
+									<p className="text-orange-800 dark:text-orange-200 font-medium flex items-start gap-2">
+										<Icons.star className="h-5 w-5 mt-0.5 flex-shrink-0" />
+										<span>
+											<strong>Pro Tip:</strong> Use MultiSelect variants to
+											create visual hierarchy: primary selectors for main
+											filters, secondary for sub-categories, and inverted for
+											special options.
+										</span>
+									</p>
 								</div>
 							</div>
 						</div>
-					</Card>
+
+						{/* AI/LLM Examples Section */}
+						<div className="w-full min-w-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden">
+							{/* Header */}
+							<div className="bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 p-6 text-white">
+								<div className="flex items-center gap-3 mb-3">
+									<div className="p-2 bg-white/20 rounded-lg">
+										<Icons.zap className="h-6 w-6" />
+									</div>
+									<h2 className="text-2xl font-bold">AI & LLM Integration</h2>
+								</div>
+								<p className="text-violet-100 text-lg leading-relaxed">
+									Power up your AI applications with intelligent MultiSelect
+									controls for model selection, prompt engineering, data source
+									configuration, and multimodal AI workflows.
+								</p>
+							</div>
+
+							{/* Content */}
+							<div className="p-6 space-y-8">
+								{/* Introduction */}
+								<div className="prose prose-violet max-w-none">
+									<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+										Transform your AI interfaces with{" "}
+										<strong>smart selection controls</strong> that make complex
+										configurations intuitive. From LLM model comparison to RAG
+										data source management, MultiSelect components bring clarity
+										to AI workflows.
+									</p>
+								</div>
+
+								{/* Interactive Demo Grid */}
+								<div className="grid gap-6">
+									{/* LLM Model Selection */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											LLM Model Selection
+										</h4>
+										<MultiSelect
+											options={llmModelsOptions}
+											onValueChange={(value) => setSelectedLLMs(value)}
+											defaultValue={["gpt-4o", "claude-3-opus"]}
+											placeholder="Select AI models"
+											variant="default"
+											animationConfig={{ badgeAnimation: "pulse" }}
+											className="w-full"
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Choose multiple language models for comparison, A/B
+											testing, or ensemble predictions.
+										</p>
+									</Card>
+
+									{/* AI Tools Categories */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											AI Tools & Services
+										</h4>
+										<MultiSelect
+											options={aiToolsCategories}
+											onValueChange={(value) => setSelectedAITools(value)}
+											defaultValue={[
+												"openai-gpt",
+												"code-assistant",
+												"pinecone",
+											]}
+											placeholder="Select AI tools"
+											variant="secondary"
+											animationConfig={{ badgeAnimation: "wiggle" }}
+											className="w-full"
+											searchable={true}
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Organize AI services by category for better workflow
+											management and tool selection.
+										</p>
+									</Card>
+
+									{/* Prompt Template Types */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Prompt Engineering Templates
+										</h4>
+										<MultiSelect
+											options={promptTemplateTypes}
+											onValueChange={(value) => setSelectedPromptTypes(value)}
+											defaultValue={["system-prompt", "few-shot"]}
+											placeholder="Select prompt types"
+											variant="default"
+											animationConfig={{ badgeAnimation: "bounce" }}
+											className="w-full"
+											maxCount={4}
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Select prompt engineering patterns with custom styling for
+											different template types.
+										</p>
+									</Card>
+
+									{/* RAG Data Sources */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											RAG Data Sources
+										</h4>
+										<MultiSelect
+											options={ragDataSources}
+											onValueChange={(value) => setSelectedRAGSources(value)}
+											defaultValue={[
+												"pdf-documents",
+												"knowledge-base",
+												"web-pages",
+											]}
+											placeholder="Select data sources"
+											variant="secondary"
+											animationConfig={{ badgeAnimation: "slide" }}
+											className="w-full"
+											hideSelectAll={false}
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Configure Retrieval-Augmented Generation with multiple
+											data sources for enhanced AI responses.
+										</p>
+									</Card>
+
+									{/* AI Model Parameters */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Model Parameters Configuration
+										</h4>
+										<MultiSelect
+											options={aiModelParameters}
+											onValueChange={(value) => setSelectedAIParameters(value)}
+											defaultValue={["temperature", "max-tokens", "top-p"]}
+											placeholder="Select parameters"
+											variant="default"
+											animationConfig={{ badgeAnimation: "fade" }}
+											className="w-full"
+											responsive={true}
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Fine-tune AI model behavior by selecting generation and
+											response control parameters.
+										</p>
+									</Card>
+
+									{/* AI Agent Capabilities */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											AI Agent Capabilities
+										</h4>
+										<MultiSelect
+											options={aiAgentCapabilities}
+											onValueChange={(value) =>
+												setSelectedAgentCapabilities(value)
+											}
+											defaultValue={[
+												"text-generation",
+												"data-analysis",
+												"translation",
+											]}
+											placeholder="Select capabilities"
+											variant="secondary"
+											animationConfig={{ badgeAnimation: "bounce" }}
+											className="w-full"
+											maxCount={5}
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Define what your AI agent can do by selecting from content
+											creation, analysis, and communication capabilities.
+										</p>
+									</Card>
+
+									{/* Multimodal AI Features */}
+									<Card className="p-4 w-full min-w-0">
+										<h4 className="text-lg font-medium mb-4">
+											Multimodal AI Features
+										</h4>
+										<MultiSelect
+											options={multimodalOptions}
+											onValueChange={(value) => setSelectedMultimodal(value)}
+											defaultValue={["text-to-image", "speech-to-text"]}
+											placeholder="Select modalities"
+											variant="default"
+											animationConfig={{ badgeAnimation: "wiggle" }}
+											className="w-full"
+											singleLine={false}
+										/>
+										<p className="text-sm text-muted-foreground mt-2">
+											Enable cross-modal AI capabilities with custom-styled
+											badges for different input/output types.
+										</p>
+									</Card>
+								</div>
+
+								{/* Features Grid */}
+								<div className="p-6 pt-0">
+									<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+										<div className="p-4 bg-violet-100 dark:bg-violet-900/30 rounded-lg border border-violet-200 dark:border-violet-800">
+											<div className="flex items-center gap-2 mb-2">
+												<Icons.cpu className="h-5 w-5 text-violet-600 dark:text-violet-400" />
+												<h4 className="font-semibold text-violet-900 dark:text-violet-100">
+													Model Selection
+												</h4>
+											</div>
+											<p className="text-sm text-violet-700 dark:text-violet-300">
+												Configure multiple AI models for A/B testing
+											</p>
+										</div>
+										<div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800">
+											<div className="flex items-center gap-2 mb-2">
+												<Icons.messageCircle className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+												<h4 className="font-semibold text-purple-900 dark:text-purple-100">
+													Prompt Engineering
+												</h4>
+											</div>
+											<p className="text-sm text-purple-700 dark:text-purple-300">
+												Organize templates and conversation patterns
+											</p>
+										</div>
+										<div className="p-4 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg border border-indigo-200 dark:border-indigo-800">
+											<div className="flex items-center gap-2 mb-2">
+												<Icons.database className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+												<h4 className="font-semibold text-indigo-900 dark:text-indigo-100">
+													RAG Integration
+												</h4>
+											</div>
+											<p className="text-sm text-indigo-700 dark:text-indigo-300">
+												Multi-source knowledge retrieval system
+											</p>
+										</div>
+									</div>
+								</div>
+
+								{/* AI Use Cases */}
+								<div className="p-6 pt-0">
+									<div className="bg-gradient-to-r from-violet-100 via-purple-100 to-indigo-100 dark:from-violet-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-violet-200 dark:border-violet-800">
+										<h4 className="text-lg font-semibold mb-4 text-violet-900 dark:text-violet-100 flex items-center gap-2">
+											<Icons.star className="h-5 w-5" />
+											AI Implementation Patterns
+										</h4>
+										<div className="grid gap-4 md:grid-cols-2">
+											<div>
+												<h5 className="font-medium text-violet-800 dark:text-violet-200 mb-2">
+													Essential AI Workflows
+												</h5>
+												<ul className="text-sm text-violet-700 dark:text-violet-300 space-y-1">
+													<li>• Model ensemble and comparison</li>
+													<li>• Template-based prompt engineering</li>
+													<li>• Multi-source RAG configuration</li>
+													<li>• Parameter optimization controls</li>
+												</ul>
+											</div>
+											<div>
+												<h5 className="font-medium text-purple-800 dark:text-purple-200 mb-2">
+													Advanced Features
+												</h5>
+												<ul className="text-sm text-purple-700 dark:text-purple-300 space-y-1">
+													<li>• Multimodal AI capabilities</li>
+													<li>• Agent skill configuration</li>
+													<li>• Tool and service organization</li>
+													<li>• Custom AI pipeline building</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{/* Pro Tips */}
+								<div className="p-6 pt-0">
+									<div className="bg-gradient-to-br from-indigo-400/10 via-purple-400/10 to-violet-400/10 border-l-4 border-violet-400 rounded-r-lg p-4">
+										<p className="text-violet-800 dark:text-violet-200 font-medium flex items-start gap-2">
+											<Icons.zap className="h-5 w-5 mt-0.5 flex-shrink-0" />
+											<span>
+												<strong>AI Pro Tip:</strong> Use different animation
+												styles to indicate AI status: &ldquo;pulse&rdquo; for
+												active models, &ldquo;bounce&rdquo; for new features,
+												&ldquo;slide&rdquo; for data sources.
+											</span>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							{/* Props Reference */}
+							<div className="w-full min-w-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden">
+								{/* Header */}
+								<div className="bg-gradient-to-r from-rose-500 via-pink-500 to-red-500 p-6 text-white">
+									<div className="flex items-center gap-3 mb-3">
+										<div className="p-2 bg-white/20 rounded-lg">
+											<Icons.code className="h-6 w-6" />
+										</div>
+										<h2 className="text-2xl font-bold">
+											Props Reference Guide
+										</h2>
+									</div>
+									<p className="text-rose-100 text-lg leading-relaxed">
+										Complete documentation of all MultiSelect component
+										properties, with examples, defaults, and best practices for
+										every configuration option.
+									</p>
+								</div>
+
+								{/* Content */}
+								<div className="p-6 space-y-8">
+									{/* Introduction */}
+									<div className="prose prose-rose max-w-none">
+										<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+											Master every aspect of the MultiSelect component with this{" "}
+											<strong>comprehensive reference</strong>. From basic
+											configuration to advanced customization, find all the
+											props you need to create perfect multi-selection
+											experiences.
+										</p>
+									</div>
+
+									{/* Props Grid */}
+									<div className="grid gap-6">
+										{/* Core Props */}
+										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
+											<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
+												<Icons.star className="h-5 w-5" />
+												Core Properties
+											</h3>
+											<div className="space-y-3 text-sm">
+												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+													<code className="font-semibold text-rose-700 dark:text-rose-300">
+														options
+													</code>
+													<p className="text-rose-600 dark:text-rose-400 mt-1">
+														Array of options or grouped options
+													</p>
+												</div>
+												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+													<code className="font-semibold text-pink-700 dark:text-pink-300">
+														onValueChange
+													</code>
+													<p className="text-pink-600 dark:text-pink-400 mt-1">
+														Callback function for value changes
+													</p>
+												</div>
+												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+													<code className="font-semibold text-red-700 dark:text-red-300">
+														defaultValue
+													</code>
+													<p className="text-red-600 dark:text-red-400 mt-1">
+														Initial selected values (default: [])
+													</p>
+												</div>
+												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+													<code className="font-semibold text-rose-700 dark:text-rose-300">
+														placeholder
+													</code>
+													<p className="text-rose-600 dark:text-rose-400 mt-1">
+														Placeholder text (default: &ldquo;Select
+														options&rdquo;)
+													</p>
+												</div>
+											</div>
+										</Card>
+
+										{/* Appearance Props */}
+										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-pink-200 dark:border-pink-800">
+											<h3 className="text-xl font-semibold mb-4 text-pink-800 dark:text-pink-200 flex items-center gap-2">
+												<Icons.heart className="h-5 w-5" />
+												Appearance & Styling
+											</h3>
+											<div className="grid gap-3 md:grid-cols-2 text-sm">
+												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+													<code className="font-semibold text-pink-700 dark:text-pink-300">
+														variant
+													</code>
+													<p className="text-pink-600 dark:text-pink-400 mt-1">
+														&ldquo;default&rdquo; | &ldquo;secondary&rdquo; |
+														&ldquo;destructive&rdquo; | &ldquo;inverted&rdquo;
+													</p>
+												</div>
+												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+													<code className="font-semibold text-rose-700 dark:text-rose-300">
+														maxCount
+													</code>
+													<p className="text-rose-600 dark:text-rose-400 mt-1">
+														Max badges to show (default: 3)
+													</p>
+												</div>
+												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+													<code className="font-semibold text-red-700 dark:text-red-300">
+														autoSize
+													</code>
+													<p className="text-red-600 dark:text-red-400 mt-1">
+														Auto width behavior (default: true)
+													</p>
+												</div>
+												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+													<code className="font-semibold text-pink-700 dark:text-pink-300">
+														singleLine
+													</code>
+													<p className="text-pink-600 dark:text-pink-400 mt-1">
+														Single line layout (default: false)
+													</p>
+												</div>
+											</div>
+										</Card>
+
+										{/* Behavior Props */}
+										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-red-200 dark:border-red-800">
+											<h3 className="text-xl font-semibold mb-4 text-red-800 dark:text-red-200 flex items-center gap-2">
+												<Icons.target className="h-5 w-5" />
+												Behavior & Interaction
+											</h3>
+											<div className="grid gap-3 md:grid-cols-2 text-sm">
+												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+													<code className="font-semibold text-red-700 dark:text-red-300">
+														searchable
+													</code>
+													<p className="text-red-600 dark:text-red-400 mt-1">
+														Enable search functionality (default: true)
+													</p>
+												</div>
+												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+													<code className="font-semibold text-rose-700 dark:text-rose-300">
+														hideSelectAll
+													</code>
+													<p className="text-rose-600 dark:text-rose-400 mt-1">
+														Hide select all button (default: false)
+													</p>
+												</div>
+												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+													<code className="font-semibold text-pink-700 dark:text-pink-300">
+														closeOnSelect
+													</code>
+													<p className="text-pink-600 dark:text-pink-400 mt-1">
+														Close after selection (default: false)
+													</p>
+												</div>
+												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+													<code className="font-semibold text-red-700 dark:text-red-300">
+														disabled
+													</code>
+													<p className="text-red-600 dark:text-red-400 mt-1">
+														Disable component (default: false)
+													</p>
+												</div>
+											</div>
+										</Card>
+
+										{/* Advanced Props */}
+										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
+											<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
+												<Icons.zap className="h-5 w-5" />
+												Advanced Configuration
+											</h3>
+											<div className="grid gap-3 md:grid-cols-2 text-sm">
+												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+													<code className="font-semibold text-rose-700 dark:text-rose-300">
+														responsive
+													</code>
+													<p className="text-rose-600 dark:text-rose-400 mt-1">
+														Responsive behavior configuration
+													</p>
+												</div>
+												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+													<code className="font-semibold text-pink-700 dark:text-pink-300">
+														animationConfig
+													</code>
+													<p className="text-pink-600 dark:text-pink-400 mt-1">
+														Custom animation settings
+													</p>
+												</div>
+												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+													<code className="font-semibold text-red-700 dark:text-red-300">
+														modalPopover
+													</code>
+													<p className="text-red-600 dark:text-red-400 mt-1">
+														Modal behavior (default: false)
+													</p>
+												</div>
+												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+													<code className="font-semibold text-rose-700 dark:text-rose-300">
+														deduplicateOptions
+													</code>
+													<p className="text-rose-600 dark:text-rose-400 mt-1">
+														Remove duplicates (default: false)
+													</p>
+												</div>
+											</div>
+										</Card>
+									</div>
+								</div>
+
+								{/* Implementation Tips */}
+								<div className="p-6 pt-0">
+									<div className="bg-gradient-to-r from-rose-100 via-pink-100 to-red-100 dark:from-rose-900/20 dark:via-pink-900/20 dark:to-red-900/20 rounded-lg p-6 border border-rose-200 dark:border-rose-800">
+										<h4 className="text-lg font-semibold mb-4 text-rose-900 dark:text-rose-100 flex items-center gap-2">
+											<Icons.code className="h-5 w-5" />
+											Implementation Best Practices
+										</h4>
+										<div className="grid gap-4 md:grid-cols-2">
+											<div>
+												<h5 className="font-medium text-rose-800 dark:text-rose-200 mb-2">
+													Essential Tips
+												</h5>
+												<ul className="text-sm text-rose-700 dark:text-rose-300 space-y-1">
+													<li>• Always provide onValueChange callback</li>
+													<li>• Use meaningful option labels</li>
+													<li>• Set appropriate maxCount for UI</li>
+													<li>• Test with different data sizes</li>
+												</ul>
+											</div>
+											<div>
+												<h5 className="font-medium text-pink-800 dark:text-pink-200 mb-2">
+													Performance
+												</h5>
+												<ul className="text-sm text-pink-700 dark:text-pink-300 space-y-1">
+													<li>
+														• Enable deduplicateOptions for large datasets
+													</li>
+													<li>• Use responsive props for mobile</li>
+													<li>• Optimize search with custom filtering</li>
+													<li>• Memoize option arrays when possible</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{/* Quick Reference */}
+								<div className="p-6 pt-0">
+									<div className="bg-gradient-to-br from-red-400/10 via-pink-400/10 to-rose-400/10 border-l-4 border-rose-400 rounded-r-lg p-4">
+										<p className="text-rose-800 dark:text-rose-200 font-medium flex items-start gap-2">
+											<Icons.code className="h-5 w-5 mt-0.5 flex-shrink-0" />
+											<span>
+												<strong>Quick Start:</strong> Most use cases only need
+												options, onValueChange, and optionally defaultValue. All
+												other props enhance the experience but have sensible
+												defaults.
+											</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					{/* AI Chat Widget */}
 				</div>
-
-				{/* Code Example Section */}
-				<div className="mt-12">
-					<Card className="p-6">
-						<div className="space-y-4">
-							<div className="space-y-2">
-								<h3 className="text-xl font-semibold">14. Example Usage</h3>
-								<p className="text-muted-foreground">
-									Copy and paste this code to get started with the MultiSelect
-									component
-								</p>
-							</div>
-							<div className="relative overflow-hidden">
-								<pre className="bg-muted p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm max-w-full">
-									<code className="block whitespace-pre-wrap break-words sm:whitespace-pre">{`import { MultiSelect } from "@/components/multi-select";
-import { useState } from "react";
-
-const options = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue.js" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-];
-
-export function MyComponent() {
-  const [selectedValues, setSelectedValues] = 
-    useState<string[]>([]);
-
-  return (
-    <MultiSelect
-      options={options}
-      onValueChange={setSelectedValues}
-      defaultValue={selectedValues}
-    />
-  );
-}`}</code>
-								</pre>
-								<Button
-									size="sm"
-									variant="outline"
-									className="absolute top-1 right-1 sm:top-2 sm:right-2 h-8 w-8 sm:h-auto sm:w-auto p-1 sm:p-2"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(`import { MultiSelect } from "@/components/multi-select";
-import { useState } from "react";
-
-const options = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue.js" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-];
-
-export function MyComponent() {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
-  return (
-    <MultiSelect
-      options={options}
-      onValueChange={setSelectedValues}
-      defaultValue={selectedValues}
-    />
-  );
-}`);
-										toast.success("Code copied to clipboard!", {
-											description: "You can now paste it into your project",
-										});
-									}}>
-									<Copy className="h-3 w-3 sm:h-4 sm:w-4" />
-									<span className="hidden sm:inline ml-1">Copy</span>
-								</Button>
-							</div>
-						</div>
-					</Card>
-				</div>
+				<AIChat />
 			</div>
-
-			{/* AI Chat Widget */}
-			<AIChat />
 		</main>
 	);
 }
