@@ -102,7 +102,15 @@ When responding:
 8. Provide code examples when relevant
 9. Reference specific props and their usage
 10. **ALWAYS** end your response with exactly 5 relevant follow-up questions about MultiSelect
-11. Format follow-up questions as a JSON array at the end like: QUESTIONS: ["Question 1?", "Question 2?", "Question 3?", "Question 4?", "Question 5?"]
+11. **MANDATORY**: Format follow-up questions ONLY as a JSON array at the end like this:
+    QUESTIONS: ["Question 1?", "Question 2?", "Question 3?", "Question 4?", "Question 5?"]
+    - Use EXACTLY this format: QUESTIONS: followed by a valid JSON array
+    - Each question MUST end with a question mark
+    - Each question MUST be a complete string in double quotes
+    - NO other format is accepted (no plain text, no numbered lists)
+    - The JSON array MUST be valid and parseable
+    - Example: QUESTIONS: ["How do I set default values?", "What props control styling?", "How to handle validation?", "Can I disable specific options?", "How to integrate with forms?"]
+    - CRITICAL: This is the ONLY accepted format - any other format will be ignored
 12. Make sure questions are specific to MultiSelect component and build on the current conversation context
 13. **IMPORTANT**: The QUESTIONS section will be automatically hidden from users and used to update suggested questions
 
@@ -237,22 +245,15 @@ export function AIChat({ className }: AIChatProps) {
 					questions = JSON.parse(questionsMatch[1]);
 					aiContent = aiContent.replace(/QUESTIONS:\s*\[[\s\S]*?\]/, "").trim();
 				} catch (e) {
-					console.warn("Failed to parse JSON questions format");
+					console.warn("Failed to parse JSON questions format:", e);
+					console.warn(
+						'Expected format: QUESTIONS: ["Question 1?", "Question 2?", ...]'
+					);
 				}
-			}
-
-			if (questions.length === 0) {
-				const quotedQuestionsMatch = aiContent.match(
-					/QUESTIONS:\s*([\s\S]*?)$/
+			} else {
+				console.warn(
+					'No valid QUESTIONS format found. Expected: QUESTIONS: ["Question 1?", "Question 2?", ...]'
 				);
-				if (quotedQuestionsMatch) {
-					const questionsText = quotedQuestionsMatch[1];
-					const quotedQuestions = questionsText.match(/"([^"]+)"/g);
-					if (quotedQuestions) {
-						questions = quotedQuestions.map((q: string) => q.replace(/"/g, ""));
-						aiContent = aiContent.replace(/QUESTIONS:[\s\S]*$/, "").trim();
-					}
-				}
 			}
 
 			const aiMessage: Message = {
