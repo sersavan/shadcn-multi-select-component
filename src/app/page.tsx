@@ -1466,12 +1466,6 @@ export default function Home() {
 											haven&apos;t had the chance to try yet.
 										</p>
 
-										<blockquote className="border-l-4 border-teal-500 pl-6 italic text-muted-foreground mb-6 bg-teal-50/50 dark:bg-teal-950/20 py-4 rounded-r-lg">
-											&ldquo;The only way to make sense out of change is to
-											plunge into it, move with it, and join the dance.&rdquo; -
-											Alan Watts
-										</blockquote>
-
 										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
 											<MultiSelect
 												options={categorizedOptions}
@@ -2268,11 +2262,6 @@ export default function Home() {
 										</div>
 									</div>
 
-									<blockquote className="border-l-4 border-amber-500 pl-6 italic text-muted-foreground my-6 bg-amber-50/50 dark:bg-amber-950/20 py-4 rounded-r-lg">
-										&ldquo;Animation is not the art of drawings that move but
-										the art of movements that are drawn.&rdquo; - Norman McLaren
-									</blockquote>
-
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
@@ -2512,7 +2501,10 @@ export default function Home() {
 												</div>
 											</div>
 
-											<div className="mt-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200/50 dark:border-green-700/50">
+											<div
+												className={getSmallDivClasses(
+													"mt-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200/50 dark:border-green-700/50"
+												)}>
 												<p className="text-sm font-medium text-green-800 dark:text-green-200">
 													Current Selection:{" "}
 													{responsiveDemo.join(", ") || "None selected"}
@@ -2524,7 +2516,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50"
+												"bg-gradient-to-br from-green-50/50 to-teal-50/50 dark:from-green-950/20 dark:to-teal-950/20 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-green-500" />
@@ -2700,7 +2692,10 @@ export default function Home() {
 												}}
 											/>
 
-											<div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200/50 dark:border-blue-700/50">
+											<div
+												className={getSmallDivClasses(
+													"mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200/50 dark:border-blue-700/50"
+												)}>
 												<p className="text-sm font-medium text-blue-800 dark:text-blue-200">
 													Selected Stack:{" "}
 													{groupedSelection.join(", ") || "None selected"}
@@ -2712,7 +2707,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
+												"bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-blue-500" />
@@ -2948,7 +2943,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50"
+												"bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-cyan-500" />
@@ -3218,7 +3213,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50"
+												"bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-950/20 dark:to-yellow-950/20 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-orange-500" />
@@ -3406,7 +3401,7 @@ export default function Home() {
 											<div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
 												<div
 													className={getSmallDivClasses(
-														"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
+														"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
 													)}>
 													<h5 className="font-medium text-foreground mb-3 flex items-center gap-2">
 														<Icons.target className="h-4 w-4 text-purple-500" />
@@ -3478,7 +3473,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50"
+												"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-purple-500" />
@@ -3708,7 +3703,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50"
+												"bg-gradient-to-br from-slate-50/50 to-zinc-50/50 dark:from-slate-950/20 dark:to-zinc-950/20 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-slate-500" />
@@ -3994,7 +3989,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50"
+												"bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-indigo-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-indigo-500" />
@@ -4188,7 +4183,7 @@ export default function Home() {
 													size="sm"
 													variant="outline"
 													onClick={handleReset}
-													className="flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:hover:bg-emerald-950">
+													className="flex items-center gap-1">
 													<Icons.activity className="h-3 w-3" />
 													Reset
 												</Button>
@@ -4196,7 +4191,7 @@ export default function Home() {
 													size="sm"
 													variant="outline"
 													onClick={handleClear}
-													className="flex items-center gap-1 bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/50 dark:hover:bg-teal-950">
+													className="flex items-center gap-1">
 													<Icons.x className="h-3 w-3" />
 													Clear
 												</Button>
@@ -4204,7 +4199,7 @@ export default function Home() {
 													size="sm"
 													variant="outline"
 													onClick={handleFocus}
-													className="flex items-center gap-1 bg-green-50 hover:bg-green-100 dark:bg-green-950/50 dark:hover:bg-green-950">
+													className="flex items-center gap-1">
 													<Icons.target className="h-3 w-3" />
 													Focus
 												</Button>
@@ -4212,7 +4207,7 @@ export default function Home() {
 													size="sm"
 													variant="outline"
 													onClick={handleGetValues}
-													className="flex items-center gap-1 bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-950/50 dark:hover:bg-cyan-950">
+													className="flex items-center gap-1">
 													<Icons.search className="h-3 w-3" />
 													Get Values
 												</Button>
@@ -4220,7 +4215,7 @@ export default function Home() {
 													size="sm"
 													variant="outline"
 													onClick={handleSetValues}
-													className="flex items-center gap-1 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/50 dark:hover:bg-blue-950">
+													className="flex items-center gap-1">
 													<Icons.wand className="h-3 w-3" />
 													Set Values
 												</Button>
@@ -4248,7 +4243,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50"
+												"bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/20 dark:to-green-950/20 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-emerald-500" />
