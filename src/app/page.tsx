@@ -51,6 +51,7 @@ import {
 } from "@/components/page-header";
 import { MultiSelect, MultiSelectRef } from "@/components/multi-select";
 import { AIChat } from "@/components/ai-chat";
+import { useColorMode } from "@/contexts/color-mode-context";
 
 const frameworksList = [
 	{ value: "next.js", label: "Next.js", icon: Icons.code },
@@ -720,6 +721,7 @@ const FormSchema = z.object({
 
 export default function Home() {
 	const [isInfoExpanded, setIsInfoExpanded] = useState(false);
+	const { isGrayMode } = useColorMode();
 
 	const [groupedSelection, setGroupedSelection] = useState<string[]>([
 		"react",
@@ -938,6 +940,69 @@ export default function Home() {
 		toast("Set values to: React, Vue.js, Angular");
 	};
 
+	const getCardClasses = (originalClasses: string) => {
+		if (isGrayMode) {
+			return "p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden";
+		}
+		return originalClasses;
+	};
+
+	const getHeaderTextClasses = (originalClasses: string) => {
+		if (isGrayMode) {
+			return "text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-700 via-gray-600 to-zinc-600 dark:from-slate-400 dark:via-gray-300 dark:to-zinc-300 bg-clip-text text-transparent mb-4";
+		}
+		return originalClasses;
+	};
+
+	const getBadgeClasses = (originalClasses: string) => {
+		if (isGrayMode) {
+			return "inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-900/30 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium mb-4";
+		}
+		return originalClasses;
+	};
+
+	const getDivClasses = (originalClasses: string) => {
+		if (isGrayMode) {
+			return "w-full min-w-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 rounded-xl border border-slate-200/50 dark:border-slate-800/50 overflow-hidden";
+		}
+		return originalClasses;
+	};
+
+	const getDivHeaderClasses = (originalClasses: string) => {
+		if (isGrayMode) {
+			return "bg-gradient-to-r from-slate-500 via-gray-500 to-zinc-500 p-6 text-white";
+		}
+		return originalClasses;
+	};
+
+	const getSmallDivClasses = (originalClasses: string) => {
+		if (isGrayMode) {
+			const hasMyClass = originalClasses.includes("my-8");
+			const hasMtClass =
+				originalClasses.includes("mt-8") || originalClasses.includes("mt-12");
+			const hasPadding = originalClasses.includes("p-6") ? "p-6" : "p-4";
+			const hasRoundedLg = originalClasses.includes("rounded-lg");
+			const rounded = hasRoundedLg ? "rounded-lg" : "rounded-xl";
+
+			let baseClasses = `${hasPadding} bg-white/60 dark:bg-slate-900/60 ${rounded} border border-slate-200 dark:border-slate-700 shadow-sm`;
+
+			if (hasMyClass) {
+				baseClasses = `my-8 ${baseClasses}`;
+			} else if (hasMtClass) {
+				baseClasses = originalClasses.includes("mt-12")
+					? `mt-12 ${baseClasses}`
+					: `mt-8 ${baseClasses}`;
+			}
+
+			if (originalClasses.includes("inline-flex")) {
+				baseClasses = `inline-flex items-center gap-2 px-4 py-2 ${baseClasses}`;
+			}
+
+			return baseClasses;
+		}
+		return originalClasses;
+	};
+
 	return (
 		<main className="min-h-screen bg-background overflow-x-hidden">
 			{/* Header */}
@@ -961,10 +1026,17 @@ export default function Home() {
 
 				{/* Interactive Examples Introduction */}
 				<div className="mt-4 mb-4">
-					<Card className="p-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 overflow-hidden"
+						)}>
 						{/* Header - Always Visible */}
 						<div
-							className="p-6 cursor-pointer hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-colors"
+							className={
+								isGrayMode
+									? "p-6 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-900/30 transition-colors"
+									: "p-6 cursor-pointer hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-colors"
+							}
 							onClick={() => setIsInfoExpanded(!isInfoExpanded)}>
 							<div className="flex items-center justify-between">
 								<div className="flex items-center gap-4">
@@ -1127,7 +1199,10 @@ export default function Home() {
 									</p>
 
 									{/* Another Interactive Section */}
-									<div className="my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-800/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-800/50"
+										)}>
 										<div className="mb-4">
 											<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-indigo-500" />
@@ -1194,7 +1269,10 @@ export default function Home() {
 											consider alternative technologies.
 										</p>
 
-										<div className="p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-800/50">
+										<div
+											className={getSmallDivClasses(
+												"p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-800/50"
+											)}>
 											<div className="mb-4">
 												<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
 													<Icons.cpu className="h-5 w-5 text-amber-500" />
@@ -1224,7 +1302,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mt-1">
 												<Icons.check className="h-4 w-4 text-white" />
@@ -1268,15 +1349,24 @@ export default function Home() {
 
 				{/* Interactive Form/Survey Section - Markdown Style */}
 				<div className="mt-8 mb-8">
-					<Card className="p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Survey Header */}
 							<div className="mb-8 text-center">
-								<div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
+								<div
+									className={getBadgeClasses(
+										"inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4"
+									)}>
 									<Icons.users className="h-4 w-4" />
 									Interactive Survey Example
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Developer Survey 2025
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -1382,7 +1472,7 @@ export default function Home() {
 											Alan Watts
 										</blockquote>
 
-										<div className="bg-gradient-to-br from-teal-50/50 to-cyan-50/50 dark:from-teal-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-teal-200/50 dark:border-teal-700/50">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
 											<MultiSelect
 												options={categorizedOptions}
 												onValueChange={(values) => {
@@ -1449,7 +1539,7 @@ export default function Home() {
 											</div>
 										</div>
 
-										<div className="bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50">
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
 											<MultiSelect
 												options={projectTypesWithStyle}
 												onValueChange={(values) => {
@@ -1484,7 +1574,10 @@ export default function Home() {
 											create better educational resources.
 										</p>
 
-										<div className="bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6">
+										<div
+											className={getSmallDivClasses(
+												"bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6"
+											)}>
 											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
 												<Icons.star className="h-5 w-5 text-purple-500" />
 												Learning Preferences
@@ -1548,7 +1641,10 @@ export default function Home() {
 											/>
 										</div>
 
-										<div className="bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50">
+										<div
+											className={getSmallDivClasses(
+												"mt-8 bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
+											)}>
 											<div className="flex items-start gap-3">
 												<Icons.star className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
 												<div>
@@ -1566,7 +1662,10 @@ export default function Home() {
 									</div>
 
 									{/* Survey Summary */}
-									<div className="mt-12 p-6 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-12 p-6 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
+										)}>
 										<h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
 											<Icons.check className="h-6 w-6 text-emerald-500" />
 											Thank You for Participating!
@@ -1601,15 +1700,24 @@ export default function Home() {
 				{/* Examples Grid */}
 				<div className="grid gap-6 mt-12 w-full min-w-0">
 					{/* 1. Form Integration - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
-								<div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm font-medium mb-4">
+								<div
+									className={getBadgeClasses(
+										"inline-flex items-center gap-2 px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm font-medium mb-4"
+									)}>
 									<Icons.wand className="h-4 w-4" />
 									Professional Form Integration
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-300 dark:to-fuchsia-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-300 dark:to-fuchsia-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Advanced Form Validation
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -1636,7 +1744,10 @@ export default function Home() {
 										developer experience.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-violet-50/50 to-purple-50/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-violet-50/50 to-purple-50/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.check className="h-5 w-5 text-violet-500" />
 											Complete Form Example
@@ -1770,9 +1881,7 @@ export default function Home() {
 													/>
 												</div>
 												<div className="pt-4">
-													<Button
-														type="submit"
-														className="w-full bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700">
+													<Button type="submit" className="w-full">
 														<Icons.check className="mr-2 h-4 w-4" />
 														Submit Form
 													</Button>
@@ -1781,7 +1890,10 @@ export default function Home() {
 										</Form>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-violet-100/50 to-purple-100/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-violet-100/50 to-purple-100/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.code className="h-5 w-5 text-violet-500" />
 											Integration Benefits
@@ -1823,15 +1935,24 @@ export default function Home() {
 					</Card>
 
 					{/* 2. Component Variants - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 border-rose-200 dark:border-rose-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 border-rose-200 dark:border-rose-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
-								<div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded-full text-sm font-medium mb-4">
+								<div
+									className={getBadgeClasses(
+										"inline-flex items-center gap-2 px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded-full text-sm font-medium mb-4"
+									)}>
 									<Icons.wand className="h-4 w-4" />
 									Visual Design System
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-700 via-pink-600 to-red-600 dark:from-rose-400 dark:via-pink-300 dark:to-red-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-700 via-pink-600 to-red-600 dark:from-rose-400 dark:via-pink-300 dark:to-red-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Component Variants
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -1853,7 +1974,10 @@ export default function Home() {
 									</p>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-rose-500" />
 												Primary Variants
@@ -1903,7 +2027,10 @@ export default function Home() {
 											</div>
 										</div>
 
-										<div className="bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.shield className="h-5 w-5 text-pink-500" />
 												Special Variants
@@ -1955,7 +2082,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-rose-100/50 to-pink-100/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl border border-rose-200/50 dark:border-rose-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-rose-100/50 to-pink-100/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl border border-rose-200/50 dark:border-rose-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.star className="h-5 w-5 text-rose-500" />
 											Design System Integration
@@ -2003,7 +2133,10 @@ export default function Home() {
 					</Card>
 
 					{/* 3. Animation Configurations - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -2011,7 +2144,10 @@ export default function Home() {
 									<Icons.zap className="h-4 w-4" />
 									Interactive Animations
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-700 via-yellow-600 to-orange-600 dark:from-amber-400 dark:via-yellow-300 dark:to-orange-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-700 via-yellow-600 to-orange-600 dark:from-amber-400 dark:via-yellow-300 dark:to-orange-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Animation Configurations
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -2036,7 +2172,10 @@ export default function Home() {
 										system with customizable timing, easing, and effects.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
 											<Icons.activity className="h-5 w-5 text-amber-500" />
 											Badge Animation Showcase
@@ -2135,7 +2274,10 @@ export default function Home() {
 									</blockquote>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-amber-500" />
 												Performance Features
@@ -2165,7 +2307,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.star className="h-5 w-5 text-orange-500" />
 												Animation Types
@@ -2199,7 +2344,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-amber-100/50 to-yellow-100/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-amber-100/50 to-yellow-100/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-amber-500 mt-1 flex-shrink-0" />
 											<div>
@@ -2239,7 +2387,10 @@ export default function Home() {
 					</Card>
 
 					{/* 4. Responsive Behavior - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 border-green-200 dark:border-green-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 border-green-200 dark:border-green-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -2247,7 +2398,10 @@ export default function Home() {
 									<Icons.smartphone className="h-4 w-4" />
 									Adaptive Design
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 dark:from-green-400 dark:via-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 dark:from-green-400 dark:via-emerald-300 dark:to-teal-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Responsive Behavior
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -2281,7 +2435,10 @@ export default function Home() {
 										.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.monitor className="h-5 w-5 text-green-500" />
 											Live Responsive Demo
@@ -2365,7 +2522,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-green-500" />
 												Responsive Features
@@ -2402,7 +2562,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-green-50/50 to-teal-50/50 dark:from-green-950/20 dark:to-teal-950/20 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-green-50/50 to-teal-50/50 dark:from-green-950/20 dark:to-teal-950/20 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.star className="h-5 w-5 text-emerald-500" />
 												Configuration Options
@@ -2436,7 +2599,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-green-100/50 to-emerald-100/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-green-100/50 to-emerald-100/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-green-500 mt-1 flex-shrink-0" />
 											<div>
@@ -2466,7 +2632,10 @@ export default function Home() {
 					</Card>
 
 					{/* 5. Grouped Options - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -2474,7 +2643,10 @@ export default function Home() {
 									<Icons.star className="h-4 w-4" />
 									Organized Structure
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Grouped Options
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -2500,7 +2672,10 @@ export default function Home() {
 										find and select relevant options.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.code className="h-5 w-5 text-blue-500" />
 											Technology Stack Selector
@@ -2535,7 +2710,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-blue-500" />
 												Grouping Benefits
@@ -2572,7 +2750,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.star className="h-5 w-5 text-indigo-500" />
 												Category Structure
@@ -2606,7 +2787,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-blue-100/50 to-indigo-100/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-blue-100/50 to-indigo-100/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-blue-500 mt-1 flex-shrink-0" />
 											<div>
@@ -2634,7 +2818,10 @@ export default function Home() {
 					</Card>
 
 					{/* 6. Search and UI Configuration - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 dark:from-cyan-950/30 dark:via-sky-950/30 dark:to-blue-950/30 border-cyan-200 dark:border-cyan-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 dark:from-cyan-950/30 dark:via-sky-950/30 dark:to-blue-950/30 border-cyan-200 dark:border-cyan-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -2642,7 +2829,10 @@ export default function Home() {
 									<Icons.search className="h-4 w-4" />
 									Search & Discovery
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-700 via-sky-600 to-blue-600 dark:from-cyan-400 dark:via-sky-300 dark:to-blue-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-700 via-sky-600 to-blue-600 dark:from-cyan-400 dark:via-sky-300 dark:to-blue-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Search and UI Configuration
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -2675,7 +2865,10 @@ export default function Home() {
 										to create intuitive selection interfaces.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-cyan-50/50 to-sky-50/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-cyan-50/50 to-sky-50/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.search className="h-5 w-5 text-cyan-500" />
 											Search Configuration Comparison
@@ -2722,7 +2915,10 @@ export default function Home() {
 											</div>
 
 											<div className="space-y-4">
-												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-sky-200/50 dark:border-sky-700/50">
+												<div
+													className={getSmallDivClasses(
+														"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-sky-200/50 dark:border-sky-700/50"
+													)}>
 													<div className="flex items-center gap-2 mb-3">
 														<Icons.target className="h-4 w-4 text-sky-500" />
 														<span className="font-medium text-foreground text-sm">
@@ -2750,7 +2946,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-cyan-500" />
 												Search Features
@@ -2787,7 +2986,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.zap className="h-5 w-5 text-sky-500" />
 												UI Controls
@@ -2829,7 +3031,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-cyan-100/50 to-sky-100/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-cyan-100/50 to-sky-100/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-cyan-500 mt-1 flex-shrink-0" />
 											<div>
@@ -2859,7 +3064,10 @@ export default function Home() {
 					</Card>
 
 					{/* 7. Layout and Sizing Options - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 border-orange-200 dark:border-orange-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 border-orange-200 dark:border-orange-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -2867,7 +3075,10 @@ export default function Home() {
 									<Icons.monitor className="h-4 w-4" />
 									Flexible Layouts
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-300 dark:to-yellow-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-300 dark:to-yellow-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Layout and Sizing Options
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -2899,7 +3110,10 @@ export default function Home() {
 										for consistent layouts.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.monitor className="h-5 w-5 text-orange-500" />
 											Layout Demonstrations
@@ -3002,7 +3216,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-orange-500" />
 												Layout Features
@@ -3039,7 +3256,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-950/20 dark:to-yellow-950/20 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-950/20 dark:to-yellow-950/20 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.activity className="h-5 w-5 text-amber-500" />
 												Size Control Options
@@ -3077,7 +3297,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-orange-100/50 to-amber-100/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-orange-100/50 to-amber-100/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-orange-500 mt-1 flex-shrink-0" />
 											<div>
@@ -3105,7 +3328,10 @@ export default function Home() {
 					</Card>
 
 					{/* 8. Custom Styling and Colors - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 dark:from-purple-950/30 dark:via-fuchsia-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 dark:from-purple-950/30 dark:via-fuchsia-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -3113,7 +3339,10 @@ export default function Home() {
 									<Icons.wand className="h-4 w-4" />
 									Creative Expression
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-700 via-fuchsia-600 to-pink-600 dark:from-purple-400 dark:via-fuchsia-300 dark:to-pink-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-700 via-fuchsia-600 to-pink-600 dark:from-purple-400 dark:via-fuchsia-300 dark:to-pink-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Custom Styling and Colors
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -3146,7 +3375,10 @@ export default function Home() {
 										meaningfully.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-purple-50/50 to-fuchsia-50/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-purple-50/50 to-fuchsia-50/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.wand className="h-5 w-5 text-purple-500" />
 											Styled Project Types
@@ -3172,7 +3404,10 @@ export default function Home() {
 											/>
 
 											<div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50">
+												<div
+													className={getSmallDivClasses(
+														"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
+													)}>
 													<h5 className="font-medium text-foreground mb-3 flex items-center gap-2">
 														<Icons.target className="h-4 w-4 text-purple-500" />
 														Style Categories
@@ -3205,7 +3440,10 @@ export default function Home() {
 													</div>
 												</div>
 
-												<div className="bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50">
+												<div
+													className={getSmallDivClasses(
+														"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
+													)}>
 													<h5 className="font-medium text-foreground mb-3 flex items-center gap-2">
 														<Icons.star className="h-4 w-4 text-fuchsia-500" />
 														Current Selection
@@ -3238,7 +3476,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-purple-500" />
 												Styling Features
@@ -3275,7 +3516,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.wand className="h-5 w-5 text-fuchsia-500" />
 												Implementation
@@ -3315,7 +3559,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-purple-100/50 to-fuchsia-100/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-purple-100/50 to-fuchsia-100/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-purple-500 mt-1 flex-shrink-0" />
 											<div>
@@ -3383,14 +3630,20 @@ export default function Home() {
 										during loading states or form validation.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-slate-50/50 to-gray-50/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-slate-50/50 to-gray-50/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.shield className="h-5 w-5 text-slate-500" />
 											Disabled State Demonstrations
 										</h4>
 
 										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
-											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50">
+											<div
+												className={getSmallDivClasses(
+													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50"
+												)}>
 												<div className="flex items-center gap-2 mb-3">
 													<Icons.eyeOff className="h-4 w-4 text-slate-500" />
 													<span className="font-medium text-foreground text-sm">
@@ -3418,7 +3671,10 @@ export default function Home() {
 												</div>
 											</div>
 
-											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50">
+											<div
+												className={getSmallDivClasses(
+													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50"
+												)}>
 												<div className="flex items-center gap-2 mb-3">
 													<Icons.x className="h-4 w-4 text-slate-500" />
 													<span className="font-medium text-foreground text-sm">
@@ -3450,7 +3706,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-slate-500" />
 												Disabled Features
@@ -3487,7 +3746,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-slate-50/50 to-zinc-50/50 dark:from-slate-950/20 dark:to-zinc-950/20 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-slate-50/50 to-zinc-50/50 dark:from-slate-950/20 dark:to-zinc-950/20 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.shield className="h-5 w-5 text-gray-500" />
 												Use Cases
@@ -3529,7 +3791,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-slate-100/50 to-gray-100/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-slate-100/50 to-gray-100/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-slate-500 mt-1 flex-shrink-0" />
 											<div>
@@ -3559,7 +3824,10 @@ export default function Home() {
 					</Card>
 
 					{/* 10. Advanced Features - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/30 dark:via-blue-950/30 dark:to-cyan-950/30 border-indigo-200 dark:border-indigo-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/30 dark:via-blue-950/30 dark:to-cyan-950/30 border-indigo-200 dark:border-indigo-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -3567,7 +3835,10 @@ export default function Home() {
 									<Icons.zap className="h-4 w-4" />
 									Power User Features
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-700 via-blue-600 to-cyan-600 dark:from-indigo-400 dark:via-blue-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-700 via-blue-600 to-cyan-600 dark:from-indigo-400 dark:via-blue-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Advanced Features
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -3599,14 +3870,20 @@ export default function Home() {
 										for complex data scenarios.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-indigo-50/50 to-blue-50/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-indigo-50/50 to-blue-50/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.zap className="h-5 w-5 text-indigo-500" />
 											Advanced Behavior Showcase
 										</h4>
 
 										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
-											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-indigo-200/50 dark:border-indigo-700/50">
+											<div
+												className={getSmallDivClasses(
+													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-indigo-200/50 dark:border-indigo-700/50"
+												)}>
 												<div className="flex items-center gap-2 mb-3">
 													<Icons.x className="h-4 w-4 text-indigo-500" />
 													<span className="font-medium text-foreground text-sm">
@@ -3632,7 +3909,10 @@ export default function Home() {
 												</div>
 											</div>
 
-											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-blue-200/50 dark:border-blue-700/50">
+											<div
+												className={getSmallDivClasses(
+													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-blue-200/50 dark:border-blue-700/50"
+												)}>
 												<div className="flex items-center gap-2 mb-3">
 													<Icons.maximize className="h-4 w-4 text-blue-500" />
 													<span className="font-medium text-foreground text-sm">
@@ -3658,7 +3938,10 @@ export default function Home() {
 												</div>
 											</div>
 
-											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50 md:col-span-2 lg:col-span-1">
+											<div
+												className={getSmallDivClasses(
+													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50 md:col-span-2 lg:col-span-1"
+												)}>
 												<div className="flex items-center gap-2 mb-3">
 													<Icons.copy className="h-4 w-4 text-cyan-500" />
 													<span className="font-medium text-foreground text-sm">
@@ -3709,7 +3992,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-indigo-500" />
 												Advanced Controls
@@ -3746,7 +4032,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-indigo-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-indigo-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.star className="h-5 w-5 text-blue-500" />
 												Implementation Notes
@@ -3788,7 +4077,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-indigo-100/50 to-blue-100/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-indigo-100/50 to-blue-100/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-indigo-500 mt-1 flex-shrink-0" />
 											<div>
@@ -3818,7 +4110,10 @@ export default function Home() {
 					</Card>
 
 					{/* 11. Imperative Methods (useRef) - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden">
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
 							{/* Header */}
 							<div className="mb-8 text-center">
@@ -3826,7 +4121,10 @@ export default function Home() {
 									<Icons.code className="h-4 w-4" />
 									Programmatic Control
 								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-green-600 dark:from-emerald-400 dark:via-teal-300 dark:to-green-300 bg-clip-text text-transparent mb-4">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-green-600 dark:from-emerald-400 dark:via-teal-300 dark:to-green-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Imperative Methods (useRef)
 								</h2>
 								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -3852,7 +4150,10 @@ export default function Home() {
 										with complex application workflows.
 									</p>
 
-									<div className="my-8 p-6 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50">
+									<div
+										className={getSmallDivClasses(
+											"my-8 p-6 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
+										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.code className="h-5 w-5 text-emerald-500" />
 											Interactive Control Panel
@@ -3863,7 +4164,10 @@ export default function Home() {
 										</p>
 
 										<div className="space-y-6">
-											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50">
+											<div
+												className={getSmallDivClasses(
+													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50"
+												)}>
 												<MultiSelect
 													ref={multiSelectRef}
 													options={frameworksList}
@@ -3922,7 +4226,10 @@ export default function Home() {
 												</Button>
 											</div>
 
-											<div className="bg-emerald-50 dark:bg-emerald-950/20 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50">
+											<div
+												className={getSmallDivClasses(
+													"bg-emerald-50 dark:bg-emerald-950/20 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50"
+												)}>
 												<div className="flex items-center gap-2 mb-2">
 													<Icons.check className="h-4 w-4 text-emerald-500" />
 													<span className="font-medium text-emerald-800 dark:text-emerald-200">
@@ -3939,7 +4246,10 @@ export default function Home() {
 									</div>
 
 									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-emerald-500" />
 												Available Methods
@@ -3979,7 +4289,10 @@ export default function Home() {
 											</ul>
 										</div>
 
-										<div className="bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/20 dark:to-green-950/20 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50">
+										<div
+											className={getSmallDivClasses(
+												"bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/20 dark:to-green-950/20 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50"
+											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.code className="h-5 w-5 text-teal-500" />
 												Use Cases
@@ -4021,7 +4334,10 @@ export default function Home() {
 										</div>
 									</div>
 
-									<div className="mt-8 p-6 bg-gradient-to-r from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50">
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
+										)}>
 										<div className="flex items-start gap-4">
 											<Icons.star className="h-6 w-6 text-emerald-500 mt-1 flex-shrink-0" />
 											<div>
@@ -4052,9 +4368,15 @@ export default function Home() {
 					</Card>
 
 					{/* Charts and Data Visualization */}
-					<div className="w-full min-w-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden">
+					<div
+						className={getDivClasses(
+							"w-full min-w-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden"
+						)}>
 						{/* Header */}
-						<div className="bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 p-6 text-white">
+						<div
+							className={getDivHeaderClasses(
+								"bg-gradient-to-r from-orange-700 via-amber-700 to-yellow-600 p-6 text-white"
+							)}>
 							<div className="flex items-center gap-3 mb-3">
 								<div className="p-2 bg-white/20 rounded-lg">
 									<Icons.pieChart className="h-6 w-6" />
@@ -4642,7 +4964,10 @@ export default function Home() {
 							{/* Features Grid */}
 							<div className="p-6 pt-0">
 								<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-									<div className="p-4 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-200 dark:border-orange-800">
+									<div
+										className={getSmallDivClasses(
+											"p-4 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-200 dark:border-orange-800"
+										)}>
 										<div className="flex items-center gap-2 mb-2">
 											<Icons.activity className="h-5 w-5 text-orange-600 dark:text-orange-400" />
 											<h4 className="font-semibold text-orange-900 dark:text-orange-100">
@@ -4653,7 +4978,10 @@ export default function Home() {
 											Charts instantly update when selections change
 										</p>
 									</div>
-									<div className="p-4 bg-amber-100 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800">
+									<div
+										className={getSmallDivClasses(
+											"p-4 bg-amber-100 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800"
+										)}>
 										<div className="flex items-center gap-2 mb-2">
 											<Icons.search className="h-5 w-5 text-amber-600 dark:text-amber-400" />
 											<h4 className="font-semibold text-amber-900 dark:text-amber-100">
@@ -4664,7 +4992,10 @@ export default function Home() {
 											Multiple filter dimensions working together
 										</p>
 									</div>
-									<div className="p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-800">
+									<div
+										className={getSmallDivClasses(
+											"p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-800"
+										)}>
 										<div className="flex items-center gap-2 mb-2">
 											<Icons.target className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
 											<h4 className="font-semibold text-yellow-900 dark:text-yellow-100">
@@ -4680,7 +5011,10 @@ export default function Home() {
 
 							{/* Implementation Notes */}
 							<div className="p-6 pt-0">
-								<div className="bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800">
+								<div
+									className={getSmallDivClasses(
+										"bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800"
+									)}>
 									<h4 className="text-lg font-semibold mb-4 text-orange-900 dark:text-orange-100 flex items-center gap-2">
 										<Icons.code className="h-5 w-5" />
 										Implementation Highlights
@@ -4714,7 +5048,10 @@ export default function Home() {
 
 							{/* Pro Tips */}
 							<div className="p-6 pt-0">
-								<div className="bg-gradient-to-br from-yellow-400/10 via-orange-400/10 to-amber-400/10 border-l-4 border-orange-400 rounded-r-lg p-4">
+								<div
+									className={getSmallDivClasses(
+										"bg-gradient-to-br from-yellow-400/10 via-orange-400/10 to-amber-400/10 border-l-4 border-orange-400 rounded-r-lg p-4"
+									)}>
 									<p className="text-orange-800 dark:text-orange-200 font-medium flex items-start gap-2">
 										<Icons.star className="h-5 w-5 mt-0.5 flex-shrink-0" />
 										<span>
@@ -4729,9 +5066,15 @@ export default function Home() {
 						</div>
 
 						{/* AI/LLM Examples Section */}
-						<div className="w-full min-w-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden">
+						<div
+							className={getDivClasses(
+								"w-full min-w-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden"
+							)}>
 							{/* Header */}
-							<div className="bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 p-6 text-white">
+							<div
+								className={getDivHeaderClasses(
+									"bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 p-6 text-white"
+								)}>
 								<div className="flex items-center gap-3 mb-3">
 									<div className="p-2 bg-white/20 rounded-lg">
 										<Icons.zap className="h-6 w-6" />
@@ -4924,7 +5267,10 @@ export default function Home() {
 								{/* Features Grid */}
 								<div className="p-6 pt-0">
 									<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-										<div className="p-4 bg-violet-100 dark:bg-violet-900/30 rounded-lg border border-violet-200 dark:border-violet-800">
+										<div
+											className={getSmallDivClasses(
+												"p-4 bg-violet-100 dark:bg-violet-900/30 rounded-lg border border-violet-200 dark:border-violet-800"
+											)}>
 											<div className="flex items-center gap-2 mb-2">
 												<Icons.cpu className="h-5 w-5 text-violet-600 dark:text-violet-400" />
 												<h4 className="font-semibold text-violet-900 dark:text-violet-100">
@@ -4935,7 +5281,10 @@ export default function Home() {
 												Configure multiple AI models for A/B testing
 											</p>
 										</div>
-										<div className="p-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800">
+										<div
+											className={getSmallDivClasses(
+												"p-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800"
+											)}>
 											<div className="flex items-center gap-2 mb-2">
 												<Icons.messageCircle className="h-5 w-5 text-purple-600 dark:text-purple-400" />
 												<h4 className="font-semibold text-purple-900 dark:text-purple-100">
@@ -4946,7 +5295,10 @@ export default function Home() {
 												Organize templates and conversation patterns
 											</p>
 										</div>
-										<div className="p-4 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg border border-indigo-200 dark:border-indigo-800">
+										<div
+											className={getSmallDivClasses(
+												"p-4 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg border border-indigo-200 dark:border-indigo-800"
+											)}>
 											<div className="flex items-center gap-2 mb-2">
 												<Icons.database className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
 												<h4 className="font-semibold text-indigo-900 dark:text-indigo-100">
@@ -4962,7 +5314,10 @@ export default function Home() {
 
 								{/* AI Use Cases */}
 								<div className="p-6 pt-0">
-									<div className="bg-gradient-to-r from-violet-100 via-purple-100 to-indigo-100 dark:from-violet-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-violet-200 dark:border-violet-800">
+									<div
+										className={getSmallDivClasses(
+											"bg-gradient-to-r from-violet-100 via-purple-100 to-indigo-100 dark:from-violet-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-violet-200 dark:border-violet-800"
+										)}>
 										<h4 className="text-lg font-semibold mb-4 text-violet-900 dark:text-violet-100 flex items-center gap-2">
 											<Icons.star className="h-5 w-5" />
 											AI Implementation Patterns
@@ -4996,7 +5351,10 @@ export default function Home() {
 
 								{/* Pro Tips */}
 								<div className="p-6 pt-0">
-									<div className="bg-gradient-to-br from-indigo-400/10 via-purple-400/10 to-violet-400/10 border-l-4 border-violet-400 rounded-r-lg p-4">
+									<div
+										className={getSmallDivClasses(
+											"bg-gradient-to-br from-indigo-400/10 via-purple-400/10 to-violet-400/10 border-l-4 border-violet-400 rounded-r-lg p-4"
+										)}>
 										<p className="text-violet-800 dark:text-violet-200 font-medium flex items-start gap-2">
 											<Icons.zap className="h-5 w-5 mt-0.5 flex-shrink-0" />
 											<span>
@@ -5011,9 +5369,15 @@ export default function Home() {
 							</div>
 
 							{/* Props Reference */}
-							<div className="w-full min-w-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden">
+							<div
+								className={getDivClasses(
+									"w-full min-w-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
+								)}>
 								{/* Header */}
-								<div className="bg-gradient-to-r from-rose-500 via-pink-500 to-red-500 p-6 text-white">
+								<div
+									className={getDivHeaderClasses(
+										"bg-gradient-to-r from-rose-500 via-fuchsia-500 to-red-500 p-6 text-white"
+									)}>
 									<div className="flex items-center gap-3 mb-3">
 										<div className="p-2 bg-white/20 rounded-lg">
 											<Icons.code className="h-6 w-6" />
@@ -5218,7 +5582,10 @@ export default function Home() {
 
 								{/* Implementation Tips */}
 								<div className="p-6 pt-0">
-									<div className="bg-gradient-to-r from-rose-100 via-pink-100 to-red-100 dark:from-rose-900/20 dark:via-pink-900/20 dark:to-red-900/20 rounded-lg p-6 border border-rose-200 dark:border-rose-800">
+									<div
+										className={getSmallDivClasses(
+											"bg-gradient-to-r from-rose-100 via-pink-100 to-red-100 dark:from-rose-900/20 dark:via-pink-900/20 dark:to-red-900/20 rounded-lg p-6 border border-rose-200 dark:border-rose-800"
+										)}>
 										<h4 className="text-lg font-semibold mb-4 text-rose-900 dark:text-rose-100 flex items-center gap-2">
 											<Icons.code className="h-5 w-5" />
 											Implementation Best Practices
@@ -5254,7 +5621,10 @@ export default function Home() {
 
 								{/* Quick Reference */}
 								<div className="p-6 pt-0">
-									<div className="bg-gradient-to-br from-red-400/10 via-pink-400/10 to-rose-400/10 border-l-4 border-rose-400 rounded-r-lg p-4">
+									<div
+										className={getSmallDivClasses(
+											"bg-gradient-to-br from-red-400/10 via-pink-400/10 to-rose-400/10 border-l-4 border-rose-400 rounded-r-lg p-4"
+										)}>
 										<p className="text-rose-800 dark:text-rose-200 font-medium flex items-start gap-2">
 											<Icons.code className="h-5 w-5 mt-0.5 flex-shrink-0" />
 											<span>

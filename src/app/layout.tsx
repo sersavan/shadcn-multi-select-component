@@ -7,6 +7,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
+import { ColorModeProvider } from "@/contexts/color-mode-context";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -50,10 +51,12 @@ export default function RootLayout({
 					defaultTheme="system"
 					enableSystem
 					disableTransitionOnChange>
-					<div className="relative flex min-h-screen flex-col bg-background">
-						<SiteHeader />
-						{children}
-					</div>
+					<ColorModeProvider>
+						<div className="relative flex min-h-screen flex-col bg-background">
+							<SiteHeader />
+							{children}
+						</div>
+					</ColorModeProvider>
 				</ThemeProvider>
 				<Toaster position="bottom-center" />
 				<SpeedInsights />
