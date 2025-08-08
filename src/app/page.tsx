@@ -1005,8 +1005,8 @@ export default function Home() {
 
 	return (
 		<main className="min-h-screen bg-background overflow-x-hidden">
-			{/* Header */}
 			<div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 w-full min-w-0">
+				{/* Header */}
 				<PageHeader className="text-center">
 					<PageHeaderHeading>Multi Select Component</PageHeaderHeading>
 					<PageHeaderDescription>
@@ -1030,7 +1030,6 @@ export default function Home() {
 						className={getCardClasses(
 							"p-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 overflow-hidden"
 						)}>
-						{/* Header - Always Visible */}
 						<div
 							className={
 								isGrayMode
@@ -1062,8 +1061,6 @@ export default function Home() {
 								/>
 							</div>
 						</div>
-
-						{/* Expandable Content */}
 						<div
 							className={cn(
 								"overflow-hidden transition-all duration-300 ease-in-out",
@@ -1108,13 +1105,12 @@ export default function Home() {
 
 				{/* Examples Grid */}
 				<div className="grid gap-6 mt-12 w-full min-w-0">
-					{/* 1. Form Integration - Markdown Style */}
+					{/* 1. Form Integration*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div
 									className={getBadgeClasses(
@@ -1134,25 +1130,8 @@ export default function Home() {
 									validation
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Building robust forms is essential for professional
-										applications. Our MultiSelect component seamlessly
-										integrates with{" "}
-										<span className="font-semibold text-foreground">
-											React Hook Form
-										</span>
-										and{" "}
-										<span className="font-semibold text-foreground">
-											Zod validation
-										</span>{" "}
-										to provide type-safe, validated user inputs with excellent
-										developer experience.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-violet-50/50 to-purple-50/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50"
@@ -1165,7 +1144,6 @@ export default function Home() {
 											This form demonstrates validation, error handling, and
 											successful submission workflows:
 										</p>
-
 										<Form {...form}>
 											<form
 												onSubmit={form.handleSubmit(onSubmit)}
@@ -1298,7 +1276,6 @@ export default function Home() {
 											</form>
 										</Form>
 									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-violet-100/50 to-purple-100/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50"
@@ -1343,13 +1320,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 2. Component Variants - Markdown Style */}
+					{/* 2. Component Variants*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 border-rose-200 dark:border-rose-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div
 									className={getBadgeClasses(
@@ -1368,20 +1344,8 @@ export default function Home() {
 									Explore different visual styles to match your design system
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Our MultiSelect component comes with multiple{" "}
-										<span className="font-semibold text-foreground">
-											pre-built variants
-										</span>
-										that seamlessly integrate with your design system. Each
-										variant serves different use cases and visual hierarchies in
-										your application interface.
-									</p>
-
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
@@ -1435,7 +1399,6 @@ export default function Home() {
 												</div>
 											</div>
 										</div>
-
 										<div
 											className={getSmallDivClasses(
 												"bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50"
@@ -1490,7 +1453,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-rose-100/50 to-pink-100/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl border border-rose-200/50 dark:border-rose-700/50"
@@ -1541,13 +1503,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 3. Animation Configurations - Markdown Style */}
+					{/* 3. Animation Configurations*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
 									<Icons.zap className="h-4 w-4" />
@@ -1564,23 +1525,8 @@ export default function Home() {
 									animations
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Animations enhance user experience by providing{" "}
-										<span className="font-semibold text-foreground">
-											visual feedback
-										</span>
-										and creating{" "}
-										<span className="font-semibold text-foreground">
-											delightful interactions
-										</span>
-										. Our MultiSelect component offers a comprehensive animation
-										system with customizable timing, easing, and effects.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50"
@@ -1589,7 +1535,6 @@ export default function Home() {
 											<Icons.activity className="h-5 w-5 text-amber-500" />
 											Badge Animation Showcase
 										</h4>
-
 										<div className="grid gap-6 md:grid-cols-2">
 											<div className="space-y-4">
 												<div className="space-y-2">
@@ -1611,7 +1556,6 @@ export default function Home() {
 														Creates a gentle pulsing effect that draws attention
 													</p>
 												</div>
-
 												<div className="space-y-2">
 													<label className="text-sm font-medium flex items-center gap-2">
 														<span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
@@ -1632,7 +1576,6 @@ export default function Home() {
 													</p>
 												</div>
 											</div>
-
 											<div className="space-y-4">
 												<div className="space-y-2">
 													<label className="text-sm font-medium flex items-center gap-2">
@@ -1676,78 +1619,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-amber-500" />
-												Performance Features
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Hardware Accelerated:</strong> Uses CSS
-														transforms for smooth 60fps animations
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Reduced Motion:</strong> Respects
-														user&apos;s accessibility preferences
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Memory Efficient:</strong> Minimal impact on
-														application performance
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-amber-50/50 to-orange-50/50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-xl p-6 border border-amber-200/50 dark:border-amber-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.star className="h-5 w-5 text-orange-500" />
-												Animation Types
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Badge Animations:
-													</strong>
-													<div className="ml-2 mt-1">
-														pulse, fade, wiggle, bounce, slide
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Popover Animations:
-													</strong>
-													<div className="ml-2 mt-1">
-														scale, slide, fade, flip
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Hover Effects:
-													</strong>
-													<div className="ml-2 mt-1">
-														highlight, scale, glow
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-amber-100/50 to-yellow-100/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50"
@@ -1790,13 +1661,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 4. Responsive Behavior - Markdown Style */}
+					{/* 4. Responsive Behavior*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 border-green-200 dark:border-green-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium mb-4">
 									<Icons.smartphone className="h-4 w-4" />
@@ -1813,32 +1683,8 @@ export default function Home() {
 									optimization
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										In today&apos;s multi-device world,{" "}
-										<span className="font-semibold text-foreground">
-											responsive design
-										</span>
-										is crucial. Our MultiSelect component automatically adapts
-										its behavior based on screen size, ensuring optimal user
-										experience across{" "}
-										<span className="font-semibold text-foreground">
-											mobile phones
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											tablets
-										</span>
-										, and{" "}
-										<span className="font-semibold text-foreground">
-											desktop screens
-										</span>
-										.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50"
@@ -1851,7 +1697,6 @@ export default function Home() {
 											Try resizing your browser window to see how the component
 											adapts its maxCount and layout behavior:
 										</p>
-
 										<div className="space-y-4">
 											<MultiSelect
 												options={companyDepartments}
@@ -1870,7 +1715,6 @@ export default function Home() {
 													popoverAnimation: "scale",
 												}}
 											/>
-
 											<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
 												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-green-200/50 dark:border-green-700/50">
 													<div className="flex items-center gap-2 mb-2">
@@ -1915,7 +1759,6 @@ export default function Home() {
 													</p>
 												</div>
 											</div>
-
 											<div
 												className={getSmallDivClasses(
 													"mt-4 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200/50 dark:border-green-700/50"
@@ -1927,85 +1770,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-green-50/50 to-teal-50/50 dark:from-green-950/20 dark:to-teal-950/20 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-green-500" />
-												Responsive Features
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Dynamic maxCount:</strong> Automatically
-														adjusts based on screen size
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Compact Mode:</strong> Optimized layout for
-														mobile devices
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Touch Friendly:</strong> Larger touch
-														targets on mobile
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>CSS Breakpoints:</strong> Standard
-														responsive breakpoints
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-green-50/50 to-teal-50/50 dark:from-green-950/20 dark:to-teal-950/20 rounded-xl p-6 border border-green-200/50 dark:border-green-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.star className="h-5 w-5 text-emerald-500" />
-												Configuration Options
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Breakpoint Controls:
-													</strong>
-													<div className="ml-2 mt-1">
-														mobile, tablet, desktop configurations
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Layout Modes:
-													</strong>
-													<div className="ml-2 mt-1">
-														compact, standard, expanded
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Auto Sizing:
-													</strong>
-													<div className="ml-2 mt-1">
-														Dynamic width based on content
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-green-100/50 to-emerald-100/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50"
@@ -2038,13 +1802,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 5. Grouped Options - Markdown Style */}
+					{/* 5. Grouped Options*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
 									<Icons.star className="h-4 w-4" />
@@ -2061,24 +1824,8 @@ export default function Home() {
 									visual separators
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										When dealing with large option sets,{" "}
-										<span className="font-semibold text-foreground">
-											logical grouping
-										</span>
-										becomes essential for user experience. Our grouped options
-										feature organizes related items into
-										<span className="font-semibold text-foreground">
-											categories
-										</span>{" "}
-										with clear visual separators, making it easier for users to
-										find and select relevant options.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50"
@@ -2091,7 +1838,6 @@ export default function Home() {
 											Choose from categorized technology options to build your
 											stack:
 										</p>
-
 										<div className="space-y-4">
 											<MultiSelect
 												options={categorizedOptions}
@@ -2106,7 +1852,6 @@ export default function Home() {
 													popoverAnimation: "fade",
 												}}
 											/>
-
 											<div
 												className={getSmallDivClasses(
 													"mt-4 p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200/50 dark:border-blue-700/50"
@@ -2118,85 +1863,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-blue-500" />
-												Grouping Benefits
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Logical Organization:</strong> Related
-														options grouped together
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Visual Separators:</strong> Clear
-														distinction between categories
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Faster Navigation:</strong> Users find
-														options more quickly
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Scalable Structure:</strong> Handles large
-														option sets efficiently
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-xl p-6 border border-blue-200/50 dark:border-blue-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.star className="h-5 w-5 text-indigo-500" />
-												Category Structure
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">Frontend:</strong>
-													<div className="ml-2 mt-1 text-xs">
-														React, Vue, Angular, Svelte
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">Backend:</strong>
-													<div className="ml-2 mt-1 text-xs">
-														Node.js, Python, Java, Go
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">Database:</strong>
-													<div className="ml-2 mt-1 text-xs">
-														PostgreSQL, MongoDB, Redis
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">Cloud:</strong>
-													<div className="ml-2 mt-1 text-xs">
-														AWS, Azure, Google Cloud
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-blue-100/50 to-indigo-100/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50"
@@ -2227,13 +1893,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 6. Search and UI Configuration - Markdown Style */}
+					{/* 6. Search and UI Configuration*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 dark:from-cyan-950/30 dark:via-sky-950/30 dark:to-blue-950/30 border-cyan-200 dark:border-cyan-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-full text-sm font-medium mb-4">
 									<Icons.search className="h-4 w-4" />
@@ -2250,31 +1915,8 @@ export default function Home() {
 									empty states
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Efficient{" "}
-										<span className="font-semibold text-foreground">
-											search functionality
-										</span>{" "}
-										is crucial for user experience when dealing with extensive
-										option lists. Our component provides
-										<span className="font-semibold text-foreground">
-											real-time filtering
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											select all controls
-										</span>
-										, and
-										<span className="font-semibold text-foreground">
-											customizable empty states
-										</span>
-										to create intuitive selection interfaces.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-cyan-50/50 to-sky-50/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50"
@@ -2323,7 +1965,6 @@ export default function Home() {
 													</div>
 												</div>
 											</div>
-
 											<div className="space-y-4">
 												<div
 													className={getSmallDivClasses(
@@ -2354,93 +1995,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-cyan-500" />
-												Search Features
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Real-time Filtering:</strong> Instant
-														results as you type
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Case Insensitive:</strong> Matches
-														regardless of case
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Substring Matching:</strong> Finds partial
-														matches
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-cyan-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Keyboard Navigation:</strong> Arrow keys and
-														Enter support
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-cyan-950/20 dark:to-blue-950/20 rounded-xl p-6 border border-cyan-200/50 dark:border-cyan-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.zap className="h-5 w-5 text-sky-500" />
-												UI Controls
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Search Toggle:
-													</strong>
-													<div className="ml-2 mt-1">
-														Enable/disable search functionality
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Select All Control:
-													</strong>
-													<div className="ml-2 mt-1">
-														Show/hide bulk selection options
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Empty States:
-													</strong>
-													<div className="ml-2 mt-1">
-														Custom no-results messaging
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Placeholder Text:
-													</strong>
-													<div className="ml-2 mt-1">
-														Contextual hints for users
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-cyan-100/50 to-sky-100/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50"
@@ -2473,13 +2027,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 7. Layout and Sizing Options - Markdown Style */}
+					{/* 7. Layout and Sizing Options*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 border-orange-200 dark:border-orange-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium mb-4">
 									<Icons.monitor className="h-4 w-4" />
@@ -2496,30 +2049,8 @@ export default function Home() {
 									design requirements
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Different interfaces require different{" "}
-										<span className="font-semibold text-foreground">
-											layout approaches
-										</span>
-										. Our component offers flexible sizing options including
-										<span className="font-semibold text-foreground">
-											single-line mode
-										</span>{" "}
-										for compact spaces,
-										<span className="font-semibold text-foreground">
-											auto-sizing
-										</span>{" "}
-										for dynamic content, and
-										<span className="font-semibold text-foreground">
-											width constraints
-										</span>{" "}
-										for consistent layouts.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50"
@@ -2528,9 +2059,7 @@ export default function Home() {
 											<Icons.monitor className="h-5 w-5 text-orange-500" />
 											Layout Demonstrations
 										</h4>
-
 										<div className="space-y-6">
-											{/* Single Line Mode */}
 											<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-orange-200/50 dark:border-orange-700/50">
 												<div className="flex items-center gap-2 mb-3">
 													<Icons.x className="h-4 w-4 text-orange-500" />
@@ -2566,8 +2095,6 @@ export default function Home() {
 													width
 												</p>
 											</div>
-
-											{/* Width Comparison */}
 											<div className="grid gap-4 grid-cols-1 md:grid-cols-2">
 												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-amber-200/50 dark:border-amber-700/50">
 													<div className="flex items-center gap-2 mb-3">
@@ -2595,7 +2122,6 @@ export default function Home() {
 														Uses full container width
 													</p>
 												</div>
-
 												<div className="bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-yellow-200/50 dark:border-yellow-700/50">
 													<div className="flex items-center gap-2 mb-3">
 														<Icons.minimize className="h-4 w-4 text-yellow-600" />
@@ -2624,89 +2150,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-950/20 dark:to-yellow-950/20 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-orange-500" />
-												Layout Features
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Single Line Mode:</strong> Horizontal
-														scrolling for compact spaces
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Auto Sizing:</strong> Dynamic width based on
-														content
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Width Constraints:</strong> Minimum and
-														maximum width limits
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Responsive Behavior:</strong> Adapts to
-														container changes
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-orange-50/50 to-yellow-50/50 dark:from-orange-950/20 dark:to-yellow-950/20 rounded-xl p-6 border border-orange-200/50 dark:border-orange-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.activity className="h-5 w-5 text-amber-500" />
-												Size Control Options
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														singleLine:
-													</strong>
-													<div className="ml-2 mt-1">
-														Forces horizontal layout with scroll
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">autoSize:</strong>
-													<div className="ml-2 mt-1">
-														Dynamic width based on content
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														className:
-													</strong>
-													<div className="ml-2 mt-1">
-														Custom CSS classes for styling
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">maxCount:</strong>
-													<div className="ml-2 mt-1">
-														Controls badge overflow behavior
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-orange-100/50 to-amber-100/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50"
@@ -2737,13 +2180,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 8. Custom Styling and Colors - Markdown Style */}
+					{/* 8. Custom Styling and Colors*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 dark:from-purple-950/30 dark:via-fuchsia-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
 									<Icons.wand className="h-4 w-4" />
@@ -2760,31 +2202,8 @@ export default function Home() {
 									gradient backgrounds
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Make your interface uniquely yours with{" "}
-										<span className="font-semibold text-foreground">
-											custom styling options
-										</span>
-										. Each option can have its own{" "}
-										<span className="font-semibold text-foreground">
-											badge colors
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											gradient backgrounds
-										</span>
-										, and
-										<span className="font-semibold text-foreground">
-											visual identity
-										</span>{" "}
-										that reflects your brand or categorizes content
-										meaningfully.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-purple-50/50 to-fuchsia-50/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50"
@@ -2797,7 +2216,6 @@ export default function Home() {
 											Each project type has its own unique color scheme and
 											styling:
 										</p>
-
 										<div className="space-y-4">
 											<MultiSelect
 												options={projectTypesWithStyle}
@@ -2812,7 +2230,6 @@ export default function Home() {
 													popoverAnimation: "scale",
 												}}
 											/>
-
 											<div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
 												<div
 													className={getSmallDivClasses(
@@ -2849,7 +2266,6 @@ export default function Home() {
 														</div>
 													</div>
 												</div>
-
 												<div
 													className={getSmallDivClasses(
 														"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
@@ -2884,91 +2300,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-purple-500" />
-												Styling Features
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Custom Badge Colors:</strong> Individual
-														color schemes per option
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Gradient Backgrounds:</strong> Beautiful
-														gradient effects
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>CSS Variables:</strong> Dynamic theming
-														support
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Dark Mode:</strong> Automatic adaptation to
-														themes
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.wand className="h-5 w-5 text-fuchsia-500" />
-												Implementation
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Style Property:
-													</strong>
-													<div className="ml-2 mt-1">
-														Define colors in option objects
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														CSS Classes:
-													</strong>
-													<div className="ml-2 mt-1">
-														Use Tailwind or custom CSS
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">Theming:</strong>
-													<div className="ml-2 mt-1">
-														Support for light/dark modes
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Brand Colors:
-													</strong>
-													<div className="ml-2 mt-1">
-														Match your design system
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-purple-100/50 to-fuchsia-100/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50"
@@ -2999,10 +2330,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 9. Disabled States - Markdown Style */}
-					<Card className="p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden">
+					{/* 9. Disabled States*/}
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden"
+						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-900/30 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium mb-4">
 									<Icons.shield className="h-4 w-4" />
@@ -3016,30 +2349,8 @@ export default function Home() {
 									disabled states
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Disabled states provide{" "}
-										<span className="font-semibold text-foreground">
-											access control
-										</span>{" "}
-										and
-										<span className="font-semibold text-foreground">
-											contextual restrictions
-										</span>
-										. You can disable
-										<span className="font-semibold text-foreground">
-											individual options
-										</span>{" "}
-										based on user permissions or
-										<span className="font-semibold text-foreground">
-											entire components
-										</span>{" "}
-										during loading states or form validation.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-slate-50/50 to-gray-50/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50"
@@ -3048,7 +2359,6 @@ export default function Home() {
 											<Icons.shield className="h-5 w-5 text-slate-500" />
 											Disabled State Demonstrations
 										</h4>
-
 										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
 											<div
 												className={getSmallDivClasses(
@@ -3080,7 +2390,6 @@ export default function Home() {
 													</span>
 												</div>
 											</div>
-
 											<div
 												className={getSmallDivClasses(
 													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-slate-200/50 dark:border-slate-700/50"
@@ -3114,93 +2423,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-slate-50/50 to-zinc-50/50 dark:from-slate-950/20 dark:to-zinc-950/20 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-slate-500" />
-												Disabled Features
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Option-Level:</strong> Disable specific
-														choices individually
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Component-Level:</strong> Disable entire
-														selection interface
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Visual Feedback:</strong> Clear disabled
-														state indicators
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-slate-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Accessibility:</strong> Screen reader
-														compatible states
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-slate-50/50 to-zinc-50/50 dark:from-slate-950/20 dark:to-zinc-950/20 rounded-xl p-6 border border-slate-200/50 dark:border-slate-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.shield className="h-5 w-5 text-gray-500" />
-												Use Cases
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Permission Control:
-													</strong>
-													<div className="ml-2 mt-1">
-														Restrict based on user roles
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Loading States:
-													</strong>
-													<div className="ml-2 mt-1">
-														Disable during data fetching
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Form Validation:
-													</strong>
-													<div className="ml-2 mt-1">
-														Conditional availability
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Maintenance Mode:
-													</strong>
-													<div className="ml-2 mt-1">
-														Temporary service restrictions
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-slate-100/50 to-gray-100/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50"
@@ -3233,13 +2455,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 10. Advanced Features - Markdown Style */}
+					{/* 10. Advanced Features*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/30 dark:via-blue-950/30 dark:to-cyan-950/30 border-indigo-200 dark:border-indigo-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
 									<Icons.zap className="h-4 w-4" />
@@ -3256,30 +2477,8 @@ export default function Home() {
 									edge cases
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										For sophisticated applications, advanced features provide{" "}
-										<span className="font-semibold text-foreground">
-											fine-grained control
-										</span>
-										over interaction behaviors. These include{" "}
-										<span className="font-semibold text-foreground">
-											modal popovers
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											close-on-select
-										</span>{" "}
-										patterns, and
-										<span className="font-semibold text-foreground">
-											duplicate handling
-										</span>{" "}
-										for complex data scenarios.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-indigo-50/50 to-blue-50/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50"
@@ -3288,7 +2487,6 @@ export default function Home() {
 											<Icons.zap className="h-5 w-5 text-indigo-500" />
 											Advanced Behavior Showcase
 										</h4>
-
 										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
 											<div
 												className={getSmallDivClasses(
@@ -3318,7 +2516,6 @@ export default function Home() {
 													🎯 Perfect for single-focused selection flows
 												</div>
 											</div>
-
 											<div
 												className={getSmallDivClasses(
 													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-blue-200/50 dark:border-blue-700/50"
@@ -3347,7 +2544,6 @@ export default function Home() {
 													📱 Great for mobile and accessibility
 												</div>
 											</div>
-
 											<div
 												className={getSmallDivClasses(
 													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50 md:col-span-2 lg:col-span-1"
@@ -3400,93 +2596,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-indigo-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-indigo-500" />
-												Advanced Controls
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>closeOnSelect:</strong> Auto-close after
-														each selection
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>modalPopover:</strong> Modal overlay
-														behavior
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>deduplicateOptions:</strong> Handle similar
-														labels
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-indigo-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>Custom Positioning:</strong> Advanced
-														popover placement
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-indigo-50/50 to-cyan-50/50 dark:from-indigo-950/20 dark:to-cyan-950/20 rounded-xl p-6 border border-indigo-200/50 dark:border-indigo-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.star className="h-5 w-5 text-blue-500" />
-												Implementation Notes
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Performance:
-													</strong>
-													<div className="ml-2 mt-1">
-														Optimized for complex data sets
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Accessibility:
-													</strong>
-													<div className="ml-2 mt-1">
-														ARIA compliance for all modes
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Mobile Support:
-													</strong>
-													<div className="ml-2 mt-1">
-														Touch-optimized interactions
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Customization:
-													</strong>
-													<div className="ml-2 mt-1">
-														Extensive theming options
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-indigo-100/50 to-blue-100/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50"
@@ -3519,13 +2628,12 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* 11. Imperative Methods (useRef) - Markdown Style */}
+					{/* 11. Imperative Methods (useRef)*/}
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
 						)}>
 						<div className="p-8 md:p-12">
-							{/* Header */}
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
 									<Icons.code className="h-4 w-4" />
@@ -3542,24 +2650,8 @@ export default function Home() {
 									patterns
 								</p>
 							</div>
-
-							{/* Markdown Content */}
 							<div className="prose prose-lg dark:prose-invert max-w-none">
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										For advanced use cases,{" "}
-										<span className="font-semibold text-foreground">
-											imperative methods
-										</span>{" "}
-										provide direct programmatic control over the component.
-										Using React&apos;s{" "}
-										<span className="font-semibold text-foreground">
-											useRef
-										</span>{" "}
-										hook, you can trigger actions, manage state, and integrate
-										with complex application workflows.
-									</p>
-
 									<div
 										className={getSmallDivClasses(
 											"my-8 p-6 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
@@ -3572,7 +2664,6 @@ export default function Home() {
 											Try the buttons below to programmatically control the
 											MultiSelect component:
 										</p>
-
 										<div className="space-y-6">
 											<div
 												className={getSmallDivClasses(
@@ -3592,7 +2683,6 @@ export default function Home() {
 													}}
 												/>
 											</div>
-
 											<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
 												<Button
 													size="sm"
@@ -3635,7 +2725,6 @@ export default function Home() {
 													Set Values
 												</Button>
 											</div>
-
 											<div
 												className={getSmallDivClasses(
 													"bg-emerald-50 dark:bg-emerald-950/20 rounded-lg p-4 border border-emerald-200/50 dark:border-emerald-700/50"
@@ -3654,96 +2743,6 @@ export default function Home() {
 											</div>
 										</div>
 									</div>
-
-									<div className="grid md:grid-cols-2 gap-6 my-8">
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/20 dark:to-green-950/20 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-emerald-500" />
-												Available Methods
-											</h4>
-											<ul className="text-sm text-muted-foreground space-y-2">
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>reset():</strong> Reset to default values
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>clear():</strong> Remove all selections
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>focus():</strong> Focus the input element
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>getValues():</strong> Get current selections
-													</span>
-												</li>
-												<li className="flex items-start gap-2">
-													<Icons.check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-													<span>
-														<strong>setValues():</strong> Set selections
-														programmatically
-													</span>
-												</li>
-											</ul>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/20 dark:to-green-950/20 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50"
-											)}>
-											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-												<Icons.code className="h-5 w-5 text-teal-500" />
-												Use Cases
-											</h4>
-											<div className="text-sm text-muted-foreground space-y-3">
-												<div>
-													<strong className="text-foreground">
-														Form Integration:
-													</strong>
-													<div className="ml-2 mt-1">
-														Reset forms after submission
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Wizard Steps:
-													</strong>
-													<div className="ml-2 mt-1">
-														Auto-advance between steps
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Data Loading:
-													</strong>
-													<div className="ml-2 mt-1">
-														Set values from API responses
-													</div>
-												</div>
-												<div>
-													<strong className="text-foreground">
-														Shortcuts:
-													</strong>
-													<div className="ml-2 mt-1">
-														Keyboard shortcuts for actions
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
 									<div
 										className={getSmallDivClasses(
 											"mt-8 p-6 bg-gradient-to-r from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
@@ -3777,1345 +2776,617 @@ export default function Home() {
 						</div>
 					</Card>
 
-					{/* Charts and Data Visualization */}
-					<div
-						className={getDivClasses(
-							"w-full min-w-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden"
+					{/* Charts and Data Visualization Examples*/}
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden"
 						)}>
-						{/* Header */}
-						<div
-							className={getDivHeaderClasses(
-								"bg-gradient-to-r from-orange-700 via-amber-700 to-yellow-600 p-6 text-white"
-							)}>
-							<div className="flex items-center gap-3 mb-3">
-								<div className="p-2 bg-white/20 rounded-lg">
-									<Icons.pieChart className="h-6 w-6" />
+						<div className="p-8 md:p-12">
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium mb-4">
+									<Icons.pieChart className="h-4 w-4" />
+									Charts Examples
 								</div>
-								<h2 className="text-2xl font-bold">
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-300 dark:to-yellow-300 bg-clip-text text-transparent mb-4"
+									)}>
 									Charts & Data Visualization
 								</h2>
-							</div>
-							<p className="text-orange-100 text-lg leading-relaxed">
-								Create interactive, data-driven dashboards where MultiSelect
-								components control chart filters, time periods, and
-								visualization parameters. Perfect for business intelligence and
-								analytics platforms.
-							</p>
-						</div>
-
-						{/* Content */}
-						<div className="p-6 space-y-8">
-							{/* Introduction */}
-							<div className="prose prose-orange max-w-none">
-								<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-									Transform static charts into{" "}
-									<strong>interactive experiences</strong> where users can
-									dynamically filter departments, select metrics, and adjust
-									time periods. MultiSelect components serve as powerful control
-									panels for complex data visualizations.
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Create interactive, data-driven dashboards where MultiSelect
+									components control chart filters, time periods, and
+									visualization parameters. Perfect for business intelligence
+									and analytics platforms.
 								</p>
 							</div>
-
-							{/* Interactive Demo Section */}
-							<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-orange-200 dark:border-orange-800">
-								<h3 className="text-xl font-semibold mb-4 text-orange-800 dark:text-orange-200">
-									📊 Interactive Dashboard Demo
-								</h3>
-								<p className="text-muted-foreground mb-6">
-									Interactive charts that update based on MultiSelect selections
-								</p>
-
-								{/* Chart Controls */}
-								<div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-8">
-									<div className="space-y-2">
-										<label className="text-sm font-medium">
-											Select Departments
-										</label>
-										<MultiSelect
-											options={companyDepartments}
-											onValueChange={setSelectedDepartments}
-											defaultValue={["engineering", "design", "product"]}
-											placeholder="Choose departments"
-											variant="default"
-											maxCount={4}
-											className="w-full"
-										/>
+							<div className="p-0 space-y-8">
+								<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-orange-200 dark:border-orange-800">
+									<h3 className="text-xl font-semibold mb-4 text-orange-800 dark:text-orange-200">
+										📊 Interactive Dashboard Demo
+									</h3>
+									<p className="text-muted-foreground mb-6">
+										Interactive charts that update based on MultiSelect
+										selections
+									</p>
+									<div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-8">
+										<div className="space-y-2">
+											<label className="text-sm font-medium">
+												Select Departments
+											</label>
+											<MultiSelect
+												options={companyDepartments}
+												onValueChange={setSelectedDepartments}
+												defaultValue={["engineering", "design", "product"]}
+												placeholder="Choose departments"
+												variant="default"
+												maxCount={4}
+												className="w-full"
+											/>
+										</div>
+										<div className="space-y-2">
+											<label className="text-sm font-medium">
+												Select Metrics
+											</label>
+											<MultiSelect
+												options={metricsOptions}
+												onValueChange={setSelectedMetrics}
+												defaultValue={["revenue", "users", "performance"]}
+												placeholder="Choose metrics"
+												variant="secondary"
+												maxCount={3}
+												className="w-full"
+											/>
+										</div>
+										<div className="space-y-2">
+											<label className="text-sm font-medium">
+												Time Periods
+											</label>
+											<MultiSelect
+												options={timePeriodsOptions}
+												onValueChange={setSelectedTimePeriods}
+												defaultValue={["monthly", "quarterly"]}
+												placeholder="Select periods"
+												variant="inverted"
+												maxCount={2}
+												className="w-full"
+											/>
+										</div>
 									</div>
-									<div className="space-y-2">
-										<label className="text-sm font-medium">
-											Select Metrics
-										</label>
-										<MultiSelect
-											options={metricsOptions}
-											onValueChange={setSelectedMetrics}
-											defaultValue={["revenue", "users", "performance"]}
-											placeholder="Choose metrics"
-											variant="secondary"
-											maxCount={3}
-											className="w-full"
-										/>
-									</div>
-									<div className="space-y-2">
-										<label className="text-sm font-medium">Time Periods</label>
-										<MultiSelect
-											options={timePeriodsOptions}
-											onValueChange={setSelectedTimePeriods}
-											defaultValue={["monthly", "quarterly"]}
-											placeholder="Select periods"
-											variant="inverted"
-											maxCount={2}
-											className="w-full"
-										/>
-									</div>
-								</div>
 
-								{/* Charts Grid */}
-								<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
-									{/* Bar Chart */}
-									<Card className="p-2 sm:p-4 w-full min-w-0">
-										<h4 className="text-lg font-medium mb-4">
-											Monthly Sales by Department
-											{!selectedTimePeriods.includes("monthly") && (
-												<span className="text-sm text-muted-foreground ml-2">
-													(Select &ldquo;Monthly&rdquo; to view)
-												</span>
-											)}
-										</h4>
-										<div className="h-80">
-											{selectedTimePeriods.includes("monthly") &&
-											filteredSalesData.length > 0 ? (
-												<ResponsiveContainer width="100%" height="100%">
-													<BarChart data={filteredSalesData}>
-														<XAxis
-															dataKey="name"
-															className="text-sm"
-															tick={{ fontSize: 12 }}
-															axisLine={{ stroke: "hsl(var(--border))" }}
-															tickLine={{ stroke: "hsl(var(--border))" }}
-														/>
-														<YAxis
-															className="text-sm"
-															tick={{ fontSize: 12 }}
-															axisLine={{ stroke: "hsl(var(--border))" }}
-															tickLine={{ stroke: "hsl(var(--border))" }}
-															tickFormatter={(value) =>
-																new Intl.NumberFormat("en-US", {
-																	notation: "compact",
-																	compactDisplay: "short",
-																}).format(value)
-															}
-														/>
-														<Tooltip
-															content={<CustomTooltip type="currency" />}
-														/>
-														<Legend
-															wrapperStyle={{ fontSize: "14px" }}
-															iconType="rect"
-															formatter={(value: string) => (
-																<span className="text-sm font-medium">
-																	{companyDepartments.find(
-																		(d) => d.value === value
-																	)?.label || value}
-																</span>
-															)}
-														/>
-														{selectedDepartments.map((dept, index) => (
-															<Bar
-																key={dept}
-																dataKey={dept}
-																fill={
-																	chartColors[dept as keyof typeof chartColors]
-																}
-																name={dept}
-																radius={[2, 2, 0, 0]}
-																className="transition-all duration-200 hover:opacity-80"
-																isAnimationActive={false}
+									{/* Charts Grid */}
+									<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
+										{/* Bar Chart */}
+										<Card className="p-2 sm:p-4 w-full min-w-0">
+											<h4 className="text-lg font-medium mb-4">
+												Monthly Sales by Department
+												{!selectedTimePeriods.includes("monthly") && (
+													<span className="text-sm text-muted-foreground ml-2">
+														(Select &ldquo;Monthly&rdquo; to view)
+													</span>
+												)}
+											</h4>
+											<div className="h-80">
+												{selectedTimePeriods.includes("monthly") &&
+												filteredSalesData.length > 0 ? (
+													<ResponsiveContainer width="100%" height="100%">
+														<BarChart data={filteredSalesData}>
+															<XAxis
+																dataKey="name"
+																className="text-sm"
+																tick={{ fontSize: 12 }}
+																axisLine={{ stroke: "hsl(var(--border))" }}
+																tickLine={{ stroke: "hsl(var(--border))" }}
 															/>
-														))}
-													</BarChart>
-												</ResponsiveContainer>
-											) : (
-												<div className="flex items-center justify-center h-full text-muted-foreground">
-													<div className="text-center">
-														<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
-														<p>
-															Select &ldquo;Monthly&rdquo; period to view sales
-															data
-														</p>
-													</div>
-												</div>
-											)}
-										</div>
-									</Card>
-
-									{/* Pie Chart */}
-									<Card className="p-4 w-full min-w-0">
-										<h4 className="text-lg font-medium mb-4">
-											Q4 Revenue Distribution
-											{!selectedMetrics.includes("revenue") && (
-												<span className="text-sm text-muted-foreground ml-2">
-													(Select &ldquo;Revenue&rdquo; metric to view)
-												</span>
-											)}
-										</h4>
-										<div className="h-80">
-											{selectedMetrics.includes("revenue") &&
-											pieChartData.length > 0 ? (
-												<ResponsiveContainer width="100%" height="100%">
-													<PieChart>
-														<Pie
-															data={pieChartData}
-															cx="50%"
-															cy="50%"
-															innerRadius={50}
-															outerRadius={80}
-															fill="#8884d8"
-															dataKey="value"
-															label={({ name, percent }: any) =>
-																`${name} ${((percent || 0) * 100).toFixed(0)}%`
-															}
-															labelLine={true}
-															className="outline-none text-xs">
-															{pieChartData.map((entry, index) => (
-																<Cell
-																	key={`cell-${index}`}
-																	fill={entry.color}
-																	stroke="rgba(255,255,255,0.1)"
-																	strokeWidth={2}
-																	className="transition-all duration-200 hover:opacity-80"
-																/>
-															))}
-														</Pie>
-														<Tooltip content={<PieTooltip />} />
-														<Legend
-															wrapperStyle={{ fontSize: "14px" }}
-															iconType="circle"
-															formatter={(value: string, entry: any) => (
-																<span
-																	className="text-sm font-medium"
-																	style={{ color: entry.color }}>
-																	{value}
-																</span>
-															)}
-														/>
-													</PieChart>
-												</ResponsiveContainer>
-											) : (
-												<div className="flex items-center justify-center h-full text-muted-foreground">
-													<div className="text-center">
-														<Icons.dollarSign className="h-12 w-12 mx-auto mb-2 opacity-50" />
-														<p>
-															Select &ldquo;Revenue&rdquo; metric to view
-															distribution
-														</p>
-													</div>
-												</div>
-											)}
-										</div>
-									</Card>
-
-									{/* Area Chart */}
-									<Card className="p-4 w-full min-w-0">
-										<h4 className="text-lg font-medium mb-4">
-											Quarterly Revenue Trends
-											{!selectedTimePeriods.includes("quarterly") && (
-												<span className="text-sm text-muted-foreground ml-2">
-													(Select &ldquo;Quarterly&rdquo; to view)
-												</span>
-											)}
-										</h4>
-										<div
-											className="h-80 relative overflow-visible"
-											style={{ zIndex: 1 }}>
-											{selectedTimePeriods.includes("quarterly") &&
-											areaChartData.length > 0 ? (
-												<ResponsiveContainer width="100%" height="100%">
-													<AreaChart data={areaChartData}>
-														<GradientDefs />
-														<XAxis
-															dataKey="quarter"
-															className="text-sm"
-															tick={{ fontSize: 12 }}
-															axisLine={{ stroke: "hsl(var(--border))" }}
-															tickLine={{ stroke: "hsl(var(--border))" }}
-														/>
-														<YAxis
-															className="text-sm"
-															tick={{ fontSize: 12 }}
-															axisLine={{ stroke: "hsl(var(--border))" }}
-															tickLine={{ stroke: "hsl(var(--border))" }}
-															tickFormatter={(value) =>
-																new Intl.NumberFormat("en-US", {
-																	notation: "compact",
-																	compactDisplay: "short",
-																}).format(value)
-															}
-														/>
-														<Tooltip
-															content={<CustomTooltip type="currency" />}
-														/>
-														<Legend
-															wrapperStyle={{ fontSize: "14px", zIndex: 1 }}
-															iconType="rect"
-															formatter={(value: string) => (
-																<span className="text-sm font-medium">
-																	{companyDepartments.find(
-																		(d) => d.value === value
-																	)?.label || value}
-																</span>
-															)}
-														/>
-														{selectedDepartments.map((dept, index) => (
-															<Area
-																key={dept}
-																type="monotone"
-																dataKey={dept}
-																stackId="1"
-																stroke={
-																	chartColors[dept as keyof typeof chartColors]
+															<YAxis
+																className="text-sm"
+																tick={{ fontSize: 12 }}
+																axisLine={{ stroke: "hsl(var(--border))" }}
+																tickLine={{ stroke: "hsl(var(--border))" }}
+																tickFormatter={(value) =>
+																	new Intl.NumberFormat("en-US", {
+																		notation: "compact",
+																		compactDisplay: "short",
+																	}).format(value)
 																}
-																fill={`url(#${getGradientId(dept)})`}
-																strokeWidth={2}
-																className="transition-all duration-200"
 															/>
-														))}
-													</AreaChart>
-												</ResponsiveContainer>
-											) : (
-												<div className="flex items-center justify-center h-full text-muted-foreground">
-													<div className="text-center">
-														<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
-														<p>
-															Select &ldquo;Quarterly&rdquo; period to view
-															trends
-														</p>
-													</div>
-												</div>
-											)}
-										</div>
-									</Card>
-
-									{/* Line Chart */}
-									<Card className="p-4 w-full min-w-0">
-										<h4 className="text-lg font-medium mb-4">
-											Performance Metrics Comparison
-											{!selectedMetrics.includes("performance") && (
-												<span className="text-sm text-muted-foreground ml-2">
-													(Select &ldquo;Performance&rdquo; metric to view)
-												</span>
-											)}
-										</h4>
-										<div className="h-80">
-											{selectedMetrics.includes("performance") &&
-											lineChartData.length > 0 ? (
-												<ResponsiveContainer width="100%" height="100%">
-													<LineChart data={lineChartData}>
-														<YAxis
-															className="text-sm"
-															tick={{ fontSize: 12 }}
-															axisLine={{ stroke: "hsl(var(--border))" }}
-															tickLine={{ stroke: "hsl(var(--border))" }}
-															tickFormatter={(value) => `${value}%`}
-														/>
-														<Tooltip
-															content={<CustomTooltip type="percentage" />}
-														/>
-														<Legend
-															wrapperStyle={{ fontSize: "14px" }}
-															iconType="line"
-															formatter={(value: string) => (
-																<span className="text-sm font-medium">
-																	{companyDepartments.find(
-																		(d) => d.value === value
-																	)?.label || value}
-																</span>
-															)}
-														/>
-														{selectedDepartments
-															.filter((dept) =>
-																[
-																	"engineering",
-																	"design",
-																	"product",
-																	"marketing",
-																].includes(dept)
-															)
-															.map((dept, index) => (
-																<Line
+															<Tooltip
+																content={<CustomTooltip type="currency" />}
+															/>
+															<Legend
+																wrapperStyle={{ fontSize: "14px" }}
+																iconType="rect"
+																formatter={(value: string) => (
+																	<span className="text-sm font-medium">
+																		{companyDepartments.find(
+																			(d) => d.value === value
+																		)?.label || value}
+																	</span>
+																)}
+															/>
+															{selectedDepartments.map((dept, index) => (
+																<Bar
 																	key={dept}
-																	type="monotone"
 																	dataKey={dept}
-																	stroke={
-																		chartColors[
-																			dept as keyof typeof chartColors
-																		]
-																	}
-																	strokeWidth={3}
-																	dot={{
-																		fill: chartColors[
-																			dept as keyof typeof chartColors
-																		],
-																		strokeWidth: 2,
-																		r: 5,
-																		className:
-																			"transition-all duration-200 hover:r-7",
-																	}}
-																	activeDot={{
-																		r: 8,
-																		stroke:
-																			chartColors[
-																				dept as keyof typeof chartColors
-																			],
-																		strokeWidth: 2,
-																		fill: chartColors[
-																			dept as keyof typeof chartColors
-																		],
-																	}}
-																	name={
-																		companyDepartments.find(
-																			(d) => d.value === dept
-																		)?.label || dept
-																	}
-																	className="transition-all duration-200"
-																/>
-															))}
-													</LineChart>
-												</ResponsiveContainer>
-											) : (
-												<div className="flex items-center justify-center h-full text-muted-foreground">
-													<div className="text-center">
-														<Icons.activity className="h-12 w-12 mx-auto mb-2 opacity-50" />
-														<p>
-															Select &ldquo;Performance&rdquo; metric to view
-															comparison
-														</p>
-													</div>
-												</div>
-											)}
-										</div>
-									</Card>
-
-									{/* Radar Chart */}
-									<Card className="p-4 w-full min-w-0">
-										<h4 className="text-lg font-medium mb-4">
-											Team Skills Radar
-											{!selectedMetrics.includes("performance") && (
-												<span className="text-sm text-muted-foreground ml-2">
-													(Select &ldquo;Performance&rdquo; metric to view)
-												</span>
-											)}
-										</h4>
-										<div className="h-80">
-											{selectedMetrics.includes("performance") &&
-											radarChartData.length > 0 ? (
-												<ResponsiveContainer width="100%" height="100%">
-													<RadarChart data={radarChartData}>
-														<PolarGrid
-															gridType="polygon"
-															className="opacity-30"
-														/>
-														<PolarAngleAxis
-															dataKey="subject"
-															className="text-sm"
-															tick={{ fontSize: 12 }}
-														/>
-														<PolarRadiusAxis
-															angle={90}
-															domain={[0, 100]}
-															className="text-sm"
-															tick={{ fontSize: 10 }}
-															tickCount={6}
-														/>
-														<Tooltip
-															content={<CustomTooltip type="percentage" />}
-														/>
-														<Legend
-															wrapperStyle={{ fontSize: "14px" }}
-															iconType="line"
-															formatter={(value: string) => (
-																<span className="text-sm font-medium">
-																	{companyDepartments.find(
-																		(d) => d.value === value
-																	)?.label || value}
-																</span>
-															)}
-														/>
-														{selectedDepartments
-															.filter((dept) =>
-																[
-																	"engineering",
-																	"design",
-																	"product",
-																	"marketing",
-																].includes(dept)
-															)
-															.map((dept, index) => (
-																<Radar
-																	key={dept}
-																	name={
-																		companyDepartments.find(
-																			(d) => d.value === dept
-																		)?.label || dept
-																	}
-																	dataKey={dept}
-																	stroke={
-																		chartColors[
-																			dept as keyof typeof chartColors
-																		]
-																	}
 																	fill={
 																		chartColors[
 																			dept as keyof typeof chartColors
 																		]
 																	}
-																	fillOpacity={0.1}
-																	strokeWidth={2}
-																	dot={{
-																		fill: chartColors[
-																			dept as keyof typeof chartColors
-																		],
-																		strokeWidth: 2,
-																		r: 4,
-																	}}
+																	name={dept}
+																	radius={[2, 2, 0, 0]}
+																	className="transition-all duration-200 hover:opacity-80"
+																	isAnimationActive={false}
 																/>
 															))}
-													</RadarChart>
-												</ResponsiveContainer>
-											) : (
-												<div className="flex items-center justify-center h-full text-muted-foreground">
-													<div className="text-center">
-														<Icons.target className="h-12 w-12 mx-auto mb-2 opacity-50" />
-														<p>
-															Select &ldquo;Performance&rdquo; metric to view
-															skills radar
-														</p>
-													</div>
-												</div>
-											)}
-										</div>
-									</Card>
-
-									{/* Treemap Chart */}
-									<Card className="p-4 w-full min-w-0">
-										<h4 className="text-lg font-medium mb-4">
-											Revenue Distribution by Teams
-											{!selectedMetrics.includes("revenue") && (
-												<span className="text-sm text-muted-foreground ml-2">
-													(Select &ldquo;Revenue&rdquo; metric to view)
-												</span>
-											)}
-										</h4>
-										<div className="h-80">
-											{selectedMetrics.includes("revenue") &&
-											treemapData.length > 0 ? (
-												<ResponsiveContainer width="100%" height="100%">
-													<Treemap
-														data={treemapData}
-														dataKey="size"
-														stroke="#fff"
-														fill="#8884d8"
-													/>
-												</ResponsiveContainer>
-											) : (
-												<div className="flex items-center justify-center h-full text-muted-foreground">
-													<div className="text-center">
-														<Icons.pieChart className="h-12 w-12 mx-auto mb-2 opacity-50" />
-														<p>
-															Select &ldquo;Revenue&rdquo; metric to view team
-															distribution
-														</p>
-													</div>
-												</div>
-											)}
-										</div>
-									</Card>
-								</div>
-							</Card>
-
-							{/* Chart Info */}
-							<div className="mt-6 p-4 bg-muted rounded-lg">
-								<h5 className="font-medium mb-2">Interactive Features:</h5>
-								<ul className="text-sm text-muted-foreground space-y-1">
-									<li>
-										• Select different departments to filter chart data across
-										all visualizations
-									</li>
-									<li>
-										• Choose specific metrics (Revenue, Users, Performance,
-										etc.) to control which charts are displayed
-									</li>
-									<li>
-										• Select time periods (Monthly, Quarterly, Weekly) to change
-										chart timeframes
-									</li>
-									<li>
-										• Charts automatically update and show/hide based on your
-										selections
-									</li>
-									<li>
-										• Hover over chart elements for detailed tooltips with
-										formatted values
-									</li>
-									<li>
-										• Each department has a unique color for easy identification
-										across charts
-									</li>
-								</ul>
-								<div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950 rounded border-l-4 border-blue-400">
-									<p className="text-sm font-medium text-blue-800 dark:text-blue-200 break-words">
-										💡 Try different combinations: Select &ldquo;Revenue&rdquo;
-										+ &ldquo;Quarterly&rdquo; for revenue trends, or
-										&ldquo;Performance&rdquo; + specific departments for
-										performance comparison!
-									</p>
-								</div>
-							</div>
-
-							{/* Interactive Documentation Section - Example Usage in Content */}
-							<div className="mt-12 mb-8">
-								<Card className="p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/50 dark:via-gray-950/50 dark:to-zinc-950/50 border-slate-200 dark:border-slate-800 overflow-hidden">
-									<div className="p-8 md:p-12">
-										{/* Article Header */}
-										<div className="mb-8 text-center">
-											<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
-												<Icons.code className="h-4 w-4" />
-												Example Usage in Content
-											</div>
-											<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 bg-clip-text text-transparent mb-4">
-												Building Your Tech Stack
-											</h2>
-											<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-												A comprehensive guide to selecting the right
-												technologies for your next project
-											</p>
-										</div>
-
-										{/* Article Content with Embedded MultiSelect */}
-										<div className="prose prose-lg dark:prose-invert max-w-none">
-											<div className="space-y-6 text-muted-foreground leading-relaxed">
-												<p className="text-base md:text-lg">
-													Choosing the right technology stack is crucial for any
-													successful project. Whether you&apos;re building a
-													<span className="font-semibold text-foreground">
-														{" "}
-														web application
-													</span>
-													,
-													<span className="font-semibold text-foreground">
-														{" "}
-														mobile app
-													</span>
-													, or
-													<span className="font-semibold text-foreground">
-														{" "}
-														enterprise solution
-													</span>
-													, the technologies you select will impact your
-													development speed, scalability, and long-term
-													maintenance.
-												</p>
-
-												{/* Interactive Element Embedded in Content */}
-												<div className="my-8 p-6 bg-white/60 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-													<div className="mb-4">
-														<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-															<Icons.zap className="h-5 w-5 text-blue-500" />
-															Select Your Preferred Technologies
-														</h4>
-														<p className="text-sm text-muted-foreground mb-4">
-															Try our interactive multi-select component to
-															choose technologies for your project:
-														</p>
-													</div>
-													<MultiSelect
-														options={techStackOptions}
-														onValueChange={(values) => {
-															// Optional: handle selection changes
-														}}
-														defaultValue={["typescript", "react"]}
-														placeholder="Choose technologies..."
-														variant="inverted"
-														animationConfig={{
-															badgeAnimation: "bounce",
-															popoverAnimation: "scale",
-															optionHoverAnimation: "highlight",
-														}}
-														maxCount={3}
-														className="w-full"
-													/>
-												</div>
-
-												<p className="text-base md:text-lg">
-													Modern development teams often prefer
-													<span className="font-semibold text-foreground">
-														{" "}
-														TypeScript
-													</span>{" "}
-													for its type safety,
-													<span className="font-semibold text-foreground">
-														{" "}
-														React
-													</span>{" "}
-													for component-based architecture, and{" "}
-													<span className="font-semibold text-foreground">
-														{" "}
-														Node.js
-													</span>{" "}
-													for full-stack JavaScript development.
-												</p>
-
-												{/* Another Interactive Section */}
-												<div
-													className={getSmallDivClasses(
-														"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-800/50"
-													)}>
-													<div className="mb-4">
-														<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-															<Icons.target className="h-5 w-5 text-indigo-500" />
-															Project Categories
-														</h4>
-														<p className="text-sm text-muted-foreground mb-4">
-															What type of project are you planning to build?
-														</p>
-													</div>
-													<MultiSelect
-														options={projectTypesWithStyle}
-														onValueChange={(values) => {
-															// Optional: handle selection changes
-														}}
-														defaultValue={["web-app"]}
-														placeholder="Select project type..."
-														variant="default"
-														animationConfig={{
-															badgeAnimation: "pulse",
-															popoverAnimation: "fade",
-															optionHoverAnimation: "scale",
-														}}
-														maxCount={2}
-														className="w-full"
-													/>
-												</div>
-
-												<p className="text-base md:text-lg">
-													The choice of technology stack should align with your
-													project requirements, team expertise, and long-term
-													goals. Consider factors such as
-													<span className="font-semibold text-foreground">
-														{" "}
-														performance
-													</span>
-													,
-													<span className="font-semibold text-foreground">
-														{" "}
-														scalability
-													</span>
-													,
-													<span className="font-semibold text-foreground">
-														{" "}
-														maintainability
-													</span>
-													, and{" "}
-													<span className="font-semibold text-foreground">
-														{" "}
-														community support
-													</span>
-													when making your decisions.
-												</p>
-
-												{/* Skills and Expertise Section */}
-												<div className="my-8">
-													<h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-														<Icons.star className="h-5 w-5 text-yellow-500" />
-														Team Skills Assessment
-													</h3>
-													<p className="text-base md:text-lg mb-4">
-														Before finalizing your tech stack, assess your
-														team&apos;s current skills and expertise. This will
-														help determine whether you need additional training
-														or if you should consider alternative technologies.
-													</p>
-
-													<div
-														className={getSmallDivClasses(
-															"p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-800/50"
-														)}>
-														<div className="mb-4">
-															<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-																<Icons.cpu className="h-5 w-5 text-amber-500" />
-																Current Skills
-															</h4>
-															<p className="text-sm text-muted-foreground mb-4">
-																Select the technologies your team is already
-																proficient in:
-															</p>
-														</div>
-														<MultiSelect
-															options={skillsWithDisabled}
-															onValueChange={(values) => {
-																// Optional: handle selection changes
-															}}
-															defaultValue={["html", "css", "javascript"]}
-															placeholder="Select team skills..."
-															variant="secondary"
-															animationConfig={{
-																badgeAnimation: "fade",
-																popoverAnimation: "slide",
-																optionHoverAnimation: "glow",
-															}}
-															maxCount={5}
-															className="w-full"
-														/>
-													</div>
-												</div>
-
-												<div
-													className={getSmallDivClasses(
-														"mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50"
-													)}>
-													<div className="flex items-start gap-4">
-														<div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mt-1">
-															<Icons.check className="h-4 w-4 text-white" />
-														</div>
-														<div>
-															<h4 className="text-lg font-semibold text-foreground mb-2">
-																Pro Tip
-															</h4>
-															<p className="text-base text-muted-foreground">
-																Start with technologies your team knows well,
-																then gradually introduce new ones. This approach
-																reduces risk and ensures project success while
-																still allowing for innovation and growth.
+														</BarChart>
+													</ResponsiveContainer>
+												) : (
+													<div className="flex items-center justify-center h-full text-muted-foreground">
+														<div className="text-center">
+															<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+															<p>
+																Select &ldquo;Monthly&rdquo; period to view
+																sales data
 															</p>
 														</div>
 													</div>
-												</div>
-
-												<p className="text-base md:text-lg">
-													Remember, the best technology stack is the one that
-													your team can effectively use to deliver value to your
-													users. Don&apos;t choose technologies just because
-													they&apos;re trendy – choose them because they solve
-													real problems and fit your specific use case.
-												</p>
+												)}
 											</div>
-										</div>
+										</Card>
 
-										{/* Call to Action */}
-										<div className="mt-12 text-center">
-											<div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full border border-blue-200/50 dark:border-blue-800/50">
-												<Icons.wand className="h-4 w-4 text-blue-500" />
-												<span className="text-sm font-medium text-blue-700 dark:text-blue-300">
-													Interactive components powered by our MultiSelect
-												</span>
+										{/* Pie Chart */}
+										<Card className="p-4 w-full min-w-0">
+											<h4 className="text-lg font-medium mb-4">
+												Q4 Revenue Distribution
+												{!selectedMetrics.includes("revenue") && (
+													<span className="text-sm text-muted-foreground ml-2">
+														(Select &ldquo;Revenue&rdquo; metric to view)
+													</span>
+												)}
+											</h4>
+											<div className="h-80">
+												{selectedMetrics.includes("revenue") &&
+												pieChartData.length > 0 ? (
+													<ResponsiveContainer width="100%" height="100%">
+														<PieChart>
+															<Pie
+																data={pieChartData}
+																cx="50%"
+																cy="50%"
+																innerRadius={50}
+																outerRadius={80}
+																fill="#8884d8"
+																dataKey="value"
+																label={({ name, percent }: any) =>
+																	`${name} ${((percent || 0) * 100).toFixed(
+																		0
+																	)}%`
+																}
+																labelLine={true}
+																className="outline-none text-xs">
+																{pieChartData.map((entry, index) => (
+																	<Cell
+																		key={`cell-${index}`}
+																		fill={entry.color}
+																		stroke="rgba(255,255,255,0.1)"
+																		strokeWidth={2}
+																		className="transition-all duration-200 hover:opacity-80"
+																	/>
+																))}
+															</Pie>
+															<Tooltip content={<PieTooltip />} />
+															<Legend
+																wrapperStyle={{ fontSize: "14px" }}
+																iconType="circle"
+																formatter={(value: string, entry: any) => (
+																	<span
+																		className="text-sm font-medium"
+																		style={{ color: entry.color }}>
+																		{value}
+																	</span>
+																)}
+															/>
+														</PieChart>
+													</ResponsiveContainer>
+												) : (
+													<div className="flex items-center justify-center h-full text-muted-foreground">
+														<div className="text-center">
+															<Icons.dollarSign className="h-12 w-12 mx-auto mb-2 opacity-50" />
+															<p>
+																Select &ldquo;Revenue&rdquo; metric to view
+																distribution
+															</p>
+														</div>
+													</div>
+												)}
 											</div>
-										</div>
-									</div>
-								</Card>
-							</div>
+										</Card>
 
-							{/* Interactive Form/Survey Section - Markdown Style */}
-							<div className="mt-8 mb-8">
-								<Card
-									className={getCardClasses(
-										"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
-									)}>
-									<div className="p-8 md:p-12">
-										{/* Survey Header */}
-										<div className="mb-8 text-center">
+										{/* Area Chart */}
+										<Card className="p-4 w-full min-w-0">
+											<h4 className="text-lg font-medium mb-4">
+												Quarterly Revenue Trends
+												{!selectedTimePeriods.includes("quarterly") && (
+													<span className="text-sm text-muted-foreground ml-2">
+														(Select &ldquo;Quarterly&rdquo; to view)
+													</span>
+												)}
+											</h4>
 											<div
-												className={getBadgeClasses(
-													"inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4"
-												)}>
-												<Icons.users className="h-4 w-4" />
-												Interactive Survey Example
-											</div>
-											<h2
-												className={getHeaderTextClasses(
-													"text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4"
-												)}>
-												Developer Survey 2025
-											</h2>
-											<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-												Help us understand the current state of web development
-											</p>
-										</div>
-
-										{/* Survey Content in Markdown Style */}
-										<div className="prose prose-lg dark:prose-invert max-w-none">
-											<div className="space-y-8 text-muted-foreground leading-relaxed">
-												{/* Question 1 */}
-												<div className="markdown-section">
-													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-														<span className="flex items-center justify-center w-8 h-8 bg-emerald-500 text-white rounded-full text-sm font-bold">
-															1
-														</span>
-														What programming languages do you use regularly?
-													</h3>
-													<p className="text-base md:text-lg mb-6">
-														Select all programming languages that you work with
-														on a regular basis. This helps us understand the
-														current landscape of developer preferences and
-														industry trends.
-													</p>
-
-													<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
-														<MultiSelect
-															options={[
-																{
-																	value: "javascript",
-																	label: "JavaScript",
-																	icon: Icons.zap,
-																},
-																{
-																	value: "typescript",
-																	label: "TypeScript",
-																	icon: Icons.code,
-																},
-																{
-																	value: "python",
-																	label: "Python",
-																	icon: Icons.cpu,
-																},
-																{
-																	value: "java",
-																	label: "Java",
-																	icon: Icons.database,
-																},
-																{
-																	value: "csharp",
-																	label: "C#",
-																	icon: Icons.shield,
-																},
-																{
-																	value: "golang",
-																	label: "Go",
-																	icon: Icons.activity,
-																},
-																{
-																	value: "rust",
-																	label: "Rust",
-																	icon: Icons.harddrive,
-																},
-																{
-																	value: "php",
-																	label: "PHP",
-																	icon: Icons.globe,
-																},
-																{
-																	value: "swift",
-																	label: "Swift",
-																	icon: Icons.smartphone,
-																},
-																{
-																	value: "kotlin",
-																	label: "Kotlin",
-																	icon: Icons.smartphone,
-																},
-															]}
-															onValueChange={(values) => {
-																// Optional: handle selection changes
-															}}
-															defaultValue={["javascript", "typescript"]}
-															placeholder="Select programming languages..."
-															variant="default"
-															animationConfig={{
-																badgeAnimation: "bounce",
-																popoverAnimation: "scale",
-																optionHoverAnimation: "highlight",
-															}}
-															maxCount={5}
-															className="w-full"
-														/>
-													</div>
-												</div>
-
-												{/* Question 2 */}
-												<div className="markdown-section">
-													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-														<span className="flex items-center justify-center w-8 h-8 bg-teal-500 text-white rounded-full text-sm font-bold">
-															2
-														</span>
-														Which frameworks and libraries are you most
-														interested in learning?
-													</h3>
-													<p className="text-base md:text-lg mb-6">
-														The tech industry evolves rapidly. Tell us which
-														technologies you&apos;re planning to learn next
-														year. This could include frameworks you&apos;ve
-														heard about but haven&apos;t had the chance to try
-														yet.
-													</p>
-
-													<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
-														<MultiSelect
-															options={categorizedOptions}
-															onValueChange={(values) => {
-																// Optional: handle selection changes
-															}}
-															defaultValue={["react", "nodejs"]}
-															placeholder="Select technologies to learn..."
-															variant="inverted"
-															animationConfig={{
-																badgeAnimation: "pulse",
-																popoverAnimation: "fade",
-																optionHoverAnimation: "scale",
-															}}
-															maxCount={4}
-															className="w-full"
-														/>
-													</div>
-												</div>
-
-												{/* Question 3 */}
-												<div className="markdown-section">
-													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-														<span className="flex items-center justify-center w-8 h-8 bg-cyan-500 text-white rounded-full text-sm font-bold">
-															3
-														</span>
-														What type of projects do you primarily work on?
-													</h3>
-													<p className="text-base md:text-lg mb-6">
-														Understanding the types of projects developers work
-														on helps us identify common patterns and challenges.
-														Whether you&apos;re building{" "}
-														<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
-															enterprise applications
-														</code>
-														,
-														<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
-															mobile apps
-														</code>
-														, or
-														<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
-															data pipelines
-														</code>
-														, your experience matters.
-													</p>
-
-													<div className="grid md:grid-cols-2 gap-4 mb-6">
-														<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
-															<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-																<Icons.globe className="h-5 w-5 text-cyan-500" />
-																Web Development
-															</h4>
-															<p className="text-sm text-muted-foreground">
-																Frontend, backend, and full-stack web
-																applications
-															</p>
-														</div>
-														<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
-															<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-																<Icons.smartphone className="h-5 w-5 text-cyan-500" />
-																Mobile Development
-															</h4>
-															<p className="text-sm text-muted-foreground">
-																Native and cross-platform mobile applications
+												className="h-80 relative overflow-visible"
+												style={{ zIndex: 1 }}>
+												{selectedTimePeriods.includes("quarterly") &&
+												areaChartData.length > 0 ? (
+													<ResponsiveContainer width="100%" height="100%">
+														<AreaChart data={areaChartData}>
+															<GradientDefs />
+															<XAxis
+																dataKey="quarter"
+																className="text-sm"
+																tick={{ fontSize: 12 }}
+																axisLine={{ stroke: "hsl(var(--border))" }}
+																tickLine={{ stroke: "hsl(var(--border))" }}
+															/>
+															<YAxis
+																className="text-sm"
+																tick={{ fontSize: 12 }}
+																axisLine={{ stroke: "hsl(var(--border))" }}
+																tickLine={{ stroke: "hsl(var(--border))" }}
+																tickFormatter={(value) =>
+																	new Intl.NumberFormat("en-US", {
+																		notation: "compact",
+																		compactDisplay: "short",
+																	}).format(value)
+																}
+															/>
+															<Tooltip
+																content={<CustomTooltip type="currency" />}
+															/>
+															<Legend
+																wrapperStyle={{ fontSize: "14px", zIndex: 1 }}
+																iconType="rect"
+																formatter={(value: string) => (
+																	<span className="text-sm font-medium">
+																		{companyDepartments.find(
+																			(d) => d.value === value
+																		)?.label || value}
+																	</span>
+																)}
+															/>
+															{selectedDepartments.map((dept, index) => (
+																<Area
+																	key={dept}
+																	type="monotone"
+																	dataKey={dept}
+																	stackId="1"
+																	stroke={
+																		chartColors[
+																			dept as keyof typeof chartColors
+																		]
+																	}
+																	fill={`url(#${getGradientId(dept)})`}
+																	strokeWidth={2}
+																	className="transition-all duration-200"
+																/>
+															))}
+														</AreaChart>
+													</ResponsiveContainer>
+												) : (
+													<div className="flex items-center justify-center h-full text-muted-foreground">
+														<div className="text-center">
+															<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+															<p>
+																Select &ldquo;Quarterly&rdquo; period to view
+																trends
 															</p>
 														</div>
 													</div>
+												)}
+											</div>
+										</Card>
 
-													<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
-														<MultiSelect
-															options={projectTypesWithStyle}
-															onValueChange={(values) => {
-																// Optional: handle selection changes
-															}}
-															defaultValue={["web-app"]}
-															placeholder="Select project types..."
-															variant="secondary"
-															animationConfig={{
-																badgeAnimation: "wiggle",
-																popoverAnimation: "slide",
-																optionHoverAnimation: "glow",
-															}}
-															maxCount={3}
-															className="w-full"
-														/>
-													</div>
-												</div>
-
-												{/* Question 4 */}
-												<div className="markdown-section">
-													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-														<span className="flex items-center justify-center w-8 h-8 bg-purple-500 text-white rounded-full text-sm font-bold">
-															4
-														</span>
-														How do you prefer to learn new technologies?
-													</h3>
-													<p className="text-base md:text-lg mb-6">
-														Everyone has different learning styles. Some prefer
-														hands-on coding, others like structured courses.
-														Understanding how developers learn helps the
-														community create better educational resources.
-													</p>
-
-													<div
-														className={getSmallDivClasses(
-															"bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6"
-														)}>
-														<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-															<Icons.star className="h-5 w-5 text-purple-500" />
-															Learning Preferences
-														</h4>
-														<MultiSelect
-															options={[
-																{
-																	value: "documentation",
-																	label: "Official Documentation",
-																	icon: Icons.code,
-																},
-																{
-																	value: "tutorials",
-																	label: "Video Tutorials",
-																	icon: Icons.globe,
-																},
-																{
-																	value: "courses",
-																	label: "Online Courses",
-																	icon: Icons.target,
-																},
-																{
-																	value: "books",
-																	label: "Technical Books",
-																	icon: Icons.star,
-																},
-																{
-																	value: "practice",
-																	label: "Hands-on Practice",
-																	icon: Icons.zap,
-																},
-																{
-																	value: "mentorship",
-																	label: "Mentorship",
-																	icon: Icons.cpu,
-																},
-																{
-																	value: "community",
-																	label: "Community Forums",
-																	icon: Icons.database,
-																},
-																{
-																	value: "conferences",
-																	label: "Conferences & Talks",
-																	icon: Icons.shield,
-																},
-															]}
-															onValueChange={(values) => {
-																// Optional: handle selection changes
-															}}
-															defaultValue={["documentation", "practice"]}
-															placeholder="How do you like to learn?"
-															variant="default"
-															animationConfig={{
-																badgeAnimation: "fade",
-																popoverAnimation: "flip",
-																optionHoverAnimation: "highlight",
-															}}
-															maxCount={4}
-															className="w-full"
-														/>
-													</div>
-
-													<div
-														className={getSmallDivClasses(
-															"mt-8 bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
-														)}>
-														<div className="flex items-start gap-3">
-															<Icons.star className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
-															<div>
-																<h4 className="font-semibold text-foreground mb-1">
-																	Pro Tip
-																</h4>
-																<p className="text-sm text-muted-foreground">
-																	Combining multiple learning methods often
-																	leads to better retention and understanding.
-																	Try pairing documentation reading with
-																	hands-on practice!
-																</p>
-															</div>
+										{/* Line Chart */}
+										<Card className="p-4 w-full min-w-0">
+											<h4 className="text-lg font-medium mb-4">
+												Performance Metrics Comparison
+												{!selectedMetrics.includes("performance") && (
+													<span className="text-sm text-muted-foreground ml-2">
+														(Select &ldquo;Performance&rdquo; metric to view)
+													</span>
+												)}
+											</h4>
+											<div className="h-80">
+												{selectedMetrics.includes("performance") &&
+												lineChartData.length > 0 ? (
+													<ResponsiveContainer width="100%" height="100%">
+														<LineChart data={lineChartData}>
+															<YAxis
+																className="text-sm"
+																tick={{ fontSize: 12 }}
+																axisLine={{ stroke: "hsl(var(--border))" }}
+																tickLine={{ stroke: "hsl(var(--border))" }}
+																tickFormatter={(value) => `${value}%`}
+															/>
+															<Tooltip
+																content={<CustomTooltip type="percentage" />}
+															/>
+															<Legend
+																wrapperStyle={{ fontSize: "14px" }}
+																iconType="line"
+																formatter={(value: string) => (
+																	<span className="text-sm font-medium">
+																		{companyDepartments.find(
+																			(d) => d.value === value
+																		)?.label || value}
+																	</span>
+																)}
+															/>
+															{selectedDepartments
+																.filter((dept) =>
+																	[
+																		"engineering",
+																		"design",
+																		"product",
+																		"marketing",
+																	].includes(dept)
+																)
+																.map((dept, index) => (
+																	<Line
+																		key={dept}
+																		type="monotone"
+																		dataKey={dept}
+																		stroke={
+																			chartColors[
+																				dept as keyof typeof chartColors
+																			]
+																		}
+																		strokeWidth={3}
+																		dot={{
+																			fill: chartColors[
+																				dept as keyof typeof chartColors
+																			],
+																			strokeWidth: 2,
+																			r: 5,
+																			className:
+																				"transition-all duration-200 hover:r-7",
+																		}}
+																		activeDot={{
+																			r: 8,
+																			stroke:
+																				chartColors[
+																					dept as keyof typeof chartColors
+																				],
+																			strokeWidth: 2,
+																			fill: chartColors[
+																				dept as keyof typeof chartColors
+																			],
+																		}}
+																		name={
+																			companyDepartments.find(
+																				(d) => d.value === dept
+																			)?.label || dept
+																		}
+																		className="transition-all duration-200"
+																	/>
+																))}
+														</LineChart>
+													</ResponsiveContainer>
+												) : (
+													<div className="flex items-center justify-center h-full text-muted-foreground">
+														<div className="text-center">
+															<Icons.activity className="h-12 w-12 mx-auto mb-2 opacity-50" />
+															<p>
+																Select &ldquo;Performance&rdquo; metric to view
+																comparison
+															</p>
 														</div>
 													</div>
-												</div>
-
-												{/* Survey Summary */}
-												<div
-													className={getSmallDivClasses(
-														"mt-12 p-6 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
-													)}>
-													<h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-														<Icons.check className="h-6 w-6 text-emerald-500" />
-														Thank You for Participating!
-													</h3>
-													<p className="text-base text-muted-foreground mb-4">
-														Your responses help us understand the developer
-														community better. This survey demonstrates how
-														MultiSelect components can be seamlessly integrated
-														into forms and surveys.
-													</p>
-													<div className="flex flex-wrap gap-2">
-														<span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded-full text-sm">
-															<Icons.zap className="h-3 w-3" />
-															Interactive
-														</span>
-														<span className="inline-flex items-center gap-1 px-3 py-1 bg-teal-200 dark:bg-teal-800 text-teal-800 dark:text-teal-200 rounded-full text-sm">
-															<Icons.target className="h-3 w-3" />
-															Accessible
-														</span>
-														<span className="inline-flex items-center gap-1 px-3 py-1 bg-cyan-200 dark:bg-cyan-800 text-cyan-800 dark:text-cyan-200 rounded-full text-sm">
-															<Icons.star className="h-3 w-3" />
-															Customizable
-														</span>
-													</div>
-												</div>
+												)}
 											</div>
-										</div>
+										</Card>
+
+										{/* Radar Chart */}
+										<Card className="p-4 w-full min-w-0">
+											<h4 className="text-lg font-medium mb-4">
+												Team Skills Radar
+												{!selectedMetrics.includes("performance") && (
+													<span className="text-sm text-muted-foreground ml-2">
+														(Select &ldquo;Performance&rdquo; metric to view)
+													</span>
+												)}
+											</h4>
+											<div className="h-80">
+												{selectedMetrics.includes("performance") &&
+												radarChartData.length > 0 ? (
+													<ResponsiveContainer width="100%" height="100%">
+														<RadarChart data={radarChartData}>
+															<PolarGrid
+																gridType="polygon"
+																className="opacity-30"
+															/>
+															<PolarAngleAxis
+																dataKey="subject"
+																className="text-sm"
+																tick={{ fontSize: 12 }}
+															/>
+															<PolarRadiusAxis
+																angle={90}
+																domain={[0, 100]}
+																className="text-sm"
+																tick={{ fontSize: 10 }}
+																tickCount={6}
+															/>
+															<Tooltip
+																content={<CustomTooltip type="percentage" />}
+															/>
+															<Legend
+																wrapperStyle={{ fontSize: "14px" }}
+																iconType="line"
+																formatter={(value: string) => (
+																	<span className="text-sm font-medium">
+																		{companyDepartments.find(
+																			(d) => d.value === value
+																		)?.label || value}
+																	</span>
+																)}
+															/>
+															{selectedDepartments
+																.filter((dept) =>
+																	[
+																		"engineering",
+																		"design",
+																		"product",
+																		"marketing",
+																	].includes(dept)
+																)
+																.map((dept, index) => (
+																	<Radar
+																		key={dept}
+																		name={
+																			companyDepartments.find(
+																				(d) => d.value === dept
+																			)?.label || dept
+																		}
+																		dataKey={dept}
+																		stroke={
+																			chartColors[
+																				dept as keyof typeof chartColors
+																			]
+																		}
+																		fill={
+																			chartColors[
+																				dept as keyof typeof chartColors
+																			]
+																		}
+																		fillOpacity={0.1}
+																		strokeWidth={2}
+																		dot={{
+																			fill: chartColors[
+																				dept as keyof typeof chartColors
+																			],
+																			strokeWidth: 2,
+																			r: 4,
+																		}}
+																	/>
+																))}
+														</RadarChart>
+													</ResponsiveContainer>
+												) : (
+													<div className="flex items-center justify-center h-full text-muted-foreground">
+														<div className="text-center">
+															<Icons.target className="h-12 w-12 mx-auto mb-2 opacity-50" />
+															<p>
+																Select &ldquo;Performance&rdquo; metric to view
+																skills radar
+															</p>
+														</div>
+													</div>
+												)}
+											</div>
+										</Card>
+
+										{/* Treemap Chart */}
+										<Card className="p-4 w-full min-w-0">
+											<h4 className="text-lg font-medium mb-4">
+												Revenue Distribution by Teams
+												{!selectedMetrics.includes("revenue") && (
+													<span className="text-sm text-muted-foreground ml-2">
+														(Select &ldquo;Revenue&rdquo; metric to view)
+													</span>
+												)}
+											</h4>
+											<div className="h-80">
+												{selectedMetrics.includes("revenue") &&
+												treemapData.length > 0 ? (
+													<ResponsiveContainer width="100%" height="100%">
+														<Treemap
+															data={treemapData}
+															dataKey="size"
+															stroke="#fff"
+															fill="#8884d8"
+														/>
+													</ResponsiveContainer>
+												) : (
+													<div className="flex items-center justify-center h-full text-muted-foreground">
+														<div className="text-center">
+															<Icons.pieChart className="h-12 w-12 mx-auto mb-2 opacity-50" />
+															<p>
+																Select &ldquo;Revenue&rdquo; metric to view team
+																distribution
+															</p>
+														</div>
+													</div>
+												)}
+											</div>
+										</Card>
 									</div>
 								</Card>
-							</div>
-
-							{/* Features Grid */}
-							<div className="p-6 pt-0">
-								<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+								<div className="p-0 pt-0">
 									<div
 										className={getSmallDivClasses(
-											"p-4 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-200 dark:border-orange-800"
+											"bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800"
 										)}>
-										<div className="flex items-center gap-2 mb-2">
-											<Icons.activity className="h-5 w-5 text-orange-600 dark:text-orange-400" />
-											<h4 className="font-semibold text-orange-900 dark:text-orange-100">
-												Real-time Updates
-											</h4>
-										</div>
-										<p className="text-sm text-orange-700 dark:text-orange-300">
-											Charts instantly update when selections change
-										</p>
-									</div>
-									<div
-										className={getSmallDivClasses(
-											"p-4 bg-amber-100 dark:bg-amber-900/30 rounded-lg border border-amber-200 dark:border-amber-800"
-										)}>
-										<div className="flex items-center gap-2 mb-2">
-											<Icons.search className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-											<h4 className="font-semibold text-amber-900 dark:text-amber-100">
-												Smart Filtering
-											</h4>
-										</div>
-										<p className="text-sm text-amber-700 dark:text-amber-300">
-											Multiple filter dimensions working together
-										</p>
-									</div>
-									<div
-										className={getSmallDivClasses(
-											"p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-800"
-										)}>
-										<div className="flex items-center gap-2 mb-2">
-											<Icons.target className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
-											<h4 className="font-semibold text-yellow-900 dark:text-yellow-100">
-												Custom Visualizations
-											</h4>
-										</div>
-										<p className="text-sm text-yellow-700 dark:text-yellow-300">
-											Bar, pie, area, line, radar, and treemap charts
-										</p>
-									</div>
-								</div>
-							</div>
-
-							{/* Implementation Notes */}
-							<div className="p-6 pt-0">
-								<div
-									className={getSmallDivClasses(
-										"bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800"
-									)}>
-									<h4 className="text-lg font-semibold mb-4 text-orange-900 dark:text-orange-100 flex items-center gap-2">
-										<Icons.code className="h-5 w-5" />
-										Implementation Highlights
-									</h4>
-									<div className="grid gap-4 md:grid-cols-2">
-										<div>
-											<h5 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
-												Data Binding Strategy
-											</h5>
-											<ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
-												<li>• Reactive chart data based on selections</li>
-												<li>• Conditional chart rendering</li>
-												<li>• Optimized re-render performance</li>
-												<li>• Smooth transition animations</li>
-											</ul>
-										</div>
-										<div>
-											<h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">
-												Best Practices
-											</h5>
-											<ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
-												<li>• Consistent color schemes across charts</li>
-												<li>• Responsive chart containers</li>
-												<li>• Accessible tooltips and legends</li>
-												<li>• Empty state handling</li>
-											</ul>
+										<h4 className="text-lg font-semibold mb-4 text-orange-900 dark:text-orange-100 flex items-center gap-2">
+											<Icons.code className="h-5 w-5" />
+											Implementation Highlights
+										</h4>
+										<div className="grid gap-4 md:grid-cols-2">
+											<div>
+												<h5 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
+													Data Binding Strategy
+												</h5>
+												<ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
+													<li>• Reactive chart data based on selections</li>
+													<li>• Conditional chart rendering</li>
+													<li>• Optimized re-render performance</li>
+													<li>• Smooth transition animations</li>
+												</ul>
+											</div>
+											<div>
+												<h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">
+													Best Practices
+												</h5>
+												<ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
+													<li>• Consistent color schemes across charts</li>
+													<li>• Responsive chart containers</li>
+													<li>• Accessible tooltips and legends</li>
+													<li>• Empty state handling</li>
+												</ul>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-
-							{/* Pro Tips */}
-							<div className="p-6 pt-0">
-								<div
-									className={getSmallDivClasses(
-										"bg-gradient-to-br from-yellow-400/10 via-orange-400/10 to-amber-400/10 border-l-4 border-orange-400 rounded-r-lg p-4"
-									)}>
-									<p className="text-orange-800 dark:text-orange-200 font-medium flex items-start gap-2">
-										<Icons.star className="h-5 w-5 mt-0.5 flex-shrink-0" />
-										<span>
-											<strong>Pro Tip:</strong> Use MultiSelect variants to
-											create visual hierarchy: primary selectors for main
-											filters, secondary for sub-categories, and inverted for
-											special options.
-										</span>
-									</p>
 								</div>
 							</div>
 						</div>
+					</Card>
 
-						{/* AI/LLM Examples Section */}
-						<div
-							className={getDivClasses(
-								"w-full min-w-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden"
-							)}>
-							{/* Header */}
-							<div
-								className={getDivHeaderClasses(
-									"bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 p-6 text-white"
-								)}>
-								<div className="flex items-center gap-3 mb-3">
-									<div className="p-2 bg-white/20 rounded-lg">
-										<Icons.zap className="h-6 w-6" />
-									</div>
-									<h2 className="text-2xl font-bold">AI & LLM Integration</h2>
+					{/* AI/LLM Examples*/}
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden"
+						)}>
+						<div className="p-8 md:p-12">
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm font-medium mb-4">
+									<Icons.zap className="h-4 w-4" />
+									AI & LLM Examples
 								</div>
-								<p className="text-violet-100 text-lg leading-relaxed">
-									Power up your AI applications with intelligent MultiSelect
-									controls for model selection, prompt engineering, data source
-									configuration, and multimodal AI workflows.
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-700 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent mb-4"
+									)}>
+									AI & LLM Integration
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Create interactive, data-driven dashboards where MultiSelect
+									components control chart filters, time periods, and
+									visualization parameters. Perfect for business intelligence
+									and analytics platforms.
 								</p>
 							</div>
-
-							{/* Content */}
-							<div className="p-6 space-y-8">
-								{/* Introduction */}
-								<div className="prose prose-violet max-w-none">
-									<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-										Transform your AI interfaces with{" "}
-										<strong>smart selection controls</strong> that make complex
-										configurations intuitive. From LLM model comparison to RAG
-										data source management, MultiSelect components bring clarity
-										to AI workflows.
-									</p>
-								</div>
-
-								{/* Interactive Demo Grid */}
+							<div className="p-0 space-y-8">
 								<div className="grid gap-6">
-									{/* LLM Model Selection */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											LLM Model Selection
@@ -5134,8 +3405,6 @@ export default function Home() {
 											testing, or ensemble predictions.
 										</p>
 									</Card>
-
-									{/* AI Tools Categories */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											AI Tools & Services
@@ -5159,8 +3428,6 @@ export default function Home() {
 											management and tool selection.
 										</p>
 									</Card>
-
-									{/* Prompt Template Types */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											Prompt Engineering Templates
@@ -5180,8 +3447,6 @@ export default function Home() {
 											different template types.
 										</p>
 									</Card>
-
-									{/* RAG Data Sources */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											RAG Data Sources
@@ -5205,8 +3470,6 @@ export default function Home() {
 											data sources for enhanced AI responses.
 										</p>
 									</Card>
-
-									{/* AI Model Parameters */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											Model Parameters Configuration
@@ -5226,8 +3489,6 @@ export default function Home() {
 											response control parameters.
 										</p>
 									</Card>
-
-									{/* AI Agent Capabilities */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											AI Agent Capabilities
@@ -5253,8 +3514,6 @@ export default function Home() {
 											creation, analysis, and communication capabilities.
 										</p>
 									</Card>
-
-									{/* Multimodal AI Features */}
 									<Card className="p-4 w-full min-w-0">
 										<h4 className="text-lg font-medium mb-4">
 											Multimodal AI Features
@@ -5275,57 +3534,7 @@ export default function Home() {
 										</p>
 									</Card>
 								</div>
-
-								{/* Features Grid */}
-								<div className="p-6 pt-0">
-									<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-										<div
-											className={getSmallDivClasses(
-												"p-4 bg-violet-100 dark:bg-violet-900/30 rounded-lg border border-violet-200 dark:border-violet-800"
-											)}>
-											<div className="flex items-center gap-2 mb-2">
-												<Icons.cpu className="h-5 w-5 text-violet-600 dark:text-violet-400" />
-												<h4 className="font-semibold text-violet-900 dark:text-violet-100">
-													Model Selection
-												</h4>
-											</div>
-											<p className="text-sm text-violet-700 dark:text-violet-300">
-												Configure multiple AI models for A/B testing
-											</p>
-										</div>
-										<div
-											className={getSmallDivClasses(
-												"p-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-800"
-											)}>
-											<div className="flex items-center gap-2 mb-2">
-												<Icons.messageCircle className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-												<h4 className="font-semibold text-purple-900 dark:text-purple-100">
-													Prompt Engineering
-												</h4>
-											</div>
-											<p className="text-sm text-purple-700 dark:text-purple-300">
-												Organize templates and conversation patterns
-											</p>
-										</div>
-										<div
-											className={getSmallDivClasses(
-												"p-4 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg border border-indigo-200 dark:border-indigo-800"
-											)}>
-											<div className="flex items-center gap-2 mb-2">
-												<Icons.database className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-												<h4 className="font-semibold text-indigo-900 dark:text-indigo-100">
-													RAG Integration
-												</h4>
-											</div>
-											<p className="text-sm text-indigo-700 dark:text-indigo-300">
-												Multi-source knowledge retrieval system
-											</p>
-										</div>
-									</div>
-								</div>
-
-								{/* AI Use Cases */}
-								<div className="p-6 pt-0">
+								<div className="p-0 pt-0">
 									<div
 										className={getSmallDivClasses(
 											"bg-gradient-to-r from-violet-100 via-purple-100 to-indigo-100 dark:from-violet-900/20 dark:via-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-violet-200 dark:border-violet-800"
@@ -5360,297 +3569,815 @@ export default function Home() {
 										</div>
 									</div>
 								</div>
+							</div>
+						</div>
+					</Card>
 
-								{/* Pro Tips */}
-								<div className="p-6 pt-0">
+					{/* Interactive Documentation Example */}
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/50 dark:via-gray-950/50 dark:to-zinc-950/50 border-slate-200 dark:border-slate-800 overflow-hidden"
+						)}>
+						<div className="p-8 md:p-12">
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
+									<Icons.code className="h-4 w-4" />
+									Example Usage in Content
+								</div>
+								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 bg-clip-text text-transparent mb-4">
+									Building Your Tech Stack
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									A comprehensive guide to selecting the right technologies for
+									your next project
+								</p>
+							</div>
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-6 text-muted-foreground leading-relaxed">
+									<p className="text-base md:text-lg">
+										Choosing the right technology stack is crucial for any
+										successful project. Whether you&apos;re building a
+										<span className="font-semibold text-foreground">
+											{" "}
+											web application
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											{" "}
+											mobile app
+										</span>
+										, or
+										<span className="font-semibold text-foreground">
+											{" "}
+											enterprise solution
+										</span>
+										, the technologies you select will impact your development
+										speed, scalability, and long-term maintenance.
+									</p>
+									<div className="my-8 p-6 bg-white/60 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+										<div className="mb-4">
+											<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+												<Icons.zap className="h-5 w-5 text-blue-500" />
+												Select Your Preferred Technologies
+											</h4>
+											<p className="text-sm text-muted-foreground mb-4">
+												Try our interactive multi-select component to choose
+												technologies for your project:
+											</p>
+										</div>
+										<MultiSelect
+											options={techStackOptions}
+											onValueChange={(values) => {
+												// Optional: handle selection changes
+											}}
+											defaultValue={["typescript", "react"]}
+											placeholder="Choose technologies..."
+											variant="inverted"
+											animationConfig={{
+												badgeAnimation: "bounce",
+												popoverAnimation: "scale",
+												optionHoverAnimation: "highlight",
+											}}
+											maxCount={3}
+											className="w-full"
+										/>
+									</div>
+
+									<p className="text-base md:text-lg">
+										Modern development teams often prefer
+										<span className="font-semibold text-foreground">
+											{" "}
+											TypeScript
+										</span>{" "}
+										for its type safety,
+										<span className="font-semibold text-foreground">
+											{" "}
+											React
+										</span>{" "}
+										for component-based architecture, and{" "}
+										<span className="font-semibold text-foreground">
+											{" "}
+											Node.js
+										</span>{" "}
+										for full-stack JavaScript development.
+									</p>
 									<div
 										className={getSmallDivClasses(
-											"bg-gradient-to-br from-indigo-400/10 via-purple-400/10 to-violet-400/10 border-l-4 border-violet-400 rounded-r-lg p-4"
+											"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-800/50"
 										)}>
-										<p className="text-violet-800 dark:text-violet-200 font-medium flex items-start gap-2">
-											<Icons.zap className="h-5 w-5 mt-0.5 flex-shrink-0" />
-											<span>
-												<strong>AI Pro Tip:</strong> Use different animation
-												styles to indicate AI status: &ldquo;pulse&rdquo; for
-												active models, &ldquo;bounce&rdquo; for new features,
-												&ldquo;slide&rdquo; for data sources.
-											</span>
-										</p>
-									</div>
-								</div>
-							</div>
-
-							{/* Props Reference */}
-							<div
-								className={getDivClasses(
-									"w-full min-w-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
-								)}>
-								{/* Header */}
-								<div
-									className={getDivHeaderClasses(
-										"bg-gradient-to-r from-rose-500 via-fuchsia-500 to-red-500 p-6 text-white"
-									)}>
-									<div className="flex items-center gap-3 mb-3">
-										<div className="p-2 bg-white/20 rounded-lg">
-											<Icons.code className="h-6 w-6" />
+										<div className="mb-4">
+											<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+												<Icons.target className="h-5 w-5 text-indigo-500" />
+												Project Categories
+											</h4>
+											<p className="text-sm text-muted-foreground mb-4">
+												What type of project are you planning to build?
+											</p>
 										</div>
-										<h2 className="text-2xl font-bold">
-											Props Reference Guide
-										</h2>
+										<MultiSelect
+											options={projectTypesWithStyle}
+											onValueChange={(values) => {
+												// Optional: handle selection changes
+											}}
+											defaultValue={["web-app"]}
+											placeholder="Select project type..."
+											variant="default"
+											animationConfig={{
+												badgeAnimation: "pulse",
+												popoverAnimation: "fade",
+												optionHoverAnimation: "scale",
+											}}
+											maxCount={2}
+											className="w-full"
+										/>
 									</div>
-									<p className="text-rose-100 text-lg leading-relaxed">
-										Complete documentation of all MultiSelect component
-										properties, with examples, defaults, and best practices for
-										every configuration option.
+									<p className="text-base md:text-lg">
+										The choice of technology stack should align with your
+										project requirements, team expertise, and long-term goals.
+										Consider factors such as
+										<span className="font-semibold text-foreground">
+											{" "}
+											performance
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											{" "}
+											scalability
+										</span>
+										,
+										<span className="font-semibold text-foreground">
+											{" "}
+											maintainability
+										</span>
+										, and{" "}
+										<span className="font-semibold text-foreground">
+											{" "}
+											community support
+										</span>
+										when making your decisions.
+									</p>
+									<div className="my-8">
+										<h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+											<Icons.star className="h-5 w-5 text-yellow-500" />
+											Team Skills Assessment
+										</h3>
+										<p className="text-base md:text-lg mb-4">
+											Before finalizing your tech stack, assess your team&apos;s
+											current skills and expertise. This will help determine
+											whether you need additional training or if you should
+											consider alternative technologies.
+										</p>
+										<div
+											className={getSmallDivClasses(
+												"p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-800/50"
+											)}>
+											<div className="mb-4">
+												<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+													<Icons.cpu className="h-5 w-5 text-amber-500" />
+													Current Skills
+												</h4>
+												<p className="text-sm text-muted-foreground mb-4">
+													Select the technologies your team is already
+													proficient in:
+												</p>
+											</div>
+											<MultiSelect
+												options={skillsWithDisabled}
+												onValueChange={(values) => {
+													// Optional: handle selection changes
+												}}
+												defaultValue={["html", "css", "javascript"]}
+												placeholder="Select team skills..."
+												variant="secondary"
+												animationConfig={{
+													badgeAnimation: "fade",
+													popoverAnimation: "slide",
+													optionHoverAnimation: "glow",
+												}}
+												maxCount={5}
+												className="w-full"
+											/>
+										</div>
+									</div>
+									<div
+										className={getSmallDivClasses(
+											"mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50"
+										)}>
+										<div className="flex items-start gap-4">
+											<div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mt-1">
+												<Icons.check className="h-4 w-4 text-white" />
+											</div>
+											<div>
+												<h4 className="text-lg font-semibold text-foreground mb-2">
+													Pro Tip
+												</h4>
+												<p className="text-base text-muted-foreground">
+													Start with technologies your team knows well, then
+													gradually introduce new ones. This approach reduces
+													risk and ensures project success while still allowing
+													for innovation and growth.
+												</p>
+											</div>
+										</div>
+									</div>
+									<p className="text-base md:text-lg">
+										Remember, the best technology stack is the one that your
+										team can effectively use to deliver value to your users.
+										Don&apos;t choose technologies just because they&apos;re
+										trendy – choose them because they solve real problems and
+										fit your specific use case.
 									</p>
 								</div>
+							</div>
+						</div>
+					</Card>
 
-								{/* Content */}
-								<div className="p-6 space-y-8">
-									{/* Introduction */}
-									<div className="prose prose-rose max-w-none">
-										<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-											Master every aspect of the MultiSelect component with this{" "}
-											<strong>comprehensive reference</strong>. From basic
-											configuration to advanced customization, find all the
-											props you need to create perfect multi-selection
-											experiences.
-										</p>
-									</div>
-
-									{/* Props Grid */}
-									<div className="grid gap-6">
-										{/* Core Props */}
-										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
-											<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
-												<Icons.star className="h-5 w-5" />
-												Core Properties
-											</h3>
-											<div className="space-y-3 text-sm">
-												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-													<code className="font-semibold text-rose-700 dark:text-rose-300">
-														options
-													</code>
-													<p className="text-rose-600 dark:text-rose-400 mt-1">
-														Array of options or grouped options
-													</p>
-												</div>
-												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-													<code className="font-semibold text-pink-700 dark:text-pink-300">
-														onValueChange
-													</code>
-													<p className="text-pink-600 dark:text-pink-400 mt-1">
-														Callback function for value changes
-													</p>
-												</div>
-												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-													<code className="font-semibold text-red-700 dark:text-red-300">
-														defaultValue
-													</code>
-													<p className="text-red-600 dark:text-red-400 mt-1">
-														Initial selected values (default: [])
-													</p>
-												</div>
-												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-													<code className="font-semibold text-rose-700 dark:text-rose-300">
-														placeholder
-													</code>
-													<p className="text-rose-600 dark:text-rose-400 mt-1">
-														Placeholder text (default: &ldquo;Select
-														options&rdquo;)
-													</p>
-												</div>
-											</div>
-										</Card>
-
-										{/* Appearance Props */}
-										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-pink-200 dark:border-pink-800">
-											<h3 className="text-xl font-semibold mb-4 text-pink-800 dark:text-pink-200 flex items-center gap-2">
-												<Icons.heart className="h-5 w-5" />
-												Appearance & Styling
-											</h3>
-											<div className="grid gap-3 md:grid-cols-2 text-sm">
-												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-													<code className="font-semibold text-pink-700 dark:text-pink-300">
-														variant
-													</code>
-													<p className="text-pink-600 dark:text-pink-400 mt-1">
-														&ldquo;default&rdquo; | &ldquo;secondary&rdquo; |
-														&ldquo;destructive&rdquo; | &ldquo;inverted&rdquo;
-													</p>
-												</div>
-												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-													<code className="font-semibold text-rose-700 dark:text-rose-300">
-														maxCount
-													</code>
-													<p className="text-rose-600 dark:text-rose-400 mt-1">
-														Max badges to show (default: 3)
-													</p>
-												</div>
-												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-													<code className="font-semibold text-red-700 dark:text-red-300">
-														autoSize
-													</code>
-													<p className="text-red-600 dark:text-red-400 mt-1">
-														Auto width behavior (default: false)
-													</p>
-												</div>
-												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-													<code className="font-semibold text-pink-700 dark:text-pink-300">
-														singleLine
-													</code>
-													<p className="text-pink-600 dark:text-pink-400 mt-1">
-														Single line layout (default: false)
-													</p>
-												</div>
-											</div>
-										</Card>
-
-										{/* Behavior Props */}
-										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-red-200 dark:border-red-800">
-											<h3 className="text-xl font-semibold mb-4 text-red-800 dark:text-red-200 flex items-center gap-2">
-												<Icons.target className="h-5 w-5" />
-												Behavior & Interaction
-											</h3>
-											<div className="grid gap-3 md:grid-cols-2 text-sm">
-												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-													<code className="font-semibold text-red-700 dark:text-red-300">
-														searchable
-													</code>
-													<p className="text-red-600 dark:text-red-400 mt-1">
-														Enable search functionality (default: true)
-													</p>
-												</div>
-												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-													<code className="font-semibold text-rose-700 dark:text-rose-300">
-														hideSelectAll
-													</code>
-													<p className="text-rose-600 dark:text-rose-400 mt-1">
-														Hide select all button (default: false)
-													</p>
-												</div>
-												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-													<code className="font-semibold text-pink-700 dark:text-pink-300">
-														closeOnSelect
-													</code>
-													<p className="text-pink-600 dark:text-pink-400 mt-1">
-														Close after selection (default: false)
-													</p>
-												</div>
-												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-													<code className="font-semibold text-red-700 dark:text-red-300">
-														disabled
-													</code>
-													<p className="text-red-600 dark:text-red-400 mt-1">
-														Disable component (default: false)
-													</p>
-												</div>
-											</div>
-										</Card>
-
-										{/* Advanced Props */}
-										<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
-											<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
-												<Icons.zap className="h-5 w-5" />
-												Advanced Configuration
-											</h3>
-											<div className="grid gap-3 md:grid-cols-2 text-sm">
-												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-													<code className="font-semibold text-rose-700 dark:text-rose-300">
-														responsive
-													</code>
-													<p className="text-rose-600 dark:text-rose-400 mt-1">
-														Responsive behavior configuration
-													</p>
-												</div>
-												<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-													<code className="font-semibold text-pink-700 dark:text-pink-300">
-														animationConfig
-													</code>
-													<p className="text-pink-600 dark:text-pink-400 mt-1">
-														Custom animation settings
-													</p>
-												</div>
-												<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-													<code className="font-semibold text-red-700 dark:text-red-300">
-														modalPopover
-													</code>
-													<p className="text-red-600 dark:text-red-400 mt-1">
-														Modal behavior (default: false)
-													</p>
-												</div>
-												<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-													<code className="font-semibold text-rose-700 dark:text-rose-300">
-														deduplicateOptions
-													</code>
-													<p className="text-rose-600 dark:text-rose-400 mt-1">
-														Remove duplicates (default: false)
-													</p>
-												</div>
-											</div>
-										</Card>
-									</div>
+					{/* Interactive Form/Survey Example */}
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
+						)}>
+						<div className="p-8 md:p-12">
+							<div className="mb-8 text-center">
+								<div
+									className={getBadgeClasses(
+										"inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4"
+									)}>
+									<Icons.users className="h-4 w-4" />
+									Interactive Survey Example
 								</div>
-
-								{/* Implementation Tips */}
-								<div className="p-6 pt-0">
-									<div
-										className={getSmallDivClasses(
-											"bg-gradient-to-r from-rose-100 via-pink-100 to-red-100 dark:from-rose-900/20 dark:via-pink-900/20 dark:to-red-900/20 rounded-lg p-6 border border-rose-200 dark:border-rose-800"
-										)}>
-										<h4 className="text-lg font-semibold mb-4 text-rose-900 dark:text-rose-100 flex items-center gap-2">
-											<Icons.code className="h-5 w-5" />
-											Implementation Best Practices
-										</h4>
-										<div className="grid gap-4 md:grid-cols-2">
-											<div>
-												<h5 className="font-medium text-rose-800 dark:text-rose-200 mb-2">
-													Essential Tips
-												</h5>
-												<ul className="text-sm text-rose-700 dark:text-rose-300 space-y-1">
-													<li>• Always provide onValueChange callback</li>
-													<li>• Use meaningful option labels</li>
-													<li>• Set appropriate maxCount for UI</li>
-													<li>• Test with different data sizes</li>
-												</ul>
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4"
+									)}>
+									Developer Survey
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Help us understand the current state of web development
+								</p>
+							</div>
+							<div className="prose prose-lg dark:prose-invert max-w-none">
+								<div className="space-y-8 text-muted-foreground leading-relaxed">
+									<div className="markdown-section">
+										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+											<span className="flex items-center justify-center w-8 h-8 bg-emerald-500 text-white rounded-full text-sm font-bold">
+												1
+											</span>
+											What programming languages do you use regularly?
+										</h3>
+										<p className="text-base md:text-lg mb-6">
+											Select all programming languages that you work with on a
+											regular basis. This helps us understand the current
+											landscape of developer preferences and industry trends.
+										</p>
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+											<MultiSelect
+												options={[
+													{
+														value: "javascript",
+														label: "JavaScript",
+														icon: Icons.zap,
+													},
+													{
+														value: "typescript",
+														label: "TypeScript",
+														icon: Icons.code,
+													},
+													{
+														value: "python",
+														label: "Python",
+														icon: Icons.cpu,
+													},
+													{
+														value: "java",
+														label: "Java",
+														icon: Icons.database,
+													},
+													{
+														value: "csharp",
+														label: "C#",
+														icon: Icons.shield,
+													},
+													{
+														value: "golang",
+														label: "Go",
+														icon: Icons.activity,
+													},
+													{
+														value: "rust",
+														label: "Rust",
+														icon: Icons.harddrive,
+													},
+													{
+														value: "php",
+														label: "PHP",
+														icon: Icons.globe,
+													},
+													{
+														value: "swift",
+														label: "Swift",
+														icon: Icons.smartphone,
+													},
+													{
+														value: "kotlin",
+														label: "Kotlin",
+														icon: Icons.smartphone,
+													},
+												]}
+												onValueChange={(values) => {
+													// Optional: handle selection changes
+												}}
+												defaultValue={["javascript", "typescript"]}
+												placeholder="Select programming languages..."
+												variant="default"
+												animationConfig={{
+													badgeAnimation: "bounce",
+													popoverAnimation: "scale",
+													optionHoverAnimation: "highlight",
+												}}
+												maxCount={5}
+												className="w-full"
+											/>
+										</div>
+									</div>
+									<div className="markdown-section">
+										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+											<span className="flex items-center justify-center w-8 h-8 bg-teal-500 text-white rounded-full text-sm font-bold">
+												2
+											</span>
+											Which frameworks and libraries are you most interested in
+											learning?
+										</h3>
+										<p className="text-base md:text-lg mb-6">
+											The tech industry evolves rapidly. Tell us which
+											technologies you&apos;re planning to learn next year. This
+											could include frameworks you&apos;ve heard about but
+											haven&apos;t had the chance to try yet.
+										</p>
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+											<MultiSelect
+												options={categorizedOptions}
+												onValueChange={(values) => {
+													// Optional: handle selection changes
+												}}
+												defaultValue={["react", "nodejs"]}
+												placeholder="Select technologies to learn..."
+												variant="inverted"
+												animationConfig={{
+													badgeAnimation: "pulse",
+													popoverAnimation: "fade",
+													optionHoverAnimation: "scale",
+												}}
+												maxCount={4}
+												className="w-full"
+											/>
+										</div>
+									</div>
+									<div className="markdown-section">
+										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+											<span className="flex items-center justify-center w-8 h-8 bg-cyan-500 text-white rounded-full text-sm font-bold">
+												3
+											</span>
+											What type of projects do you primarily work on?
+										</h3>
+										<p className="text-base md:text-lg mb-6">
+											Understanding the types of projects developers work on
+											helps us identify common patterns and challenges. Whether
+											you&apos;re building{" "}
+											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+												enterprise applications
+											</code>
+											,
+											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+												mobile apps
+											</code>
+											, or
+											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+												data pipelines
+											</code>
+											, your experience matters.
+										</p>
+										<div className="grid md:grid-cols-2 gap-4 mb-6">
+											<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
+												<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+													<Icons.globe className="h-5 w-5 text-cyan-500" />
+													Web Development
+												</h4>
+												<p className="text-sm text-muted-foreground">
+													Frontend, backend, and full-stack web applications
+												</p>
 											</div>
-											<div>
-												<h5 className="font-medium text-pink-800 dark:text-pink-200 mb-2">
-													Performance
-												</h5>
-												<ul className="text-sm text-pink-700 dark:text-pink-300 space-y-1">
-													<li>
-														• Enable deduplicateOptions for large datasets
-													</li>
-													<li>• Use responsive props for mobile</li>
-													<li>• Optimize search with custom filtering</li>
-													<li>• Memoize option arrays when possible</li>
-												</ul>
+											<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
+												<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+													<Icons.smartphone className="h-5 w-5 text-cyan-500" />
+													Mobile Development
+												</h4>
+												<p className="text-sm text-muted-foreground">
+													Native and cross-platform mobile applications
+												</p>
+											</div>
+										</div>
+										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+											<MultiSelect
+												options={projectTypesWithStyle}
+												onValueChange={(values) => {
+													// Optional: handle selection changes
+												}}
+												defaultValue={["web-app"]}
+												placeholder="Select project types..."
+												variant="secondary"
+												animationConfig={{
+													badgeAnimation: "wiggle",
+													popoverAnimation: "slide",
+													optionHoverAnimation: "glow",
+												}}
+												maxCount={3}
+												className="w-full"
+											/>
+										</div>
+									</div>
+									<div className="markdown-section">
+										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+											<span className="flex items-center justify-center w-8 h-8 bg-purple-500 text-white rounded-full text-sm font-bold">
+												4
+											</span>
+											How do you prefer to learn new technologies?
+										</h3>
+										<p className="text-base md:text-lg mb-6">
+											Everyone has different learning styles. Some prefer
+											hands-on coding, others like structured courses.
+											Understanding how developers learn helps the community
+											create better educational resources.
+										</p>
+										<div
+											className={getSmallDivClasses(
+												"bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6"
+											)}>
+											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+												<Icons.star className="h-5 w-5 text-purple-500" />
+												Learning Preferences
+											</h4>
+											<MultiSelect
+												options={[
+													{
+														value: "documentation",
+														label: "Official Documentation",
+														icon: Icons.code,
+													},
+													{
+														value: "tutorials",
+														label: "Video Tutorials",
+														icon: Icons.globe,
+													},
+													{
+														value: "courses",
+														label: "Online Courses",
+														icon: Icons.target,
+													},
+													{
+														value: "books",
+														label: "Technical Books",
+														icon: Icons.star,
+													},
+													{
+														value: "practice",
+														label: "Hands-on Practice",
+														icon: Icons.zap,
+													},
+													{
+														value: "mentorship",
+														label: "Mentorship",
+														icon: Icons.cpu,
+													},
+													{
+														value: "community",
+														label: "Community Forums",
+														icon: Icons.database,
+													},
+													{
+														value: "conferences",
+														label: "Conferences & Talks",
+														icon: Icons.shield,
+													},
+												]}
+												onValueChange={(values) => {
+													// Optional: handle selection changes
+												}}
+												defaultValue={["documentation", "practice"]}
+												placeholder="How do you like to learn?"
+												variant="default"
+												animationConfig={{
+													badgeAnimation: "fade",
+													popoverAnimation: "flip",
+													optionHoverAnimation: "highlight",
+												}}
+												maxCount={4}
+												className="w-full"
+											/>
+										</div>
+										<div
+											className={getSmallDivClasses(
+												"mt-8 bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
+											)}>
+											<div className="flex items-start gap-3">
+												<Icons.star className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
+												<div>
+													<h4 className="font-semibold text-foreground mb-1">
+														Pro Tip
+													</h4>
+													<p className="text-sm text-muted-foreground">
+														Combining multiple learning methods often leads to
+														better retention and understanding. Try pairing
+														documentation reading with hands-on practice!
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-
-								{/* Quick Reference */}
-								<div className="p-6 pt-0">
 									<div
 										className={getSmallDivClasses(
-											"bg-gradient-to-br from-red-400/10 via-pink-400/10 to-rose-400/10 border-l-4 border-rose-400 rounded-r-lg p-4"
+											"mt-12 p-6 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
 										)}>
-										<p className="text-rose-800 dark:text-rose-200 font-medium flex items-start gap-2">
-											<Icons.code className="h-5 w-5 mt-0.5 flex-shrink-0" />
-											<span>
-												<strong>Quick Start:</strong> Most use cases only need
-												options, onValueChange, and optionally defaultValue. All
-												other props enhance the experience but have sensible
-												defaults.
-											</span>
+										<h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+											<Icons.check className="h-6 w-6 text-emerald-500" />
+											Thank You for Participating!
+										</h3>
+										<p className="text-base text-muted-foreground mb-4">
+											Your responses help us understand the developer community
+											better. This survey demonstrates how MultiSelect
+											components can be seamlessly integrated into forms and
+											surveys.
 										</p>
+										<div className="flex flex-wrap gap-2">
+											<span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded-full text-sm">
+												<Icons.zap className="h-3 w-3" />
+												Interactive
+											</span>
+											<span className="inline-flex items-center gap-1 px-3 py-1 bg-teal-200 dark:bg-teal-800 text-teal-800 dark:text-teal-200 rounded-full text-sm">
+												<Icons.target className="h-3 w-3" />
+												Accessible
+											</span>
+											<span className="inline-flex items-center gap-1 px-3 py-1 bg-cyan-200 dark:bg-cyan-800 text-cyan-800 dark:text-cyan-200 rounded-full text-sm">
+												<Icons.star className="h-3 w-3" />
+												Customizable
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</Card>
+
+					{/* Props Reference */}
+					<Card
+						className={getCardClasses(
+							"p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
+						)}>
+						<div className="p-8 md:p-12">
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded-full text-sm font-medium mb-4">
+									<Icons.code className="h-4 w-4" />
+									Props Guide
+								</div>
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-700 via-pink-600 to-red-600 dark:from-rose-400 dark:via-pink-300 dark:to-red-300 bg-clip-text text-transparent mb-4"
+									)}>
+									Props Reference Guide
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Complete documentation of all MultiSelect component
+									properties, with examples, defaults, and best practices for
+									every configuration option.
+								</p>
+							</div>
+							<div className="p-0 space-y-8">
+								<div className="prose prose-rose max-w-none">
+									<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+										Master every aspect of the MultiSelect component with this{" "}
+										<strong>comprehensive reference</strong>. From basic
+										configuration to advanced customization, find all the props
+										you need to create perfect multi-selection experiences.
+									</p>
+								</div>
+								<div className="grid gap-6">
+									<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
+										<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
+											<Icons.star className="h-5 w-5" />
+											Core Properties
+										</h3>
+										<div className="space-y-3 text-sm">
+											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+												<code className="font-semibold text-rose-700 dark:text-rose-300">
+													options
+												</code>
+												<p className="text-rose-600 dark:text-rose-400 mt-1">
+													Array of options or grouped options
+												</p>
+											</div>
+											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+												<code className="font-semibold text-pink-700 dark:text-pink-300">
+													onValueChange
+												</code>
+												<p className="text-pink-600 dark:text-pink-400 mt-1">
+													Callback function for value changes
+												</p>
+											</div>
+											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+												<code className="font-semibold text-red-700 dark:text-red-300">
+													defaultValue
+												</code>
+												<p className="text-red-600 dark:text-red-400 mt-1">
+													Initial selected values (default: [])
+												</p>
+											</div>
+											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+												<code className="font-semibold text-rose-700 dark:text-rose-300">
+													placeholder
+												</code>
+												<p className="text-rose-600 dark:text-rose-400 mt-1">
+													Placeholder text (default: &ldquo;Select
+													options&rdquo;)
+												</p>
+											</div>
+										</div>
+									</Card>
+									<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-pink-200 dark:border-pink-800">
+										<h3 className="text-xl font-semibold mb-4 text-pink-800 dark:text-pink-200 flex items-center gap-2">
+											<Icons.heart className="h-5 w-5" />
+											Appearance & Styling
+										</h3>
+										<div className="grid gap-3 md:grid-cols-2 text-sm">
+											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+												<code className="font-semibold text-pink-700 dark:text-pink-300">
+													variant
+												</code>
+												<p className="text-pink-600 dark:text-pink-400 mt-1">
+													&ldquo;default&rdquo; | &ldquo;secondary&rdquo; |
+													&ldquo;destructive&rdquo; | &ldquo;inverted&rdquo;
+												</p>
+											</div>
+											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+												<code className="font-semibold text-rose-700 dark:text-rose-300">
+													maxCount
+												</code>
+												<p className="text-rose-600 dark:text-rose-400 mt-1">
+													Max badges to show (default: 3)
+												</p>
+											</div>
+											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+												<code className="font-semibold text-red-700 dark:text-red-300">
+													autoSize
+												</code>
+												<p className="text-red-600 dark:text-red-400 mt-1">
+													Auto width behavior (default: false)
+												</p>
+											</div>
+											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+												<code className="font-semibold text-pink-700 dark:text-pink-300">
+													singleLine
+												</code>
+												<p className="text-pink-600 dark:text-pink-400 mt-1">
+													Single line layout (default: false)
+												</p>
+											</div>
+										</div>
+									</Card>
+									<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-red-200 dark:border-red-800">
+										<h3 className="text-xl font-semibold mb-4 text-red-800 dark:text-red-200 flex items-center gap-2">
+											<Icons.target className="h-5 w-5" />
+											Behavior & Interaction
+										</h3>
+										<div className="grid gap-3 md:grid-cols-2 text-sm">
+											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+												<code className="font-semibold text-red-700 dark:text-red-300">
+													searchable
+												</code>
+												<p className="text-red-600 dark:text-red-400 mt-1">
+													Enable search functionality (default: true)
+												</p>
+											</div>
+											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+												<code className="font-semibold text-rose-700 dark:text-rose-300">
+													hideSelectAll
+												</code>
+												<p className="text-rose-600 dark:text-rose-400 mt-1">
+													Hide select all button (default: false)
+												</p>
+											</div>
+											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+												<code className="font-semibold text-pink-700 dark:text-pink-300">
+													closeOnSelect
+												</code>
+												<p className="text-pink-600 dark:text-pink-400 mt-1">
+													Close after selection (default: false)
+												</p>
+											</div>
+											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+												<code className="font-semibold text-red-700 dark:text-red-300">
+													disabled
+												</code>
+												<p className="text-red-600 dark:text-red-400 mt-1">
+													Disable component (default: false)
+												</p>
+											</div>
+										</div>
+									</Card>
+									<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
+										<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
+											<Icons.zap className="h-5 w-5" />
+											Advanced Configuration
+										</h3>
+										<div className="grid gap-3 md:grid-cols-2 text-sm">
+											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+												<code className="font-semibold text-rose-700 dark:text-rose-300">
+													responsive
+												</code>
+												<p className="text-rose-600 dark:text-rose-400 mt-1">
+													Responsive behavior configuration
+												</p>
+											</div>
+											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
+												<code className="font-semibold text-pink-700 dark:text-pink-300">
+													animationConfig
+												</code>
+												<p className="text-pink-600 dark:text-pink-400 mt-1">
+													Custom animation settings
+												</p>
+											</div>
+											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
+												<code className="font-semibold text-red-700 dark:text-red-300">
+													modalPopover
+												</code>
+												<p className="text-red-600 dark:text-red-400 mt-1">
+													Modal behavior (default: false)
+												</p>
+											</div>
+											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
+												<code className="font-semibold text-rose-700 dark:text-rose-300">
+													deduplicateOptions
+												</code>
+												<p className="text-rose-600 dark:text-rose-400 mt-1">
+													Remove duplicates (default: false)
+												</p>
+											</div>
+										</div>
+									</Card>
+								</div>
+							</div>
+							<div className="p-0 pt-6">
+								<div
+									className={getSmallDivClasses(
+										"bg-gradient-to-r from-rose-100 via-pink-100 to-red-100 dark:from-rose-900/20 dark:via-pink-900/20 dark:to-red-900/20 rounded-lg p-6 border border-rose-200 dark:border-rose-800"
+									)}>
+									<h4 className="text-lg font-semibold mb-4 text-rose-900 dark:text-rose-100 flex items-center gap-2">
+										<Icons.code className="h-5 w-5" />
+										Implementation Best Practices
+									</h4>
+									<div className="grid gap-4 md:grid-cols-2">
+										<div>
+											<h5 className="font-medium text-rose-800 dark:text-rose-200 mb-2">
+												Essential Tips
+											</h5>
+											<ul className="text-sm text-rose-700 dark:text-rose-300 space-y-1">
+												<li>• Always provide onValueChange callback</li>
+												<li>• Use meaningful option labels</li>
+												<li>• Set appropriate maxCount for UI</li>
+												<li>• Test with different data sizes</li>
+											</ul>
+										</div>
+										<div>
+											<h5 className="font-medium text-pink-800 dark:text-pink-200 mb-2">
+												Performance
+											</h5>
+											<ul className="text-sm text-pink-700 dark:text-pink-300 space-y-1">
+												<li>• Enable deduplicateOptions for large datasets</li>
+												<li>• Use responsive props for mobile</li>
+												<li>• Optimize search with custom filtering</li>
+												<li>• Memoize option arrays when possible</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="p-0 pt-6">
+								<div
+									className={getSmallDivClasses(
+										"bg-gradient-to-br from-red-400/10 via-pink-400/10 to-rose-400/10 border-l-4 border-rose-400 rounded-r-lg p-4"
+									)}>
+									<p className="text-rose-800 dark:text-rose-200 font-medium flex items-start gap-2">
+										<Icons.star className="h-5 w-5 mt-0.5 flex-shrink-0" />
+										<span>
+											<strong>Quick Start:</strong> Most use cases only need
+											options, onValueChange, and optionally defaultValue. All
+											other props enhance the experience but have sensible
+											defaults.
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</Card>
 
 					{/* AI Chat Widget */}
 				</div>

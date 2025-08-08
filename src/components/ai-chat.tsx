@@ -212,7 +212,7 @@ export function AIChat({ className }: AIChatProps) {
 		setIsLoading(true);
 
 		setIsRateLimited(true);
-		setRateLimitSeconds(30);
+		setRateLimitSeconds(15);
 
 		setSuggestedQuestions([]);
 
@@ -676,8 +676,8 @@ export function AIChat({ className }: AIChatProps) {
 									onClick={() =>
 										!isRateLimited && handleSuggestedQuestion(question)
 									}>
-									{question.length > 40
-										? question.substring(0, 40) + "..."
+									{question.length > 100
+										? question.substring(0, 100) + "..."
 										: question}
 								</Badge>
 							))}
