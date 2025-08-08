@@ -1135,7 +1135,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-violet-50/50 to-purple-50/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.check className="h-5 w-5 text-violet-500" />
@@ -1350,7 +1350,7 @@ export default function Home() {
 									<div className="grid md:grid-cols-2 gap-6 my-8">
 										<div
 											className={getSmallDivClasses(
-												"bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50"
+												"p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.target className="h-5 w-5 text-rose-500" />
@@ -1402,7 +1402,7 @@ export default function Home() {
 										</div>
 										<div
 											className={getSmallDivClasses(
-												"bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl p-6 border border-rose-200/50 dark:border-rose-700/50"
+												"p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 											)}>
 											<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 												<Icons.shield className="h-5 w-5 text-pink-500" />
@@ -1530,7 +1530,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
 											<Icons.activity className="h-5 w-5 text-amber-500" />
@@ -1688,7 +1688,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.monitor className="h-5 w-5 text-green-500" />
@@ -1829,7 +1829,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.code className="h-5 w-5 text-blue-500" />
@@ -1920,7 +1920,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-cyan-50/50 to-sky-50/50 dark:from-cyan-950/20 dark:to-sky-950/20 rounded-xl border border-cyan-200/50 dark:border-cyan-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.search className="h-5 w-5 text-cyan-500" />
@@ -2054,7 +2054,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-orange-50/50 to-amber-50/50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl border border-orange-200/50 dark:border-orange-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.monitor className="h-5 w-5 text-orange-500" />
@@ -2207,7 +2207,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-purple-50/50 to-fuchsia-50/50 dark:from-purple-950/20 dark:to-fuchsia-950/20 rounded-xl border border-purple-200/50 dark:border-purple-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.wand className="h-5 w-5 text-purple-500" />
@@ -2354,7 +2354,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-slate-50/50 to-gray-50/50 dark:from-slate-950/20 dark:to-gray-950/20 rounded-xl border border-slate-200/50 dark:border-slate-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.shield className="h-5 w-5 text-slate-500" />
@@ -2482,7 +2482,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-indigo-50/50 to-blue-50/50 dark:from-indigo-950/20 dark:to-blue-950/20 rounded-xl border border-indigo-200/50 dark:border-indigo-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.zap className="h-5 w-5 text-indigo-500" />
@@ -2655,7 +2655,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.code className="h-5 w-5 text-emerald-500" />
@@ -2803,13 +2803,6 @@ export default function Home() {
 							</div>
 							<div className="p-0 space-y-8">
 								<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-orange-200 dark:border-orange-800">
-									<h3 className="text-xl font-semibold mb-4 text-orange-800 dark:text-orange-200">
-										📊 Interactive Dashboard Demo
-									</h3>
-									<p className="text-muted-foreground mb-6">
-										Interactive charts that update based on MultiSelect
-										selections
-									</p>
 									<div className="grid gap-4 grid-cols-1 mb-8">
 										<div className="space-y-2">
 											<label className="text-sm font-medium">
@@ -3760,27 +3753,6 @@ export default function Home() {
 											/>
 										</div>
 									</div>
-									<div
-										className={getSmallDivClasses(
-											"mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50"
-										)}>
-										<div className="flex items-start gap-4">
-											<div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mt-1">
-												<Icons.check className="h-4 w-4 text-white" />
-											</div>
-											<div>
-												<h4 className="text-lg font-semibold text-foreground mb-2">
-													Pro Tip
-												</h4>
-												<p className="text-base text-muted-foreground">
-													Start with technologies your team knows well, then
-													gradually introduce new ones. This approach reduces
-													risk and ensures project success while still allowing
-													for innovation and growth.
-												</p>
-											</div>
-										</div>
-									</div>
 									<p className="text-base md:text-lg">
 										Remember, the best technology stack is the one that your
 										team can effectively use to deliver value to your users.
@@ -3832,6 +3804,10 @@ export default function Home() {
 											landscape of developer preferences and industry trends.
 										</p>
 										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+												<Icons.check className="h-5 w-5 text-emerald-500" />
+												Programming Languages
+											</h4>
 											<MultiSelect
 												options={[
 													{
@@ -3916,6 +3892,10 @@ export default function Home() {
 											haven&apos;t had the chance to try yet.
 										</p>
 										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+												<Icons.check className="h-5 w-5 text-teal-500" />
+												Frameworks & Libraries
+											</h4>
 											<MultiSelect
 												options={categorizedOptions}
 												onValueChange={(values) => {
@@ -3958,27 +3938,11 @@ export default function Home() {
 											</code>
 											, your experience matters.
 										</p>
-										<div className="grid md:grid-cols-2 gap-4 mb-6">
-											<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
-												<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-													<Icons.globe className="h-5 w-5 text-cyan-500" />
-													Web Development
-												</h4>
-												<p className="text-sm text-muted-foreground">
-													Frontend, backend, and full-stack web applications
-												</p>
-											</div>
-											<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
-												<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-													<Icons.smartphone className="h-5 w-5 text-cyan-500" />
-													Mobile Development
-												</h4>
-												<p className="text-sm text-muted-foreground">
-													Native and cross-platform mobile applications
-												</p>
-											</div>
-										</div>
 										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+												<Icons.check className="h-5 w-5 text-cyan-500" />
+												Project Types
+											</h4>
 											<MultiSelect
 												options={projectTypesWithStyle}
 												onValueChange={(values) => {
@@ -4015,7 +3979,7 @@ export default function Home() {
 												"bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6"
 											)}>
 											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-												<Icons.star className="h-5 w-5 text-purple-500" />
+												<Icons.check className="h-5 w-5 text-purple-500" />
 												Learning Preferences
 											</h4>
 											<MultiSelect
@@ -4075,24 +4039,6 @@ export default function Home() {
 												maxCount={4}
 												className="w-full"
 											/>
-										</div>
-										<div
-											className={getSmallDivClasses(
-												"mt-8 bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
-											)}>
-											<div className="flex items-start gap-3">
-												<Icons.star className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
-												<div>
-													<h4 className="font-semibold text-foreground mb-1">
-														Pro Tip
-													</h4>
-													<p className="text-sm text-muted-foreground">
-														Combining multiple learning methods often leads to
-														better retention and understanding. Try pairing
-														documentation reading with hands-on practice!
-													</p>
-												</div>
-											</div>
 										</div>
 									</div>
 									<div
