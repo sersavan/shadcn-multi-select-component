@@ -877,22 +877,19 @@ export default function Home() {
 	}, [selectedMetrics]);
 
 	const treemapData = useMemo(() => {
-		if (!selectedMetrics.includes("revenue")) return [];
-		return [
-			{ name: "Frontend", size: 1200, fill: "#8884d8" },
-			{ name: "Backend", size: 800, fill: "#82ca9d" },
-			{ name: "DevOps", size: 400, fill: "#ffc658" },
-			{ name: "UI/UX", size: 1000, fill: "#ff7c7c" },
-			{ name: "Graphics", size: 400, fill: "#8dd1e1" },
-			{ name: "Research", size: 200, fill: "#d084d0" },
-			{ name: "Strategy", size: 800, fill: "#ffb347" },
-			{ name: "Analytics", size: 600, fill: "#87ceeb" },
-			{ name: "Management", size: 400, fill: "#dda0dd" },
-			{ name: "Digital", size: 600, fill: "#98fb98" },
-			{ name: "Content", size: 400, fill: "#f0e68c" },
-			{ name: "Social", size: 200, fill: "#ffa07a" },
-		];
-	}, [selectedMetrics]);
+		if (
+			!selectedMetrics.includes("revenue") ||
+			selectedDepartments.length === 0
+		)
+			return [];
+		const q4Data = revenueData[3];
+
+		return selectedDepartments.map((dept) => ({
+			name: companyDepartments.find((d) => d.value === dept)?.label || dept,
+			size: q4Data[dept as keyof typeof q4Data] || 0,
+			fill: chartColors[dept as keyof typeof chartColors] || "#8884d8",
+		}));
+	}, [selectedMetrics, selectedDepartments]);
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
