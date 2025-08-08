@@ -3020,14 +3020,6 @@ export default function Home() {
 								</p>
 							</div>
 							<div className="p-0 space-y-8">
-								<div className="prose prose-rose max-w-none">
-									<p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-										Master every aspect of the MultiSelect component with this{" "}
-										<strong>comprehensive reference</strong>. From basic
-										configuration to advanced customization, find all the props
-										you need to create perfect multi-selection experiences.
-									</p>
-								</div>
 								<div className="grid gap-6">
 									<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">
 										<h3 className="text-xl font-semibold mb-4 text-rose-800 dark:text-rose-200 flex items-center gap-2">
@@ -3035,35 +3027,39 @@ export default function Home() {
 											Core Properties
 										</h3>
 										<div className="space-y-3 text-sm">
-											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-												<code className="font-semibold text-rose-700 dark:text-rose-300">
-													options
-												</code>
-												<p className="text-rose-600 dark:text-rose-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">options</code>
+												<p className="text-muted-foreground mt-1">
 													Array of options or grouped options
 												</p>
 											</div>
-											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-												<code className="font-semibold text-pink-700 dark:text-pink-300">
-													onValueChange
-												</code>
-												<p className="text-pink-600 dark:text-pink-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">onValueChange</code>
+												<p className="text-muted-foreground mt-1">
 													Callback function for value changes
 												</p>
 											</div>
-											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-												<code className="font-semibold text-red-700 dark:text-red-300">
-													defaultValue
-												</code>
-												<p className="text-red-600 dark:text-red-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">defaultValue</code>
+												<p className="text-muted-foreground mt-1">
 													Initial selected values (default: [])
 												</p>
 											</div>
-											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-												<code className="font-semibold text-rose-700 dark:text-rose-300">
-													placeholder
-												</code>
-												<p className="text-rose-600 dark:text-rose-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">placeholder</code>
+												<p className="text-muted-foreground mt-1">
 													Placeholder text (default: &ldquo;Select
 													options&rdquo;)
 												</p>
@@ -3076,36 +3072,40 @@ export default function Home() {
 											Appearance & Styling
 										</h3>
 										<div className="grid gap-3 md:grid-cols-2 text-sm">
-											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-												<code className="font-semibold text-pink-700 dark:text-pink-300">
-													variant
-												</code>
-												<p className="text-pink-600 dark:text-pink-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">variant</code>
+												<p className="text-muted-foreground mt-1">
 													&ldquo;default&rdquo; | &ldquo;secondary&rdquo; |
 													&ldquo;destructive&rdquo; | &ldquo;inverted&rdquo;
 												</p>
 											</div>
-											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-												<code className="font-semibold text-rose-700 dark:text-rose-300">
-													maxCount
-												</code>
-												<p className="text-rose-600 dark:text-rose-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">maxCount</code>
+												<p className="text-muted-foreground mt-1">
 													Max badges to show (default: 3)
 												</p>
 											</div>
-											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-												<code className="font-semibold text-red-700 dark:text-red-300">
-													autoSize
-												</code>
-												<p className="text-red-600 dark:text-red-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">autoSize</code>
+												<p className="text-muted-foreground mt-1">
 													Auto width behavior (default: false)
 												</p>
 											</div>
-											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-												<code className="font-semibold text-pink-700 dark:text-pink-300">
-													singleLine
-												</code>
-												<p className="text-pink-600 dark:text-pink-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">singleLine</code>
+												<p className="text-muted-foreground mt-1">
 													Single line layout (default: false)
 												</p>
 											</div>
@@ -3117,35 +3117,39 @@ export default function Home() {
 											Behavior & Interaction
 										</h3>
 										<div className="grid gap-3 md:grid-cols-2 text-sm">
-											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-												<code className="font-semibold text-red-700 dark:text-red-300">
-													searchable
-												</code>
-												<p className="text-red-600 dark:text-red-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">searchable</code>
+												<p className="text-muted-foreground mt-1">
 													Enable search functionality (default: true)
 												</p>
 											</div>
-											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-												<code className="font-semibold text-rose-700 dark:text-rose-300">
-													hideSelectAll
-												</code>
-												<p className="text-rose-600 dark:text-rose-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">hideSelectAll</code>
+												<p className="text-muted-foreground mt-1">
 													Hide select all button (default: false)
 												</p>
 											</div>
-											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-												<code className="font-semibold text-pink-700 dark:text-pink-300">
-													closeOnSelect
-												</code>
-												<p className="text-pink-600 dark:text-pink-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">closeOnSelect</code>
+												<p className="text-muted-foreground mt-1">
 													Close after selection (default: false)
 												</p>
 											</div>
-											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-												<code className="font-semibold text-red-700 dark:text-red-300">
-													disabled
-												</code>
-												<p className="text-red-600 dark:text-red-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">disabled</code>
+												<p className="text-muted-foreground mt-1">
 													Disable component (default: false)
 												</p>
 											</div>
@@ -3157,35 +3161,41 @@ export default function Home() {
 											Advanced Configuration
 										</h3>
 										<div className="grid gap-3 md:grid-cols-2 text-sm">
-											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-												<code className="font-semibold text-rose-700 dark:text-rose-300">
-													responsive
-												</code>
-												<p className="text-rose-600 dark:text-rose-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">responsive</code>
+												<p className="text-muted-foreground mt-1">
 													Responsive behavior configuration
 												</p>
 											</div>
-											<div className="p-3 bg-pink-50 dark:bg-pink-900/20 rounded border-l-4 border-pink-300">
-												<code className="font-semibold text-pink-700 dark:text-pink-300">
-													animationConfig
-												</code>
-												<p className="text-pink-600 dark:text-pink-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">animationConfig</code>
+												<p className="text-muted-foreground mt-1">
 													Custom animation settings
 												</p>
 											</div>
-											<div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300">
-												<code className="font-semibold text-red-700 dark:text-red-300">
-													modalPopover
-												</code>
-												<p className="text-red-600 dark:text-red-400 mt-1">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">modalPopover</code>
+												<p className="text-muted-foreground mt-1">
 													Modal behavior (default: false)
 												</p>
 											</div>
-											<div className="p-3 bg-rose-50 dark:bg-rose-900/20 rounded border-l-4 border-rose-300">
-												<code className="font-semibold text-rose-700 dark:text-rose-300">
+											<div
+												className={getDivClasses(
+													"p-3 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-300"
+												)}>
+												<code className="font-semibold">
 													deduplicateOptions
 												</code>
-												<p className="text-rose-600 dark:text-rose-400 mt-1">
+												<p className="text-muted-foreground mt-1">
 													Remove duplicates (default: false)
 												</p>
 											</div>
@@ -3204,10 +3214,10 @@ export default function Home() {
 									</h4>
 									<div className="grid gap-4 md:grid-cols-2">
 										<div>
-											<h5 className="font-medium text-rose-800 dark:text-rose-200 mb-2">
+											<h5 className="font-medium text-red-800 dark:text-red-200 mb-2">
 												Essential Tips
 											</h5>
-											<ul className="text-sm text-rose-700 dark:text-rose-300 space-y-1">
+											<ul className="text-sm space-y-1 text-muted-foreground">
 												<li>• Always provide onValueChange callback</li>
 												<li>• Use meaningful option labels</li>
 												<li>• Set appropriate maxCount for UI</li>
@@ -3215,10 +3225,10 @@ export default function Home() {
 											</ul>
 										</div>
 										<div>
-											<h5 className="font-medium text-pink-800 dark:text-pink-200 mb-2">
+											<h5 className="font-medium text-red-800 dark:text-red-200 mb-2">
 												Performance
 											</h5>
-											<ul className="text-sm text-pink-700 dark:text-pink-300 space-y-1">
+											<ul className="text-sm space-y-1 text-muted-foreground">
 												<li>• Enable deduplicateOptions for large datasets</li>
 												<li>• Use responsive props for mobile</li>
 												<li>• Optimize search with custom filtering</li>
