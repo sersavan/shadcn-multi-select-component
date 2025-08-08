@@ -13,7 +13,7 @@ const ColorModeContext = createContext<ColorModeContextType | undefined>(
 );
 
 export function ColorModeProvider({ children }: { children: ReactNode }) {
-	const [isGrayMode, setIsGrayMode] = useState(false);
+	const [isGrayMode, setIsGrayMode] = useState(true);
 
 	const toggleGrayMode = () => {
 		setIsGrayMode(!isGrayMode);

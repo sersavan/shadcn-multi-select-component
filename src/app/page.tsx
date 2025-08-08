@@ -1106,591 +1106,6 @@ export default function Home() {
 					</Card>
 				</div>
 
-				{/* Interactive Documentation Section - Example Usage in Content */}
-				<div className="mt-12 mb-8">
-					<Card className="p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/50 dark:via-gray-950/50 dark:to-zinc-950/50 border-slate-200 dark:border-slate-800 overflow-hidden">
-						<div className="p-8 md:p-12">
-							{/* Article Header */}
-							<div className="mb-8 text-center">
-								<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
-									<Icons.code className="h-4 w-4" />
-									Example Usage in Content
-								</div>
-								<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 bg-clip-text text-transparent mb-4">
-									Building Your Tech Stack
-								</h2>
-								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-									A comprehensive guide to selecting the right technologies for
-									your next project
-								</p>
-							</div>
-
-							{/* Article Content with Embedded MultiSelect */}
-							<div className="prose prose-lg dark:prose-invert max-w-none">
-								<div className="space-y-6 text-muted-foreground leading-relaxed">
-									<p className="text-base md:text-lg">
-										Choosing the right technology stack is crucial for any
-										successful project. Whether you&apos;re building a
-										<span className="font-semibold text-foreground">
-											{" "}
-											web application
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											{" "}
-											mobile app
-										</span>
-										, or
-										<span className="font-semibold text-foreground">
-											{" "}
-											enterprise solution
-										</span>
-										, the technologies you select will impact your development
-										speed, scalability, and long-term maintenance.
-									</p>
-
-									{/* Interactive Element Embedded in Content */}
-									<div className="my-8 p-6 bg-white/60 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-										<div className="mb-4">
-											<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-												<Icons.zap className="h-5 w-5 text-blue-500" />
-												Select Your Preferred Technologies
-											</h4>
-											<p className="text-sm text-muted-foreground mb-4">
-												Try our interactive multi-select component to choose
-												technologies for your project:
-											</p>
-										</div>
-										<MultiSelect
-											options={techStackOptions}
-											onValueChange={(values) => {
-												// Optional: handle selection changes
-											}}
-											defaultValue={["typescript", "react"]}
-											placeholder="Choose technologies..."
-											variant="inverted"
-											animationConfig={{
-												badgeAnimation: "bounce",
-												popoverAnimation: "scale",
-												optionHoverAnimation: "highlight",
-											}}
-											maxCount={3}
-											className="w-full"
-										/>
-									</div>
-
-									<p className="text-base md:text-lg">
-										Modern development teams often prefer
-										<span className="font-semibold text-foreground">
-											{" "}
-											TypeScript
-										</span>{" "}
-										for its type safety,
-										<span className="font-semibold text-foreground">
-											{" "}
-											React
-										</span>{" "}
-										for component-based architecture, and{" "}
-										<span className="font-semibold text-foreground">
-											{" "}
-											Node.js
-										</span>{" "}
-										for full-stack JavaScript development.
-									</p>
-
-									{/* Another Interactive Section */}
-									<div
-										className={getSmallDivClasses(
-											"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-800/50"
-										)}>
-										<div className="mb-4">
-											<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-												<Icons.target className="h-5 w-5 text-indigo-500" />
-												Project Categories
-											</h4>
-											<p className="text-sm text-muted-foreground mb-4">
-												What type of project are you planning to build?
-											</p>
-										</div>
-										<MultiSelect
-											options={projectTypesWithStyle}
-											onValueChange={(values) => {
-												// Optional: handle selection changes
-											}}
-											defaultValue={["web-app"]}
-											placeholder="Select project type..."
-											variant="default"
-											animationConfig={{
-												badgeAnimation: "pulse",
-												popoverAnimation: "fade",
-												optionHoverAnimation: "scale",
-											}}
-											maxCount={2}
-											className="w-full"
-										/>
-									</div>
-
-									<p className="text-base md:text-lg">
-										The choice of technology stack should align with your
-										project requirements, team expertise, and long-term goals.
-										Consider factors such as
-										<span className="font-semibold text-foreground">
-											{" "}
-											performance
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											{" "}
-											scalability
-										</span>
-										,
-										<span className="font-semibold text-foreground">
-											{" "}
-											maintainability
-										</span>
-										, and{" "}
-										<span className="font-semibold text-foreground">
-											{" "}
-											community support
-										</span>
-										when making your decisions.
-									</p>
-
-									{/* Skills and Expertise Section */}
-									<div className="my-8">
-										<h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-											<Icons.star className="h-5 w-5 text-yellow-500" />
-											Team Skills Assessment
-										</h3>
-										<p className="text-base md:text-lg mb-4">
-											Before finalizing your tech stack, assess your team&apos;s
-											current skills and expertise. This will help determine
-											whether you need additional training or if you should
-											consider alternative technologies.
-										</p>
-
-										<div
-											className={getSmallDivClasses(
-												"p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-800/50"
-											)}>
-											<div className="mb-4">
-												<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
-													<Icons.cpu className="h-5 w-5 text-amber-500" />
-													Current Skills
-												</h4>
-												<p className="text-sm text-muted-foreground mb-4">
-													Select the technologies your team is already
-													proficient in:
-												</p>
-											</div>
-											<MultiSelect
-												options={skillsWithDisabled}
-												onValueChange={(values) => {
-													// Optional: handle selection changes
-												}}
-												defaultValue={["html", "css", "javascript"]}
-												placeholder="Select team skills..."
-												variant="secondary"
-												animationConfig={{
-													badgeAnimation: "fade",
-													popoverAnimation: "slide",
-													optionHoverAnimation: "glow",
-												}}
-												maxCount={5}
-												className="w-full"
-											/>
-										</div>
-									</div>
-
-									<div
-										className={getSmallDivClasses(
-											"mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50"
-										)}>
-										<div className="flex items-start gap-4">
-											<div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mt-1">
-												<Icons.check className="h-4 w-4 text-white" />
-											</div>
-											<div>
-												<h4 className="text-lg font-semibold text-foreground mb-2">
-													Pro Tip
-												</h4>
-												<p className="text-base text-muted-foreground">
-													Start with technologies your team knows well, then
-													gradually introduce new ones. This approach reduces
-													risk and ensures project success while still allowing
-													for innovation and growth.
-												</p>
-											</div>
-										</div>
-									</div>
-
-									<p className="text-base md:text-lg">
-										Remember, the best technology stack is the one that your
-										team can effectively use to deliver value to your users.
-										Don&apos;t choose technologies just because they&apos;re
-										trendy – choose them because they solve real problems and
-										fit your specific use case.
-									</p>
-								</div>
-							</div>
-
-							{/* Call to Action */}
-							<div className="mt-12 text-center">
-								<div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full border border-blue-200/50 dark:border-blue-800/50">
-									<Icons.wand className="h-4 w-4 text-blue-500" />
-									<span className="text-sm font-medium text-blue-700 dark:text-blue-300">
-										Interactive components powered by our MultiSelect
-									</span>
-								</div>
-							</div>
-						</div>
-					</Card>
-				</div>
-
-				{/* Interactive Form/Survey Section - Markdown Style */}
-				<div className="mt-8 mb-8">
-					<Card
-						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
-						)}>
-						<div className="p-8 md:p-12">
-							{/* Survey Header */}
-							<div className="mb-8 text-center">
-								<div
-									className={getBadgeClasses(
-										"inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4"
-									)}>
-									<Icons.users className="h-4 w-4" />
-									Interactive Survey Example
-								</div>
-								<h2
-									className={getHeaderTextClasses(
-										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4"
-									)}>
-									Developer Survey 2025
-								</h2>
-								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-									Help us understand the current state of web development
-								</p>
-							</div>
-
-							{/* Survey Content in Markdown Style */}
-							<div className="prose prose-lg dark:prose-invert max-w-none">
-								<div className="space-y-8 text-muted-foreground leading-relaxed">
-									{/* Question 1 */}
-									<div className="markdown-section">
-										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-											<span className="flex items-center justify-center w-8 h-8 bg-emerald-500 text-white rounded-full text-sm font-bold">
-												1
-											</span>
-											What programming languages do you use regularly?
-										</h3>
-										<p className="text-base md:text-lg mb-6">
-											Select all programming languages that you work with on a
-											regular basis. This helps us understand the current
-											landscape of developer preferences and industry trends.
-										</p>
-
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
-											<MultiSelect
-												options={[
-													{
-														value: "javascript",
-														label: "JavaScript",
-														icon: Icons.zap,
-													},
-													{
-														value: "typescript",
-														label: "TypeScript",
-														icon: Icons.code,
-													},
-													{ value: "python", label: "Python", icon: Icons.cpu },
-													{
-														value: "java",
-														label: "Java",
-														icon: Icons.database,
-													},
-													{ value: "csharp", label: "C#", icon: Icons.shield },
-													{
-														value: "golang",
-														label: "Go",
-														icon: Icons.activity,
-													},
-													{
-														value: "rust",
-														label: "Rust",
-														icon: Icons.harddrive,
-													},
-													{ value: "php", label: "PHP", icon: Icons.globe },
-													{
-														value: "swift",
-														label: "Swift",
-														icon: Icons.smartphone,
-													},
-													{
-														value: "kotlin",
-														label: "Kotlin",
-														icon: Icons.smartphone,
-													},
-												]}
-												onValueChange={(values) => {
-													// Optional: handle selection changes
-												}}
-												defaultValue={["javascript", "typescript"]}
-												placeholder="Select programming languages..."
-												variant="default"
-												animationConfig={{
-													badgeAnimation: "bounce",
-													popoverAnimation: "scale",
-													optionHoverAnimation: "highlight",
-												}}
-												maxCount={5}
-												className="w-full"
-											/>
-										</div>
-									</div>
-
-									{/* Question 2 */}
-									<div className="markdown-section">
-										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-											<span className="flex items-center justify-center w-8 h-8 bg-teal-500 text-white rounded-full text-sm font-bold">
-												2
-											</span>
-											Which frameworks and libraries are you most interested in
-											learning?
-										</h3>
-										<p className="text-base md:text-lg mb-6">
-											The tech industry evolves rapidly. Tell us which
-											technologies you&apos;re planning to learn next year. This
-											could include frameworks you&apos;ve heard about but
-											haven&apos;t had the chance to try yet.
-										</p>
-
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
-											<MultiSelect
-												options={categorizedOptions}
-												onValueChange={(values) => {
-													// Optional: handle selection changes
-												}}
-												defaultValue={["react", "nodejs"]}
-												placeholder="Select technologies to learn..."
-												variant="inverted"
-												animationConfig={{
-													badgeAnimation: "pulse",
-													popoverAnimation: "fade",
-													optionHoverAnimation: "scale",
-												}}
-												maxCount={4}
-												className="w-full"
-											/>
-										</div>
-									</div>
-
-									{/* Question 3 */}
-									<div className="markdown-section">
-										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-											<span className="flex items-center justify-center w-8 h-8 bg-cyan-500 text-white rounded-full text-sm font-bold">
-												3
-											</span>
-											What type of projects do you primarily work on?
-										</h3>
-										<p className="text-base md:text-lg mb-6">
-											Understanding the types of projects developers work on
-											helps us identify common patterns and challenges. Whether
-											you&apos;re building{" "}
-											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
-												enterprise applications
-											</code>
-											,
-											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
-												mobile apps
-											</code>
-											, or
-											<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
-												data pipelines
-											</code>
-											, your experience matters.
-										</p>
-
-										<div className="grid md:grid-cols-2 gap-4 mb-6">
-											<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
-												<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-													<Icons.globe className="h-5 w-5 text-cyan-500" />
-													Web Development
-												</h4>
-												<p className="text-sm text-muted-foreground">
-													Frontend, backend, and full-stack web applications
-												</p>
-											</div>
-											<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
-												<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-													<Icons.smartphone className="h-5 w-5 text-cyan-500" />
-													Mobile Development
-												</h4>
-												<p className="text-sm text-muted-foreground">
-													Native and cross-platform mobile applications
-												</p>
-											</div>
-										</div>
-
-										<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
-											<MultiSelect
-												options={projectTypesWithStyle}
-												onValueChange={(values) => {
-													// Optional: handle selection changes
-												}}
-												defaultValue={["web-app"]}
-												placeholder="Select project types..."
-												variant="secondary"
-												animationConfig={{
-													badgeAnimation: "wiggle",
-													popoverAnimation: "slide",
-													optionHoverAnimation: "glow",
-												}}
-												maxCount={3}
-												className="w-full"
-											/>
-										</div>
-									</div>
-
-									{/* Question 4 */}
-									<div className="markdown-section">
-										<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
-											<span className="flex items-center justify-center w-8 h-8 bg-purple-500 text-white rounded-full text-sm font-bold">
-												4
-											</span>
-											How do you prefer to learn new technologies?
-										</h3>
-										<p className="text-base md:text-lg mb-6">
-											Everyone has different learning styles. Some prefer
-											hands-on coding, others like structured courses.
-											Understanding how developers learn helps the community
-											create better educational resources.
-										</p>
-
-										<div
-											className={getSmallDivClasses(
-												"bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6"
-											)}>
-											<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-												<Icons.star className="h-5 w-5 text-purple-500" />
-												Learning Preferences
-											</h4>
-											<MultiSelect
-												options={[
-													{
-														value: "documentation",
-														label: "Official Documentation",
-														icon: Icons.code,
-													},
-													{
-														value: "tutorials",
-														label: "Video Tutorials",
-														icon: Icons.globe,
-													},
-													{
-														value: "courses",
-														label: "Online Courses",
-														icon: Icons.target,
-													},
-													{
-														value: "books",
-														label: "Technical Books",
-														icon: Icons.star,
-													},
-													{
-														value: "practice",
-														label: "Hands-on Practice",
-														icon: Icons.zap,
-													},
-													{
-														value: "mentorship",
-														label: "Mentorship",
-														icon: Icons.cpu,
-													},
-													{
-														value: "community",
-														label: "Community Forums",
-														icon: Icons.database,
-													},
-													{
-														value: "conferences",
-														label: "Conferences & Talks",
-														icon: Icons.shield,
-													},
-												]}
-												onValueChange={(values) => {
-													// Optional: handle selection changes
-												}}
-												defaultValue={["documentation", "practice"]}
-												placeholder="How do you like to learn?"
-												variant="default"
-												animationConfig={{
-													badgeAnimation: "fade",
-													popoverAnimation: "flip",
-													optionHoverAnimation: "highlight",
-												}}
-												maxCount={4}
-												className="w-full"
-											/>
-										</div>
-
-										<div
-											className={getSmallDivClasses(
-												"mt-8 bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
-											)}>
-											<div className="flex items-start gap-3">
-												<Icons.star className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
-												<div>
-													<h4 className="font-semibold text-foreground mb-1">
-														Pro Tip
-													</h4>
-													<p className="text-sm text-muted-foreground">
-														Combining multiple learning methods often leads to
-														better retention and understanding. Try pairing
-														documentation reading with hands-on practice!
-													</p>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									{/* Survey Summary */}
-									<div
-										className={getSmallDivClasses(
-											"mt-12 p-6 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
-										)}>
-										<h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-											<Icons.check className="h-6 w-6 text-emerald-500" />
-											Thank You for Participating!
-										</h3>
-										<p className="text-base text-muted-foreground mb-4">
-											Your responses help us understand the developer community
-											better. This survey demonstrates how MultiSelect
-											components can be seamlessly integrated into forms and
-											surveys.
-										</p>
-										<div className="flex flex-wrap gap-2">
-											<span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded-full text-sm">
-												<Icons.zap className="h-3 w-3" />
-												Interactive
-											</span>
-											<span className="inline-flex items-center gap-1 px-3 py-1 bg-teal-200 dark:bg-teal-800 text-teal-800 dark:text-teal-200 rounded-full text-sm">
-												<Icons.target className="h-3 w-3" />
-												Accessible
-											</span>
-											<span className="inline-flex items-center gap-1 px-3 py-1 bg-cyan-200 dark:bg-cyan-800 text-cyan-800 dark:text-cyan-200 rounded-full text-sm">
-												<Icons.star className="h-3 w-3" />
-												Customizable
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</Card>
-				</div>
-
 				{/* Examples Grid */}
 				<div className="grid gap-6 mt-12 w-full min-w-0">
 					{/* 1. Form Integration - Markdown Style */}
@@ -4954,6 +4369,608 @@ export default function Home() {
 										performance comparison!
 									</p>
 								</div>
+							</div>
+
+							{/* Interactive Documentation Section - Example Usage in Content */}
+							<div className="mt-12 mb-8">
+								<Card className="p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/50 dark:via-gray-950/50 dark:to-zinc-950/50 border-slate-200 dark:border-slate-800 overflow-hidden">
+									<div className="p-8 md:p-12">
+										{/* Article Header */}
+										<div className="mb-8 text-center">
+											<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
+												<Icons.code className="h-4 w-4" />
+												Example Usage in Content
+											</div>
+											<h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-gray-100 dark:via-gray-200 dark:to-gray-300 bg-clip-text text-transparent mb-4">
+												Building Your Tech Stack
+											</h2>
+											<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+												A comprehensive guide to selecting the right
+												technologies for your next project
+											</p>
+										</div>
+
+										{/* Article Content with Embedded MultiSelect */}
+										<div className="prose prose-lg dark:prose-invert max-w-none">
+											<div className="space-y-6 text-muted-foreground leading-relaxed">
+												<p className="text-base md:text-lg">
+													Choosing the right technology stack is crucial for any
+													successful project. Whether you&apos;re building a
+													<span className="font-semibold text-foreground">
+														{" "}
+														web application
+													</span>
+													,
+													<span className="font-semibold text-foreground">
+														{" "}
+														mobile app
+													</span>
+													, or
+													<span className="font-semibold text-foreground">
+														{" "}
+														enterprise solution
+													</span>
+													, the technologies you select will impact your
+													development speed, scalability, and long-term
+													maintenance.
+												</p>
+
+												{/* Interactive Element Embedded in Content */}
+												<div className="my-8 p-6 bg-white/60 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+													<div className="mb-4">
+														<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+															<Icons.zap className="h-5 w-5 text-blue-500" />
+															Select Your Preferred Technologies
+														</h4>
+														<p className="text-sm text-muted-foreground mb-4">
+															Try our interactive multi-select component to
+															choose technologies for your project:
+														</p>
+													</div>
+													<MultiSelect
+														options={techStackOptions}
+														onValueChange={(values) => {
+															// Optional: handle selection changes
+														}}
+														defaultValue={["typescript", "react"]}
+														placeholder="Choose technologies..."
+														variant="inverted"
+														animationConfig={{
+															badgeAnimation: "bounce",
+															popoverAnimation: "scale",
+															optionHoverAnimation: "highlight",
+														}}
+														maxCount={3}
+														className="w-full"
+													/>
+												</div>
+
+												<p className="text-base md:text-lg">
+													Modern development teams often prefer
+													<span className="font-semibold text-foreground">
+														{" "}
+														TypeScript
+													</span>{" "}
+													for its type safety,
+													<span className="font-semibold text-foreground">
+														{" "}
+														React
+													</span>{" "}
+													for component-based architecture, and{" "}
+													<span className="font-semibold text-foreground">
+														{" "}
+														Node.js
+													</span>{" "}
+													for full-stack JavaScript development.
+												</p>
+
+												{/* Another Interactive Section */}
+												<div
+													className={getSmallDivClasses(
+														"my-8 p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl border border-blue-200/50 dark:border-blue-800/50"
+													)}>
+													<div className="mb-4">
+														<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+															<Icons.target className="h-5 w-5 text-indigo-500" />
+															Project Categories
+														</h4>
+														<p className="text-sm text-muted-foreground mb-4">
+															What type of project are you planning to build?
+														</p>
+													</div>
+													<MultiSelect
+														options={projectTypesWithStyle}
+														onValueChange={(values) => {
+															// Optional: handle selection changes
+														}}
+														defaultValue={["web-app"]}
+														placeholder="Select project type..."
+														variant="default"
+														animationConfig={{
+															badgeAnimation: "pulse",
+															popoverAnimation: "fade",
+															optionHoverAnimation: "scale",
+														}}
+														maxCount={2}
+														className="w-full"
+													/>
+												</div>
+
+												<p className="text-base md:text-lg">
+													The choice of technology stack should align with your
+													project requirements, team expertise, and long-term
+													goals. Consider factors such as
+													<span className="font-semibold text-foreground">
+														{" "}
+														performance
+													</span>
+													,
+													<span className="font-semibold text-foreground">
+														{" "}
+														scalability
+													</span>
+													,
+													<span className="font-semibold text-foreground">
+														{" "}
+														maintainability
+													</span>
+													, and{" "}
+													<span className="font-semibold text-foreground">
+														{" "}
+														community support
+													</span>
+													when making your decisions.
+												</p>
+
+												{/* Skills and Expertise Section */}
+												<div className="my-8">
+													<h3 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+														<Icons.star className="h-5 w-5 text-yellow-500" />
+														Team Skills Assessment
+													</h3>
+													<p className="text-base md:text-lg mb-4">
+														Before finalizing your tech stack, assess your
+														team&apos;s current skills and expertise. This will
+														help determine whether you need additional training
+														or if you should consider alternative technologies.
+													</p>
+
+													<div
+														className={getSmallDivClasses(
+															"p-6 bg-gradient-to-br from-amber-50/50 to-yellow-50/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-800/50"
+														)}>
+														<div className="mb-4">
+															<h4 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+																<Icons.cpu className="h-5 w-5 text-amber-500" />
+																Current Skills
+															</h4>
+															<p className="text-sm text-muted-foreground mb-4">
+																Select the technologies your team is already
+																proficient in:
+															</p>
+														</div>
+														<MultiSelect
+															options={skillsWithDisabled}
+															onValueChange={(values) => {
+																// Optional: handle selection changes
+															}}
+															defaultValue={["html", "css", "javascript"]}
+															placeholder="Select team skills..."
+															variant="secondary"
+															animationConfig={{
+																badgeAnimation: "fade",
+																popoverAnimation: "slide",
+																optionHoverAnimation: "glow",
+															}}
+															maxCount={5}
+															className="w-full"
+														/>
+													</div>
+												</div>
+
+												<div
+													className={getSmallDivClasses(
+														"mt-8 p-6 bg-gradient-to-r from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl border border-green-200/50 dark:border-green-800/50"
+													)}>
+													<div className="flex items-start gap-4">
+														<div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mt-1">
+															<Icons.check className="h-4 w-4 text-white" />
+														</div>
+														<div>
+															<h4 className="text-lg font-semibold text-foreground mb-2">
+																Pro Tip
+															</h4>
+															<p className="text-base text-muted-foreground">
+																Start with technologies your team knows well,
+																then gradually introduce new ones. This approach
+																reduces risk and ensures project success while
+																still allowing for innovation and growth.
+															</p>
+														</div>
+													</div>
+												</div>
+
+												<p className="text-base md:text-lg">
+													Remember, the best technology stack is the one that
+													your team can effectively use to deliver value to your
+													users. Don&apos;t choose technologies just because
+													they&apos;re trendy – choose them because they solve
+													real problems and fit your specific use case.
+												</p>
+											</div>
+										</div>
+
+										{/* Call to Action */}
+										<div className="mt-12 text-center">
+											<div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 rounded-full border border-blue-200/50 dark:border-blue-800/50">
+												<Icons.wand className="h-4 w-4 text-blue-500" />
+												<span className="text-sm font-medium text-blue-700 dark:text-blue-300">
+													Interactive components powered by our MultiSelect
+												</span>
+											</div>
+										</div>
+									</div>
+								</Card>
+							</div>
+
+							{/* Interactive Form/Survey Section - Markdown Style */}
+							<div className="mt-8 mb-8">
+								<Card
+									className={getCardClasses(
+										"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
+									)}>
+									<div className="p-8 md:p-12">
+										{/* Survey Header */}
+										<div className="mb-8 text-center">
+											<div
+												className={getBadgeClasses(
+													"inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4"
+												)}>
+												<Icons.users className="h-4 w-4" />
+												Interactive Survey Example
+											</div>
+											<h2
+												className={getHeaderTextClasses(
+													"text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-700 via-teal-600 to-cyan-600 dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent mb-4"
+												)}>
+												Developer Survey 2025
+											</h2>
+											<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+												Help us understand the current state of web development
+											</p>
+										</div>
+
+										{/* Survey Content in Markdown Style */}
+										<div className="prose prose-lg dark:prose-invert max-w-none">
+											<div className="space-y-8 text-muted-foreground leading-relaxed">
+												{/* Question 1 */}
+												<div className="markdown-section">
+													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+														<span className="flex items-center justify-center w-8 h-8 bg-emerald-500 text-white rounded-full text-sm font-bold">
+															1
+														</span>
+														What programming languages do you use regularly?
+													</h3>
+													<p className="text-base md:text-lg mb-6">
+														Select all programming languages that you work with
+														on a regular basis. This helps us understand the
+														current landscape of developer preferences and
+														industry trends.
+													</p>
+
+													<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+														<MultiSelect
+															options={[
+																{
+																	value: "javascript",
+																	label: "JavaScript",
+																	icon: Icons.zap,
+																},
+																{
+																	value: "typescript",
+																	label: "TypeScript",
+																	icon: Icons.code,
+																},
+																{
+																	value: "python",
+																	label: "Python",
+																	icon: Icons.cpu,
+																},
+																{
+																	value: "java",
+																	label: "Java",
+																	icon: Icons.database,
+																},
+																{
+																	value: "csharp",
+																	label: "C#",
+																	icon: Icons.shield,
+																},
+																{
+																	value: "golang",
+																	label: "Go",
+																	icon: Icons.activity,
+																},
+																{
+																	value: "rust",
+																	label: "Rust",
+																	icon: Icons.harddrive,
+																},
+																{
+																	value: "php",
+																	label: "PHP",
+																	icon: Icons.globe,
+																},
+																{
+																	value: "swift",
+																	label: "Swift",
+																	icon: Icons.smartphone,
+																},
+																{
+																	value: "kotlin",
+																	label: "Kotlin",
+																	icon: Icons.smartphone,
+																},
+															]}
+															onValueChange={(values) => {
+																// Optional: handle selection changes
+															}}
+															defaultValue={["javascript", "typescript"]}
+															placeholder="Select programming languages..."
+															variant="default"
+															animationConfig={{
+																badgeAnimation: "bounce",
+																popoverAnimation: "scale",
+																optionHoverAnimation: "highlight",
+															}}
+															maxCount={5}
+															className="w-full"
+														/>
+													</div>
+												</div>
+
+												{/* Question 2 */}
+												<div className="markdown-section">
+													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+														<span className="flex items-center justify-center w-8 h-8 bg-teal-500 text-white rounded-full text-sm font-bold">
+															2
+														</span>
+														Which frameworks and libraries are you most
+														interested in learning?
+													</h3>
+													<p className="text-base md:text-lg mb-6">
+														The tech industry evolves rapidly. Tell us which
+														technologies you&apos;re planning to learn next
+														year. This could include frameworks you&apos;ve
+														heard about but haven&apos;t had the chance to try
+														yet.
+													</p>
+
+													<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+														<MultiSelect
+															options={categorizedOptions}
+															onValueChange={(values) => {
+																// Optional: handle selection changes
+															}}
+															defaultValue={["react", "nodejs"]}
+															placeholder="Select technologies to learn..."
+															variant="inverted"
+															animationConfig={{
+																badgeAnimation: "pulse",
+																popoverAnimation: "fade",
+																optionHoverAnimation: "scale",
+															}}
+															maxCount={4}
+															className="w-full"
+														/>
+													</div>
+												</div>
+
+												{/* Question 3 */}
+												<div className="markdown-section">
+													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+														<span className="flex items-center justify-center w-8 h-8 bg-cyan-500 text-white rounded-full text-sm font-bold">
+															3
+														</span>
+														What type of projects do you primarily work on?
+													</h3>
+													<p className="text-base md:text-lg mb-6">
+														Understanding the types of projects developers work
+														on helps us identify common patterns and challenges.
+														Whether you&apos;re building{" "}
+														<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+															enterprise applications
+														</code>
+														,
+														<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+															mobile apps
+														</code>
+														, or
+														<code className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+															data pipelines
+														</code>
+														, your experience matters.
+													</p>
+
+													<div className="grid md:grid-cols-2 gap-4 mb-6">
+														<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
+															<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+																<Icons.globe className="h-5 w-5 text-cyan-500" />
+																Web Development
+															</h4>
+															<p className="text-sm text-muted-foreground">
+																Frontend, backend, and full-stack web
+																applications
+															</p>
+														</div>
+														<div className="bg-cyan-50/50 dark:bg-cyan-950/20 rounded-lg p-4 border border-cyan-200/50 dark:border-cyan-700/50">
+															<h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+																<Icons.smartphone className="h-5 w-5 text-cyan-500" />
+																Mobile Development
+															</h4>
+															<p className="text-sm text-muted-foreground">
+																Native and cross-platform mobile applications
+															</p>
+														</div>
+													</div>
+
+													<div className="bg-white/70 dark:bg-slate-900/70 rounded-xl p-6 border border-emerald-200/50 dark:border-emerald-700/50 shadow-sm">
+														<MultiSelect
+															options={projectTypesWithStyle}
+															onValueChange={(values) => {
+																// Optional: handle selection changes
+															}}
+															defaultValue={["web-app"]}
+															placeholder="Select project types..."
+															variant="secondary"
+															animationConfig={{
+																badgeAnimation: "wiggle",
+																popoverAnimation: "slide",
+																optionHoverAnimation: "glow",
+															}}
+															maxCount={3}
+															className="w-full"
+														/>
+													</div>
+												</div>
+
+												{/* Question 4 */}
+												<div className="markdown-section">
+													<h3 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
+														<span className="flex items-center justify-center w-8 h-8 bg-purple-500 text-white rounded-full text-sm font-bold">
+															4
+														</span>
+														How do you prefer to learn new technologies?
+													</h3>
+													<p className="text-base md:text-lg mb-6">
+														Everyone has different learning styles. Some prefer
+														hands-on coding, others like structured courses.
+														Understanding how developers learn helps the
+														community create better educational resources.
+													</p>
+
+													<div
+														className={getSmallDivClasses(
+															"bg-purple-50/50 dark:bg-purple-950/20 rounded-xl p-6 border border-purple-200/50 dark:border-purple-700/50 mb-6"
+														)}>
+														<h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+															<Icons.star className="h-5 w-5 text-purple-500" />
+															Learning Preferences
+														</h4>
+														<MultiSelect
+															options={[
+																{
+																	value: "documentation",
+																	label: "Official Documentation",
+																	icon: Icons.code,
+																},
+																{
+																	value: "tutorials",
+																	label: "Video Tutorials",
+																	icon: Icons.globe,
+																},
+																{
+																	value: "courses",
+																	label: "Online Courses",
+																	icon: Icons.target,
+																},
+																{
+																	value: "books",
+																	label: "Technical Books",
+																	icon: Icons.star,
+																},
+																{
+																	value: "practice",
+																	label: "Hands-on Practice",
+																	icon: Icons.zap,
+																},
+																{
+																	value: "mentorship",
+																	label: "Mentorship",
+																	icon: Icons.cpu,
+																},
+																{
+																	value: "community",
+																	label: "Community Forums",
+																	icon: Icons.database,
+																},
+																{
+																	value: "conferences",
+																	label: "Conferences & Talks",
+																	icon: Icons.shield,
+																},
+															]}
+															onValueChange={(values) => {
+																// Optional: handle selection changes
+															}}
+															defaultValue={["documentation", "practice"]}
+															placeholder="How do you like to learn?"
+															variant="default"
+															animationConfig={{
+																badgeAnimation: "fade",
+																popoverAnimation: "flip",
+																optionHoverAnimation: "highlight",
+															}}
+															maxCount={4}
+															className="w-full"
+														/>
+													</div>
+
+													<div
+														className={getSmallDivClasses(
+															"mt-8 bg-gradient-to-r from-purple-100/50 to-pink-100/50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border border-purple-200/50 dark:border-purple-700/50"
+														)}>
+														<div className="flex items-start gap-3">
+															<Icons.star className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" />
+															<div>
+																<h4 className="font-semibold text-foreground mb-1">
+																	Pro Tip
+																</h4>
+																<p className="text-sm text-muted-foreground">
+																	Combining multiple learning methods often
+																	leads to better retention and understanding.
+																	Try pairing documentation reading with
+																	hands-on practice!
+																</p>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												{/* Survey Summary */}
+												<div
+													className={getSmallDivClasses(
+														"mt-12 p-6 bg-gradient-to-br from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
+													)}>
+													<h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+														<Icons.check className="h-6 w-6 text-emerald-500" />
+														Thank You for Participating!
+													</h3>
+													<p className="text-base text-muted-foreground mb-4">
+														Your responses help us understand the developer
+														community better. This survey demonstrates how
+														MultiSelect components can be seamlessly integrated
+														into forms and surveys.
+													</p>
+													<div className="flex flex-wrap gap-2">
+														<span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 rounded-full text-sm">
+															<Icons.zap className="h-3 w-3" />
+															Interactive
+														</span>
+														<span className="inline-flex items-center gap-1 px-3 py-1 bg-teal-200 dark:bg-teal-800 text-teal-800 dark:text-teal-200 rounded-full text-sm">
+															<Icons.target className="h-3 w-3" />
+															Accessible
+														</span>
+														<span className="inline-flex items-center gap-1 px-3 py-1 bg-cyan-200 dark:bg-cyan-800 text-cyan-800 dark:text-cyan-200 rounded-full text-sm">
+															<Icons.star className="h-3 w-3" />
+															Customizable
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
 							</div>
 
 							{/* Features Grid */}
