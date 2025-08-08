@@ -728,7 +728,8 @@ export default function Home() {
 		"nodejs",
 	]);
 	const [imperativeSelection, setImperativeSelection] = useState<string[]>([
-		"javascript",
+		"react",
+		"nextjs",
 	]);
 
 	const [variantDemo, setVariantDemo] = useState<string[]>(["typescript"]);
@@ -898,7 +899,7 @@ export default function Home() {
 		defaultValues: {
 			frameworks: ["next.js", "react"],
 			techStack: ["typescript"],
-			skills: ["html", "css", "javascript"],
+			skills: ["html", "css"],
 			departments: ["engineering"],
 		},
 	});
@@ -2487,7 +2488,7 @@ export default function Home() {
 											<Icons.zap className="h-5 w-5 text-indigo-500" />
 											Advanced Behavior Showcase
 										</h4>
-										<div className="grid gap-6 grid-cols-1 md:grid-cols-2">
+										<div className="grid gap-6 grid-cols-1">
 											<div
 												className={getSmallDivClasses(
 													"bg-white/70 dark:bg-slate-900/70 rounded-lg p-4 border border-indigo-200/50 dark:border-indigo-700/50"
@@ -2504,7 +2505,7 @@ export default function Home() {
 												<MultiSelect
 													options={frameworksList.slice(0, 5)}
 													onValueChange={() => {}}
-													defaultValue={["react"]}
+													defaultValue={["react", "vue"]}
 													closeOnSelect={true}
 													placeholder="Closes after selection"
 													animationConfig={{
@@ -2532,7 +2533,7 @@ export default function Home() {
 												<MultiSelect
 													options={techStackOptions.slice(0, 5)}
 													onValueChange={() => {}}
-													defaultValue={["typescript"]}
+													defaultValue={["typescript", "javascript"]}
 													modalPopover={true}
 													placeholder="Modal behavior"
 													animationConfig={{
@@ -2582,7 +2583,7 @@ export default function Home() {
 														},
 													]}
 													onValueChange={() => {}}
-													defaultValue={["ts1"]}
+													defaultValue={["js1", "py1"]}
 													deduplicateOptions={false}
 													placeholder="Similar labels allowed"
 													animationConfig={{
@@ -2809,7 +2810,7 @@ export default function Home() {
 										Interactive charts that update based on MultiSelect
 										selections
 									</p>
-									<div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-8">
+									<div className="grid gap-4 grid-cols-1 mb-8">
 										<div className="space-y-2">
 											<label className="text-sm font-medium">
 												Select Departments
