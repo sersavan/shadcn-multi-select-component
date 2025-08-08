@@ -158,13 +158,13 @@ const skillsWithDisabled = [
 const companyDepartments = [
 	{ value: "engineering", label: "Engineering", icon: Icons.code },
 	{ value: "design", label: "Design", icon: Icons.wand },
-	{ value: "product", label: "Product Management", icon: Icons.target },
+	{ value: "product", label: "Product", icon: Icons.target },
 	{ value: "marketing", label: "Marketing", icon: Icons.trendingUp },
 	{ value: "sales", label: "Sales", icon: Icons.dollarSign },
-	{ value: "hr", label: "Human Resources", icon: Icons.users },
+	{ value: "hr", label: "HR", icon: Icons.users },
 	{ value: "finance", label: "Finance", icon: Icons.pieChart },
 	{ value: "operations", label: "Operations", icon: Icons.activity },
-	{ value: "support", label: "Customer Support", icon: Icons.mail },
+	{ value: "support", label: "Support", icon: Icons.mail },
 	{ value: "security", label: "Security", icon: Icons.shield },
 ];
 
@@ -2948,8 +2948,8 @@ export default function Home() {
 																data={pieChartData}
 																cx="50%"
 																cy="50%"
-																innerRadius={50}
-																outerRadius={80}
+																innerRadius={30}
+																outerRadius={60}
 																fill="#8884d8"
 																dataKey="value"
 																label={({ name, percent }: any) =>
