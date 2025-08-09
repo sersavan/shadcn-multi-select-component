@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -367,6 +367,9 @@ const FormSchema = z.object({
 
 export default function Home() {
 	const [isInfoExpanded, setIsInfoExpanded] = useState(false);
+	const [githubStars, setGithubStars] = useState<number | null>(null);
+	const [isLoadingStars, setIsLoadingStars] = useState(true);
+	const [starsError, setStarsError] = useState(false);
 	const { isGrayMode } = useColorMode();
 
 	const [groupedSelection, setGroupedSelection] = useState<string[]>([
@@ -403,6 +406,48 @@ export default function Home() {
 	const [selectedMultimodal, setSelectedMultimodal] = useState<string[]>([]);
 
 	const multiSelectRef = useRef<MultiSelectRef>(null);
+
+	useEffect(() => {
+		const fetchGitHubStars = async () => {
+			try {
+				setIsLoadingStars(true);
+				setStarsError(false);
+				const controller = new AbortController();
+				const timeoutId = setTimeout(() => controller.abort(), 10000);
+				const response = await fetch(
+					"https://api.github.com/repos/sersavan/shadcn-multi-select-component",
+					{
+						headers: {
+							Accept: "application/vnd.github.v3+json",
+						},
+						signal: controller.signal,
+					}
+				);
+				clearTimeout(timeoutId);
+				if (response.ok) {
+					const data = await response.json();
+					setGithubStars(data.stargazers_count || 0);
+				} else {
+					throw new Error(`HTTP ${response.status}`);
+				}
+			} catch (error) {
+				console.error("Error fetching GitHub stars:", error);
+				setStarsError(true);
+				setGithubStars(0);
+			} finally {
+				setIsLoadingStars(false);
+			}
+		};
+
+		fetchGitHubStars();
+	}, []);
+
+	const formatStars = (stars: number) => {
+		if (stars >= 1000) {
+			return `${(stars / 1000).toFixed(1)}k`;
+		}
+		return stars.toString();
+	};
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -510,19 +555,66 @@ export default function Home() {
 						assembled with shadcn/ui and Radix UI primitives
 					</PageHeaderDescription>
 					<PageActions>
-						<Link
-							target="_blank"
-							rel="noreferrer"
-							href="https://github.com/sersavan/shadcn-multi-select-component"
-							className={cn(buttonVariants({ variant: "outline" }))}>
-							<Icons.gitHub className="mr-2 h-4 w-4" />
-							GitHub
-						</Link>
+						<div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+							<button
+								onClick={() => {
+									const demoSection =
+										document.getElementById("examples-section");
+									demoSection?.scrollIntoView({ behavior: "smooth" });
+								}}
+								className={cn(
+									"group relative overflow-hidden w-full sm:w-auto",
+									"bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700",
+									"hover:from-blue-700 hover:via-purple-700 hover:to-blue-800",
+									"text-white border-0 shadow-lg hover:shadow-xl",
+									"transition-all duration-300 ease-in-out",
+									"transform hover:scale-105 hover:-translate-y-0.5",
+									"px-6 py-3 rounded-lg font-medium",
+									"flex items-center justify-center gap-2.5",
+									"before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-transparent",
+									"before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100"
+								)}>
+								<div className="relative z-10 flex items-center gap-2.5">
+									<Icons.zap className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+									<span>Try Live Demo</span>
+								</div>
+								<div className="absolute inset-0 border border-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+							</button>
+							<Link
+								target="_blank"
+								rel="noreferrer"
+								href="https://github.com/sersavan/shadcn-multi-select-component"
+								className={cn(
+									"group relative overflow-hidden w-full sm:w-auto",
+									"bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900",
+									"hover:from-gray-800 hover:via-gray-700 hover:to-gray-800",
+									"text-white border-0 shadow-lg hover:shadow-xl",
+									"transition-all duration-300 ease-in-out",
+									"transform hover:scale-105 hover:-translate-y-0.5",
+									"px-6 py-3 rounded-lg font-medium",
+									"flex items-center justify-center gap-2.5",
+									"before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-500/20 before:via-purple-500/20 before:to-pink-500/20",
+									"before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100"
+								)}>
+								<div className="relative z-10 flex items-center gap-2.5">
+									<Icons.gitHub className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" />
+									<span>View Source</span>
+									{!isLoadingStars && !starsError && githubStars !== null && (
+										<div className="flex items-center gap-1 px-2 py-0.5 bg-white/10 rounded-full text-xs">
+											<Icons.star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
+											<span>{formatStars(githubStars)}</span>
+										</div>
+									)}
+									<div className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
+								</div>
+								<div className="absolute inset-0 border border-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+							</Link>
+						</div>
 					</PageActions>
 				</PageHeader>
 
 				{/* Interactive Examples Introduction */}
-				<div className="mt-4 mb-4">
+				<div className="mt-6 mb-3">
 					<Card
 						className={getCardClasses(
 							"p-0 bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 overflow-hidden"
@@ -530,20 +622,20 @@ export default function Home() {
 						<div
 							className={
 								isGrayMode
-									? "p-6 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-900/30 transition-colors"
-									: "p-6 cursor-pointer hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-colors"
+									? "p-4 cursor-pointer hover:bg-slate-100/50 dark:hover:bg-slate-900/30 transition-colors"
+									: "p-4 cursor-pointer hover:bg-blue-100/50 dark:hover:bg-blue-900/30 transition-colors"
 							}
 							onClick={() => setIsInfoExpanded(!isInfoExpanded)}>
 							<div className="flex items-center justify-between">
-								<div className="flex items-center gap-4">
-									<div className="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-										<Icons.zap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+								<div className="flex items-center gap-3">
+									<div className="flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+										<Icons.zap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
 									</div>
 									<div>
-										<h3 className="text-xl font-semibold text-blue-900 dark:text-blue-100">
+										<h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100">
 											Interactive Examples & Live Demos
 										</h3>
-										<p className="text-blue-700 dark:text-blue-300 text-sm mt-1">
+										<p className="text-blue-700 dark:text-blue-300 text-xs mt-0.5">
 											{isInfoExpanded
 												? "Click to collapse detailed information"
 												: "Click to learn more about examples and AI assistant"}
@@ -601,7 +693,7 @@ export default function Home() {
 				</div>
 
 				{/* Examples Grid */}
-				<div className="grid gap-6 mt-12 w-full min-w-0">
+				<div id="examples-section" className="grid gap-6 mt-6 w-full min-w-0">
 					{/* 1. Form Integration*/}
 					<Card
 						className={getCardClasses(
