@@ -15,6 +15,9 @@ import { Icons } from "@/components/icons";
 import { AIChat } from "@/components/ai-chat";
 import { useColorMode } from "@/contexts/color-mode-context";
 import { VisualizationCharts } from "@/components/visualization-charts";
+import { TableOfContents } from "@/components/table-of-contents";
+import { ReadingProgress } from "@/components/reading-progress";
+import { CodeSheet } from "@/components/code-sheet";
 import {
 	Form,
 	FormControl,
@@ -498,7 +501,7 @@ export default function Home() {
 
 	const getCardClasses = (originalClasses: string) => {
 		if (isGrayMode) {
-			return "p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden";
+			return "relative p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden";
 		}
 		return originalClasses;
 	};
@@ -547,6 +550,8 @@ export default function Home() {
 
 	return (
 		<main className="min-h-screen bg-background overflow-x-hidden">
+			<ReadingProgress />
+			<TableOfContents />
 			<div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 w-full min-w-0">
 				{/* Header */}
 				<PageHeader className="text-center">
@@ -696,11 +701,87 @@ export default function Home() {
 				<div id="examples-section" className="grid gap-6 mt-6 w-full min-w-0">
 					{/* 1. Form Integration*/}
 					<Card
+						id="form-integration"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Form Integration Example"
+								description="Complete form example with React Hook Form and Zod validation"
+								fileName="form-example.tsx"
+								code={`import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { toast } from "sonner";
+
+import { MultiSelect } from "@/components/multi-select";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
+const FormSchema = z.object({
+  frameworks: z
+    .array(z.string())
+    .min(1, { message: "Please select at least one framework." }),
+});
+
+const frameworksList = [
+  { value: "next.js", label: "Next.js" },
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue.js" },
+  { value: "angular", label: "Angular" },
+];
+
+export default function FormExample() {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      frameworks: [],
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast.success(\`Selected: \${data.frameworks.join(", ")}\`);
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="frameworks"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Frameworks</FormLabel>
+              <FormControl>
+                <MultiSelect
+                  options={frameworksList}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  placeholder="Choose frameworks..."
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
-							<div className="mb-8 text-center">
+							<div className="text-center flex-1">
 								<div
 									className={getBadgeClasses(
 										"inline-flex items-center gap-2 px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm font-medium mb-4"
@@ -708,6 +789,8 @@ export default function Home() {
 									<Icons.wand className="h-4 w-4" />
 									Professional Form Integration
 								</div>
+							</div>
+							<div className="text-center">
 								<h2
 									className={getHeaderTextClasses(
 										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-300 dark:to-fuchsia-300 bg-clip-text text-transparent mb-4"
@@ -723,7 +806,7 @@ export default function Home() {
 								<div className="space-y-6 text-muted-foreground leading-relaxed">
 									<div
 										className={getDivClasses(
-											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm"
+											"my-8 p-6 rounded-lg border bg-card text-card-foreground shadow-sm border-violet-200/50 dark:border-violet-700/50"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
 											<Icons.check className="h-5 w-5 text-violet-500" />
@@ -870,7 +953,7 @@ export default function Home() {
 											"mt-8 p-6 bg-gradient-to-r from-violet-100/50 to-purple-100/50 dark:from-violet-950/20 dark:to-purple-950/20 rounded-xl border border-violet-200/50 dark:border-violet-700/50"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-											<Icons.code className="h-5 w-5 text-violet-500" />
+											<Icons.star className="h-6 w-6 text-violet-500 flex-shrink-0" />
 											Integration Benefits
 										</h4>
 										<ul className="text-sm text-muted-foreground space-y-2">
@@ -911,9 +994,70 @@ export default function Home() {
 
 					{/* 2. Component Variants*/}
 					<Card
+						id="variants-section"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 border-rose-200 dark:border-rose-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 border-rose-200 dark:border-rose-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Component Variants Example"
+								description="Different visual styles and variants for various use cases"
+								fileName="variants-example.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const options = [
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue.js" },
+  { value: "angular", label: "Angular" },
+];
+
+export default function VariantsExample() {
+  return (
+    <div className="space-y-6">
+      {/* Default variant */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Default</label>
+        <MultiSelect
+          options={options}
+          placeholder="Select frameworks..."
+          variant="default"
+        />
+      </div>
+
+      {/* Secondary variant */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Secondary</label>
+        <MultiSelect
+          options={options}
+          placeholder="Select frameworks..."
+          variant="secondary"
+        />
+      </div>
+
+      {/* Outline variant */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Outline</label>
+        <MultiSelect
+          options={options}
+          placeholder="Select frameworks..."
+          variant="outline"
+        />
+      </div>
+
+      {/* Ghost variant */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Ghost</label>
+        <MultiSelect
+          options={options}
+          placeholder="Select frameworks..."
+          variant="ghost"
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div
@@ -1047,7 +1191,7 @@ export default function Home() {
 											"mt-8 p-6 bg-gradient-to-r from-rose-100/50 to-pink-100/50 dark:from-rose-950/20 dark:to-pink-950/20 rounded-xl border border-rose-200/50 dark:border-rose-700/50"
 										)}>
 										<h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-											<Icons.star className="h-5 w-5 text-rose-500" />
+											<Icons.star className="h-6 w-6 text-rose-500 flex-shrink-0" />
 											Design System Integration
 										</h4>
 										<div className="grid md:grid-cols-2 gap-4 text-sm">
@@ -1094,9 +1238,72 @@ export default function Home() {
 
 					{/* 3. Animation Configurations*/}
 					<Card
+						id="animations-section"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-950/30 dark:via-yellow-950/30 dark:to-orange-950/30 border-amber-200 dark:border-amber-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Animation Configurations Example"
+								description="Configure animations for better user experience"
+								fileName="animations-example.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const options = [
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue.js" },
+  { value: "angular", label: "Angular" },
+];
+
+export default function AnimationsExample() {
+  return (
+    <div className="space-y-6">
+      {/* Bounce Animation */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Bounce Animation</label>
+        <MultiSelect
+          options={options}
+          placeholder="Bouncy interactions..."
+          animationConfig={{
+            badgeAnimation: "bounce",
+            popoverAnimation: "scale",
+            optionHoverAnimation: "glow",
+          }}
+        />
+      </div>
+
+      {/* Pulse Animation */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Pulse Animation</label>
+        <MultiSelect
+          options={options}
+          placeholder="Pulsing effects..."
+          animationConfig={{
+            badgeAnimation: "pulse",
+            popoverAnimation: "fade",
+            optionHoverAnimation: "highlight",
+          }}
+        />
+      </div>
+
+      {/* No Animation - Performance Mode */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">No Animations</label>
+        <MultiSelect
+          options={options}
+          placeholder="Fast performance..."
+          animationConfig={{
+            badgeAnimation: "none",
+            popoverAnimation: "none",
+            optionHoverAnimation: "none",
+          }}
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
@@ -1213,7 +1420,7 @@ export default function Home() {
 											"mt-8 p-6 bg-gradient-to-r from-amber-100/50 to-yellow-100/50 dark:from-amber-950/20 dark:to-yellow-950/20 rounded-xl border border-amber-200/50 dark:border-amber-700/50"
 										)}>
 										<div className="flex items-start gap-4">
-											<Icons.star className="h-6 w-6 text-amber-500 mt-1 flex-shrink-0" />
+											<Icons.star className="h-6 w-6 text-amber-500 flex-shrink-0" />
 											<div>
 												<h4 className="text-lg font-semibold text-foreground mb-2">
 													Best Practices
@@ -1252,9 +1459,64 @@ export default function Home() {
 
 					{/* 4. Responsive Behavior*/}
 					<Card
+						id="responsive-behavior"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 border-green-200 dark:border-green-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/30 dark:via-emerald-950/30 dark:to-teal-950/30 border-green-200 dark:border-green-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Responsive Behavior Example"
+								description="Adaptive design patterns for different screen sizes"
+								fileName="responsive-example.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const options = [
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue.js" },
+  { value: "angular", label: "Angular" },
+  { value: "svelte", label: "Svelte" },
+];
+
+export default function ResponsiveExample() {
+  return (
+    <div className="space-y-6">
+      {/* Mobile-first responsive */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Mobile Optimized</label>
+        <MultiSelect
+          options={options}
+          placeholder="Select frameworks..."
+          className="w-full sm:w-auto"
+          maxCount={2} // Fewer items on small screens
+        />
+      </div>
+
+      {/* Desktop full width */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Desktop Full Width</label>
+        <MultiSelect
+          options={options}
+          placeholder="All frameworks available..."
+          className="w-full"
+          maxCount={5} // More items on larger screens
+        />
+      </div>
+
+      {/* Responsive with breakpoints */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Breakpoint Aware</label>
+        <MultiSelect
+          options={options}
+          placeholder="Adaptive layout..."
+          className="w-full md:w-96 lg:w-full"
+          // Different behavior per breakpoint
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium mb-4">
@@ -1393,9 +1655,63 @@ export default function Home() {
 
 					{/* 5. Grouped Options*/}
 					<Card
+						id="grouped-options"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-blue-200 dark:border-blue-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Grouped Options Example"
+								description="Organize options into logical categories"
+								fileName="grouped-options-example.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const groupedOptions = [
+  {
+    heading: "Frontend Frameworks",
+    options: [
+      { value: "react", label: "React" },
+      { value: "vue", label: "Vue.js" },
+      { value: "angular", label: "Angular" },
+      { value: "svelte", label: "Svelte" },
+    ],
+  },
+  {
+    heading: "Backend Technologies", 
+    options: [
+      { value: "nodejs", label: "Node.js" },
+      { value: "django", label: "Django" },
+      { value: "rails", label: "Ruby on Rails" },
+      { value: "spring", label: "Spring Boot" },
+    ],
+  },
+  {
+    heading: "Databases",
+    options: [
+      { value: "postgresql", label: "PostgreSQL" },
+      { value: "mongodb", label: "MongoDB" },
+      { value: "redis", label: "Redis" },
+      { value: "mysql", label: "MySQL" },
+    ],
+  },
+];
+
+export default function GroupedOptionsExample() {
+  return (
+    <div className="space-y-6">
+      <div>
+        <label className="text-sm font-medium mb-2 block">Tech Stack Selection</label>
+        <MultiSelect
+          options={groupedOptions}
+          placeholder="Choose your tech stack..."
+          className="w-full"
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
@@ -1484,9 +1800,70 @@ export default function Home() {
 
 					{/* 6. Search and UI Configuration*/}
 					<Card
+						id="search-ui-configuration"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 dark:from-cyan-950/30 dark:via-sky-950/30 dark:to-blue-950/30 border-cyan-200 dark:border-cyan-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 dark:from-cyan-950/30 dark:via-sky-950/30 dark:to-blue-950/30 border-cyan-200 dark:border-cyan-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Search and UI Configuration"
+								description="Implementation examples for different search and UI configurations"
+								fileName="search-ui-config.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+import { Icons } from "@/components/icons";
+
+// Full search experience with custom empty state
+const frameworks = [
+  { label: "React", value: "react" },
+  { label: "Vue", value: "vue" },
+  { label: "Angular", value: "angular" },
+  { label: "Svelte", value: "svelte" },
+];
+
+function FullSearchExample() {
+  return (
+    <MultiSelect
+      options={frameworks}
+      onValueChange={(value) => console.log(value)}
+      defaultValue={["react"]}
+      searchable={true}
+      hideSelectAll={false}
+      placeholder="Search frameworks"
+      emptyIndicator={
+        <div className="text-center p-4 text-muted-foreground">
+          <Icons.search className="h-8 w-8 mx-auto mb-2 text-muted-foreground/50" />
+          <p className="text-sm">
+            No frameworks found matching your search
+          </p>
+        </div>
+      }
+      animationConfig={{
+        badgeAnimation: "bounce",
+        popoverAnimation: "slide",
+      }}
+    />
+  );
+}
+
+// Simplified interface without search
+function SimplifiedExample() {
+  return (
+    <MultiSelect
+      options={frameworks.slice(0, 6)}
+      onValueChange={(value) => console.log(value)}
+      defaultValue={["typescript"]}
+      searchable={false}
+      hideSelectAll={true}
+      placeholder="Select without search"
+      animationConfig={{
+        badgeAnimation: "fade",
+        popoverAnimation: "scale",
+      }}
+    />
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-full text-sm font-medium mb-4">
@@ -1618,9 +1995,77 @@ export default function Home() {
 
 					{/* 7. Layout and Sizing Options*/}
 					<Card
+						id="layout-sizing-options"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 border-orange-200 dark:border-orange-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 border-orange-200 dark:border-orange-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Layout and Sizing Options"
+								description="Examples of different layout and sizing configurations"
+								fileName="layout-sizing.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const options = [
+  { label: "Small Option", value: "small" },
+  { label: "Medium Option", value: "medium" },
+  { label: "Large Option with Long Text", value: "large" },
+];
+
+// Different sizing options
+function SizingExamples() {
+  return (
+    <div className="space-y-6">
+      {/* Small size */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Small Size</label>
+        <MultiSelect
+          options={options}
+          onValueChange={(value) => console.log(value)}
+          placeholder="Small multi-select"
+          className="w-64 text-sm"
+          badgeClassName="text-xs"
+        />
+      </div>
+
+      {/* Medium size (default) */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Medium Size</label>
+        <MultiSelect
+          options={options}
+          onValueChange={(value) => console.log(value)}
+          placeholder="Medium multi-select"
+          className="w-80"
+        />
+      </div>
+
+      {/* Large size */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Large Size</label>
+        <MultiSelect
+          options={options}
+          onValueChange={(value) => console.log(value)}
+          placeholder="Large multi-select"
+          className="w-96 text-lg"
+          badgeClassName="text-sm px-3 py-1"
+        />
+      </div>
+
+      {/* Full width */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Full Width</label>
+        <MultiSelect
+          options={options}
+          onValueChange={(value) => console.log(value)}
+          placeholder="Full width multi-select"
+          className="w-full"
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium mb-4">
@@ -1771,9 +2216,80 @@ export default function Home() {
 
 					{/* 8. Custom Styling and Colors*/}
 					<Card
+						id="custom-styling-colors"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 dark:from-purple-950/30 dark:via-fuchsia-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-pink-50 dark:from-purple-950/30 dark:via-fuchsia-950/30 dark:to-pink-950/30 border-purple-200 dark:border-purple-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Custom Styling and Colors"
+								description="Examples of custom badge colors and gradient styling"
+								fileName="custom-styling.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const colorOptions = [
+  { label: "Primary Color", value: "primary" },
+  { label: "Secondary Color", value: "secondary" },
+  { label: "Success Color", value: "success" },
+  { label: "Warning Color", value: "warning" },
+];
+
+// Custom badge styling with different colors
+function CustomStylingExamples() {
+  return (
+    <div className="space-y-6">
+      {/* Purple theme */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Purple Theme</label>
+        <MultiSelect
+          options={colorOptions}
+          onValueChange={(value) => console.log(value)}
+          defaultValue={["primary"]}
+          placeholder="Purple themed"
+          badgeClassName="bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900 dark:text-purple-300"
+        />
+      </div>
+
+      {/* Green theme */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Green Theme</label>
+        <MultiSelect
+          options={colorOptions}
+          onValueChange={(value) => console.log(value)}
+          defaultValue={["success"]}
+          placeholder="Green themed"
+          badgeClassName="bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900 dark:text-green-300"
+        />
+      </div>
+
+      {/* Gradient theme */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Gradient Theme</label>
+        <MultiSelect
+          options={colorOptions}
+          onValueChange={(value) => console.log(value)}
+          defaultValue={["warning"]}
+          placeholder="Gradient themed"
+          badgeClassName="bg-gradient-to-r from-pink-500 to-violet-500 text-white hover:from-pink-600 hover:to-violet-600"
+        />
+      </div>
+
+      {/* Custom border and shadow */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Custom Border</label>
+        <MultiSelect
+          options={colorOptions}
+          onValueChange={(value) => console.log(value)}
+          placeholder="Custom styled"
+          className="border-2 border-blue-300 shadow-lg rounded-xl"
+          badgeClassName="bg-blue-50 text-blue-700 border border-blue-200"
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium mb-4">
@@ -1921,9 +2437,87 @@ export default function Home() {
 
 					{/* 9. Disabled States*/}
 					<Card
+						id="disabled-states"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Disabled States"
+								description="Examples of component-level and option-level disabled states"
+								fileName="disabled-states.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+const options = [
+  { label: "Available Option", value: "available" },
+  { label: "Disabled Option", value: "disabled", disabled: true },
+  { label: "Another Available", value: "available2" },
+  { label: "Also Disabled", value: "disabled2", disabled: true },
+];
+
+// Disabled states examples
+function DisabledStatesExamples() {
+  return (
+    <div className="space-y-6">
+      {/* Fully disabled component */}
+      <div>
+        <label className="text-sm font-medium mb-2 block text-muted-foreground">
+          Fully Disabled Component
+        </label>
+        <MultiSelect
+          options={options}
+          onValueChange={(value) => console.log(value)}
+          defaultValue={["available"]}
+          disabled={true}
+          placeholder="This component is disabled"
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Entire component is non-interactive
+        </p>
+      </div>
+
+      {/* Mixed disabled options */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">
+          Mixed Disabled Options
+        </label>
+        <MultiSelect
+          options={options}
+          onValueChange={(value) => console.log(value)}
+          defaultValue={["available"]}
+          placeholder="Some options are disabled"
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Only specific options are disabled
+        </p>
+      </div>
+
+      {/* Loading state (simulated disabled) */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">
+          Loading State
+        </label>
+        <MultiSelect
+          options={[]}
+          onValueChange={(value) => console.log(value)}
+          disabled={true}
+          placeholder="Loading options..."
+          emptyIndicator={
+            <div className="text-center p-4">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto"></div>
+              <p className="text-sm text-muted-foreground mt-2">Loading...</p>
+            </div>
+          }
+        />
+        <p className="text-xs text-muted-foreground mt-1">
+          Disabled while loading data
+        </p>
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 dark:bg-slate-900/30 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium mb-4">
@@ -2046,9 +2640,85 @@ export default function Home() {
 
 					{/* 10. Advanced Features*/}
 					<Card
+						id="advanced-features"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/30 dark:via-blue-950/30 dark:to-cyan-950/30 border-indigo-200 dark:border-indigo-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/30 dark:via-blue-950/30 dark:to-cyan-950/30 border-indigo-200 dark:border-indigo-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Advanced Features Example"
+								description="Complex interaction patterns and power user features"
+								fileName="advanced-features-example.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+import { useState } from "react";
+
+const options = [
+  { value: "react", label: "React", icon: Icons.zap },
+  { value: "vue", label: "Vue.js", icon: Icons.globe },
+  { value: "angular", label: "Angular", icon: Icons.target },
+];
+
+export default function AdvancedFeaturesExample() {
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+  return (
+    <div className="space-y-6">
+      {/* Programmatic Control */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Programmatic Control</label>
+        <div className="space-y-2">
+          <MultiSelect
+            options={options}
+            value={selectedValues}
+            onValueChange={setSelectedValues}
+            placeholder="Controlled from outside..."
+          />
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setSelectedValues(["react", "vue"])}
+              className="px-3 py-1 bg-blue-500 text-white rounded text-sm"
+            >
+              Select React & Vue
+            </button>
+            <button 
+              onClick={() => setSelectedValues([])}
+              className="px-3 py-1 bg-gray-500 text-white rounded text-sm"
+            >
+              Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Custom Search Logic */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Custom Search</label>
+        <MultiSelect
+          options={options}
+          placeholder="Smart search..."
+          searchFunction={(query, option) => {
+            // Custom search logic
+            return option.label.toLowerCase().includes(query.toLowerCase()) ||
+                   option.value.toLowerCase().includes(query.toLowerCase());
+          }}
+        />
+      </div>
+
+      {/* Async Loading */}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Async Loading</label>
+        <MultiSelect
+          options={options}
+          placeholder="Loading options..."
+          isLoading={false} // Set to true when loading
+          emptyMessage="No results found..."
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium mb-4">
@@ -2219,9 +2889,82 @@ export default function Home() {
 
 					{/* 11. Imperative Methods (useRef)*/}
 					<Card
+						id="imperative-methods"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-green-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-green-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Imperative Methods (useRef)"
+								description="Examples of programmatic control using ref methods"
+								fileName="imperative-methods.tsx"
+								code={`import { useRef } from "react";
+import { MultiSelect, MultiSelectRef } from "@/components/multi-select";
+import { Button } from "@/components/ui/button";
+
+const options = [
+  { label: "React", value: "react" },
+  { label: "Vue", value: "vue" },
+  { label: "Angular", value: "angular" },
+  { label: "Svelte", value: "svelte" },
+];
+
+// Imperative methods example
+function ImperativeMethodsExample() {
+  const multiSelectRef = useRef<MultiSelectRef>(null);
+
+  const selectAll = () => {
+    if (multiSelectRef.current) {
+      multiSelectRef.current.selectAll();
+    }
+  };
+
+  const clearAll = () => {
+    if (multiSelectRef.current) {
+      multiSelectRef.current.clearAll();
+    }
+  };
+
+  const focusInput = () => {
+    if (multiSelectRef.current) {
+      multiSelectRef.current.focus();
+    }
+  };
+
+  const selectSpecific = () => {
+    if (multiSelectRef.current) {
+      multiSelectRef.current.setValue(["react", "vue"]);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <MultiSelect
+        ref={multiSelectRef}
+        options={options}
+        onValueChange={(value) => console.log("Value changed:", value)}
+        placeholder="Controlled via ref methods"
+      />
+      
+      <div className="flex flex-wrap gap-2">
+        <Button onClick={selectAll} size="sm">
+          Select All
+        </Button>
+        <Button onClick={clearAll} size="sm" variant="outline">
+          Clear All
+        </Button>
+        <Button onClick={focusInput} size="sm" variant="outline">
+          Focus Input
+        </Button>
+        <Button onClick={selectSpecific} size="sm" variant="secondary">
+          Select React & Vue
+        </Button>
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm font-medium mb-4">
@@ -2337,7 +3080,7 @@ export default function Home() {
 											"mt-8 p-6 bg-gradient-to-r from-emerald-100/50 to-teal-100/50 dark:from-emerald-950/20 dark:to-teal-950/20 rounded-xl border border-emerald-200/50 dark:border-emerald-700/50"
 										)}>
 										<div className="flex items-start gap-4">
-											<Icons.star className="h-6 w-6 text-emerald-500 mt-1 flex-shrink-0" />
+											<Icons.star className="h-6 w-6 text-emerald-500 flex-shrink-0" />
 											<div>
 												<h4 className="text-lg font-semibold text-foreground mb-2">
 													Implementation Pattern
@@ -2366,13 +3109,253 @@ export default function Home() {
 					</Card>
 
 					{/* Charts Examples*/}
-					<VisualizationCharts />
+					<Card
+						id="data-visualization"
+						className={getCardClasses(
+							"relative p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden"
+						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Charts & Data Visualization"
+								description="Complete implementation of interactive charts with MultiSelect filters"
+								fileName="visualization-charts.tsx"
+								code={`"use client";
+					
+import { useState, useMemo } from "react";
+import {
+	BarChart,
+	Bar,
+	XAxis,
+	YAxis,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
+	PieChart,
+	Pie,
+	Cell,
+	LineChart,
+	Line,
+	AreaChart,
+	Area,
+} from "recharts";
+import { Card } from "@/components/ui/card";
+import { MultiSelect } from "@/components/multi-select";
+
+const salesData = [
+	{
+	name: "Jan",
+	engineering: 4000,
+	design: 2400,
+	product: 2400,
+	marketing: 3200,
+	},
+	{
+	name: "Feb", 
+	engineering: 3000,
+	design: 1398,
+	product: 2210,
+	marketing: 2800,
+	},
+	// ... more data
+];
+
+const departmentOptions = [
+	{ label: "Engineering", value: "engineering" },
+	{ label: "Design", value: "design" },
+	{ label: "Product", value: "product" },
+	{ label: "Marketing", value: "marketing" },
+];
+
+function InteractiveChart() {
+	const [selectedDepartments, setSelectedDepartments] = useState([
+	"engineering",
+	"design",
+	"product",
+	]);
+
+	const filteredData = useMemo(() => {
+	return salesData.map((item) => {
+		const filtered = { name: item.name };
+		selectedDepartments.forEach((dept) => {
+		if (item[dept]) {
+			filtered[dept] = item[dept];
+		}
+		});
+		return filtered;
+	});
+	}, [selectedDepartments]);
+
+	return (
+	<Card className="p-6">
+		<div className="mb-6">
+		<h3 className="text-lg font-semibold mb-3">Department Filter</h3>
+		<MultiSelect
+			options={departmentOptions}
+			onValueChange={setSelectedDepartments}
+			defaultValue={selectedDepartments}
+			placeholder="Select departments to display"
+			badgeClassName="bg-orange-100 text-orange-700"
+		/>
+		</div>
+
+		<div className="h-80">
+		<ResponsiveContainer width="100%" height="100%">
+			<BarChart data={filteredData}>
+			<XAxis dataKey="name" />
+			<YAxis />
+			<Tooltip />
+			<Legend />
+			{selectedDepartments.map((dept, index) => (
+				<Bar
+				key={dept}
+				dataKey={dept}
+				fill={\`hsl(\${index * 60}, 70%, 50%)\`}
+				/>
+			))}
+			</BarChart>
+		</ResponsiveContainer>
+		</div>
+	</Card>
+	);
+}`}
+							/>
+						</div>
+						<div className="p-8 md:p-12">
+							<div className="mb-8 text-center">
+								<div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium mb-4">
+									<Icons.pieChart className="h-4 w-4" />
+									Charts Examples
+								</div>
+								<h2
+									className={getHeaderTextClasses(
+										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-300 dark:to-yellow-300 bg-clip-text text-transparent mb-4"
+									)}>
+									Charts & Data Visualization
+								</h2>
+								<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+									Create interactive, data-driven dashboards where MultiSelect
+									components control chart filters, time periods, and
+									visualization parameters. Perfect for business intelligence
+									and analytics platforms.
+								</p>
+							</div>
+							<VisualizationCharts />
+							<div className="p-0 pt-8">
+								<div
+									className={getDivClasses(
+										"bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800"
+									)}>
+									<h4 className="text-lg font-semibold mb-4 text-orange-900 dark:text-orange-100 flex items-center gap-2">
+										<Icons.star className="h-6 w-6 text-orange-500 flex-shrink-0" />
+										Implementation Highlights
+									</h4>
+									<div className="grid gap-4 md:grid-cols-2">
+										<div>
+											<h5 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
+												Data Binding Strategy
+											</h5>
+											<ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
+												<li>• Reactive chart data based on selections</li>
+												<li>• Conditional chart rendering</li>
+												<li>• Optimized re-render performance</li>
+												<li>• Smooth transition animations</li>
+											</ul>
+										</div>
+										<div>
+											<h5 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
+												Best Practices
+											</h5>
+											<ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
+												<li>• Consistent color schemes across charts</li>
+												<li>• Responsive chart containers</li>
+												<li>• Accessible tooltips and legends</li>
+												<li>• Empty state handling</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Card>
 
 					{/* AI/LLM Examples*/}
 					<Card
+						id="ai-configuration"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-indigo-950/30 rounded-xl border border-violet-200/50 dark:border-violet-800/50 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="AI & LLM Integration"
+								description="Examples of AI assistant and LLM model configuration"
+								fileName="ai-configuration.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+
+// AI/LLM model options
+const aiModels = [
+  { label: "GPT-4o", value: "gpt-4o" },
+  { label: "GPT-4o Mini", value: "gpt-4o-mini" },
+  { label: "Claude 3.5 Sonnet", value: "claude-3-5-sonnet" },
+  { label: "Claude 3 Haiku", value: "claude-3-haiku" },
+  { label: "Gemini Pro", value: "gemini-pro" },
+  { label: "Llama 3.1 70B", value: "llama-3.1-70b" },
+];
+
+const capabilities = [
+  { label: "Text Generation", value: "text-generation" },
+  { label: "Code Analysis", value: "code-analysis" },
+  { label: "Data Processing", value: "data-processing" },
+  { label: "Image Understanding", value: "image-understanding" },
+  { label: "Function Calling", value: "function-calling" },
+];
+
+// AI Configuration Example
+function AIConfigurationExample() {
+  return (
+    <div className="space-y-6">
+      <div>
+        <label className="text-sm font-medium mb-2 block">
+          Select AI Models
+        </label>
+        <MultiSelect
+          options={aiModels}
+          onValueChange={(models) => console.log("Selected models:", models)}
+          placeholder="Choose AI models for your project"
+          searchable={true}
+          badgeClassName="bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300"
+        />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium mb-2 block">
+          Required Capabilities
+        </label>
+        <MultiSelect
+          options={capabilities}
+          onValueChange={(caps) => console.log("Selected capabilities:", caps)}
+          placeholder="Select required AI capabilities"
+          searchable={true}
+          maxCount={3}
+          badgeClassName="bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300"
+        />
+      </div>
+
+      <div>
+        <label className="text-sm font-medium mb-2 block">
+          Fallback Models
+        </label>
+        <MultiSelect
+          options={aiModels.filter(m => m.value.includes('mini') || m.value.includes('haiku'))}
+          onValueChange={(fallbacks) => console.log("Fallback models:", fallbacks)}
+          placeholder="Select fallback models"
+          badgeClassName="bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300"
+        />
+      </div>
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full text-sm font-medium mb-4">
@@ -2582,9 +3565,90 @@ export default function Home() {
 
 					{/* Interactive Documentation Example */}
 					<Card
+						id="interactive-documentation"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/50 dark:via-gray-950/50 dark:to-zinc-950/50 border-slate-200 dark:border-slate-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/50 dark:via-gray-950/50 dark:to-zinc-950/50 border-slate-200 dark:border-slate-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Interactive Documentation"
+								description="Example of embedding MultiSelect in interactive documentation"
+								fileName="interactive-docs.tsx"
+								code={`import { useState } from "react";
+import { MultiSelect } from "@/components/multi-select";
+
+const techCategories = [
+  { label: "Frontend Frameworks", value: "frontend" },
+  { label: "Backend Technologies", value: "backend" },
+  { label: "Databases", value: "databases" },
+  { label: "DevOps Tools", value: "devops" },
+  { label: "Testing Frameworks", value: "testing" },
+];
+
+const techOptions = {
+  frontend: [
+    { label: "React", value: "react" },
+    { label: "Vue.js", value: "vue" },
+    { label: "Angular", value: "angular" },
+    { label: "Svelte", value: "svelte" },
+  ],
+  backend: [
+    { label: "Node.js", value: "nodejs" },
+    { label: "Python", value: "python" },
+    { label: "Go", value: "go" },
+    { label: "Rust", value: "rust" },
+  ],
+  // ... more categories
+};
+
+// Interactive tech stack builder
+function TechStackBuilder() {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedTech, setSelectedTech] = useState<Record<string, string[]>>({});
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold mb-3">
+          Step 1: Choose Technology Categories
+        </h3>
+        <MultiSelect
+          options={techCategories}
+          onValueChange={setSelectedCategories}
+          placeholder="Select technology categories"
+          badgeClassName="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+        />
+      </div>
+
+      {selectedCategories.map((category) => (
+        <div key={category}>
+          <h4 className="text-md font-medium mb-2 capitalize">
+            {category} Technologies
+          </h4>
+          <MultiSelect
+            options={techOptions[category] || []}
+            onValueChange={(values) => 
+              setSelectedTech(prev => ({ ...prev, [category]: values }))
+            }
+            placeholder={\`Select \${category} technologies\`}
+            badgeClassName="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+          />
+        </div>
+      ))}
+
+      {Object.keys(selectedTech).length > 0 && (
+        <div className="mt-6 p-4 bg-muted rounded-lg">
+          <h4 className="font-semibold mb-2">Your Tech Stack:</h4>
+          <pre className="text-sm">
+            {JSON.stringify(selectedTech, null, 2)}
+          </pre>
+        </div>
+      )}
+    </div>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium mb-4">
@@ -2780,9 +3844,117 @@ export default function Home() {
 
 					{/* Interactive Form/Survey Example */}
 					<Card
+						id="interactive-form-survey"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-cyan-950/30 border-emerald-200 dark:border-emerald-800 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Interactive Form/Survey"
+								description="Example of building interactive surveys and forms with MultiSelect"
+								fileName="survey-form.tsx"
+								code={`import { useState } from "react";
+import { MultiSelect } from "@/components/multi-select";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+const experienceLevels = [
+  { label: "Beginner (0-1 years)", value: "beginner" },
+  { label: "Intermediate (2-5 years)", value: "intermediate" },
+  { label: "Senior (6-10 years)", value: "senior" },
+  { label: "Expert (10+ years)", value: "expert" },
+];
+
+const technologies = [
+  { label: "JavaScript", value: "javascript" },
+  { label: "TypeScript", value: "typescript" },
+  { label: "React", value: "react" },
+  { label: "Vue.js", value: "vue" },
+  { label: "Node.js", value: "nodejs" },
+  { label: "Python", value: "python" },
+];
+
+const interests = [
+  { label: "Frontend Development", value: "frontend" },
+  { label: "Backend Development", value: "backend" },
+  { label: "Mobile Development", value: "mobile" },
+  { label: "DevOps", value: "devops" },
+  { label: "AI/ML", value: "ai-ml" },
+  { label: "Blockchain", value: "blockchain" },
+];
+
+// Developer Survey Form
+function DeveloperSurvey() {
+  const [formData, setFormData] = useState({
+    experience: [],
+    technologies: [],
+    interests: [],
+  });
+
+  const handleSubmit = () => {
+    console.log("Survey submitted:", formData);
+    // Handle form submission
+  };
+
+  return (
+    <Card className="p-6 space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold mb-2">Experience Level</h3>
+        <MultiSelect
+          options={experienceLevels}
+          onValueChange={(value) => 
+            setFormData(prev => ({ ...prev, experience: value }))
+          }
+          placeholder="Select your experience level"
+          maxCount={1}
+          badgeClassName="bg-blue-100 text-blue-700"
+        />
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold mb-2">Technologies You Use</h3>
+        <MultiSelect
+          options={technologies}
+          onValueChange={(value) => 
+            setFormData(prev => ({ ...prev, technologies: value }))
+          }
+          placeholder="Select technologies you work with"
+          searchable={true}
+          badgeClassName="bg-green-100 text-green-700"
+        />
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold mb-2">Areas of Interest</h3>
+        <MultiSelect
+          options={interests}
+          onValueChange={(value) => 
+            setFormData(prev => ({ ...prev, interests: value }))
+          }
+          placeholder="Select your areas of interest"
+          maxCount={3}
+          badgeClassName="bg-purple-100 text-purple-700"
+        />
+      </div>
+
+      <Button onClick={handleSubmit} className="w-full">
+        Submit Survey
+      </Button>
+
+      {/* Preview submitted data */}
+      {Object.values(formData).some(arr => arr.length > 0) && (
+        <div className="mt-4 p-4 bg-muted rounded-lg">
+          <h4 className="font-semibold mb-2">Survey Data:</h4>
+          <pre className="text-sm overflow-auto">
+            {JSON.stringify(formData, null, 2)}
+          </pre>
+        </div>
+      )}
+    </Card>
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div
@@ -3090,9 +4262,68 @@ export default function Home() {
 
 					{/* Props Reference */}
 					<Card
+						id="props-reference"
 						className={getCardClasses(
-							"p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
+							"relative p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
 						)}>
+						<div className="absolute top-4 right-4 z-10">
+							<CodeSheet
+								title="Props Reference Example"
+								description="Complete usage example with all available props"
+								fileName="props-reference-example.tsx"
+								code={`import { MultiSelect } from "@/components/multi-select";
+import { useState } from "react";
+
+const options = [
+  { value: "react", label: "React", icon: Icons.zap },
+  { value: "vue", label: "Vue.js", icon: Icons.globe },
+  { value: "angular", label: "Angular", icon: Icons.target },
+];
+
+export default function PropsReferenceExample() {
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+  return (
+    <MultiSelect
+      // Core Props
+      options={options}
+      value={selectedValues}
+      onValueChange={setSelectedValues}
+      
+      // UI Props
+      placeholder="Select frameworks..."
+      variant="default"
+      size="default"
+      
+      // Behavior Props
+      maxCount={3}
+      disabled={false}
+      clearable={true}
+      searchable={true}
+      
+      // Animation Props
+      animationConfig={{
+        badgeAnimation: "bounce",
+        popoverAnimation: "scale",
+        optionHoverAnimation: "glow",
+      }}
+      
+      // Styling Props
+      className="w-full"
+      
+      // Event Props
+      onSearch={(query) => console.log("Searching:", query)}
+      onOpenChange={(open) => console.log("Popover:", open)}
+      
+      // Advanced Props
+      emptyMessage="No options found"
+      selectAllText="Select All"
+      clearAllText="Clear All"
+    />
+  );
+}`}
+							/>
+						</div>
 						<div className="p-8 md:p-12">
 							<div className="mb-8 text-center">
 								<div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded-full text-sm font-medium mb-4">
@@ -3111,6 +4342,7 @@ export default function Home() {
 									every configuration option.
 								</p>
 							</div>
+
 							<div className="p-0 space-y-8">
 								<div className="grid gap-6">
 									<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-rose-200 dark:border-rose-800">

@@ -26,7 +26,6 @@ import {
 
 import { Card } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
-import { useColorMode } from "@/contexts/color-mode-context";
 import { MultiSelect } from "@/components/multi-select";
 
 const salesData = [
@@ -380,8 +379,6 @@ interface VisualizationChartsProps {
 }
 
 export function VisualizationCharts({ className }: VisualizationChartsProps) {
-	const { isGrayMode } = useColorMode();
-
 	const [selectedDepartments, setSelectedDepartments] = useState<string[]>([
 		"engineering",
 		"design",
@@ -515,589 +512,461 @@ export function VisualizationCharts({ className }: VisualizationChartsProps) {
 		}));
 	}, [selectedMetrics, selectedDepartments]);
 
-	const getCardClasses = (originalClasses: string) => {
-		if (isGrayMode) {
-			return "p-0 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 dark:from-slate-950/30 dark:via-gray-950/30 dark:to-zinc-950/30 border-slate-200 dark:border-slate-800 overflow-hidden";
-		}
-		return originalClasses;
-	};
-
-	const getHeaderTextClasses = (originalClasses: string) => {
-		if (isGrayMode) {
-			return "text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-700 via-gray-600 to-zinc-600 dark:from-slate-400 dark:via-gray-300 dark:to-zinc-300 bg-clip-text text-transparent mb-4";
-		}
-		return originalClasses;
-	};
-
-	const getSmallDivClasses = (originalClasses: string) => {
-		if (isGrayMode) {
-			const hasMyClass = originalClasses.includes("my-8");
-			const hasMtClass =
-				originalClasses.includes("mt-8") || originalClasses.includes("mt-12");
-			const hasPadding = originalClasses.includes("p-6") ? "p-6" : "p-4";
-			const hasRoundedLg = originalClasses.includes("rounded-lg");
-			const rounded = hasRoundedLg ? "rounded-lg" : "rounded-xl";
-
-			let baseClasses = `${hasPadding} bg-white/60 dark:bg-slate-900/60 ${rounded} border border-slate-200 dark:border-slate-700 shadow-sm`;
-
-			if (hasMyClass) {
-				baseClasses = `my-8 ${baseClasses}`;
-			} else if (hasMtClass) {
-				baseClasses = originalClasses.includes("mt-12")
-					? `mt-12 ${baseClasses}`
-					: `mt-8 ${baseClasses}`;
-			}
-
-			if (originalClasses.includes("inline-flex")) {
-				baseClasses = `inline-flex items-center gap-2 px-4 py-2 ${baseClasses}`;
-			}
-
-			return baseClasses;
-		}
-		return originalClasses;
-	};
-
 	return (
-		<Card
-			className={getCardClasses(
-				"p-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/30 dark:via-amber-950/30 dark:to-yellow-950/30 rounded-xl border border-orange-200/50 dark:border-orange-800/50 overflow-hidden"
-			)}>
-			<div className="p-8 md:p-12">
-				<div className="mb-8 text-center">
-					<div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-sm font-medium mb-4">
-						<Icons.pieChart className="h-4 w-4" />
-						Charts Examples
+		<div className="p-0 space-y-8">
+			<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-orange-200 dark:border-orange-800">
+				<div className="grid gap-4 grid-cols-1 mb-8">
+					<div className="space-y-2">
+						<label className="text-sm font-medium">Select Departments</label>
+						<MultiSelect
+							options={companyDepartments}
+							onValueChange={setSelectedDepartments}
+							defaultValue={["engineering", "design", "product"]}
+							placeholder="Choose departments"
+							variant="default"
+							maxCount={4}
+							className="w-full"
+						/>
 					</div>
-					<h2
-						className={getHeaderTextClasses(
-							"text-3xl md:text-4xl font-bold bg-gradient-to-r from-orange-700 via-amber-600 to-yellow-600 dark:from-orange-400 dark:via-amber-300 dark:to-yellow-300 bg-clip-text text-transparent mb-4"
-						)}>
-						Charts & Data Visualization
-					</h2>
-					<p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-						Create interactive, data-driven dashboards where MultiSelect
-						components control chart filters, time periods, and visualization
-						parameters. Perfect for business intelligence and analytics
-						platforms.
-					</p>
+					<div className="space-y-2">
+						<label className="text-sm font-medium">Select Metrics</label>
+						<MultiSelect
+							options={metricsOptions}
+							onValueChange={setSelectedMetrics}
+							defaultValue={["revenue", "users", "performance"]}
+							placeholder="Choose metrics"
+							variant="secondary"
+							maxCount={3}
+							className="w-full"
+						/>
+					</div>
+					<div className="space-y-2">
+						<label className="text-sm font-medium">Time Periods</label>
+						<MultiSelect
+							options={timePeriodsOptions}
+							onValueChange={setSelectedTimePeriods}
+							defaultValue={["monthly", "quarterly"]}
+							placeholder="Select periods"
+							variant="inverted"
+							maxCount={2}
+							className="w-full"
+						/>
+					</div>
 				</div>
-				<div className="p-0 space-y-8">
-					<Card className="p-6 bg-white/80 dark:bg-gray-900/80 border-orange-200 dark:border-orange-800">
-						<div className="grid gap-4 grid-cols-1 mb-8">
-							<div className="space-y-2">
-								<label className="text-sm font-medium">
-									Select Departments
-								</label>
-								<MultiSelect
-									options={companyDepartments}
-									onValueChange={setSelectedDepartments}
-									defaultValue={["engineering", "design", "product"]}
-									placeholder="Choose departments"
-									variant="default"
-									maxCount={4}
-									className="w-full"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Select Metrics</label>
-								<MultiSelect
-									options={metricsOptions}
-									onValueChange={setSelectedMetrics}
-									defaultValue={["revenue", "users", "performance"]}
-									placeholder="Choose metrics"
-									variant="secondary"
-									maxCount={3}
-									className="w-full"
-								/>
-							</div>
-							<div className="space-y-2">
-								<label className="text-sm font-medium">Time Periods</label>
-								<MultiSelect
-									options={timePeriodsOptions}
-									onValueChange={setSelectedTimePeriods}
-									defaultValue={["monthly", "quarterly"]}
-									placeholder="Select periods"
-									variant="inverted"
-									maxCount={2}
-									className="w-full"
-								/>
-							</div>
-						</div>
 
-						{/* Charts Grid */}
-						<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
-							{/* Bar Chart */}
-							<Card className="p-2 sm:p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Monthly Sales by Department
-									{!selectedTimePeriods.includes("monthly") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Monthly&rdquo; to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedTimePeriods.includes("monthly") &&
-									filteredSalesData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<BarChart data={filteredSalesData}>
-												<XAxis
-													dataKey="name"
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-												/>
-												<YAxis
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-													tickFormatter={(value) =>
-														new Intl.NumberFormat("en-US", {
-															notation: "compact",
-															compactDisplay: "short",
-														}).format(value)
-													}
-												/>
-												<Tooltip content={<CustomTooltip type="currency" />} />
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="rect"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments.map((dept, index) => (
-													<Bar
-														key={dept}
-														dataKey={dept}
-														fill={chartColors[dept as keyof typeof chartColors]}
-														name={dept}
-														radius={[2, 2, 0, 0]}
-														className="transition-all duration-200 hover:opacity-80"
-														isAnimationActive={false}
-													/>
-												))}
-											</BarChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Monthly&rdquo; period to view sales data
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Pie Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Q4 Revenue Distribution
-									{!selectedMetrics.includes("revenue") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Revenue&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("revenue") &&
-									pieChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<PieChart>
-												<Pie
-													data={pieChartData}
-													cx="50%"
-													cy="50%"
-													innerRadius={30}
-													outerRadius={60}
-													fill="#8884d8"
-													dataKey="value"
-													label={({ name, percent }: any) =>
-														`${name} ${((percent || 0) * 100).toFixed(0)}%`
-													}
-													labelLine={true}
-													className="outline-none text-xs">
-													{pieChartData.map((entry, index) => (
-														<Cell
-															key={`cell-${index}`}
-															fill={entry.color}
-															stroke="rgba(255,255,255,0.1)"
-															strokeWidth={2}
-															className="transition-all duration-200 hover:opacity-80"
-														/>
-													))}
-												</Pie>
-												<Tooltip content={<PieTooltip />} />
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="circle"
-													formatter={(value: string, entry: any) => (
-														<span
-															className="text-sm font-medium"
-															style={{ color: entry.color }}>
-															{value}
-														</span>
-													)}
-												/>
-											</PieChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.dollarSign className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Revenue&rdquo; metric to view
-													distribution
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Area Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Quarterly Revenue Trends
-									{!selectedTimePeriods.includes("quarterly") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Quarterly&rdquo; to view)
-										</span>
-									)}
-								</h4>
-								<div
-									className="h-80 relative overflow-visible"
-									style={{ zIndex: 1 }}>
-									{selectedTimePeriods.includes("quarterly") &&
-									areaChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<AreaChart data={areaChartData}>
-												<GradientDefs />
-												<XAxis
-													dataKey="quarter"
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-												/>
-												<YAxis
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-													tickFormatter={(value) =>
-														new Intl.NumberFormat("en-US", {
-															notation: "compact",
-															compactDisplay: "short",
-														}).format(value)
-													}
-												/>
-												<Tooltip content={<CustomTooltip type="currency" />} />
-												<Legend
-													wrapperStyle={{ fontSize: "14px", zIndex: 1 }}
-													iconType="rect"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments.map((dept, index) => (
-													<Area
-														key={dept}
-														type="monotone"
-														dataKey={dept}
-														stackId="1"
-														stroke={
-															chartColors[dept as keyof typeof chartColors]
-														}
-														fill={`url(#${getGradientId(dept)})`}
-														strokeWidth={2}
-														className="transition-all duration-200"
-													/>
-												))}
-											</AreaChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Quarterly&rdquo; period to view trends
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Line Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Performance Metrics Comparison
-									{!selectedMetrics.includes("performance") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Performance&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("performance") &&
-									lineChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<LineChart data={lineChartData}>
-												<YAxis
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-													axisLine={{ stroke: "hsl(var(--border))" }}
-													tickLine={{ stroke: "hsl(var(--border))" }}
-													tickFormatter={(value) => `${value}%`}
-												/>
-												<Tooltip
-													content={<CustomTooltip type="percentage" />}
-												/>
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="line"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments
-													.filter((dept) =>
-														[
-															"engineering",
-															"design",
-															"product",
-															"marketing",
-														].includes(dept)
-													)
-													.map((dept, index) => (
-														<Line
-															key={dept}
-															type="monotone"
-															dataKey={dept}
-															stroke={
-																chartColors[dept as keyof typeof chartColors]
-															}
-															strokeWidth={3}
-															dot={{
-																fill: chartColors[
-																	dept as keyof typeof chartColors
-																],
-																strokeWidth: 2,
-																r: 5,
-																className:
-																	"transition-all duration-200 hover:r-7",
-															}}
-															activeDot={{
-																r: 8,
-																stroke:
-																	chartColors[dept as keyof typeof chartColors],
-																strokeWidth: 2,
-																fill: chartColors[
-																	dept as keyof typeof chartColors
-																],
-															}}
-															name={
-																companyDepartments.find((d) => d.value === dept)
-																	?.label || dept
-															}
-															className="transition-all duration-200"
-														/>
-													))}
-											</LineChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.activity className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Performance&rdquo; metric to view
-													comparison
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Radar Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Team Skills Radar
-									{!selectedMetrics.includes("performance") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Performance&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("performance") &&
-									radarChartData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<RadarChart data={radarChartData}>
-												<PolarGrid gridType="polygon" className="opacity-30" />
-												<PolarAngleAxis
-													dataKey="subject"
-													className="text-sm"
-													tick={{ fontSize: 12 }}
-												/>
-												<PolarRadiusAxis
-													angle={90}
-													domain={[0, 100]}
-													className="text-sm"
-													tick={{ fontSize: 10 }}
-													tickCount={6}
-												/>
-												<Tooltip
-													content={<CustomTooltip type="percentage" />}
-												/>
-												<Legend
-													wrapperStyle={{ fontSize: "14px" }}
-													iconType="line"
-													formatter={(value: string) => (
-														<span className="text-sm font-medium">
-															{companyDepartments.find((d) => d.value === value)
-																?.label || value}
-														</span>
-													)}
-												/>
-												{selectedDepartments
-													.filter((dept) =>
-														[
-															"engineering",
-															"design",
-															"product",
-															"marketing",
-														].includes(dept)
-													)
-													.map((dept, index) => (
-														<Radar
-															key={dept}
-															name={
-																companyDepartments.find((d) => d.value === dept)
-																	?.label || dept
-															}
-															dataKey={dept}
-															stroke={
-																chartColors[dept as keyof typeof chartColors]
-															}
-															fill={
-																chartColors[dept as keyof typeof chartColors]
-															}
-															fillOpacity={0.1}
-															strokeWidth={2}
-															dot={{
-																fill: chartColors[
-																	dept as keyof typeof chartColors
-																],
-																strokeWidth: 2,
-																r: 4,
-															}}
-														/>
-													))}
-											</RadarChart>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.target className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Performance&rdquo; metric to view skills
-													radar
-												</p>
-											</div>
-										</div>
-									)}
-								</div>
-							</Card>
-
-							{/* Treemap Chart */}
-							<Card className="p-4 w-full min-w-0">
-								<h4 className="text-lg font-medium mb-4">
-									Revenue Distribution by Teams
-									{!selectedMetrics.includes("revenue") && (
-										<span className="text-sm text-muted-foreground ml-2">
-											(Select &ldquo;Revenue&rdquo; metric to view)
-										</span>
-									)}
-								</h4>
-								<div className="h-80">
-									{selectedMetrics.includes("revenue") &&
-									treemapData.length > 0 ? (
-										<ResponsiveContainer width="100%" height="100%">
-											<Treemap
-												data={treemapData}
-												dataKey="size"
-												stroke="#fff"
-												fill="#8884d8"
+				{/* Charts Grid */}
+				<div className="grid gap-3 sm:gap-6 grid-cols-1 lg:grid-cols-2 w-full min-w-0">
+					{/* Bar Chart */}
+					<Card className="p-2 sm:p-4 w-full min-w-0">
+						<h4 className="text-lg font-medium mb-4">
+							Monthly Sales by Department
+							{!selectedTimePeriods.includes("monthly") && (
+								<span className="text-sm text-muted-foreground ml-2">
+									(Select &ldquo;Monthly&rdquo; to view)
+								</span>
+							)}
+						</h4>
+						<div className="h-80">
+							{selectedTimePeriods.includes("monthly") &&
+							filteredSalesData.length > 0 ? (
+								<ResponsiveContainer width="100%" height="100%">
+									<BarChart data={filteredSalesData}>
+										<XAxis
+											dataKey="name"
+											className="text-sm"
+											tick={{ fontSize: 12 }}
+											axisLine={{ stroke: "hsl(var(--border))" }}
+											tickLine={{ stroke: "hsl(var(--border))" }}
+										/>
+										<YAxis
+											className="text-sm"
+											tick={{ fontSize: 12 }}
+											axisLine={{ stroke: "hsl(var(--border))" }}
+											tickLine={{ stroke: "hsl(var(--border))" }}
+											tickFormatter={(value) =>
+												new Intl.NumberFormat("en-US", {
+													notation: "compact",
+													compactDisplay: "short",
+												}).format(value)
+											}
+										/>
+										<Tooltip content={<CustomTooltip type="currency" />} />
+										<Legend
+											wrapperStyle={{ fontSize: "14px" }}
+											iconType="rect"
+											formatter={(value: string) => (
+												<span className="text-sm font-medium">
+													{companyDepartments.find((d) => d.value === value)
+														?.label || value}
+												</span>
+											)}
+										/>
+										{selectedDepartments.map((dept, index) => (
+											<Bar
+												key={dept}
+												dataKey={dept}
+												fill={chartColors[dept as keyof typeof chartColors]}
+												name={dept}
+												radius={[2, 2, 0, 0]}
+												className="transition-all duration-200 hover:opacity-80"
+												isAnimationActive={false}
 											/>
-										</ResponsiveContainer>
-									) : (
-										<div className="flex items-center justify-center h-full text-muted-foreground">
-											<div className="text-center">
-												<Icons.pieChart className="h-12 w-12 mx-auto mb-2 opacity-50" />
-												<p>
-													Select &ldquo;Revenue&rdquo; metric to view team
-													distribution
-												</p>
-											</div>
-										</div>
-									)}
+										))}
+									</BarChart>
+								</ResponsiveContainer>
+							) : (
+								<div className="flex items-center justify-center h-full text-muted-foreground">
+									<div className="text-center">
+										<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+										<p>
+											Select &ldquo;Monthly&rdquo; period to view sales data
+										</p>
+									</div>
 								</div>
-							</Card>
+							)}
 						</div>
 					</Card>
-					<div className="p-0 pt-0">
-						<div
-							className={getSmallDivClasses(
-								"bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 dark:from-orange-900/20 dark:via-amber-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800"
-							)}>
-							<h4 className="text-lg font-semibold mb-4 text-orange-900 dark:text-orange-100 flex items-center gap-2">
-								<Icons.code className="h-5 w-5" />
-								Implementation Highlights
-							</h4>
-							<div className="grid gap-4 md:grid-cols-2">
-								<div>
-									<h5 className="font-medium text-orange-800 dark:text-orange-200 mb-2">
-										Data Binding Strategy
-									</h5>
-									<ul className="text-sm text-orange-700 dark:text-orange-300 space-y-1">
-										<li>• Reactive chart data based on selections</li>
-										<li>• Conditional chart rendering</li>
-										<li>• Optimized re-render performance</li>
-										<li>• Smooth transition animations</li>
-									</ul>
+
+					{/* Pie Chart */}
+					<Card className="p-4 w-full min-w-0">
+						<h4 className="text-lg font-medium mb-4">
+							Q4 Revenue Distribution
+							{!selectedMetrics.includes("revenue") && (
+								<span className="text-sm text-muted-foreground ml-2">
+									(Select &ldquo;Revenue&rdquo; metric to view)
+								</span>
+							)}
+						</h4>
+						<div className="h-80">
+							{selectedMetrics.includes("revenue") &&
+							pieChartData.length > 0 ? (
+								<ResponsiveContainer width="100%" height="100%">
+									<PieChart>
+										<Pie
+											data={pieChartData}
+											cx="50%"
+											cy="50%"
+											innerRadius={30}
+											outerRadius={60}
+											fill="#8884d8"
+											dataKey="value"
+											label={({ name, percent }: any) =>
+												`${name} ${((percent || 0) * 100).toFixed(0)}%`
+											}
+											labelLine={true}
+											className="outline-none text-xs">
+											{pieChartData.map((entry, index) => (
+												<Cell
+													key={`cell-${index}`}
+													fill={entry.color}
+													stroke="rgba(255,255,255,0.1)"
+													strokeWidth={2}
+													className="transition-all duration-200 hover:opacity-80"
+												/>
+											))}
+										</Pie>
+										<Tooltip content={<PieTooltip />} />
+										<Legend
+											wrapperStyle={{ fontSize: "14px" }}
+											iconType="circle"
+											formatter={(value: string, entry: any) => (
+												<span
+													className="text-sm font-medium"
+													style={{ color: entry.color }}>
+													{value}
+												</span>
+											)}
+										/>
+									</PieChart>
+								</ResponsiveContainer>
+							) : (
+								<div className="flex items-center justify-center h-full text-muted-foreground">
+									<div className="text-center">
+										<Icons.dollarSign className="h-12 w-12 mx-auto mb-2 opacity-50" />
+										<p>
+											Select &ldquo;Revenue&rdquo; metric to view distribution
+										</p>
+									</div>
 								</div>
-								<div>
-									<h5 className="font-medium text-amber-800 dark:text-amber-200 mb-2">
-										Best Practices
-									</h5>
-									<ul className="text-sm text-amber-700 dark:text-amber-300 space-y-1">
-										<li>• Consistent color schemes across charts</li>
-										<li>• Responsive chart containers</li>
-										<li>• Accessible tooltips and legends</li>
-										<li>• Empty state handling</li>
-									</ul>
-								</div>
-							</div>
+							)}
 						</div>
-					</div>
+					</Card>
+
+					{/* Area Chart */}
+					<Card className="p-4 w-full min-w-0">
+						<h4 className="text-lg font-medium mb-4">
+							Quarterly Revenue Trends
+							{!selectedTimePeriods.includes("quarterly") && (
+								<span className="text-sm text-muted-foreground ml-2">
+									(Select &ldquo;Quarterly&rdquo; to view)
+								</span>
+							)}
+						</h4>
+						<div
+							className="h-80 relative overflow-visible"
+							style={{ zIndex: 1 }}>
+							{selectedTimePeriods.includes("quarterly") &&
+							areaChartData.length > 0 ? (
+								<ResponsiveContainer width="100%" height="100%">
+									<AreaChart data={areaChartData}>
+										<GradientDefs />
+										<XAxis
+											dataKey="quarter"
+											className="text-sm"
+											tick={{ fontSize: 12 }}
+											axisLine={{ stroke: "hsl(var(--border))" }}
+											tickLine={{ stroke: "hsl(var(--border))" }}
+										/>
+										<YAxis
+											className="text-sm"
+											tick={{ fontSize: 12 }}
+											axisLine={{ stroke: "hsl(var(--border))" }}
+											tickLine={{ stroke: "hsl(var(--border))" }}
+											tickFormatter={(value) =>
+												new Intl.NumberFormat("en-US", {
+													notation: "compact",
+													compactDisplay: "short",
+												}).format(value)
+											}
+										/>
+										<Tooltip content={<CustomTooltip type="currency" />} />
+										<Legend
+											wrapperStyle={{ fontSize: "14px", zIndex: 1 }}
+											iconType="rect"
+											formatter={(value: string) => (
+												<span className="text-sm font-medium">
+													{companyDepartments.find((d) => d.value === value)
+														?.label || value}
+												</span>
+											)}
+										/>
+										{selectedDepartments.map((dept, index) => (
+											<Area
+												key={dept}
+												type="monotone"
+												dataKey={dept}
+												stackId="1"
+												stroke={chartColors[dept as keyof typeof chartColors]}
+												fill={`url(#${getGradientId(dept)})`}
+												strokeWidth={2}
+												className="transition-all duration-200"
+											/>
+										))}
+									</AreaChart>
+								</ResponsiveContainer>
+							) : (
+								<div className="flex items-center justify-center h-full text-muted-foreground">
+									<div className="text-center">
+										<Icons.calendar className="h-12 w-12 mx-auto mb-2 opacity-50" />
+										<p>Select &ldquo;Quarterly&rdquo; period to view trends</p>
+									</div>
+								</div>
+							)}
+						</div>
+					</Card>
+
+					{/* Line Chart */}
+					<Card className="p-4 w-full min-w-0">
+						<h4 className="text-lg font-medium mb-4">
+							Performance Metrics Comparison
+							{!selectedMetrics.includes("performance") && (
+								<span className="text-sm text-muted-foreground ml-2">
+									(Select &ldquo;Performance&rdquo; metric to view)
+								</span>
+							)}
+						</h4>
+						<div className="h-80">
+							{selectedMetrics.includes("performance") &&
+							lineChartData.length > 0 ? (
+								<ResponsiveContainer width="100%" height="100%">
+									<LineChart data={lineChartData}>
+										<YAxis
+											className="text-sm"
+											tick={{ fontSize: 12 }}
+											axisLine={{ stroke: "hsl(var(--border))" }}
+											tickLine={{ stroke: "hsl(var(--border))" }}
+											tickFormatter={(value) => `${value}%`}
+										/>
+										<Tooltip content={<CustomTooltip type="percentage" />} />
+										<Legend
+											wrapperStyle={{ fontSize: "14px" }}
+											iconType="line"
+											formatter={(value: string) => (
+												<span className="text-sm font-medium">
+													{companyDepartments.find((d) => d.value === value)
+														?.label || value}
+												</span>
+											)}
+										/>
+										{selectedDepartments
+											.filter((dept) =>
+												[
+													"engineering",
+													"design",
+													"product",
+													"marketing",
+												].includes(dept)
+											)
+											.map((dept, index) => (
+												<Line
+													key={dept}
+													type="monotone"
+													dataKey={dept}
+													stroke={chartColors[dept as keyof typeof chartColors]}
+													strokeWidth={3}
+													dot={{
+														fill: chartColors[dept as keyof typeof chartColors],
+														strokeWidth: 2,
+														r: 5,
+														className: "transition-all duration-200 hover:r-7",
+													}}
+													activeDot={{
+														r: 8,
+														stroke:
+															chartColors[dept as keyof typeof chartColors],
+														strokeWidth: 2,
+														fill: chartColors[dept as keyof typeof chartColors],
+													}}
+													name={
+														companyDepartments.find((d) => d.value === dept)
+															?.label || dept
+													}
+													className="transition-all duration-200"
+												/>
+											))}
+									</LineChart>
+								</ResponsiveContainer>
+							) : (
+								<div className="flex items-center justify-center h-full text-muted-foreground">
+									<div className="text-center">
+										<Icons.activity className="h-12 w-12 mx-auto mb-2 opacity-50" />
+										<p>
+											Select &ldquo;Performance&rdquo; metric to view comparison
+										</p>
+									</div>
+								</div>
+							)}
+						</div>
+					</Card>
+
+					{/* Radar Chart */}
+					<Card className="p-4 w-full min-w-0">
+						<h4 className="text-lg font-medium mb-4">
+							Team Skills Radar
+							{!selectedMetrics.includes("performance") && (
+								<span className="text-sm text-muted-foreground ml-2">
+									(Select &ldquo;Performance&rdquo; metric to view)
+								</span>
+							)}
+						</h4>
+						<div className="h-80">
+							{selectedMetrics.includes("performance") &&
+							radarChartData.length > 0 ? (
+								<ResponsiveContainer width="100%" height="100%">
+									<RadarChart data={radarChartData}>
+										<PolarGrid gridType="polygon" className="opacity-30" />
+										<PolarAngleAxis
+											dataKey="subject"
+											className="text-sm"
+											tick={{ fontSize: 12 }}
+										/>
+										<PolarRadiusAxis
+											angle={90}
+											domain={[0, 100]}
+											className="text-sm"
+											tick={{ fontSize: 10 }}
+											tickCount={6}
+										/>
+										<Tooltip content={<CustomTooltip type="percentage" />} />
+										<Legend
+											wrapperStyle={{ fontSize: "14px" }}
+											iconType="line"
+											formatter={(value: string) => (
+												<span className="text-sm font-medium">
+													{companyDepartments.find((d) => d.value === value)
+														?.label || value}
+												</span>
+											)}
+										/>
+										{selectedDepartments
+											.filter((dept) =>
+												[
+													"engineering",
+													"design",
+													"product",
+													"marketing",
+												].includes(dept)
+											)
+											.map((dept, index) => (
+												<Radar
+													key={dept}
+													name={
+														companyDepartments.find((d) => d.value === dept)
+															?.label || dept
+													}
+													dataKey={dept}
+													stroke={chartColors[dept as keyof typeof chartColors]}
+													fill={chartColors[dept as keyof typeof chartColors]}
+													fillOpacity={0.1}
+													strokeWidth={2}
+													dot={{
+														fill: chartColors[dept as keyof typeof chartColors],
+														strokeWidth: 2,
+														r: 4,
+													}}
+												/>
+											))}
+									</RadarChart>
+								</ResponsiveContainer>
+							) : (
+								<div className="flex items-center justify-center h-full text-muted-foreground">
+									<div className="text-center">
+										<Icons.target className="h-12 w-12 mx-auto mb-2 opacity-50" />
+										<p>
+											Select &ldquo;Performance&rdquo; metric to view skills
+											radar
+										</p>
+									</div>
+								</div>
+							)}
+						</div>
+					</Card>
+
+					{/* Treemap Chart */}
+					<Card className="p-4 w-full min-w-0">
+						<h4 className="text-lg font-medium mb-4">
+							Revenue Distribution by Teams
+							{!selectedMetrics.includes("revenue") && (
+								<span className="text-sm text-muted-foreground ml-2">
+									(Select &ldquo;Revenue&rdquo; metric to view)
+								</span>
+							)}
+						</h4>
+						<div className="h-80">
+							{selectedMetrics.includes("revenue") && treemapData.length > 0 ? (
+								<ResponsiveContainer width="100%" height="100%">
+									<Treemap
+										data={treemapData}
+										dataKey="size"
+										stroke="#fff"
+										fill="#8884d8"
+									/>
+								</ResponsiveContainer>
+							) : (
+								<div className="flex items-center justify-center h-full text-muted-foreground">
+									<div className="text-center">
+										<Icons.pieChart className="h-12 w-12 mx-auto mb-2 opacity-50" />
+										<p>
+											Select &ldquo;Revenue&rdquo; metric to view team
+											distribution
+										</p>
+									</div>
+								</div>
+							)}
+						</div>
+					</Card>
 				</div>
-			</div>
-		</Card>
+			</Card>
+		</div>
 	);
 }
