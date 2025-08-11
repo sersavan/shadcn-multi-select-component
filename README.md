@@ -1,8 +1,4 @@
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=sersavan/shadcn-multi-select-component&type=Date)](https://star-history.com/#sersavan/shadcn-multi-select-component&Date)
-
-# Shadcn Multi Select Component
+# MultiSelect Component
 
 A powerful and flexible multi-select component built with **React**,
 **TypeScript**, **Tailwind CSS**, and **shadcn/ui** components.
@@ -13,6 +9,10 @@ that supports path aliases and shadcn/ui components.
 ![Multi Select Demo](https://img.shields.io/badge/React-19+-blue?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-blue?logo=tailwindcss)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sersavan/shadcn-multi-select-component&type=Date)](https://star-history.com/#sersavan/shadcn-multi-select-component&Date)
 
 ## 🚀 Features
 
@@ -35,9 +35,10 @@ that supports path aliases and shadcn/ui components.
 - 📐 **Width Constraints**: Support for minimum and maximum width settings
 - 📲 **Mobile-Optimized**: Compact mode with touch-friendly interactions
 - 💻 **Desktop-Enhanced**: Full feature set with large displays
-- ♿ **Accessibility**: Full keyboard support and screen reader compatibility
+- ♿ **Accessibility**: Full keyboard support, screen reader compatibility, and
+  ARIA live regions
 - ⌨️ **Keyboard Shortcuts**: Global hotkeys for navigation and quick actions
-- �🔧 **Imperative Methods**: Programmatic control via ref (reset, clear, focus,
+- 🔧 **Imperative Methods**: Programmatic control via ref (reset, clear, focus,
   get/set values)
 - 🔄 **Duplicate Handling**: Automatic detection and removal of duplicate
   options
@@ -46,7 +47,8 @@ that supports path aliases and shadcn/ui components.
 - 🎛️ **Customizable Behavior**: Auto-close on select, width constraints, empty
   indicators
 - 🎯 **TypeScript Support**: Fully typed with comprehensive TypeScript support
-- 📦 **Zero Dependencies**: Only uses peer dependencies you already have
+- 📦 **Self-Contained**: All accessibility features built-in, no external
+  dependencies required
 
 ## 📦 Installation
 
@@ -251,7 +253,7 @@ const groupedOptions = [
 />;
 ```
 
-## � Responsive Design
+## 📱 Responsive Design
 
 The Multi-Select component includes comprehensive responsive design capabilities
 that automatically adapt to different screen sizes.
@@ -365,7 +367,75 @@ const AdvancedDashboard = () => {
 };
 ```
 
+## 📖 Examples
+
+### Basic Multi-Select
+
+```tsx
+const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+<MultiSelect
+	options={frameworks}
+	onValueChange={setSelectedValues}
+	defaultValue={selectedValues}
+	placeholder="Select frameworks"
+/>;
+```
+
+### With Icons and Custom Styling
+
+```tsx
+const [selectedValues, setSelectedValues] = useState<string[]>([]);
+
+<MultiSelect
+	options={frameworksWithIcons}
+	onValueChange={setSelectedValues}
+	defaultValue={selectedValues}
+	placeholder="Select technologies"
+	variant="inverted"
+	maxCount={3}
+	modalPopover={true}
+/>;
+```
+
+### Async Data Loading
+
+```tsx
+const [options, setOptions] = useState<Option[]>([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+	loadData().then((data) => {
+		setOptions(data);
+		setLoading(false);
+	});
+}, []);
+
+<MultiSelect
+	options={options}
+	onValueChange={setSelectedValues}
+	defaultValue={selectedValues}
+	placeholder={loading ? "Loading..." : "Select items"}
+	disabled={loading}
+/>;
+```
+
 ## 📚 API Reference
+
+## 🎯 Best Practices
+
+1. **Always provide meaningful labels**: Use descriptive placeholders and
+   aria-labels
+2. **Handle loading states**: Show loading indicators when fetching async data
+3. **Limit display count**: Use `maxCount` for large selections to maintain UI
+   clarity
+4. **Use modal on mobile**: Set `modalPopover={true}` for better mobile
+   experience
+5. **Implement search**: For large option lists, consider adding search
+   functionality
+6. **Provide clear feedback**: Use the built-in announcements for screen readers
+
+## �📚 API Reference
 
 ### Props
 
@@ -449,6 +519,62 @@ interface MultiSelectGroup {
 	heading: string; // Group heading text
 	options: MultiSelectOption[]; // Options in this group
 }
+```
+
+## ♿ Accessibility
+
+The MultiSelect component includes comprehensive accessibility features
+built-in:
+
+### ARIA Support
+
+- **ARIA Live Regions**: Automatic announcements for screen readers when
+  selections change
+- **Role Attributes**: Proper `combobox`, `listbox`, and `option` roles
+- **ARIA Labels**: Descriptive labels for all interactive elements
+- **ARIA States**: `aria-expanded`, `aria-selected`, `aria-disabled` states
+
+### Keyboard Navigation
+
+- **Tab**: Focus component and navigate between elements
+- **Enter/Space**: Open dropdown and select options
+- **Arrow Keys**: Navigate through options
+- **Escape**: Close dropdown
+- **Backspace**: Remove last selected item when search is empty
+
+### Screen Reader Announcements
+
+The component automatically announces:
+
+- Number of options selected
+- When dropdown opens/closes
+- Search results count
+- Individual option selection/deselection
+
+### Example with Enhanced Accessibility
+
+```tsx
+<MultiSelect
+	options={options}
+	onValueChange={setSelected}
+	placeholder="Choose frameworks (accessible)"
+	// Accessibility features are built-in and automatic
+	searchable={true}
+	aria-label="Framework selection"
+/>
+```
+
+### Manual Accessibility Testing
+
+```tsx
+// The component provides imperative methods for testing
+const multiSelectRef = useRef<MultiSelectRef>(null);
+
+// Programmatic focus for testing
+multiSelectRef.current?.focus();
+
+// Check current selection
+const currentValues = multiSelectRef.current?.getSelectedValues();
 ```
 
 ## 🎨 Styling Examples
