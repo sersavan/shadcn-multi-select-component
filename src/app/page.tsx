@@ -4285,7 +4285,7 @@ function DeveloperSurvey() {
 
 					{/* Props Reference */}
 					<Card
-						id="documentation"
+						id="props-reference"
 						className={getCardClasses(
 							"relative p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
 						)}>
