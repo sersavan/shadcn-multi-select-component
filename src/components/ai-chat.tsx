@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import rehypeHighlight from "rehype-highlight";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+import { cn } from "@/lib/utils";
 import "../styles/markdown.css";
 
 const extractTextFromNode = (node: any): string => {
@@ -136,6 +137,8 @@ export function AIChat({ className }: AIChatProps) {
 	const [questionsKey, setQuestionsKey] = useState(0);
 	const [rateLimitSeconds, setRateLimitSeconds] = useState(0);
 	const [isRateLimited, setIsRateLimited] = useState(false);
+	const [isSuggestedQuestionsVisible, setIsSuggestedQuestionsVisible] =
+		useState(true);
 	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const rateLimitTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -644,11 +647,12 @@ export function AIChat({ className }: AIChatProps) {
 					<div
 						key={questionsKey}
 						className={cn(
-							"px-4 py-2 border-t bg-muted/30 animate-in fade-in slide-in-from-bottom-2 duration-500",
+							"border-t bg-muted/30",
 							isFullscreen && "max-w-4xl mx-auto w-full",
 							isRateLimited && "opacity-60"
 						)}>
-						<div className="mb-2">
+						{/* Toggle Header */}
+						<div className="flex items-center justify-between px-4 py-2">
 							<p className="text-xs font-medium text-muted-foreground">
 								💡 Suggested questions:
 								{isRateLimited && (
@@ -657,31 +661,55 @@ export function AIChat({ className }: AIChatProps) {
 									</span>
 								)}
 							</p>
+							<Button
+								variant="ghost"
+								size="sm"
+								onClick={() =>
+									setIsSuggestedQuestionsVisible(!isSuggestedQuestionsVisible)
+								}
+								className="h-6 w-6 p-0 hover:bg-muted/50"
+								title={
+									isSuggestedQuestionsVisible
+										? "Hide suggestions"
+										: "Show suggestions"
+								}>
+								{isSuggestedQuestionsVisible ? (
+									<Icons.chevronDown className="h-3 w-3" />
+								) : (
+									<Icons.chevronUp className="h-3 w-3" />
+								)}
+							</Button>
 						</div>
-						<div className="flex flex-wrap gap-1">
-							{suggestedQuestions.slice(0, 5).map((question, index) => (
-								<Badge
-									key={`${questionsKey}-${question}-${index}`}
-									variant="secondary"
-									className={cn(
-										"text-xs transition-all duration-200 animate-in fade-in",
-										isRateLimited
-											? "cursor-not-allowed opacity-50"
-											: "cursor-pointer hover:bg-secondary/80 hover:scale-105"
-									)}
-									style={{
-										animationDelay: `${index * 100}ms`,
-										animationDuration: "300ms",
-									}}
-									onClick={() =>
-										!isRateLimited && handleSuggestedQuestion(question)
-									}>
-									{question.length > 100
-										? question.substring(0, 100) + "..."
-										: question}
-								</Badge>
-							))}
-						</div>
+
+						{/* Collapsible Content */}
+						{isSuggestedQuestionsVisible && (
+							<div className="px-4 pb-2 animate-in fade-in slide-in-from-top-2 duration-300">
+								<div className="flex flex-wrap gap-1">
+									{suggestedQuestions.slice(0, 5).map((question, index) => (
+										<Badge
+											key={`${questionsKey}-${question}-${index}`}
+											variant="secondary"
+											className={cn(
+												"text-xs transition-all duration-200 animate-in fade-in",
+												isRateLimited
+													? "cursor-not-allowed opacity-50"
+													: "cursor-pointer hover:bg-secondary/80 hover:scale-105"
+											)}
+											style={{
+												animationDelay: `${index * 100}ms`,
+												animationDuration: "300ms",
+											}}
+											onClick={() =>
+												!isRateLimited && handleSuggestedQuestion(question)
+											}>
+											{question.length > 100
+												? question.substring(0, 100) + "..."
+												: question}
+										</Badge>
+									))}
+								</div>
+							</div>
+						)}
 					</div>
 				)}
 

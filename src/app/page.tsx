@@ -9,7 +9,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
 import { AIChat } from "@/components/ai-chat";
@@ -18,6 +18,11 @@ import { VisualizationCharts } from "@/components/visualization-charts";
 import { TableOfContents } from "@/components/table-of-contents";
 import { ReadingProgress } from "@/components/reading-progress";
 import { CodeSheet } from "@/components/code-sheet";
+import {
+	SkipLinks,
+	FocusIndicator,
+	LiveRegion,
+} from "@/components/accessibility";
 import {
 	Form,
 	FormControl,
@@ -381,7 +386,7 @@ export default function Home() {
 	]);
 	const [imperativeSelection, setImperativeSelection] = useState<string[]>([
 		"react",
-		"nextjs",
+		"next.js",
 	]);
 
 	const [variantDemo, setVariantDemo] = useState<string[]>(["typescript"]);
@@ -550,73 +555,81 @@ export default function Home() {
 
 	return (
 		<main className="min-h-screen bg-background overflow-x-hidden">
+			{/* Accessibility Components */}
+			<SkipLinks />
+			<FocusIndicator />
+			<LiveRegion />
 			<ReadingProgress />
 			<TableOfContents />
-			<div className="max-w-4xl mx-auto px-2 sm:px-4 py-4 w-full min-w-0">
+
+			<div
+				className="max-w-4xl mx-auto px-2 sm:px-4 py-4 w-full min-w-0"
+				id="main-content">
 				{/* Header */}
-				<PageHeader className="text-center">
-					<PageHeaderHeading>Multi Select Component</PageHeaderHeading>
-					<PageHeaderDescription>
-						assembled with shadcn/ui and Radix UI primitives
-					</PageHeaderDescription>
-					<PageActions>
-						<div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-							<button
-								onClick={() => {
-									const demoSection =
-										document.getElementById("examples-section");
-									demoSection?.scrollIntoView({ behavior: "smooth" });
-								}}
-								className={cn(
-									"group relative overflow-hidden w-full sm:w-auto",
-									"bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700",
-									"hover:from-blue-700 hover:via-purple-700 hover:to-blue-800",
-									"text-white border-0 shadow-lg hover:shadow-xl",
-									"transition-all duration-300 ease-in-out",
-									"transform hover:scale-105 hover:-translate-y-0.5",
-									"px-6 py-3 rounded-lg font-medium",
-									"flex items-center justify-center gap-2.5",
-									"before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-transparent",
-									"before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100"
-								)}>
-								<div className="relative z-10 flex items-center gap-2.5">
-									<Icons.zap className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
-									<span>Try Live Demo</span>
-								</div>
-								<div className="absolute inset-0 border border-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-							</button>
-							<Link
-								target="_blank"
-								rel="noreferrer"
-								href="https://github.com/sersavan/shadcn-multi-select-component"
-								className={cn(
-									"group relative overflow-hidden w-full sm:w-auto",
-									"bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900",
-									"hover:from-gray-800 hover:via-gray-700 hover:to-gray-800",
-									"text-white border-0 shadow-lg hover:shadow-xl",
-									"transition-all duration-300 ease-in-out",
-									"transform hover:scale-105 hover:-translate-y-0.5",
-									"px-6 py-3 rounded-lg font-medium",
-									"flex items-center justify-center gap-2.5",
-									"before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-500/20 before:via-purple-500/20 before:to-pink-500/20",
-									"before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100"
-								)}>
-								<div className="relative z-10 flex items-center gap-2.5">
-									<Icons.gitHub className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" />
-									<span>View Source</span>
-									{!isLoadingStars && !starsError && githubStars !== null && (
-										<div className="flex items-center gap-1 px-2 py-0.5 bg-white/10 rounded-full text-xs">
-											<Icons.star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
-											<span>{formatStars(githubStars)}</span>
-										</div>
-									)}
-									<div className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
-								</div>
-								<div className="absolute inset-0 border border-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-							</Link>
-						</div>
-					</PageActions>
-				</PageHeader>
+				<header id="navigation">
+					<PageHeader className="text-center">
+						<PageHeaderHeading>Multi Select Component</PageHeaderHeading>
+						<PageHeaderDescription>
+							assembled with shadcn/ui and Radix UI primitives
+						</PageHeaderDescription>
+						<PageActions>
+							<div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+								<button
+									onClick={() => {
+										const demoSection = document.getElementById("examples");
+										demoSection?.scrollIntoView({ behavior: "smooth" });
+									}}
+									className={cn(
+										"group relative overflow-hidden w-full sm:w-auto",
+										"bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700",
+										"hover:from-blue-700 hover:via-purple-700 hover:to-blue-800",
+										"text-white border-0 shadow-lg hover:shadow-xl",
+										"transition-all duration-300 ease-in-out",
+										"transform hover:scale-105 hover:-translate-y-0.5",
+										"px-6 py-3 rounded-lg font-medium",
+										"flex items-center justify-center gap-2.5",
+										"before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/10 before:to-transparent",
+										"before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100"
+									)}>
+									<div className="relative z-10 flex items-center gap-2.5">
+										<Icons.zap className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+										<span>Try Live Demo</span>
+									</div>
+									<div className="absolute inset-0 border border-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+								</button>
+								<Link
+									target="_blank"
+									rel="noreferrer"
+									href="https://github.com/sersavan/shadcn-multi-select-component"
+									className={cn(
+										"group relative overflow-hidden w-full sm:w-auto",
+										"bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900",
+										"hover:from-gray-800 hover:via-gray-700 hover:to-gray-800",
+										"text-white border-0 shadow-lg hover:shadow-xl",
+										"transition-all duration-300 ease-in-out",
+										"transform hover:scale-105 hover:-translate-y-0.5",
+										"px-6 py-3 rounded-lg font-medium",
+										"flex items-center justify-center gap-2.5",
+										"before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-500/20 before:via-purple-500/20 before:to-pink-500/20",
+										"before:opacity-0 before:transition-opacity before:duration-300 group-hover:before:opacity-100"
+									)}>
+									<div className="relative z-10 flex items-center gap-2.5">
+										<Icons.gitHub className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" />
+										<span>View Source</span>
+										{!isLoadingStars && !starsError && githubStars !== null && (
+											<div className="flex items-center gap-1 px-2 py-0.5 bg-white/10 rounded-full text-xs">
+												<Icons.star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
+												<span>{formatStars(githubStars)}</span>
+											</div>
+										)}
+										<div className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
+									</div>
+									<div className="absolute inset-0 border border-white/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+								</Link>
+							</div>
+						</PageActions>
+					</PageHeader>
+				</header>
 
 				{/* Interactive Examples Introduction */}
 				<div className="mt-6 mb-3">
@@ -698,10 +711,19 @@ export default function Home() {
 				</div>
 
 				{/* Examples Grid */}
-				<div id="examples-section" className="grid gap-6 mt-6 w-full min-w-0">
+				<section
+					id="examples"
+					className="grid gap-6 mt-6 w-full min-w-0"
+					aria-labelledby="examples-heading">
+					<h2 id="examples-heading" className="sr-only">
+						Interactive Examples and Demonstrations
+					</h2>
+
 					{/* 1. Form Integration*/}
 					<Card
 						id="form-integration"
+						role="region"
+						aria-labelledby="form-integration-title"
 						className={getCardClasses(
 							"relative p-0 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 dark:from-violet-950/30 dark:via-purple-950/30 dark:to-fuchsia-950/30 border-violet-200 dark:border-violet-800 overflow-hidden"
 						)}>
@@ -792,6 +814,7 @@ export default function FormExample() {
 							</div>
 							<div className="text-center">
 								<h2
+									id="form-integration-title"
 									className={getHeaderTextClasses(
 										"text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-700 via-purple-600 to-fuchsia-600 dark:from-violet-400 dark:via-purple-300 dark:to-fuchsia-300 bg-clip-text text-transparent mb-4"
 									)}>
@@ -3701,7 +3724,7 @@ function TechStackBuilder() {
 											onValueChange={(values) => {
 												// Optional: handle selection changes
 											}}
-											defaultValue={["typescript", "react"]}
+											defaultValue={["typescript", "javascript"]}
 											placeholder="Choose technologies..."
 											variant="inverted"
 											animationConfig={{
@@ -4262,7 +4285,7 @@ function DeveloperSurvey() {
 
 					{/* Props Reference */}
 					<Card
-						id="props-reference"
+						id="documentation"
 						className={getCardClasses(
 							"relative p-0 bg-gradient-to-br from-rose-50 via-pink-50 to-red-50 dark:from-rose-950/30 dark:via-pink-950/30 dark:to-red-950/30 rounded-xl border border-rose-200/50 dark:border-rose-800/50 overflow-hidden"
 						)}>
@@ -4580,9 +4603,9 @@ export default function PropsReferenceExample() {
 							</div>
 						</div>
 					</Card>
+				</section>
 
-					{/* AI Chat Widget */}
-				</div>
+				{/* AI Chat Widget */}
 				<AIChat />
 			</div>
 		</main>

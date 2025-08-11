@@ -36,7 +36,8 @@ that supports path aliases and shadcn/ui components.
 - 📲 **Mobile-Optimized**: Compact mode with touch-friendly interactions
 - 💻 **Desktop-Enhanced**: Full feature set with large displays
 - ♿ **Accessibility**: Full keyboard support and screen reader compatibility
-- 🔧 **Imperative Methods**: Programmatic control via ref (reset, clear, focus,
+- ⌨️ **Keyboard Shortcuts**: Global hotkeys for navigation and quick actions
+- �🔧 **Imperative Methods**: Programmatic control via ref (reset, clear, focus,
   get/set values)
 - 🔄 **Duplicate Handling**: Automatic detection and removal of duplicate
   options

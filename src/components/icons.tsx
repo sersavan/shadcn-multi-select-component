@@ -38,6 +38,8 @@ import {
 	Copy,
 	Check,
 	Clock,
+	ChevronUp,
+	ChevronDown,
 } from "lucide-react";
 
 export const Icons = {
@@ -79,6 +81,8 @@ export const Icons = {
 	copy: Copy,
 	check: Check,
 	clock: Clock,
+	chevronUp: ChevronUp,
+	chevronDown: ChevronDown,
 	gitHub: ({ ...props }: LucideProps) => (
 		<svg
 			aria-hidden="true"
