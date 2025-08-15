@@ -1436,6 +1436,28 @@ export default function AnimationsExample() {
 													</p>
 												</div>
 											</div>
+											<div className="space-y-4">
+												<div className="space-y-2">
+													<label className="text-sm font-medium flex items-center gap-2">
+														<span className="w-2 h-2 bg-slate-500 rounded-full"></span>
+														No Animation
+													</label>
+													<MultiSelect
+														options={projectTypesWithStyle.slice(0, 3)}
+														onValueChange={() => {}}
+														defaultValue={["web-app"]}
+														animationConfig={{
+                                                            badgeAnimation: "none",
+                                                            popoverAnimation: "none",
+                                                            optionHoverAnimation: "none",
+														}}
+														placeholder="Without animation effect"
+													/>
+													<p className="text-xs text-muted-foreground">
+														With animation effects disabled
+													</p>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div

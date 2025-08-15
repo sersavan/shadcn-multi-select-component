@@ -519,7 +519,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					case "flip":
 						return "animate-flipIn";
 					case "none":
-						return "";
+						return "!animate-none";
 					default:
 						return "";
 				}
@@ -858,7 +858,10 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 														key={value}
 														className={cn(
 															getBadgeAnimationClass(),
-															multiSelectVariants({ variant }),
+															multiSelectVariants({
+																variant,
+																badgeAnimation: animationConfig?.badgeAnimation
+															}),
 															customStyle?.gradient &&
 																"text-white border-transparent",
 															responsiveSettings.compactMode &&
@@ -930,7 +933,10 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 												className={cn(
 													"bg-transparent text-foreground border-foreground/1 hover:bg-transparent",
 													getBadgeAnimationClass(),
-													multiSelectVariants({ variant }),
+													multiSelectVariants({
+														variant,
+														badgeAnimation: animationConfig?.badgeAnimation
+													}),
 													responsiveSettings.compactMode &&
 														"text-xs px-1.5 py-0.5",
 													singleLine && "flex-shrink-0 whitespace-nowrap",
