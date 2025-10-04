@@ -41,15 +41,15 @@ import {
 import { MultiSelect, MultiSelectRef } from "@/components/multi-select";
 
 const frameworksList = [
-	{ value: "next.js", label: "Next.js", icon: Icons.code },
+	{ value: "next.js", label: "Next.js", icon: Icons.code, keywords: ["fullstack"] },
 	{ value: "react", label: "React", icon: Icons.zap },
 	{ value: "vue", label: "Vue.js", icon: Icons.globe },
 	{ value: "angular", label: "Angular", icon: Icons.target },
 	{ value: "svelte", label: "Svelte", icon: Icons.star },
-	{ value: "nuxt.js", label: "Nuxt.js", icon: Icons.turtle },
-	{ value: "remix", label: "Remix", icon: Icons.rabbit },
-	{ value: "astro", label: "Astro", icon: Icons.fish },
-	{ value: "gatsby", label: "Gatsby", icon: Icons.dog },
+	{ value: "nuxt.js", label: "Nuxt.js", icon: Icons.turtle, keywords: ["fullstack"] },
+	{ value: "remix", label: "Remix", icon: Icons.rabbit, keywords: ["fullstack"] },
+	{ value: "astro", label: "Astro", icon: Icons.fish, keywords: ["fullstack"] },
+	{ value: "gatsby", label: "Gatsby", icon: Icons.dog, keywords: ["fullstack"] },
 	{ value: "solid", label: "SolidJS", icon: Icons.cpu },
 ];
 
@@ -1950,7 +1950,7 @@ function SimplifiedExample() {
 													/>
 													<div className="mt-2 text-xs text-muted-foreground">
 														✅ Search enabled • ✅ Select all • ✅ Custom empty
-														state
+														state • ✅ Item keywords are searchable
 													</div>
 												</div>
 											</div>
@@ -1996,17 +1996,27 @@ function SimplifiedExample() {
 												</h4>
 												<p className="text-base text-muted-foreground mb-4">
 													Our search implementation is optimized for performance
-													with debounced input handling, efficient filtering
-													algorithms, and smooth animations that don&apos;t
-													block user interactions.
+													with debounced input handling and smooth animations that
+													don&apos;t block user interactions. Uses the underlying
+													Command filter approach, allowing users to supply 
+													"hidden keywords" for matches, and also an entirely
+													custom filter function if needed. Try searching for
+													&quot;fullstack&quot; to see how &quot;Next.js&quot; matches.
 												</p>
-												<div className="text-sm text-muted-foreground">
+												<div className="text-sm text-muted-foregroun mb-4">
 													<strong className="text-foreground">
 														Best Practices:
 													</strong>{" "}
 													Use descriptive placeholders, provide helpful empty
 													states, and consider disabling search for small option
 													sets (≤10 items) to simplify the interface.
+												</div>
+												<div className="text-sm text-muted-foreground">
+													<strong className="text-foreground">Pro Tip:</strong>{" "}
+													Add a <code>keywords</code> field to your options to extend
+													and improve matching beyond visible text and values. You
+													can also provide a fully custom <code>filter</code> function
+													for complete control over search behavior.
 												</div>
 											</div>
 										</div>
