@@ -93,6 +93,8 @@ interface MultiSelectOption {
 		/** Gradient background for badge */
 		gradient?: string;
 	};
+	/** Optional keywords for improved searchability, passed on to `cmdk` `Command` */
+	keywords?: string[];
 }
 
 /**
@@ -182,6 +184,12 @@ interface MultiSelectProps
 	 * Optional, defaults to true.
 	 */
 	searchable?: boolean;
+
+	/**
+	 * Optional filter function to customize how options are filtered based on search input.
+	 * Takes the same signature as the underlying `cmdk` Command filter function.
+	 */
+	filter?: (value: string, search: string, keywords?: string[]) => number;
 
 	/**
 	 * Custom empty state message when no options match search.
@@ -320,6 +328,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			className,
 			hideSelectAll = false,
 			searchable = true,
+			filter,
 			emptyIndicator,
 			autoSize = false,
 			singleLine = false,
@@ -580,30 +589,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 			[getAllOptions]
 		);
 
-		const filteredOptions = React.useMemo(() => {
-			if (!searchable || !searchValue) return options;
-			if (options.length === 0) return [];
-			if (isGroupedOptions(options)) {
-				return options
-					.map((group) => ({
-						...group,
-						options: group.options.filter(
-							(option) =>
-								option.label
-									.toLowerCase()
-									.includes(searchValue.toLowerCase()) ||
-								option.value.toLowerCase().includes(searchValue.toLowerCase())
-						),
-					}))
-					.filter((group) => group.options.length > 0);
-			}
-			return options.filter(
-				(option) =>
-					option.label.toLowerCase().includes(searchValue.toLowerCase()) ||
-					option.value.toLowerCase().includes(searchValue.toLowerCase())
-			);
-		}, [options, searchValue, searchable, isGroupedOptions]);
-
 		const handleInputKeyDown = (
 			event: React.KeyboardEvent<HTMLInputElement>
 		) => {
@@ -738,26 +723,6 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 					announce("Dropdown closed.");
 				}
 				prevIsOpen.current = isPopoverOpen;
-			}
-
-			if (
-				searchValue !== prevSearchValue.current &&
-				searchValue !== undefined
-			) {
-				if (searchValue && isPopoverOpen) {
-					const filteredCount = allOptions.filter(
-						(opt) =>
-							opt.label.toLowerCase().includes(searchValue.toLowerCase()) ||
-							opt.value.toLowerCase().includes(searchValue.toLowerCase())
-					).length;
-
-					announce(
-						`${filteredCount} option${
-							filteredCount === 1 ? "" : "s"
-						} found for "${searchValue}"`
-					);
-				}
-				prevSearchValue.current = searchValue;
 			}
 		}, [selectedValues, isPopoverOpen, searchValue, announce, getAllOptions]);
 
@@ -1019,7 +984,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 						}}
 						align="start"
 						onEscapeKeyDown={() => setIsPopoverOpen(false)}>
-						<Command>
+						<Command filter={filter}>
 							{searchable && (
 								<CommandInput
 									placeholder="Search options..."
@@ -1080,8 +1045,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 										</CommandItem>
 									</CommandGroup>
 								)}
-								{isGroupedOptions(filteredOptions) ? (
-									filteredOptions.map((group) => (
+								{isGroupedOptions(options) ? (
+									options.map((group) => (
 										<CommandGroup key={group.heading} heading={group.heading}>
 											{group.options.map((option) => {
 												const isSelected = selectedValues.includes(
@@ -1101,7 +1066,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 															"cursor-pointer",
 															option.disabled && "opacity-50 cursor-not-allowed"
 														)}
-														disabled={option.disabled}>
+														disabled={option.disabled}
+														keywords={option.keywords}>
 														<div
 															className={cn(
 																"mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
@@ -1126,7 +1092,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 									))
 								) : (
 									<CommandGroup>
-										{filteredOptions.map((option) => {
+										{options.map((option) => {
 											const isSelected = selectedValues.includes(option.value);
 											return (
 												<CommandItem
@@ -1142,7 +1108,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 														"cursor-pointer",
 														option.disabled && "opacity-50 cursor-not-allowed"
 													)}
-													disabled={option.disabled}>
+													disabled={option.disabled}
+													keywords={option.keywords}>
 													<div
 														className={cn(
 															"mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
