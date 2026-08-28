@@ -48,6 +48,10 @@ that supports path aliases and shadcn/ui components.
 
 ## 📦 Installation
 
+### Check out the live example
+
+[Link](https://shadcn-multi-select-component.vercel.app/)
+
 ### Prerequisites
 
 This component is compatible with any React project but requires proper setup:
